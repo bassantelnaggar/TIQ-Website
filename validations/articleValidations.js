@@ -1,0 +1,33 @@
+const Joi = require('joi')
+module.exports = {
+    createValidation: request => {
+         const createSchema = {
+                title: Joi.string().required(),
+                description: Joi.string().required(),
+                body: Joi.string().required(),
+                author: Joi.string().required(),
+                date: Joi.string().required(),
+                image: Joi.string()
+        
+            }
+       
+        return Joi.validate(request, createSchema)
+    },
+
+    updateValidation: request => {
+        const updateSchema = {
+            title: Joi.string(),
+            description: Joi.string(),
+            body: Joi.string(),
+            author: Joi.string(),
+            date: Joi.string(),
+            image: Joi.string()
+            // comments:Joi.array()
+            
+        }
+
+        return Joi.validate(request, updateSchema)
+
+    }
+     
+}
