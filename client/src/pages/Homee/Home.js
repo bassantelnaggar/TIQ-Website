@@ -192,22 +192,18 @@ export class Home extends Component {
           <div className="inner">
             <ul className="icons">
               <li>
-                <Link
-                  to="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX"
-                  className="icon fa-facebook"
-                >
-                  <span className="label">Facebook</span>
-                </Link>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
               </li>
               <li>
-                <Link to="#" className="icon fa-twitter">
-                  <span className="label">Twitter</span>
-                </Link>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
               </li>
               <li>
-                <Link to="#" className="icon fa-instagram">
-                  <span className="label">Instagram</span>
-                </Link>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
               </li>
             </ul>
             <ul className="copyright">

@@ -15,7 +15,17 @@ export class Score extends Component {
       scores: []
     };
   }
-
+  UpdateScore = async (id,score) => {
+    console.log(score);
+    console.log(`/updateScores/${id}/${score}`)
+       axios.put(
+      `/api/Users/updateScores/${id}/${score}` )
+      .then(res => {
+        axios.get('/api/Users')
+        .then(res => this.setState({ scores: res.data.data }))
+      });
+        alert("updated");
+  };
   componentDidMount() {
     console.log("ana henaa");
     axios
@@ -38,7 +48,7 @@ export class Score extends Component {
             <header>Debaters Scores!!</header>
           </main>
 
-          <CustomizedTable scores={this.state.scores} />
+          <CustomizedTable UpdateScore={this.UpdateScore} scores={this.state.scores} />
         </div>
       );
     } else {

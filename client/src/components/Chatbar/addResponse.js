@@ -16,19 +16,57 @@ export class addResponse extends Component {
       chatbars: [],
       forResponses_: [],
       againstResponses_: [],
-      forResponses: "",
-      againstResponses: "",
+      forResponses: null,
+      againstResponses: null,
       user:{}
     };
   }
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   onSubmit = e => {
     e.preventDefault();
-    // this.setState(this.state.debateLiveTitle);
-
-    this.setState({ forResponses: "" });
-    this.setState({ againstResponses: "" });
+    if(this.state.againstResponses!==null){
+    this.addAgainstResponse({
+        _id: this.props.match.params.key,
+        againstResponses: this.state.user.firstName +" "+ this.state.user.lastName +" : "+ this.state.againstResponses
+      })}
+    if(this.state.forResponses!==null){
+    this.addForResponse({
+      _id: this.props.match.params.key,
+      forResponses: this.state.user.firstName +" "+ this.state.user.lastName +" : "+ this.state.forResponses
+    })}
+  this.setState({ againstResponses: ''});
+  this.setState({ forResponses: ''});
   };
+ 
+ 
+  addForResponse(chatbar) {
+    axios.put(
+      " /api/Chatbars/for/" + this.props.match.params.key,
+      {
+        forResponses: [chatbar.forResponses]
+      }
+    )
+    .then(res => this.setState({ forResponses_: [...this.state.forResponses_, res.data.data] }));
+      alert("Added successfully!");
+    // alert("Your response has been added successfully, please refresh the page");
+    //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
+  }
+  addAgainstResponse(chatbar) {
+
+    axios.put(
+      " /api/Chatbars/against/" +
+        this.props.match.params.key,
+      {
+        againstResponses: [chatbar.againstResponses]
+      }
+    )
+    .then(res => this.setState({ againstResponses_: [...this.state.againstResponses_, res.data.data] }));
+
+  
+    // alert("Your response has been added successfully, please refresh the page");
+    //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
+  }
+
   componentDidMount() {
     const id = this.props.match.params.key;
     axios.get('/api/Users/'+ this.props.id)
@@ -44,10 +82,10 @@ export class addResponse extends Component {
     fetch("/api/Chatbars/getAllForResponses/" + id)
       .then(res => res.json())
       .then(forResponses_ =>
-        this.setState({ forResponses_: forResponses_ }, () =>
-          console.log("chatbars fetched...", forResponses_)
-        )
-      );
+        this.setState({ forResponses_: forResponses_}))
+      ;
+     
+
     fetch("/api/Chatbars/getAllAgainstResponses/" + id)
       .then(res => res.json())
       .then(againstResponses_ =>
@@ -79,36 +117,7 @@ export class addResponse extends Component {
     };
   };
 
-  addForResponse(chatbar) {
-    const updatedData = {};
-    if (chatbar.forResponses !== "")
-      updatedData.forResponses = chatbar.forResponses;
-
-    axios.put(
-      " /api/Chatbars/for/" + this.props.match.params.key,
-      {
-        forResponses: [chatbar.forResponses]
-      }
-    );
-    alert("Your response has been added successfully, please refresh the page");
-    //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
-  }
-  addAgainstResponse(chatbar) {
-    const updatedData = {};
-    if (chatbar.againstResponses !== "")
-      updatedData.againstResponses = chatbar.againstResponses;
-
-    axios.put(
-      " /api/Chatbars/against/" +
-        this.props.match.params.key,
-      {
-        againstResponses: [chatbar.againstResponses]
-      }
-    );
-    alert("Your response has been added successfully, please refresh the page");
-    //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
-  }
-
+  
   render() {
     return (
 
@@ -139,7 +148,6 @@ export class addResponse extends Component {
         </div>
       
        
-        <form onSubmit={this.onSubmit}>
         <div
               style={{
                 fontSize: "20px",
@@ -169,7 +177,6 @@ export class addResponse extends Component {
             )}
 
             </div>
-             <form onSubmit={this.onSubmit} />
             <div
             style={{
               fontSize: "15px",
@@ -190,6 +197,8 @@ export class addResponse extends Component {
             </div></div>
            
             <div style={this.styleBottom()}>
+            <form onSubmit={this.onSubmit} style={{ display: "flex" }}>
+
               <input
                 type="text"
                 name="forResponses"
@@ -210,16 +219,19 @@ export class addResponse extends Component {
                 type="Submit"
                 value="Submit"
                 className="btn"
-                onClick={this.addForResponse.bind(this, {
-                  _id: this.props.match.params.key,
-                  forResponses: this.state.user.firstName +" "+ this.state.user.lastName+" : " +this.state.forResponses
-                })}
+                // onClick={this.addForResponse.bind(this, {
+                //   _id: this.props.match.params.key,
+                //   forResponses: this.state.user.firstName +" "+ this.state.user.lastName+" : " +this.state.forResponses
+                // })}
                 style={{ flex: "1", position: "fixed", bottom: "2px",left: "375px" }}
                
               />
-              
+            </form>
+
             </div>
             <div style={this.styleBottomRight()}>
+            <form onSubmit={this.onSubmit} style={{ display: "flex" }}>
+
               <input
                 type="text"
                 name="againstResponses"
@@ -240,15 +252,16 @@ export class addResponse extends Component {
                 type="Submit"
                 value="Submit"
                 className="btn"
-                onClick={this.addAgainstResponse.bind(this, {
-                  _id: this.props.match.params.key,
-                  againstResponses: this.state.user.firstName +" "+ this.state.user.lastName +" : "+ this.state.againstResponses
-                })}
+                // onClick={this.addAgainstResponse.bind(this, {
+                //   _id: this.props.match.params.key,
+                //   againstResponses: this.state.user.firstName +" "+ this.state.user.lastName +" : "+ this.state.againstResponses
+                // })}
                 style={{ flex: "1",position: "fixed", bottom: "2px",left: "1165px"  }}
               />
+            </form>
+
             </div>
           </div>
-        </form>
         
       </div>
     );

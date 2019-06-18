@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 //import Header from "./Header";
 import Toolbar from "../../layout/Toolbar/Toolbar";
-import Blog from "../images/blog.jpg";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
@@ -17,7 +16,7 @@ export class ArticleBody extends Component {
         }
         handleClick =() => {
             this.props.history.push("/ArticlesHome");
-         };
+  };
 
   componentDidMount() {
     const id = this.props.match.params.key;

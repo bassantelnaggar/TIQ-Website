@@ -62,7 +62,7 @@ router.put('/for/:id/',async(req,res)=>{
         const updateNumberofResponse =await Chatbars.findOneAndUpdate({_id:chatBarId},{$inc:{numberOfResponses: addnumberofResponse}})
         const getChatbarNew =await Chatbars.findOne({_id:chatBarId})
        // const notification=await User.findOneAndUpdate({_id:userid},{$push:{notification:response}})
-        res.json({data:getChatbarNew })
+        res.json({data:response })
     }
     catch(error){
         console.log(error)
@@ -84,7 +84,7 @@ router.put('/against/:id',async(req,res)=>{
         const updateNumberofResponse =await Chatbars.findOneAndUpdate({_id:chatBarId},{$inc:{numberOfResponses: addnumberofResponse}})
         const getChatbarNew =await Chatbars.findOne({_id:chatBarId})
        // const notification=await User.findOneAndUpdate({_id:userid},{$push:{notification:response}})
-        res.json({data:getChatbarNew })
+        res.json({data:response })
     }
     catch(error){
         console.log(error)

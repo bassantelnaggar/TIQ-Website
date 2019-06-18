@@ -20,11 +20,13 @@ export class ContactUs extends Component {
         <li>
           <p class="left">
           <label for="Facebook Page :">Facebook Page :</label>
-          <Link style={{ color:"blue"}}  to="https://www.facebook.com/TheIntelligentQuestion/"><u>https://www.facebook.com/TheIntelligentQuestion/ </u> </Link> 
+          <a style={{ color:"blue"}} href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><u>https://www.facebook.com/TheIntelligentQuestion/ </u></a>
+
           </p>
           <p class="left">
             <label for="Blog :">Blog :</label>
-            <Link style={{ color:"blue"}} to="https://tiqguc.blogspot.com.eg/p/welcome.html"><u> https://tiqguc.blogspot.com.eg/p/welcome.html</u></Link>    
+            <a style={{ color:"blue"}} href="https://tiqguc.blogspot.com.eg/p/welcome.html" target="_blank"><u>https://tiqguc.blogspot.com.eg/p/welcome.html</u></a>
+
           </p>
         </li>
         
