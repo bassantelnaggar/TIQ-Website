@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FaqUItem from './Faquitem'
+import FaqUItem from './FaqUItem'
 
 class FAQUs extends Component {
   render() {

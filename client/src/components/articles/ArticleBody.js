@@ -77,7 +77,8 @@ export class ArticleBody extends Component {
       {
         comments: article.commments
       }
-    );
+    )
+    .then(res => this.setState({ allComments: [...this.state.allComments, res.data.data] }));
     alert("Your comment has been added successfully!");
     //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
   }
@@ -188,7 +189,6 @@ export class ArticleBody extends Component {
                     color: "black",
                     height: "200px"
 
-
                 }}
                 placeholder="Write your comment here..."
                 value={ this.state.commments}
@@ -199,9 +199,16 @@ export class ArticleBody extends Component {
                 type="Submit"
                 value="Post my comment !"
                 className="btn"
-                style={{ postion:'fixed',
-                left: '0',
-                width:'100%'}}
+                style={{ 
+                  color: '#E2A325',
+                  textAlign: 'center',
+                  padding: '55px',
+                  postion:'fixed',
+  
+                  marginLeft:'35%',
+                  width:'30%',
+                  lineHeight: '1',
+                  }}
                 onClick={this.addcomment.bind(this, {
                   commments: this.state.commments
                 })}
