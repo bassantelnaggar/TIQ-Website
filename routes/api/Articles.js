@@ -83,7 +83,7 @@ router.put('/comment/:id',async(req,res)=>{
     const getArticle= await Articles.findOne({_id:articleId})
     const updatedArticle=await Articles.findOneAndUpdate({_id:articleId},{$push:{comments:newComment}})
     const getArticleNew =await Articles.findOne({_id:articleId})
-        res.json({data:getArticleNew })
+        res.json({data:newComment })
     }
     catch(error){
         console.log(error)
