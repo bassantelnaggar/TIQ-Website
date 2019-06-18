@@ -78,7 +78,6 @@ export class ArticleBody extends Component {
         comments: article.commments
       }
     );
-  
     alert("Your comment has been added successfully!");
     //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
   }
@@ -207,7 +206,9 @@ export class ArticleBody extends Component {
                   commments: this.state.commments
                 })}
             
-              />
+              /><br></br>
+              <br></br>
+              <br></br>
       
       </div>
     );

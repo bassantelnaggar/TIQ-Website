@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 // import "../../pages/Homee/ourPeople/ourPeople.css";
 
 class FormDialog extends React.Component {
+ 
   constructor(props) {
     super(props);
     this.state = {

@@ -100,9 +100,8 @@ class tryme extends React.Component {
       {
         forResponses: [chatbar.forResponses]
       }
-    );
-    alert("Your response has been added successfully, please refresh the page");
-    //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
+    ).then(res => this.setState({ forResponses_: [...this.state.forResponses_, res.data.data] }));
+    alert("Added successfully!");;
   }
   addAgainstResponse(chatbar) {
     const updatedData = {};
@@ -115,9 +114,8 @@ class tryme extends React.Component {
       {
         againstResponses: [chatbar.againstResponses]
       }
-    );
-    alert("Your response has been added successfully, please refresh the page");
-    //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
+    )    .then(res => this.setState({ againstResponses_: [...this.state.againstResponses_, res.data.data] }));
+
   }
 
   render() {
