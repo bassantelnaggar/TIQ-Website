@@ -21,7 +21,7 @@ import articlebody from "./components/articles/ArticleBody";
 import Chatbars from "./components/Chatbar/Chatbars";
 import SeachDebateLive from "./components/Chatbar/searchChatbBar";
 import Clubs from "./Clubs";
-
+import tryme from "./components/Chatbar/tryme";
 import Contents from "./Contents";
 import Articles from "./Articles";
 import ArticleHome from "./ArticlesHome";
@@ -72,7 +72,7 @@ ReactDOM.render(
           <Route exact path="/about" component={About}/>
           <Route exact path= "/Profile" component={profile}/>
           <Route exact path="/debates" component={Debates} />
-
+          <Route exact path="/tryme/:key" component={tryme} />
           <Route
             exact
             path="/debates/searchbydate/:date"

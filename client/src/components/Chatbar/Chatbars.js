@@ -159,13 +159,14 @@ class Chatbars extends Component {
             <div class="thumbnails">
               {this.state.chatbars.map(chatbar => (
                 <div class="box">
-                  <Link to={"/addResponse/" + chatbar._id} class="image fit">
+                  <Link to={"/tryme/" + chatbar._id} class="image fit">
                     <img src={Logo} alt="" />
                   </Link>
                   <div class="inner">
                     <h3>{chatbar.date}</h3>
                     <p>{chatbar.debateLiveTitle} </p>
-                    <Link to={"/addResponse/" + chatbar._id} class="btn">
+                    <p>{"Number of Responses: "}{chatbar.numberOfResponses} </p>
+                    <Link to={"/tryme/" + chatbar._id} class="btn">
                       Debate it Now!
                     </Link>
                   </div>

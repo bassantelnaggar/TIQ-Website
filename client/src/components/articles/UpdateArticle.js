@@ -4,7 +4,8 @@ export class UpdateArticle extends Component {
 
   state = {
       title: '',
-      description: ''
+      description: '',
+      body:''
   } 
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -26,8 +27,16 @@ export class UpdateArticle extends Component {
           placeholder={this.props.article.description}
           onChange={this.onChange}
         />
+         <br></br>
+        <textarea
+          type="textarea"
+          name="body"
+          placeholder={this.props.article.body}
+          style={{height: "300px"}}
+          onChange={this.onChange}
+        />
         <br></br>
-        <button onClick={this.props.updateArticle.bind(this, {_id: this.props.article._id, title:this.state.title, description: this.state.description})}>
+        <button onClick={this.props.updateArticle.bind(this, {_id: this.props.article._id, title:this.state.title, description: this.state.description,body: this.state.body})}>
         UPDATE
         </button>
         </div>
