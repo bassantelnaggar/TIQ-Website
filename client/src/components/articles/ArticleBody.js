@@ -2,30 +2,87 @@ import React, { Component } from "react";
 import axios from "axios";
 //import Header from "./Header";
 import Toolbar from "../../layout/Toolbar/Toolbar";
-import Blog from "../images/blog.jpg";
+import List from '@material-ui/core/List';
+import { makeStyles } from '@material-ui/core/styles';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
+const useStyles = theme => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    background: '#yellow',
+  },
+  inline: {
+    display: 'inline',
+  },
+});
+
 export class ArticleBody extends Component {
     constructor(props) {
           super(props);
            this.state = {
               articleee: [],
+              commments: "",
+              allComments:[],
+              user:{}
            }
         }
         handleClick =() => {
             this.props.history.push("/ArticlesHome");
          };
-
+         onChange = e => this.setState({ [e.target.name]: e.target.value });
+         onSubmit = e => {
+          e.preventDefault();
+          // this.setState(this.state.debateLiveTitle);
+      
+          this.setState({ commments: "" });
+         
+        };
   componentDidMount() {
     const id = this.props.match.params.key;
+    axios.get('/api/Users/'+ this.props.id)
+    .then(user=>this.setState({user : user.data.data},()=>console.log("fetched",user.data.data)))
+    .catch(console.log('cannot fetch'))
     axios.get('/api/Articles/' + id)
     .then(articleee=>this.setState({articleee : articleee.data.data},()=>console.log("fetched",articleee.data.data)))
     .catch(console.log('cannot fetch'))
+
+    fetch("/api/Articles/getAllComments/" + id)
+      .then(res => res.json())
+      .then(allComments =>
+        this.setState({ allComments: allComments }, () =>
+          console.log("chatbars fetched...", allComments)
+        )
+      );
     
   }
+  
+  addcomment(article) {
+    const updatedData = {};
+    if (article.commments !== "")
+      updatedData.commments = article.commments;
+      console.log(article.commments)
+    axios.put(
+      " /api/Articles/comment/" +
+        this.props.match.params.key,
+      {
+        comments: article.commments
+      }
+    );
+  
+    alert("Your comment has been added successfully!");
+    //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
+  }
+
   
 
   render() {
@@ -63,9 +120,21 @@ export class ArticleBody extends Component {
         fontSize:'30px'
        
       }
-    return (
+      const commStyle = {
+        color: 'black',
+        textAlign: 'center',
+        // padding: '55px',
+        postion:'fixed',
+        left: '0',
+        width:'100%',
+        fontSize:'30px'
+       
+      }
+      
+      const classes = useStyles();
 
-      <div >
+    return (
+     <div >
           <div>
           <Toolbar />
           <button
@@ -84,13 +153,67 @@ export class ArticleBody extends Component {
         {/* <img src={Blog} alt="" style={imageStyle}  /> */}
         {/* <header style={descStyle}>  {this.state.articleee.description}</header> */}
         <p style={bodyStyle}> {this.state.articleee.body}</p>
-    
-       
+        <h1 style={commStyle}> {"COMMENTS"}</h1>
+        {this.state.allComments.map(commenttt => (
+          <List className={classes.root} style={{background:'#e0e0e0'}}>
+          <ListItem alignItems="flex-start" style={{background:'#e0e0e0'}}>
+          {/* <ListItemAvatar>
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          </ListItemAvatar> */}
+          <ListItemText
+            primary= {commenttt}
+            secondary={
+              <React.Fragment>
+                <Typography
+                  component="span"
+                  variant="body2"
+                  className={classes.inline}
+                  color="textPrimary"
+                >
+                  {"BY: "}{ this.state.user.firstName +" "+ this.state.user.lastName}
+                 
+                </Typography>
+              </React.Fragment>
+            }
+          />
+        </ListItem>
+        <Divider variant="dense" component="li" />
+      
+         </List>
+        ))}  
+        <br></br>
+           <textarea
+                type="text"
+                name="commments"
+                style={{
+                    color: "black",
+                    height: "200px"
+
+
+                }}
+                placeholder="Write your comment here..."
+                value={ this.state.commments}
+                onChange={this.onChange}
+              />
+              <br></br>
+             <input
+                type="Submit"
+                value="Post my comment !"
+                className="btn"
+                style={{ postion:'fixed',
+                left: '0',
+                width:'100%'}}
+                onClick={this.addcomment.bind(this, {
+                  commments: this.state.commments
+                })}
+            
+              />
       
       </div>
     );
   }
 }
+
 const Form = connect(
   mapStateToProps,
   null

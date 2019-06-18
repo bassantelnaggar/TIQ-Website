@@ -21,8 +21,8 @@ module.exports = {
             body: Joi.string(),
             author: Joi.string(),
             date: Joi.string(),
-            image: Joi.string()
-            // comments:Joi.array()
+            image: Joi.string(),
+            comments:Joi.array()
             
         }
 

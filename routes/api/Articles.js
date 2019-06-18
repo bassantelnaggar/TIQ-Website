@@ -74,14 +74,14 @@ router.get('/Search/:keyWord',async(req,res)=>{
     return res.json({data:article})
          
     })
-router.put('/comment/:id/:userid',async(req,res)=>{
+router.put('/comment/:id',async(req,res)=>{
     try{
     const articleId =req.params.id
     const newComment= req.body.comments
-    const userid = req.params.userid
-    const getuser = await Users.findOne({_id :userid})
+   // const userid = req.params.userid
+    //const getuser = await Users.findOne({_id :userid})
     const getArticle= await Articles.findOne({_id:articleId})
-    const updatedArticle=await Articles.findOneAndUpdate({_id:articleId},{$push:{comments:{username:getuser.firstName,comment:newComment}}})
+    const updatedArticle=await Articles.findOneAndUpdate({_id:articleId},{$push:{comments:newComment}})
     const getArticleNew =await Articles.findOne({_id:articleId})
         res.json({data:getArticleNew })
     }
@@ -90,7 +90,14 @@ router.put('/comment/:id/:userid',async(req,res)=>{
     }
 
 }
+
 )
+router.get ('/getAllComments/:id',async (req,res)=>{
+    const articleId = req.params.id
+    const motion = await Articles.findById({_id:articleId})
+    const getAllComments = motion.comments
+    res.send(getAllComments)
+})
 module.exports = router
 
 

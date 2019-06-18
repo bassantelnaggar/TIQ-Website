@@ -24,14 +24,11 @@ const articleSchema = new Schema({
     },
     image:{
         type: String
+    },
+    comments: {
+        type: [String], 
+        //required: true
     }
-    // comments: {
-    //     type: [{
-    //         username:String ,
-    //         comment:String
-    //     }], 
-    //     required: true
-    // }
    
 })
 
