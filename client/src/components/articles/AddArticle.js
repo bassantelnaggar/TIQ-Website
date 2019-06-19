@@ -4,6 +4,7 @@ import React , {Component} from "react";
   state = {
     title:'',
     description:'',
+    body:'',
     author:'', 
     date:'',
     comments:''
@@ -12,8 +13,8 @@ import React , {Component} from "react";
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
   onSubmit = (e) => {
       e.preventDefault();
-      this.props.addArticle({title: this.state.title, description: this.state.description, author:this.state.author ,date:this.state.date });
-      this.setState({ title: '', description: '' ,author:'',date:''});
+      this.props.addArticle({title: this.state.title, description: this.state.description,body: this.state.body, author:this.state.author ,date:this.state.date });
+      this.setState({ title: '', description: '' ,body:'',author:'',date:''});
       
   }
 
@@ -36,6 +37,15 @@ import React , {Component} from "react";
             onChange={this.onChange}
           />
            <br></br>
+           <textarea
+            type="textarea"
+            name="body"
+            placeholder="Add article body "
+            style={{height: "300px"}}
+            value={this.state.body}
+            onChange={this.onChange}
+          />
+          <br></br>
           <input
             type="text"
             name="author"
@@ -44,6 +54,7 @@ import React , {Component} from "react";
             onChange={this.onChange}
           />
            <br></br>
+           
           <input
             type="text"
             name="date"

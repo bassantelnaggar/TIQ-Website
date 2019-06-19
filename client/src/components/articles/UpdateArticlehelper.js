@@ -4,7 +4,7 @@ import UpdateArticle from './UpdateArticle'
 export class UpdateArticlehelper extends Component {
   render() {
     return(
-      <div class="thumbnails">
+      <div >
       
      { this.props.allArticles.map((article) =>(
         <div class="box">

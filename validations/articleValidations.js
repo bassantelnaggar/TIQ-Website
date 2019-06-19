@@ -18,6 +18,7 @@ module.exports = {
             description: Joi.string(),
             author: Joi.string(),
             date: Joi.string(),
+            image: Joi.string(),
             comments:Joi.array()
             
         }

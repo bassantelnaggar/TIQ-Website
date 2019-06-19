@@ -17,11 +17,11 @@ import SearchDebateDate from "./components/debates/searchdate";
 import SearchDebateCategory from "./components/debates/searchcategory";
 import deleteChatBar from "./components/Chatbar/DeleteChatBar";
 import addResponse from "./components/Chatbar/addResponse";
-
+import articlebody from "./components/articles/ArticleBody";
 import Chatbars from "./components/Chatbar/Chatbars";
 import SeachDebateLive from "./components/Chatbar/searchChatbBar";
 import Clubs from "./Clubs";
-
+import tryme from "./components/Chatbar/tryme";
 import Contents from "./Contents";
 import Articles from "./Articles";
 import ArticleHome from "./ArticlesHome";
@@ -64,7 +64,7 @@ ReactDOM.render(
 
           <Route exact path="/Homee" component={Homee} />
           <Route exact path="/ourPeople" component={ourPeople} />
-         
+          <Route exact path="/articlebody/:key" component={articlebody}/>
           <Route exact path="/AllEvents" component={AllEvents} />
           <Route exact path="/TIQHome" component={Homee} />
           <Route exact path="/Score" component={Score} />

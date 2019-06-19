@@ -52,7 +52,7 @@ class CustomizedTable extends React.Component {
     this.state = {
       
       updateOpen: false,
-      updateScore: this.props.score,
+      // updateScore: this.props.score,
       scoree:0,
       idd:0
     };
@@ -68,13 +68,9 @@ class CustomizedTable extends React.Component {
     });
   };
   onChange = e => this.setState({ [e.target.name]: e.target.value });
-  UpdateScore = async (id,score) => {
-    console.log(score);
-    console.log(`/updateScores/${id}/${score}`)
-      await Axios.put(
-      `/api/Users/updateScores/${id}/${score}` );
-    alert("updated");
-  };
+  
+  
+  
   onSubmit= (e) => {
     e.preventDefault();
       // this.setState(this.state.debateLiveTitle);
@@ -98,17 +94,13 @@ class CustomizedTable extends React.Component {
             <DialogTitle id="form-dialog-title">Update Score</DialogTitle>
             <DialogContent>
             <TextField
-                // autoFocus
-                // margin="dense"
                 id="scoree"
-                // multiline
                 label="Score"
-                // placeholder={score.score}
                 onChange={this.handleChange("scoree")}
               />
             </DialogContent>
             <DialogActions>
-               <Button class="button" onClick={() => this.UpdateScore(this.state.idd,this.state.scoree)} onSubmit={this.onSubmit}> Update </Button>
+               <Button class="button" onClick={() => this.props.UpdateScore(this.state.idd,this.state.scoree)} onSubmit={this.onSubmit}> Update </Button>
             </DialogActions>
           </Dialog>
         <Table className={classes.table}style={{position:"absolute",top:"-199px"}} >

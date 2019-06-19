@@ -103,7 +103,7 @@ export class DisciplesProgramItem extends Component {
               onChange={this.onChange}
               />
       </label>
-      <button  className="btn"  onClick={this.props.updateDisciplesProgram.bind(this,_id,"this.state.title",
+      <button  className="btn"  onClick={this.props.updateDisciplesProgram.bind(this,_id,this.state.title,
         this.state.description,this.state.duration,this.state.location,this.state.price,this.year,this.state.image,this.state.link)} >update</button>
       <DeleteIcon  onClick={this.props.delDisciplesProgram.bind(this,_id)}/> 
   </form>

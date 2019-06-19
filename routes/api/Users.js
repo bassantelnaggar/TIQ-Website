@@ -438,7 +438,7 @@ router.put("/updateScores/:id/:score", async (req, res) => {
     { $inc: { score: addedScore } }
   );
 
-  res.json({ msg: "Score updated" });
+  res.json({data:User});
 });
 
 //get user by id
