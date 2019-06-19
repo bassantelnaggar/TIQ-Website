@@ -48,6 +48,7 @@ import SearchDebateLive from "./components/Chatbar/searchChatbBar";
 
 import profile from "../src/components/users/profile"
 import About from "../src/components/about/About"
+import DisciplesProgram from "./components/DisciplesProgram/DisciplesProgram";
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -73,6 +74,8 @@ ReactDOM.render(
           <Route exact path= "/Profile" component={profile}/>
           <Route exact path="/debates" component={Debates} />
           <Route exact path="/tryme/:key" component={tryme} />
+          <Route exact path="/DisciplesProgram" component={DisciplesProgram} />
+
           <Route
             exact
             path="/debates/searchbydate/:date"
