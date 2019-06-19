@@ -1,0 +1,298 @@
+.BOAtitle{
+    margin-top:3%;
+    margin-left: 40%;
+    color:rgba(139, 0, 0, 0.753);
+    position: static;
+}
+.BOAname{
+    color:rgba(139, 0, 0, 0.753);
+    text-align: center;
+    position: static;
+}
+.Btitle{
+    position: static;
+    color:rgba(139, 0, 0, 0.753);
+    font-family: Luminari, fantasy  ;
+    font-size:36px;
+    font-style: bold;
+    font-variant: bold; 
+}
+.Oname{
+    position: static;
+   color: #006600;
+   text-align:center;
+}
+.Otitle{
+    position: initial;
+    color: #006600;
+    font-family: Luminari, fantasy;
+    font-size: 21px;
+    font-style: bold; 
+    font-variant: normal; 
+    font-weight: 700; 
+}
+.Ftitle{
+    position: initial;
+    color:rgba(139, 0, 0, 0.753);
+    font-family: Luminari, fantasy;
+    font-size: 21px;
+    font-style: bold; 
+    font-variant: normal; 
+    font-weight: 700;
+}
+.Ptitle{
+    position: initial;
+    color: rgb(37,69,116);
+    font-family: Luminari, fantasy;
+    font-size: 21px;
+    font-style: bold; 
+    font-variant: normal; 
+    font-weight: 700;
+}
+.Pname{
+    position: static;
+    color: rgb(37,69,116);
+}
+.Fname{
+    position: static;
+    color:rgba(139, 0, 0, 0.753);
+    text-align: center;
+}
+.PHFSOH{
+    position: initial;
+    margin-top:2%;
+    margin-left:1%;
+    
+}
+.Dname{
+    position: static;
+    color:rgba(139, 0, 0, 0.753);
+    font-family: Luminari, fantasy  ;
+}
+.Dtitle{
+    position: static;
+    color:rgba(139, 0, 0, 0.753);
+    font-family: Luminari, fantasy  ;
+    font-size:36px;
+    font-style: bold;
+    font-variant: bold; 
+}
+.visionContainer{
+    position: static;
+    width:80%;
+    font-size: 15px;
+}
+.vision{
+    position: static;
+    font-size: 15px;
+    text-align:center;
+    color:black;
+}
+.first{
+    position: static;
+    margin-left:6%;
+}
+.Disciples{
+    position: static;
+    margin-top:2%;
+    margin-left:38%;
+}
+.type{
+    position: static;
+    color:darkgoldenrod;
+}
+.last{
+    position: static;
+    margin-left:40%;
+
+}
+.middle{
+    position: static;
+    margin-left:1%;
+    margin-right:5%;
+}
+.tree{
+    position: initial;
+    margin-left:3%;
+    margin-right:18%;
+}
+.container{
+    position: static;
+    width:60%;
+}
+
+
+.FS{
+    position: static;
+    margin-left:8%;
+}
+.OH{
+    position: static;
+    margin-left:10%;
+    margin-right:0%;
+}
+.boatitle555{
+    position: static;
+    margin-left: 41%;
+    color:rgb(224, 224, 120);
+}
+.OHL{
+    position: static;
+    margin-right: 3%;
+}
+.row{
+    position: static;
+    margin-left: 10%; 
+    text-align: center;
+    
+}
+.container1{
+    position: static;
+    margin-left: 30%;
+}
+.center555{
+    text-align: center;
+    color:rgb(224, 224, 120);
+}
+/* .BOAs555{
+    margin-left: 30%;
+    font-size: small;
+    text-align: center;
+    color:rgb(224, 224, 120);
+} */
+.PHLss{
+    margin-left: 5%;
+    margin-top: 5%;
+}
+.phltitle555{
+   margin-left: 5%;
+   text-align: center;
+   color: rgb(37,69,116);
+}
+.functiontitle555{
+    margin-left:25%;
+    text-align: center;
+    color:darkred; 
+}
+.ohltitle555{
+    margin-left:50%;
+    margin-right:10%;
+    text-align: center;
+    color: darkgreen;
+}
+
+.dhltitle555{
+    margin-left:43%;
+    color: rgb(224, 224, 120);
+}
+.dhls555{
+    margin-left:43%;
+    color: rgb(224, 224, 120);
+    
+}
+
+ .FSs555{
+     margin-left: 28%;
+     margin-bottom: 10%;
+     margin-right: 15%;
+     text-align: center;
+     color: darkred;
+    
+ }
+ .PHLs555{
+     margin-left: 11%;
+     text-align: center;
+     color: rgb(37,69,116);
+    
+ }
+ .super555{
+     margin-left: 0%;
+     margin-right:20%;
+     text-align: center
+ }
+ .container1555{
+     margin-top:5%;
+     margin-left: 0%
+ }
+ .OHLs555{
+     margin-right: 0%;
+     color:green;
+    
+ }
+ .whole{
+    position: static;
+     /* margin-right: 10%; */
+    /* margin-top: 10%; */
+    background-image:url('../../Images/about.jpg');
+    background-size: cover;
+    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin-top: -8%;
+    /* overflow: auto; */
+    /* position: absolute; top: 0;  */
+    
+
+ }
+ .about{
+    position: static;
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy; 
+    font-size: 30px;
+     font-style: normal; 
+     font-variant: normal; 
+     font-weight: 700; 
+     line-height: 26.4px;
+     color:darkred;
+     text-align: center;
+     margin-top:5%;
+     padding-top: 4%;
+ }
+ .visiontitle555{
+     margin-top: 5%;
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy; 
+    font-size: 30px;
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 26.4px;
+    color:whitesmoke;
+    text-align: center;
+
+ }
+ .vision555{
+     
+     font-family: Copperplate, "Copperplate Gothic Light", fantasy; 
+     font-size: 20px;
+     font-style: normal; 
+     font-variant: normal; 
+     font-weight: 700; 
+     line-height: 26.4px;
+     color:whitesmoke;
+     text-align: center;
+
+ }
+ .title555{
+    margin-left: 2%;
+    margin-top:5%;
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy; 
+    font-size: 40px;
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 26.4px;
+    color:whitesmoke;
+    text-align: center;
+ }
+ .heirarchy555{
+     margin-right:10%;
+     margin-top:5%;
+ }
+ .body555{
+     margin-top:2%;
+ }
+ .V555{
+     text-align: center;
+     
+ }
