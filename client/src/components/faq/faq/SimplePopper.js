@@ -18,20 +18,7 @@ const styles = theme => ({
   margin: {
     margin: theme.spacing.unit,
   },
-//   cssEdit: {
-//     color: theme.palette.getContrastText(purple[500]),
-//     backgroundColor: orange[500],
-//     '&:hover': {
-//       backgroundColor: purple[700],
-//     },
-//   },
-//   css: {
-//     color: theme.palette.getContrastText(purple[500]),
-//     backgroundColor: purple[500],
-//     '&:hover': {
-//       backgroundColor: purple[700],
-// },}
-// ,
+
 }
 );
 
