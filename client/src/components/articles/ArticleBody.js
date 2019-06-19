@@ -26,6 +26,7 @@ const useStyles = theme => ({
   },
 });
 
+
 export class ArticleBody extends Component {
     constructor(props) {
           super(props);
@@ -65,6 +66,8 @@ export class ArticleBody extends Component {
       );
     
   }
+
+
   
   addcomment(article) {
     const updatedData = {};
@@ -102,7 +105,7 @@ export class ArticleBody extends Component {
       const bodyStyle = {
  
         color: 'black',
-        textAlign: 'center',
+        textAlign: 'left',
         padding: '150px',
         postion:'fixed',
         // left: '0',
@@ -155,7 +158,7 @@ export class ArticleBody extends Component {
         <p style={bodyStyle}> {this.state.articleee.body}</p>
         <h1 style={commStyle}> {"COMMENTS"}</h1>
         {this.state.allComments.map(commenttt => (
-          <List className={classes.root} style={{background:'#e0e0e0'}}>
+          <List className={classes.root} style={{background:'#e0e0e0',width:"60%",  marginLeft:'9%'}}>
           <ListItem alignItems="flex-start" style={{background:'#e0e0e0'}}>
           {/* <ListItemAvatar>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
@@ -170,7 +173,7 @@ export class ArticleBody extends Component {
                   className={classes.inline}
                   color="textPrimary"
                 >
-                  {"BY: "}{ this.state.user.firstName +" "+ this.state.user.lastName}
+                  {/* {"BY: "}{ this.state.user.firstName +" "+ this.state.user.lastName} */}
                  
                 </Typography>
               </React.Fragment>
@@ -187,8 +190,9 @@ export class ArticleBody extends Component {
                 name="commments"
                 style={{
                     color: "black",
-                    height: "200px"
-
+                    height: "100px",
+                    width:"60%",
+                    marginLeft:'9%'
                 }}
                 placeholder="Write your comment here..."
                 value={ this.state.commments}
@@ -210,12 +214,13 @@ export class ArticleBody extends Component {
                   lineHeight: '1',
                   }}
                 onClick={this.addcomment.bind(this, {
-                  commments: this.state.commments
+                  commments: this.state.user.firstName +" "+ this.state.user.lastName+" : " +this.state.commments
                 })}
             
               /><br></br>
               <br></br>
               <br></br>
+              
       
       </div>
     );

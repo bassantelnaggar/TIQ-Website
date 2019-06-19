@@ -95,6 +95,7 @@ class Chatbars extends Component {
                   <div class="inner">
                     <h3>{chatbar.date}</h3>
                     <p>{chatbar.debateLiveTitle} </p>
+                    <p>{"Number of Responses: "}{chatbar.numberOfResponses} </p>
                     <Link to={"/tryme/" + chatbar._id} class="btn">
                       Debate it Now!
                     </Link>

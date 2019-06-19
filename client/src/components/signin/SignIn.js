@@ -14,6 +14,17 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Navbar from "../../components/layout/Navbar";
+import Avatar from '@material-ui/core/Avatar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { makeStyles } from '@material-ui/core/styles';
+
 import { connect } from "react-redux";
 import { signIn, signOut } from "../../store";
 import axios from "axios";
@@ -45,6 +56,34 @@ const styles = theme => ({
   //   flexBasis: 200
   // }
 });
+const useStyles = theme => ({
+  root: {
+    height: '100vh',
+  },
+  image: {
+    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
+  paper: {
+    // margin: theme.spacing(8, 4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    // margin: theme.spacing(1),
+   // backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    // marginTop: theme.spacing(1),
+  },
+  submit: {
+    // margin: theme.spacing(3, 0, 2),
+  },
+});
 
 class InputAdornments extends React.Component {
   state = {
@@ -53,7 +92,9 @@ class InputAdornments extends React.Component {
     showPassword: false,
     errormessgae: ""
   };
-
+  handleClick33 =() => {
+    this.props.history.push("/createuser");
+  };
   handleClick = async event => {
     const Users = await axios.post(
       "/api/Users/authenticate",
@@ -80,63 +121,90 @@ class InputAdornments extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    //const { classes } = this.props;
+    const classes = useStyles();
     console.log(this.props.usertype);
     return (
       <>
      <Navbar/>
-        <div className={classes.root}>
-          <TextField
-            className={classes.margin}
-            id="email"
-            label="Email"
-            onChange={this.handleChange("email")}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle />
-                </InputAdornment>
-              )
-            }}
-          />
-
-          <FormControl
-            className={classNames(classes.margin, classes.textField)}
-          >
-            <InputLabel htmlFor="adornment-password">Password</InputLabel>
+        <div className={classes.root}  style={{ postion:'fixed',marginLeft:'31%',marginTop:'9%', width:'100%', lineHeight: '1', }}>
+ <Grid container component="main" className={classes.root}>
+      <CssBaseline />
+      {/* <Grid item xs={false} sm={4} md={7} className={classes.image} /> */}
+      <Grid item xs={12} sm={8} md={5} >
+        <div className={classes.paper}>
+          {/* <Typography component="h1" variant="h5">
+            Sign in
+          </Typography> */}
+          <form className={classes.form} noValidate>
+          <InputLabel htmlFor="email">Email </InputLabel>
             <Input
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              onChange={this.handleChange("email")}
+              // autoFocus
+            />
+            <br></br> <br></br>
+             <InputLabel htmlFor="password">Password </InputLabel>
+            <Input
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
               id="password"
               type={this.state.showPassword ? "text" : "password"}
               value={this.state.password}
               onChange={this.handleChange("password")}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="Toggle password visibility"
-                    onClick={this.handleClickShowPassword}
-                  >
-                    {this.state.showPassword ? (
-                      <Visibility />
-                    ) : (
-                      <VisibilityOff />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              }
+              autoComplete="current-password"
             />
-          </FormControl>
-          <Button
-            variant="contained"
-            // href="http://localhost:3000/user"
-            className={classes.button}
-            onClick={() => {
-              this.handleClick();
-            }}
-          >
-            Sign In
-          </Button>
+            {/* <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            /> */}
+            <br></br> <br></br>
+            <Button
+               style = {{background: '#410c12'}}
+              fullWidth
+              variant="contained"
+              color="primary"
 
-          <Typography paragraph>{this.state.errormessgae}</Typography>
+              onClick={() => {
+                this.handleClick();
+              }}
+            >
+              Sign In
+            </Button>
+            <Typography paragraph>{this.state.errormessgae}</Typography>
+            <Grid container>
+              {/* <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid> */}
+              <Grid item>
+                <Link  href="/createuser" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+            {/* <Box mt={5}>
+              <MadeWithLove />
+            </Box> */}
+          </form>
+        </div>
+      </Grid>
+    </Grid>
+          
+          
         </div>
       </>
     );

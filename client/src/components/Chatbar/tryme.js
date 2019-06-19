@@ -15,8 +15,9 @@ const mapStateToProps = state => {
 };
 const styles = theme => ({
   root: {
-    width:'100%',
+    width:'80%',
     flexGrow: 1,
+    marginLeft:'10%'
   }
 });
 
@@ -43,8 +44,8 @@ class tryme extends React.Component {
     e.preventDefault();
     // this.setState(this.state.debateLiveTitle);
 
-    this.setState({ forResponses: "" });
-    this.setState({ againstResponses: "" });
+    this.setState({ forResponses: " " });
+    this.setState({ againstResponses: " " });
   };
   componentDidMount() {
     const id = this.props.match.params.key;
@@ -133,16 +134,22 @@ class tryme extends React.Component {
       width:'100%',
       lineHeight: '1',
       fontWeight: 'bold',
-      fontSize:'40px'
+      fontSize:'40px',
+      fontFamily: [
+        '"Rock Salt"',
+        'cursive'
+      ].join(','),
     }
     return (
     
       <div className={classes.root} >
           <Toolbarr />
-          <p style={headerStyle}>  {this.state.chatbars.debateLiveTitle}</p>
+          <p style={headerStyle} >  {this.state.chatbars.debateLiveTitle}</p>
           <div style={{position:"relative",top:"-45px"}}>
         <Grid container spacing={3}>  
         <Grid item xs>
+       
+             
         <AppBar position="static" style={{background:'#145A32'}}>
         <Toolbar variant="transparent" >
           <Typography variant="h6" color="inherit">
@@ -154,21 +161,23 @@ class tryme extends React.Component {
         {this.state.forResponses_.map(forResponse => (
         <ExpansionPanel style={expanded?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary >
-            <Typography className={classes.heading} style={expanded3?responseOpen:responseStyle} > {forResponse} </Typography>
+            <Typography className={classes.heading} style={expanded3?responseOpen:responseStyle} >{forResponse} </Typography>
           </ExpansionPanelSummary>
           </ExpansionPanel>
         
          
         ))}
-         <br></br>
-        <textarea
+         <ExpansionPanel style={expanded?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
+          <ExpansionPanelSummary >
+            <Typography className={classes.heading} style={expanded3?responseOpen:responseStyle} > 
+            <textarea
                 type="text"
                 name="forResponses"
                 style={{
                   // flex: "10",
                   // padding: "5px",
                   //position: "fixed",
-                  // width: "50%",
+                  width: "250%",
                   // bottom: "2px",
                   color: "black"
                 }}
@@ -181,6 +190,7 @@ class tryme extends React.Component {
                 type="Submit"
                 value="Submit"
                 className="btn"
+                style={{marginLeft:'183%'}}
                 onClick={this.addForResponse.bind(this, {
                   _id: this.props.match.params.key,
                   forResponses: this.state.user.firstName +" "+ this.state.user.lastName+" : " +this.state.forResponses
@@ -188,6 +198,10 @@ class tryme extends React.Component {
             
                
               />
+            </Typography>
+          </ExpansionPanelSummary>
+          </ExpansionPanel>
+       
         </Grid>
         <Grid item xs>
         <AppBar position="static"style={{background:'#1F618D'}}>
@@ -206,15 +220,17 @@ class tryme extends React.Component {
             </ExpansionPanelSummary>
            </ExpansionPanel>
            ))}
-           <br></br>
-           <textarea
+           <ExpansionPanel style={expanded2?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
+            <ExpansionPanelSummary >
+              <Typography className={classes.heading} style={expanded2?responseOpen:responseStyle} > 
+              <textarea
                 type="text"
                 name="againstResponses"
                 style={{
                   // flex: "10",
                   // padding: "5px",
                   // position: "fixed",
-                  // width: "50%",
+                  width: "250%",
                   // bottom: "2px",
                   color: "black"
                 }}
@@ -222,16 +238,24 @@ class tryme extends React.Component {
                 value={this.state.againstResponses}
                 onChange={this.onChange}
               />
+              
+              
               <input
                 type="Submit"
                 value="Submit"
                 className="btn"
+                style={{marginLeft:'183%'}}
                 onClick={this.addAgainstResponse.bind(this, {
                   _id: this.props.match.params.key,
                   againstResponses: this.state.user.firstName +" "+ this.state.user.lastName +" : "+ this.state.againstResponses
                 })}
                
-              />
+              />  
+              </Typography>
+            </ExpansionPanelSummary>
+           </ExpansionPanel>
+           <br></br>
+          
         </Grid>
         
       </Grid>
@@ -271,14 +295,14 @@ const responseStyle={
  
   const panelStyle={
     // borderLeft:'20px solid #410c12',
-    background:'#e0e0e0'
+    background:'#F6F5F5'
   }
   const panel2Style={
     borderLeft:'20px solid #410c12',
-    background:'#e0e0e0'
+    background:'#F6F5F5'
   }
   const style={
-    background:"#eeeeee"
+    background:"#F6F5F5"
   }
   tryme.propTypes = {
   classes: PropTypes.object.isRequired,
