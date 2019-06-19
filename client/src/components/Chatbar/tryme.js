@@ -29,8 +29,8 @@ class tryme extends React.Component {
       chatbars: [],
       forResponses_: [],
       againstResponses_: [],
-      forResponses: "",
-      againstResponses: "",
+      forResponses: '',
+      againstResponses: '',
       user:{}
     };
   } 
@@ -42,10 +42,9 @@ class tryme extends React.Component {
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   onSubmit = e => {
     e.preventDefault();
-    // this.setState(this.state.debateLiveTitle);
-
-    this.setState({ forResponses: " " });
-    this.setState({ againstResponses: " " });
+    
+  this.setState({ againstResponses: ''});
+  this.setState({ forResponses: ''});
   };
   componentDidMount() {
     const id = this.props.match.params.key;
@@ -99,7 +98,7 @@ class tryme extends React.Component {
     axios.put(
       " /api/Chatbars/for/" + this.props.match.params.key,
       {
-        forResponses: [chatbar.forResponses]
+        forResponses: chatbar.forResponses
       }
     ).then(res => this.setState({ forResponses_: [...this.state.forResponses_, res.data.data] }));
     alert("Added successfully!");;
@@ -113,11 +112,12 @@ class tryme extends React.Component {
       " /api/Chatbars/against/" +
         this.props.match.params.key,
       {
-        againstResponses: [chatbar.againstResponses]
+        againstResponses: chatbar.againstResponses
       }
     )    .then(res => this.setState({ againstResponses_: [...this.state.againstResponses_, res.data.data] }));
 
   }
+  
 
   render() {
     const { classes } = this.props;
@@ -161,7 +161,8 @@ class tryme extends React.Component {
         {this.state.forResponses_.map(forResponse => (
         <ExpansionPanel style={expanded?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary >
-            <Typography className={classes.heading} style={expanded3?responseOpen:responseStyle} >{forResponse} </Typography>
+            <Typography className={classes.heading} style={expanded3?responseOpen:responseStyle} >
+            <b style={{fontWeight: 'bold'}}>{forResponse[0]} {": "}</b> {forResponse[1]} </Typography>
           </ExpansionPanelSummary>
           </ExpansionPanel>
         
@@ -170,6 +171,7 @@ class tryme extends React.Component {
          <ExpansionPanel style={expanded?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary >
             <Typography className={classes.heading} style={expanded3?responseOpen:responseStyle} > 
+            <form onSubmit={this.onSubmit} >
             <textarea
                 type="text"
                 name="forResponses"
@@ -185,7 +187,7 @@ class tryme extends React.Component {
                 value={this.state.forResponses}
                 onChange={this.onChange}
               />
-              
+              <br></br>
               <input
                 type="Submit"
                 value="Submit"
@@ -193,11 +195,10 @@ class tryme extends React.Component {
                 style={{marginLeft:'183%'}}
                 onClick={this.addForResponse.bind(this, {
                   _id: this.props.match.params.key,
-                  forResponses: this.state.user.firstName +" "+ this.state.user.lastName+" : " +this.state.forResponses
+                  forResponses:[ this.state.user.firstName +" "+ this.state.user.lastName ,this.state.forResponses]
                 })}
-            
-               
               />
+              </form>
             </Typography>
           </ExpansionPanelSummary>
           </ExpansionPanel>
@@ -216,29 +217,33 @@ class tryme extends React.Component {
 
           <ExpansionPanel style={expanded2?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
             <ExpansionPanelSummary >
-              <Typography className={classes.heading} style={expanded2?responseOpen:responseStyle} > {againstResponse} </Typography>
+              <Typography className={classes.heading} style={expanded2?responseOpen:responseStyle} >
+              <b style={{fontWeight: 'bold'}}> {againstResponse[0]} {": "}</b> {againstResponse[1]} </Typography>
             </ExpansionPanelSummary>
            </ExpansionPanel>
            ))}
            <ExpansionPanel style={expanded2?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
             <ExpansionPanelSummary >
-              <Typography className={classes.heading} style={expanded2?responseOpen:responseStyle} > 
-              <textarea
+              <Typography className={classes.heading} style={expanded2?responseOpen:responseStyle}  > 
+              <form onSubmit={this.onSubmit} >
+              <textarea 
                 type="text"
                 name="againstResponses"
                 style={{
                   // flex: "10",
                   // padding: "5px",
-                  // position: "fixed",
+                  //position: "fixed",
                   width: "250%",
                   // bottom: "2px",
                   color: "black"
+                 
                 }}
                 placeholder="Write your response here if you are against..."
                 value={this.state.againstResponses}
+               
                 onChange={this.onChange}
               />
-              
+               <br></br>
               
               <input
                 type="Submit"
@@ -247,14 +252,16 @@ class tryme extends React.Component {
                 style={{marginLeft:'183%'}}
                 onClick={this.addAgainstResponse.bind(this, {
                   _id: this.props.match.params.key,
-                  againstResponses: this.state.user.firstName +" "+ this.state.user.lastName +" : "+ this.state.againstResponses
+                  againstResponses: [this.state.user.firstName +" "+ this.state.user.lastName , this.state.againstResponses]
                 })}
                
-              />  
+               
+              /> </form>
               </Typography>
+               
             </ExpansionPanelSummary>
            </ExpansionPanel>
-           <br></br>
+          
           
         </Grid>
         

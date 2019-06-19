@@ -17,11 +17,11 @@ const chatBarSchema = new Schema({
         required: false
     },
     forResponses: {
-        type: [String],
+        type: [[String]],
         required: false
     },
     againstResponses: {
-        type: [String],
+        type: [[String]],
         required: false
 
 

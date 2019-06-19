@@ -27,7 +27,7 @@ const articleSchema = new Schema({
         type: String
     },
     comments: {
-        type: [String], 
+        type: [[String]], 
         //required: true
     }
    

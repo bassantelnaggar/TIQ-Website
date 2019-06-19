@@ -164,7 +164,7 @@ export class ArticleBody extends Component {
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </ListItemAvatar> */}
           <ListItemText
-            primary= {commenttt}
+            primary= {commenttt[1]}
             secondary={
               <React.Fragment>
                 <Typography
@@ -173,6 +173,7 @@ export class ArticleBody extends Component {
                   className={classes.inline}
                   color="textPrimary"
                 >
+                  {"BY: "} {commenttt[0]}
                   {/* {"BY: "}{ this.state.user.firstName +" "+ this.state.user.lastName} */}
                  
                 </Typography>
@@ -185,6 +186,7 @@ export class ArticleBody extends Component {
          </List>
         ))}  
         <br></br>
+        <form onSubmit={this.onSubmit} >
            <textarea
                 type="text"
                 name="commments"
@@ -214,10 +216,11 @@ export class ArticleBody extends Component {
                   lineHeight: '1',
                   }}
                 onClick={this.addcomment.bind(this, {
-                  commments: this.state.user.firstName +" "+ this.state.user.lastName+" : " +this.state.commments
+                  commments: [this.state.user.firstName +" "+ this.state.user.lastName ,this.state.commments]
                 })}
             
-              /><br></br>
+              /> </form>
+              <br></br>
               <br></br>
               <br></br>
               
