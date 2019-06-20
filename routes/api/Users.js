@@ -60,7 +60,7 @@ router.get("/searchbyapproval/:approval", async (req, res) => {
 //create new user (TIQ admin, Hub user, disciples, parent)
 
 router.post("/register/:id", async (req, res) => {
-  const id = req.param.id;
+  const id = req.params.id;
   const signedUp = await SignedUp.findOne({ _id: id });
   const t = signedUp.type;
 
@@ -148,7 +148,7 @@ case "member":
       try {
        
         const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt);
+        const hashedPassword = bcrypt.hashSync(signedUp.password, salt);
         console.log(6);
         const newMember = new User({
           type:signedUp.type,
@@ -159,7 +159,6 @@ case "member":
           email:signedUp.email,
           password: hashedPassword,
           house:signedUp.house,
-          score:signedUp.score,
           din:signedUp.din,
           dor:signedUp.dor,
           tiqStatus:signedUp.tiqStatus,
@@ -168,7 +167,7 @@ case "member":
 
         await User.create(newMember);
         console.log("done");
-        return res.json({ msg: "User created successfully", data: newMember });
+        // return res.json({ msg: "User created successfully", data: newMember });
       } catch (error) {
         return res.status(422).send({ error: "Can not create user" });
       }
@@ -189,13 +188,20 @@ case "member":
          
         });
         await User.create(newUser);
+        // return res.json({ msg: "User created successfully", data: newUser });
 
-        return res.json({ msg: "User created successfully", data: newUser });
       } catch (error) {
         // We will be handling the error later
 
         console.log(error);
       }
+      try {
+        const deleted= await SignedUp.findByIdAndRemove({ _id: id });
+        res.json({ msg: "User was deleted successfully", data: deleted });
+      } catch (error) {
+        console.log(error);
+      }
+
   }
 });
 

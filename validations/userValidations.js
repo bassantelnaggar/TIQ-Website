@@ -4,7 +4,7 @@ module.exports = {
   //register schema for use except alumni
   registerValidation: request => {
     const registerSchema = {
-      type: Joi.string(),
+      type: Joi.string().valid("TIQadmin","regular","disciple","alumni","member","parent").required(),
       firstName: Joi.string()
         .min(3)
         .required(),
