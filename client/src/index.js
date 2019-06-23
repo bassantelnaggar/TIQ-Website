@@ -32,6 +32,7 @@ import ContactUs from "./ContactUs";
 import "typeface-roboto";
 import { Provider } from "react-redux";
 import store from "./store";
+import SignedUp from "./components/signUp/SignedUp";
 
 import { CreateUser } from "./components/users/CreateUser";
 
@@ -76,6 +77,7 @@ ReactDOM.render(
           <Route exact path="/debates" component={Debates} />
           <Route exact path="/tryme/:key" component={tryme} />
           <Route exact path="/DisciplesProgram" component={DisciplesProgram} />
+          <Route exact path="/SignedUp" component={SignedUp} />
 
           <Route
             exact
