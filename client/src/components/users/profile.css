@@ -200,6 +200,10 @@ figure.snip0057 .image {
     -webkit-animation: shadow 0.6s ease-in-out;
     animation: shadow 0.6s ease-in-out;
   }
+  .image-upload > input
+  {
+      display: none;
+  }
   @-webkit-keyframes shadow {
    
   }
