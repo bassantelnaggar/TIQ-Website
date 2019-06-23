@@ -101,7 +101,7 @@ class tryme extends React.Component {
         forResponses: chatbar.forResponses
       }
     ).then(res => this.setState({ forResponses_: [...this.state.forResponses_, res.data.data] }));
-    alert("Added successfully!");;
+  //  alert("Added successfully!");;
   }
   addAgainstResponse(chatbar) {
     const updatedData = {};
@@ -145,7 +145,7 @@ class tryme extends React.Component {
       <div className={classes.root} >
           <Toolbarr />
           <p style={headerStyle} >  {this.state.chatbars.debateLiveTitle}</p>
-          <div style={{position:"relative",top:"-45px"}}>
+          <div style={{position:"relative",top:"10px"}}>
         <Grid container spacing={3}>  
         <Grid item xs>
        

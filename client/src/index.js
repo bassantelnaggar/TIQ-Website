@@ -20,6 +20,7 @@ import addResponse from "./components/Chatbar/addResponse";
 import articlebody from "./components/articles/ArticleBody";
 import Chatbars from "./components/Chatbar/Chatbars";
 import SeachDebateLive from "./components/Chatbar/searchChatbBar";
+import test from "./components/debates/test";
 import Clubs from "./Clubs";
 import tryme from "./components/Chatbar/tryme";
 import Contents from "./Contents";
@@ -103,7 +104,7 @@ ReactDOM.render(
           <Route exact path="/ArticlesHome" component={ArticleHome} />
           <Route exact path="/addResponse/:key" component={addResponse} />
           <Route exact path="/deleteChatBar" component={deleteChatBar} />
-
+          <Route exact path="/test/:key" component={test} />
           <Route exact path="/user" component={SignedInUser} />
           <Route exact path="/admin" component={SignedInAdmin} />
           <Route exact path="/adminedits" component={AdminEdits} />

@@ -114,7 +114,7 @@ section {
 }
 
 body {
-  line-height: 1;
+ line-height: 1;
 }
 
 ol,
@@ -3795,9 +3795,9 @@ button.alt:active,
 
 /* Header */
 
-body {
+/* body {
   padding-top: 3.125em;
-}
+} */
 
 body.landing {
   padding-top: 0;

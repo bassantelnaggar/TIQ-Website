@@ -103,7 +103,7 @@ class CustomizedTable extends React.Component {
                <Button class="button" onClick={() => this.props.UpdateScore(this.state.idd,this.state.scoree)} onSubmit={this.onSubmit}> Update </Button>
             </DialogActions>
           </Dialog>
-        <Table className={classes.table}style={{position:"absolute",top:"-199px"}} >
+        <Table className={classes.table}style={{position:"absolute",top:"-141px"}} >
           <TableHead>
             <TableRow>
               <CustomTableCell>Member Of</CustomTableCell>
@@ -150,7 +150,7 @@ class CustomizedTable extends React.Component {
     return (
       <div style={{position:"relative",top:"20px"}}>
       <Paper className={classes.root}>
-      <Table className={classes.table}style={{position:"absolute",top:"-199px"}} >
+      <Table className={classes.table}style={{position:"absolute",top:"-141px"}} >
           <TableHead>
             <TableRow>
               <CustomTableCell>Member Of</CustomTableCell>
