@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DebateCard from "./debatecard.js";
+import Test from "./test.js"
 import { withStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
@@ -7,6 +8,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Logo from "../images/debatecover.jpg";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -14,6 +16,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import "./Debates.css";
 import Typography from "@material-ui/core/Typography";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import ToolBar from "../../layout/Toolbar/Toolbar";
 
@@ -24,16 +27,17 @@ const mapStateToProps = state => {
 const styles = theme => ({
   fab: {
     // margin: theme.spacing.unit,
-    color: "#8f1814",
-    background: "#e2a325"
+    color: "#333",
+    background: "#333",
+    onmouseover: "#fff"
   },
   rightIcon: {
     marginLeft: theme.spacing.unit
   },
   fab2: {
     margin: theme.spacing.unit,
-    color: "#8f1814",
-    background: "#e2a325",
+    color: "#333",
+    background: "#333",
     marginRight: theme.spacing.unit
   }
 });
@@ -128,19 +132,7 @@ class Debates extends Component {
             </div>
           </div>
         </div>
-        // <>
-        //   <ToolBar />
-        //   <div className="center-div">
-        //     <h1>You need to sign in first to view this content</h1>
-        //     <Button
-        //       variant="contained"
-        //       href="http://localhost:3000/signin"
-        //       className={classes.button}
-        //     >
-        //       Sign In
-        //     </Button>
-        //   </div>
-        // </>
+     
       );
     }
     console.log(this.props.usertype);
@@ -212,6 +204,7 @@ class Debates extends Component {
                   shrink: true
                 }}
               />
+              
               <Typography paragraph>{this.state.error}</Typography>
             </DialogContent>
             <DialogActions>
@@ -227,10 +220,11 @@ class Debates extends Component {
 
           <div className="button-div">
             <Fab
-              color="secondary"
-              aria-label="Add"
+              // color="transparent"
+              aria-label="Add"  
               className={classes.fab2}
               onClick={this.handleCreateClick}
+              style={{ left: "20px", top: "-50px" , background: "#333" }}
             >
               <AddIcon />
             </Fab>
@@ -245,39 +239,65 @@ class Debates extends Component {
               InputLabelProps={{
                 shrink: true
               }}
+              style={{ left: "670px", top: "-130px" }}
             />
 
-            <Fab
+            <Button
               variant="extended"
               aria-label="Search by Date"
               className={classes.fab}
               onClick={this.handleDateSearch}
+              style={{ left: "700px", top: "-120px", background:"#333" }}
             >
               Search by Date
               <SearchIcon />
-            </Fab>
+            </Button>
 
             <Typography paragraph> </Typography>
 
             <TextField
               id="selectedcategory"
-              label="category"
+              label=  {"Category"}
+              type= "textField"
               className={classes.textField}
               onChange={this.handleChange("selectedcategory")}
+              style={{ left: "1060px", top: "-195px"  }}
             />
 
-            <Fab
+            <Button
               variant="extended"
               aria-label="Search by Category"
               className={classes.fab}
               onClick={this.handleCategorySearch}
+              style={{ left: "1080px", top: "-190px",  background:"#333" }}
             >
               Search by Category
               <SearchIcon />
-            </Fab>
+            </Button>
+           
           </div>
-
-          <div className="center-div">
+    
+          <div class="inner">
+            <div class="thumbnails">
+              {this.state.debates.map(debate => (
+                <div class="box">
+                  <Link to={"/test/" + debate._id} class="image fit">
+                    <img src={Logo} alt="" />
+                  </Link>
+                  <div class="inner">
+                    <h3>{debate.title}</h3>
+                    {/* <p>{debate.info} </p> */}
+                    <p>{debate.category} </p>
+                    {/* <p>{debate.date} </p> */}
+                    <Link to={"/test/" + debate._id} class="button">
+                     Read More!
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* <div className="center-div">
             <h1>Our Debates</h1>
             {this.state.debates.map(debate => (
               <DebateCard
@@ -291,7 +311,7 @@ class Debates extends Component {
                 auth={auth}
               />
             ))}
-          </div>
+          </div> */}
         </>
       );
     } else {

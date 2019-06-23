@@ -23,13 +23,42 @@ class profile extends Component {
     }
   }
 
+  onChange = (e) => {
+    var file = e.target.files[0];
+    console.log(e.target.files[0]);
+
+
+
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset','zcwrt7qz');
+
+    axios.post(
+        'https://api.cloudinary.com/v1_1/dpny1nhaq/image/upload',
+        formData,
+        // method: 'POST',
+        {headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }}
+    ).then((res)=>{
+        console.log(res);
+        axios.put(`http://localhost:5000/api/Users/Profile/${this.props.id}`,{
+            'profilePicture': res.data.secure_url
+        })
+    }).catch(function(err){
+        console.log(err);
+    });
+
+}
+
   componentDidMount()
   {
      const id = this.state.id
      console.log(id)
      axios.get(`/api/Users/${id}`)
-     .then(user=>this.setState({user : user.data.data},()=>console.log("fetched",user.data.data)))
+     .then(user=>this.setState({user : user.data.data}))
      .catch(console.log('cannot fetch'))
+     console.log(this.state.user.profilePicture);
   }
   
   handleClick =() => {
@@ -75,7 +104,14 @@ class profile extends Component {
     <br></br>
     {/* <div class="icons"><a href="#"><i class="ion-ios-home"></i></a><a href="#"><i class="ion-ios-email"></i></a><a href="#"><i class="ion-ios-telephone"></i></a></div> */}
   </figcaption>
-   <div class="image"><img src={PegasusLogo } alt="sample4"/></div> 
+    <div class="image-upload">
+      <label for="file-input">
+          <img src={this.state.user.profilePicture} height="350" width="350"/>
+      </label>
+
+      <input id="file-input" type="file" onChange={this.onChange} display="none"/>
+    </div>
+   {/* <div class="image"><img src = {this.state.user.profilePicture} alt="sample4"/></div>  */}
   <div class="position">{this.state.user.type}</div>
 </figure>
 {/* <figure class="snip0057 blue">

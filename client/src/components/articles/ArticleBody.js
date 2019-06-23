@@ -82,7 +82,7 @@ export class ArticleBody extends Component {
       }
     )
     .then(res => this.setState({ allComments: [...this.state.allComments, res.data.data] }));
-    alert("Your comment has been added successfully!");
+  //  alert("Your comment has been added successfully!");
     //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
   }
 
@@ -156,36 +156,10 @@ export class ArticleBody extends Component {
         {/* <img src={Blog} alt="" style={imageStyle}  /> */}
         {/* <header style={descStyle}>  {this.state.articleee.description}</header> */}
         <p style={bodyStyle}> {this.state.articleee.body}</p>
-        <h1 style={commStyle}> {"COMMENTS"}</h1>
-        {this.state.allComments.map(commenttt => (
-          <List className={classes.root} style={{background:'#e0e0e0',width:"60%",  marginLeft:'9%'}}>
-          <ListItem alignItems="flex-start" style={{background:'#e0e0e0'}}>
-          {/* <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-          </ListItemAvatar> */}
-          <ListItemText
-            primary= {commenttt[1]}
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary"
-                >
-                  {"BY: "} {commenttt[0]}
-                  {/* {"BY: "}{ this.state.user.firstName +" "+ this.state.user.lastName} */}
-                 
-                </Typography>
-              </React.Fragment>
-            }
-          />
-        </ListItem>
         <Divider variant="dense" component="li" />
-      
-         </List>
-        ))}  
         <br></br>
+        {/* <h1 style={commStyle}> {"COMMENTS"}</h1> */}
+        
         <form onSubmit={this.onSubmit} >
            <textarea
                 type="text"
@@ -203,23 +177,53 @@ export class ArticleBody extends Component {
               <br></br>
              <input
                 type="Submit"
-                value="Post my comment !"
-                className="btn"
+                value=" Comment"
+                className="button"
                 style={{ 
                   color: '#E2A325',
                   textAlign: 'center',
-                  padding: '55px',
-                  postion:'fixed',
-  
-                  marginLeft:'35%',
-                  width:'30%',
-                  lineHeight: '1',
+                  padding: '35px',
+                 // postion:'fixed',
+                  marginLeft:'52%',
+                  width:'17%',
+                  lineHeight: '0',
                   }}
                 onClick={this.addcomment.bind(this, {
                   commments: [this.state.user.firstName +" "+ this.state.user.lastName ,this.state.commments]
                 })}
             
               /> </form>
+        {this.state.allComments.map(commenttt => (
+          <List className={classes.root} style={{background:'',width:"60%",  marginLeft:'9%'}}>
+          <ListItem alignItems="flex-start" style={{background:''}}>
+          {/* <ListItemAvatar>
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          </ListItemAvatar> */}
+          <ListItemText
+           style={{color:"black"}}
+            primary= {commenttt[1]}
+            secondary={
+              <React.Fragment>
+                <Typography
+                  component="span"
+                  variant="body2"
+                  className={classes.inline}
+                  style={{color:"black",fontWeight:'bold'}}
+                >
+                  {"BY: "} {commenttt[0]}
+                  {/* {"BY: "}{ this.state.user.firstName +" "+ this.state.user.lastName} */}
+                 
+                </Typography>
+              </React.Fragment>
+            }
+          />
+        </ListItem>
+        <Divider variant="dense" component="li" />
+      
+         </List>
+        ))}  
+        <br></br>
+      
               <br></br>
               <br></br>
               <br></br>

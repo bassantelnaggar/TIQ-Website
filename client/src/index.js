@@ -20,6 +20,7 @@ import addResponse from "./components/Chatbar/addResponse";
 import articlebody from "./components/articles/ArticleBody";
 import Chatbars from "./components/Chatbar/Chatbars";
 import SeachDebateLive from "./components/Chatbar/searchChatbBar";
+import test from "./components/debates/test";
 import Clubs from "./Clubs";
 import tryme from "./components/Chatbar/tryme";
 import Contents from "./Contents";
@@ -31,6 +32,7 @@ import ContactUs from "./ContactUs";
 import "typeface-roboto";
 import { Provider } from "react-redux";
 import store from "./store";
+import SignedUp from "./components/signUp/SignedUp";
 
 import { CreateUser } from "./components/users/CreateUser";
 
@@ -75,6 +77,7 @@ ReactDOM.render(
           <Route exact path="/debates" component={Debates} />
           <Route exact path="/tryme/:key" component={tryme} />
           <Route exact path="/DisciplesProgram" component={DisciplesProgram} />
+          <Route exact path="/SignedUp" component={SignedUp} />
 
           <Route
             exact
@@ -103,7 +106,7 @@ ReactDOM.render(
           <Route exact path="/ArticlesHome" component={ArticleHome} />
           <Route exact path="/addResponse/:key" component={addResponse} />
           <Route exact path="/deleteChatBar" component={deleteChatBar} />
-
+          <Route exact path="/test/:key" component={test} />
           <Route exact path="/user" component={SignedInUser} />
           <Route exact path="/admin" component={SignedInAdmin} />
           <Route exact path="/adminedits" component={AdminEdits} />

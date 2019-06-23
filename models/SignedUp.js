@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 const signedUpSchema = new Schema({
   type: {
     type: String,
-    required: true
+    required: true,  
+    enum: ["House Leader","BOA","Supervisor","Disciples House Leader"]
+
   },
   firstName: {
     type: String,
@@ -44,14 +46,7 @@ const signedUpSchema = new Schema({
     type: String
   },
 
-  clubs: {
-    type: [String]
-  },
-
-  approval: {
-    type: Boolean,
-    default: false
-  },
+  
   notification: {
     type: [String]
   },
