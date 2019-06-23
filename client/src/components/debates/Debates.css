@@ -1,0 +1,14 @@
+body {
+  background-color: white;
+  /* background-image: url(../../Images/background.jpeg); */
+}
+
+.center-div {
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  width: 1000px;
+  text-align: center;
+  color: #e2a325;
+  /* background-color: #8f1814; */
+}
