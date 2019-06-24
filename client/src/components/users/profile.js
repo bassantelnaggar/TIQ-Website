@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import axios from "axios"
 import "./profile.css"
-import Toolbar from "../../layout/Toolbar/Toolbar"
+import Toolbar from "../../layout/Toolbar/Toolbar";
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import PegasusLogo from "../../components/images/tiqLogo1.png"
 import OrionLogo from "../../Images/rsz_1rsz_orion-logo.jpg"
 import PegasusLogo3 from "../../Images/PEGASUS-LOGO.jpeg"
@@ -92,7 +93,7 @@ class profile extends Component {
     else{
     return(
       <div>
-        <Toolbar/>
+        <ToolbarOUT/>
       <figure class="snip0057 red hover">
   <figcaption>
     <h2>{this.state.user.firstName} <span>{this.state.user.lastName}</span></h2>
@@ -114,36 +115,7 @@ class profile extends Component {
    {/* <div class="image"><img src = {this.state.user.profilePicture} alt="sample4"/></div>  */}
   <div class="position">{this.state.user.type}</div>
 </figure>
-{/* <figure class="snip0057 blue">
-  <figcaption>
-    <h2>Tiffany <span>Case</span></h2>
-    <p>That's the whole problem with science. You've got a bunch of empiricists trying to describe things of unimaginable wonder.</p>
-    <div class="icons"><a href="#"><i class="ion-ios-home"></i></a><a href="#"><i class="ion-ios-email"></i></a><a href="#"><i class="ion-ios-telephone"></i></a></div>
-  </figcaption>
-  <div class="image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample3.jpg" alt="sample3"/></div>
-  <div class="position">Software Engineer</div>
-</figure> */}
 </div>
-  // <div className="profilePage7">
-  //     <Toolbar/>
-  //     {/* <Container className="nadin"> */}
-  //     <ul className="profile7">
-  //     <image src={this.state.user.profilePicture} className="profilepic7"></image>
-  //     <br/>
-  //    <p className="Name">Name: {this.state.user.firstName} {this.state.user.lastName}</p>
-  //    <br></br>
-  //    <p className="Email">Email: {this.state.user.email}</p>
-  //    <br></br>
-  //    <p className="BD">birthday: {this.state.user.birthDate}</p>
-  //    <br></br>
-  //    <p className="C">clubs:{this.state.user.clubs}</p>
-  //    <br/>
-  //    <p className="B">Bio: {this.state.user.bio}</p>
-  //    <br/>
-  //    <p className="T">Type: {this.state.user.type}</p> 
-  //   </ul>   
-  //   {/* </Container> */}
-  // </div>
   )
   }}
 }

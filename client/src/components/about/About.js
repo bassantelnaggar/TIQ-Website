@@ -3,6 +3,7 @@ import { Col,Row,Image,Container} from 'react-bootstrap'
 import { yellow, green, blue } from '@material-ui/core/colors';
 import "./About.css"
 import Toolbar from "../../layout/Toolbar/Toolbar"
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 //import { yellowA100 } from 'material-ui/styles/colors';
 class About extends Component { 
       state = {
@@ -205,7 +206,7 @@ class About extends Component {
                 </div>
             )
         })
-
+        if (this.props.token === null) {
     return(
      <div>  
          <Toolbar/> 
@@ -297,7 +298,101 @@ class About extends Component {
     {/* </div>    */}
     </div>
     </div>
-    )
+    )}
+    else{
+    return(
+        <div>  
+            <ToolbarOUT/> 
+            <div className="whole">
+            <div class="container">
+            <h2 className="about">First Worlds style debate club in Egypt and North Africa. Established and located in the German University in Cairo.
+                   </h2> 
+            </div>
+            <div className="container">
+            <h3 className="vision">Achieving progress through effective communication and perpetually seeking knowledge"
+       
+                                    We live in a world of diversity, diversity of culture, diversity of belief, diversity of thought. When we ask ourselves the important questions we reach many important conclusions but it is through constantly communicating with one another, constantly trying to understand and at the same time influence that we can together shape as satisfying a possible resolution.
+   
+                                   TIQ is a debate club, where we strive to produce dialogue in it's most exciting form, up on stage, going head to head with other people. There is nothing more remarkable than the free flowing of words carrying ideas, ideas that prevail with the passion, steadiness and charisma of those who deliver them. If riveting debate is something you long to learn and participate in then here is your home. </h3>
+            </div>      
+         <div className="tree">
+         {/* <div class="container1"> */}
+         <div className="BOAtitle">
+             <h3 className="Btitle">BOARD OF ADJUDICATORS</h3>
+         </div>
+         <div className="first">
+         <div class="container">
+             <div class = "row " >
+             {BOAList}
+             </div>    
+         </div> 
+         </div>
+        <div className="PHFSOH">
+        <div class="row">
+        <div className="PH">
+        <h4 className="Ptitle">PEGASUS HOUSE
+             LEADERS</h4></div>
+        <div className="FS">
+        <h4 className="Ftitle">FUNCTION SUPERVISORS</h4></div>
+        <div className="OH">
+        <h4 className="Otitle">ORION HOUSE 
+            LEADERS</h4></div>
+        
+        </div>
+       </div>
+       <div className="middle">
+        {/* <div class="col s12"> */}
+        <div class = "row">
+         <div  class="col s1">
+           {PHLList}
+         </div>
+         
+         {/* <div class = "col s8" > */}
+         <div class="container" >
+                                   {/* <div class="container"> */}
+                                       {LSRS}     
+                                   {/* </div> */}
+                                   {/* <div class="container"> */}
+                                       {MSFS}
+                                   {/* </div> */}
+                                   {/* <div class = "container"> */}
+                                       <div class="row">
+                                       <div class="col" >{MDSmember}</div>
+                                       </div>  
+                                   {/* </div> */}
+         {/* </div> */}
+         </div>
+       
+         <div class="col s1">
+                               {/* <Container id="OHLs555"> */}
+                               <div className="OHL">
+                                   <div class="col s1">
+                                   {OHLList}
+                                   </div>
+                               </div>
+                               {/* </Container> */}
+           </div>
+         </div>
+         </div>
+          <div className="Disciples">
+          <h4 className="Dtitle">DISCIPLES HOUSE LEADERS</h4>
+          </div>
+         <div className="last">
+         
+             <div class = "row " >
+             {DHLList}
+             </div>    
+         
+   
+         </div>
+   
+   
+         </div>
+       {/* </div>    */}
+       </div>
+       </div>
+       )
+    }
 
   }
 }

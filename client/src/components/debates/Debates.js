@@ -19,7 +19,7 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import ToolBar from "../../layout/Toolbar/Toolbar";
-
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -140,7 +140,7 @@ class Debates extends Component {
     if (auth) {
       return (
         <>
-          <ToolBar />
+          <ToolbarOUT />
 
           <Dialog
             open={this.state.createopen}
@@ -208,10 +208,10 @@ class Debates extends Component {
               <Typography paragraph>{this.state.error}</Typography>
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleCreateClick} color="primary">
+              <Button onClick={this.handleCreateClick} style={{background:"#333"}}>
                 Cancel
               </Button>
-              <Button onClick={() => this.createDebate()} color="primary">
+              <Button onClick={() => this.createDebate()} style={{background:"#333"}}>
                 Create
                 <CloudUploadIcon className={classes.rightIcon} />
               </Button>
@@ -277,28 +277,10 @@ class Debates extends Component {
            
           </div>
     
+          {/* <div className="center-div"> */}
           <div class="inner">
             <div class="thumbnails">
-              {this.state.debates.map(debate => (
-                <div class="box">
-                  <Link to={"/test/" + debate._id} class="image fit">
-                    <img src={Logo} alt="" />
-                  </Link>
-                  <div class="inner">
-                    <h3>{debate.title}</h3>
-                    {/* <p>{debate.info} </p> */}
-                    <p>{debate.category} </p>
-                    {/* <p>{debate.date} </p> */}
-                    <Link to={"/test/" + debate._id} class="button">
-                     Read More!
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* <div className="center-div">
-            <h1>Our Debates</h1>
+            {/* <h1>Our Debates</h1> */}
             {this.state.debates.map(debate => (
               <DebateCard
                 key={debate._id}
@@ -311,15 +293,17 @@ class Debates extends Component {
                 auth={auth}
               />
             ))}
-          </div> */}
+          </div> 
+          </div>
+          {/* </div> */}
         </>
       );
     } else {
       return (
         <>
-          <ToolBar />
+          <ToolbarOUT />
           <div className="button-div">
-            <TextField
+          <TextField
               id="selecteddate"
               label="Date"
               type="date"
@@ -328,40 +312,47 @@ class Debates extends Component {
               InputLabelProps={{
                 shrink: true
               }}
+              style={{ left: "670px", top: "-55px" }}
             />
 
-            <Fab
+            <Button
               variant="extended"
               aria-label="Search by Date"
               className={classes.fab}
               onClick={this.handleDateSearch}
+              style={{ left: "700px", top: "-45px", background:"#333" }}
             >
               Search by Date
               <SearchIcon />
-            </Fab>
+            </Button>
 
             <Typography paragraph> </Typography>
 
             <TextField
               id="selectedcategory"
-              label="category"
+              label=  {"Category"}
+              type= "textField"
               className={classes.textField}
               onChange={this.handleChange("selectedcategory")}
+              style={{ left: "1060px", top: "-120px"  }}
             />
 
-            <Fab
+            <Button
               variant="extended"
               aria-label="Search by Category"
               className={classes.fab}
               onClick={this.handleCategorySearch}
+              style={{ left: "1080px", top: "-110px",  background:"#333" }}
             >
               Search by Category
               <SearchIcon />
-            </Fab>
+            </Button>
+           
           </div>
 
-          <div className="center-div">
-            <h1>Our Debates</h1>
+
+          <div class="inner">
+            <div class="thumbnails">
             {this.state.debates.map(debate => (
               <DebateCard
                 key={debate._id}
@@ -371,8 +362,10 @@ class Debates extends Component {
                 category={debate.category}
                 description={debate.description}
                 info={debate.info}
+                auth={auth}
               />
             ))}
+          </div> 
           </div>
         </>
       );

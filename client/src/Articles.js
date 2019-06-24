@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import Toolbar from "./layout/Toolbar/Toolbar";
+import ToolbarOUT from "./layout/Toolbar/ToolbarSignout";
 import AllArticles from './components/articles/AllArticles'
 import AddArticle from './components/articles/AddArticle'
 import DeleteArticle from './components/articles/DeleteArticle'
@@ -75,7 +76,7 @@ class Articles extends Component {
     if (auth) {
     return (
       <div className="App">
-        <Toolbar />
+        <ToolbarOUT />
         <button
             className="button"
             style={{ position: "absolute", left: "20px", top: "63px" }}

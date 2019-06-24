@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import ToolbarOUT from "../layout/Toolbar/ToolbarSignout";
 import Toolbar from "../layout/Toolbar/Toolbar";
 import axios from "axios";
 import CustomizedTable from "../layout/Table/CustomizedTable";
@@ -42,7 +42,7 @@ export class Score extends Component {
     if (this.props.token != null) {
       return (
         <div>
-          <Toolbar />
+          <ToolbarOUT />
 
           <main className="Score__page" style={{ marginTop: "64px" }}>
             <header>Debaters Scores!!</header>

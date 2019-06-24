@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-// import "./hubHomepage/temp.css";
 import "./test.css";
 import axios from "axios";
-// import Navbar from "./components/layout/Navbar";
-// import SignedInNavBar from "./components/layout/NavbarSignedIn";
-// import Logo from "./components/images/pic05.jpg";
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import Toolbar from '../../layout/Toolbar/Toolbar'
 import news from "../../components/images/debate.jpg";
-// import addIcon from "./components/images/addIcon.png";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
@@ -45,16 +41,45 @@ class test extends Component {
       }
 
   render() {
-    
+    if (this.props.token === null) {
+      return (
+        <div>
+        <Toolbar/>
+        <div class="body66">
+          <div class="container"  data-0="transform:translateX(0%)"
+          data-4000="transform:translateX(-300%)">
+           <div class="section83">
+          
+                <>
+                  <div class="imgBx">
+                      <img src={news}/>
+                  </div>
+                  <div class="storyBx">
+                      <h2>{this.state.debate.title}</h2>
+                      <br></br><br></br>
+                     <p> 
+                      <strong style={{fontWeight:'bold', fontSize:'170%'}}>{"Background"} </strong><br></br>
+                      {this.state.debate.info} <br></br>
+                     <strong style={{fontWeight:'bold', fontSize:'170%'}}>{"Description"} </strong> <br></br>
+                       {this.state.debate.description}</p>
+                      </div> 
+                      </>
+             </div> 
+          </div>
+
+        </div>
+         </div>
+      )
+    }
+    else{
       return (
           <div>
-          <Toolbar/>
+          <ToolbarOUT/>
           <div class="body66">
             <div class="container"  data-0="transform:translateX(0%)"
             data-4000="transform:translateX(-300%)">
              <div class="section83">
-              
-            {/* {this.state.debates.map(debate => ( */}
+            
                   <>
                     <div class="imgBx">
                         <img src={news}/>
@@ -67,17 +92,15 @@ class test extends Component {
                         {this.state.debate.info} <br></br>
                        <strong style={{fontWeight:'bold', fontSize:'170%'}}>{"Description"} </strong> <br></br>
                          {this.state.debate.description}</p>
-                        {/* <p>{this.state.debate.description}</p> */}
                         </div> 
                         </>
-         {/* ))} */}
                </div> 
             </div>
 
           </div>
            </div>
       )
-    }
+    }}
 }
        
 const Form = connect(

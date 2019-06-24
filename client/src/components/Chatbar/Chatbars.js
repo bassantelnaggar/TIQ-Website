@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Chatbars.css";
 import Header from "./Header";
 import Toolbar from "../../layout/Toolbar/Toolbar";
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import Background from "../../Images/background.jpeg";
 import Logo from "../images/debate2.jpg";
 // import TextField from "@material-ui/core/TextField";
@@ -50,10 +51,10 @@ class Chatbars extends Component {
 
   render() {
     console.log(this.props.usertype);
-    if (this.props.token == null) {
+    if (this.props.token === null) {
       return (
         <div>
-          <Toolbar />
+          <Toolbar/>
           <div class="thumbnails">
             <div class="box">
               <div class="inner">
@@ -82,7 +83,7 @@ class Chatbars extends Component {
       return (
         <div style={this.getStyle()}>
           <div>
-            <Toolbar />
+            <ToolbarOUT />
             <Header />
           </div>
           <div class="inner">
@@ -153,7 +154,7 @@ class Chatbars extends Component {
       return (
         <div style={this.getStyle()}>
           <div>
-            <Toolbar />
+            <ToolbarOUT />
             <Header />
           </div>
           <div class="inner">
