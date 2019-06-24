@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './Chatbars.css';
 import Header from './Header';
-import Toolbar from '../../layout/Toolbar/Toolbar'
+import Toolbar from '../../layout/Toolbar/Toolbar';
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
@@ -62,7 +63,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
         return (
           <div style={this.getStyle()}  >
         <div>
-        <Toolbar/>
+        <ToolbarOUT/>
         <Header />
         <button
             className="btn"

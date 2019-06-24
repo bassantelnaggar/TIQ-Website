@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Toolbarr from "../../layout/Toolbar/Toolbar";
 import axios from "axios";
 import AppBar from '@material-ui/core/AppBar';
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import Toolbar from '@material-ui/core/Toolbar';
 import { connect } from "react-redux";
 const mapStateToProps = state => {
@@ -120,6 +121,33 @@ class tryme extends React.Component {
   
 
   render() {
+    if (this.props.token === null) {
+      return (
+        <div>
+          <Toolbarr/>
+          <div class="thumbnails">
+            <div class="box">
+              <div class="inner">
+                <h3>You have to sign in first!</h3>
+               
+                <button
+                  variant="contained"
+                  onClick={() => {
+                    this.handleClick();
+                  }}
+                  //onClick={() => (document.location = "/signin")}
+                  className="btn"
+                >
+                  Sign In
+                </button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    else{
     const { classes } = this.props;
     const { expanded } = this.state;
     const { expanded2 } = this.state;
@@ -143,7 +171,7 @@ class tryme extends React.Component {
     return (
     
       <div className={classes.root} >
-          <Toolbarr />
+          <ToolbarOUT />
           <p style={headerStyle} >  {this.state.chatbars.debateLiveTitle}</p>
           <div style={{position:"relative",top:"10px"}}>
         <Grid container spacing={3}>  
@@ -272,7 +300,7 @@ class tryme extends React.Component {
          </div>
 
 );
-  }
+  }}
 }
 const responseOpen={
  

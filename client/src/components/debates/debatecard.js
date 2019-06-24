@@ -19,6 +19,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Logo from "../images/debatecover.jpg";
+import { Link } from 'react-router-dom';
 
 const months = [
   "January",
@@ -183,59 +185,34 @@ class DebateCard extends React.Component {
               <Typography paragraph>{this.state.updateerror}</Typography>
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleUpdateClick} color="primary">
+              <Button onClick={this.handleUpdateClick} style={{background:"#333"}}>
                 Cancel
               </Button>
-              <Button onClick={() => this.UpdateDebate()} color="primary">
+              <Button onClick={() => this.UpdateDebate()} style={{background:"#333"}}>
                 Update
               </Button>
             </DialogActions>
           </Dialog>
-          <Card className={classes.card}>
-            <CardHeader title={this.props.title} subheader={this.state.date} />
-            <CardContent>
-              <Typography component="p">
-                category : {this.props.category}
-              </Typography>
-            </CardContent>
-            <CardActions className={classes.actions} disableActionSpacing>
-              <IconButton
-                aria-label="Delete"
-                onClick={() => {
+                <div class="box">
+                  <Link to={"/test/" + this.props.id} class="image fit">
+                    <img src={Logo} alt="" />
+                  </Link>
+                  <div class="inner">
+                    <h3>{this.props.title}</h3>
+                    <p> {this.props.category} </p>
+                    <Link to={"/test/" + this.props.id} class="button" >
+                     Read More!
+                    </Link>
+                    <br></br>
+                    <DeleteIcon style={{margin:'5%' }}  onClick={() => {
                   this.handleDeleteClick();
-                }}
-              >
-                <DeleteIcon />
-              </IconButton>
-              <IconButton
-                aria-label="Edit"
-                onClick={() => {
+                }}  />
+                <EditIcon style={{margin:'5%'}} onClick={() => {
                   this.handleUpdateClick();
-                }}
-              >
-                <EditIcon />
-              </IconButton>
-              <IconButton
-                className={classnames(classes.expand, {
-                  [classes.expandOpen]: this.state.expanded
-                })}
-                onClick={this.handleExpandClick}
-                aria-expanded={this.state.expanded}
-                aria-label="Show more"
-              >
-                <ExpandMoreIcon />
-              </IconButton>
-            </CardActions>
-            <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-              <CardContent>
-                <Typography paragraph>Description:</Typography>
-                <Typography paragraph>{this.props.description}</Typography>
-                <Typography paragraph />
-                <Typography paragraph>Info :</Typography>
-                <Typography>{this.props.info}</Typography>
-              </CardContent>
-            </Collapse>
-          </Card>
+                }}  />
+                  </div>
+                </div>
+            
         </>
       );
     } else {
@@ -306,35 +283,21 @@ class DebateCard extends React.Component {
               </Button>
             </DialogActions>
           </Dialog>
-          <Card className={classes.card}>
-            <CardHeader title={this.props.title} subheader={this.state.date} />
-            <CardContent>
-              <Typography component="p">
-                category : {this.props.category}
-              </Typography>
-            </CardContent>
-            <CardActions className={classes.actions} disableActionSpacing>
-              <IconButton
-                className={classnames(classes.expand, {
-                  [classes.expandOpen]: this.state.expanded
-                })}
-                onClick={this.handleExpandClick}
-                aria-expanded={this.state.expanded}
-                aria-label="Show more"
-              >
-                <ExpandMoreIcon />
-              </IconButton>
-            </CardActions>
-            <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-              <CardContent>
-                <Typography paragraph>Description:</Typography>
-                <Typography paragraph>{this.props.description}</Typography>
-                <Typography paragraph />
-                <Typography paragraph>Info :</Typography>
-                <Typography>{this.props.info}</Typography>
-              </CardContent>
-            </Collapse>
-          </Card>
+          <div class="box">
+                  <Link to={"/test/" + this.props.id} class="image fit">
+                    <img src={Logo} alt="" />
+                  </Link>
+                  <div class="inner">
+                    <h3>{this.props.title}</h3>
+                    {/* <p>{debate.info} </p> */}
+                    <p> {this.props.category} </p>
+                    {/* <p>{debate.date} </p> */}
+                    <Link to={"/test/" + this.props.id} class="button">
+                     Read More!
+                    </Link>
+                  </div>
+                </div>
+          
         </>
       );
     }

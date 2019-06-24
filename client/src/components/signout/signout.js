@@ -45,7 +45,7 @@ class logOut extends React.Component {
       );
     } else {
       this.props.signout();
-      this.props.history.push("/");
+      this.props.history.push("/TIQHome");
       return(<></>)
     }
   }

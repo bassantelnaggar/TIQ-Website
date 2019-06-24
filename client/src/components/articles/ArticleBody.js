@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 //import Header from "./Header";
 import Toolbar from "../../layout/Toolbar/Toolbar";
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
@@ -139,7 +140,7 @@ export class ArticleBody extends Component {
     return (
      <div >
           <div>
-          <Toolbar />
+          <ToolbarOUT />
           <button
             className="button"
             style={{ position: "absolute", left: "20px", top: "63px" }}

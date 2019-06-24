@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Navbar from "../components/layout/Navbar"
+import Toolbar from "../layout/Toolbar/Toolbar";
 import { red } from "@material-ui/core/colors";
 
 const styles = theme => ({
@@ -76,8 +77,8 @@ class SignUp extends React.Component {
     return (
       
       <main className={classes.main}>
-       <Navbar/>
-        <CssBaseline />
+       <Toolbar/>
+        {/* <CssBaseline /> */}
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />

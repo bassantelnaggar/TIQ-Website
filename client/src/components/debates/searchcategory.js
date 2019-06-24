@@ -3,7 +3,7 @@ import DebateCard from "./debatecard.js";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import "./Debates.css";
-import ToolBar from "../../layout/Toolbar/Toolbar"
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 
 
 const styles = theme => ({
@@ -32,17 +32,16 @@ class SearchDate extends Component {
     const { classes } = this.props;
     return (
       <>
-        <ToolBar />
+        <ToolbarOUT />
         <h1> 
-
-
-
-
-
-          
         </h1>
-        <div className="center-div">
-          <h1>Debates with category {this.state.category}</h1>
+        {/* <div className="center-div">
+           */}
+             <div class="inner">
+            <div class="thumbnails">
+            {/* <h1>Our Debates</h1> */}
+          {/* <h1 style={{margin:'5%'}}>Debates with category {this.state.category}</h1> */}
+    
           {this.state.debates.map(debate => (
             <DebateCard
               key={debate._id}
@@ -54,6 +53,7 @@ class SearchDate extends Component {
               info={debate.info}
             />
           ))}
+        </div>
         </div>
       </>
     );

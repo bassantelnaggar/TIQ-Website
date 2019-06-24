@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./Chatbars.css";
 import ToolBar from "../../layout/Toolbar/Toolbar";
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import Header from './Header';
 import Logo from '../images/debate2.jpg';
 import Background from '../../Images/background.jpeg';
+import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 
 class SearchDebateLive extends Component {
   componentDidMount() {
@@ -14,6 +19,9 @@ class SearchDebateLive extends Component {
       .get(`/api/chatbars/Search/${title}`)
       .then(res => this.setState({ chatbars: res.data.data }));
   }
+  handleClick =() => {
+    this.props.history.push("/chatbars");
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -34,8 +42,17 @@ class SearchDebateLive extends Component {
       <>
        <div style={this.getStyle()} >
       <div>
-        <ToolBar />
+        <ToolbarOUT />
         <Header />
+        <button
+            className="btn"
+            style={{ position: "absolute", left: "20px", top: "63px" }}
+            onClick={() => {
+              this.handleClick();
+            }}
+          >
+            BACK
+          </button>
         </div>
         <div class="inner">
           <div class="thumbnails">
@@ -61,4 +78,11 @@ class SearchDebateLive extends Component {
   }
 }
 
-export default SearchDebateLive;
+const Form = connect(
+  mapStateToProps,
+  null
+)(SearchDebateLive);
+
+export default Form;
+
+//export default SearchDebateLive;

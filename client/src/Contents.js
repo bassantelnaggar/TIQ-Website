@@ -5,6 +5,7 @@ import AddContent from "./components/Contents/AddContent";
 import DeleteContent from "./components/Contents/DeleteContent";
 import UpdatingContents from "./components/Contents/UpdatingContents";
 import Toolbar from "./layout/Toolbar/Toolbar";
+import ToolbarOUT from "./layout/Toolbar/ToolbarSignout";
 import "./App.css";
 import {connect} from "react-redux";
 
@@ -62,7 +63,7 @@ class Contents extends Component {
     if (auth) {
     return (
       <div className="App">
-      <Toolbar />
+      <ToolbarOUT />
         <h1>ADD NEW CONTENT</h1>
         <AddContent addContent={this.addContent} />
         <h1>DELETE CONTENT</h1>
@@ -78,14 +79,23 @@ class Contents extends Component {
       </div>
     );
   }else{
+    if (this.props.token === null) {
     return (
       <div className="App">
          <Toolbar />
-        {/* <h1>ALL CONTENT</h1> */}
         <AllContent allContent={this.state.allContent} />
       </div>
     );
   }
+  else{
+    return (
+      <div className="App">
+         <ToolbarOUT />
+        <AllContent allContent={this.state.allContent} />
+      </div>
+    );
+}
+}
 }
 }
 const Form = connect(
