@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import axios from "axios";
 import DeleteUser from "./DeleteUser";
 import DetailedExpansionPanel from "./DetailedExpansionPanel";
@@ -63,9 +63,37 @@ class GetUsers extends Component {
   };
 
   render() {
+    if (this.props.token === null) {
+      return (
+        <>
+        <Toolbar />
+        <div className="center-div">
+          <h1
+            style={{
+              textAlign: "center",
+              position: "relative",
+
+              fontSize: "50px"
+            }}
+          >
+            OUR PEOPLE{" "}
+          </h1>
+          <ul>
+            {this.state.users && (
+              <DeleteUser
+                users={this.state.users}
+                deleteUser={this.deleteUser}
+              />
+            )}
+          </ul>
+        </div>
+      </>
+      )
+    }
+    else{
     return (
       <>
-        <Toolbar />
+        <ToolbarOUT />
         <div className="center-div">
           <h1
             style={{
@@ -89,5 +117,6 @@ class GetUsers extends Component {
       </>
     );
   }
+}
 }
 export default GetUsers;

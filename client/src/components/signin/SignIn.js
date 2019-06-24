@@ -1,32 +1,18 @@
 import React from "react";
-import classNames from "classnames";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import TextField from "@material-ui/core/TextField";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Navbar from "../../components/layout/Navbar";
-import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
+import Toolbar from "../../layout/Toolbar/Toolbar";
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
-
 import { connect } from "react-redux";
 import { signIn, signOut } from "../../store";
+import '../../pages/Homee/assets/css/main.css';
+import "../../components/Chatbar/Chatbars.css";
 import axios from "axios";
 
 const mapStateToProps = state => {
@@ -105,7 +91,7 @@ class InputAdornments extends React.Component {
     );
     if (Users.data.token !== null) {
       this.props.signin(Users.data.token, Users.data.usertype, Users.data.id);
-      this.props.history.push("/");
+      this.props.history.push("/TIQhome");
     } else
       this.setState({
         errormessgae: "Incorrect Email or Password please try again"
@@ -125,17 +111,12 @@ class InputAdornments extends React.Component {
     const classes = useStyles();
     console.log(this.props.usertype);
     return (
-      <>
-     <Navbar/>
+      <div>
+     <Toolbar/>
         <div className={classes.root}  style={{ postion:'fixed',marginLeft:'31%',marginTop:'9%', width:'100%', lineHeight: '1', }}>
  <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      {/* <Grid item xs={false} sm={4} md={7} className={classes.image} /> */}
       <Grid item xs={12} sm={8} md={5} >
         <div className={classes.paper}>
-          {/* <Typography component="h1" variant="h5">
-            Sign in
-          </Typography> */}
           <form className={classes.form} noValidate>
           <InputLabel htmlFor="email">Email </InputLabel>
             <Input
@@ -166,10 +147,6 @@ class InputAdornments extends React.Component {
               onChange={this.handleChange("password")}
               autoComplete="current-password"
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
             <br></br> <br></br>
             <Button
                style = {{background: '#410c12'}}
@@ -183,22 +160,14 @@ class InputAdornments extends React.Component {
             >
               Sign In
             </Button>
-            <Typography paragraph>{this.state.errormessgae}</Typography>
+            <Typography paragraph style={{color:"black"}}>{this.state.errormessgae}</Typography>
             <Grid container>
-              {/* <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid> */}
               <Grid item>
                 <Link  href="/createuser" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
-            {/* <Box mt={5}>
-              <MadeWithLove />
-            </Box> */}
           </form>
         </div>
       </Grid>
@@ -206,7 +175,7 @@ class InputAdornments extends React.Component {
           
           
         </div>
-      </>
+      </div>
     );
   }
 }

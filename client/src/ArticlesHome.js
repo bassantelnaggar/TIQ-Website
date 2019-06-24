@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import Toolbar from "./layout/Toolbar/Toolbar";
+import ToolbarOUT from "./layout/Toolbar/ToolbarSignout";
 import AllArticles from './components/articles/AllArticles'
 import AddArticle from './components/articles/AddArticle'
 import DeleteArticle from './components/articles/DeleteArticle'
@@ -74,7 +75,7 @@ class Articles extends Component {
     if (auth) {
     return (
       <div className="App">
-        <Toolbar />
+        <ToolbarOUT />
         <btn
             className="button"
             style={{ position: "absolute", left: "20px", top: "63px" }}
@@ -93,18 +94,28 @@ class Articles extends Component {
     );
   }
   else{
+    if (this.props.token === null) {
     return (
       <div className="App">
         <Toolbar />
         
     
       <AllArticles allArticles = {this.state.allArticles}  />
-      {/* updateComment = {this.updateComment} */}
-      {/* <h1>add new comment</h1>
-      <AddComment allArticles = {this.state.allArticles} addComment = {this.state.addComment}/> */}
       </div>
     );
   }
+  else{
+    return (
+      <div className="App">
+        <ToolbarOUT />
+        
+    
+      <AllArticles allArticles = {this.state.allArticles}  />
+      </div>
+    );
+  }
+}
+
 }
 }
 
