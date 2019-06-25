@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
+
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -8,10 +8,10 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import Typography from "@material-ui/core/Typography";
-// import "../../pages/Homee/ourPeople/ourPeople.css";
+import Button from "@material-ui/core/Button";
+import EditIcon from "@material-ui/icons/Edit";
 
 class FormDialog extends React.Component {
- 
   constructor(props) {
     super(props);
     this.state = {
@@ -60,76 +60,30 @@ class FormDialog extends React.Component {
     return (
       <div>
         <div />
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={this.handleClickOpen}
-        >
+        <EditIcon variant="outlined" onClick={this.handleClickOpen}>
           UPDATE
-        </Button>
+        </EditIcon>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Update Profile</DialogTitle>
+          <DialogTitle class="form-dialog-title ">Update Profile</DialogTitle>
           <DialogContent>
             <DialogContentText />
 
             <TextField
               onChange={e => {
                 this.setState({
-                  firstName: e.target.value
+                  type: e.target.value
                 });
               }}
               autoFocus
               margin="dense"
-              id="FirstName"
-              label="FirstName"
-              type="FirstName"
-              defaultValue={this.props.user.firstName}
-            />
-
-            <TextField
-              onChange={e => {
-                this.setState({
-                  lastName: e.target.value
-                });
-              }}
-              autoFocus
-              margin="dense"
-              id="LastName"
-              label="LastName"
-              type="LastName"
-              defaultValue={this.props.user.lastName}
-            />
-
-            <TextField
-              onChange={e => {
-                this.setState({
-                  birthDate: e.target.value
-                });
-              }}
-              autoFocus
-              margin="dense"
-              id="birthDate"
-              label="birthDate"
-              type="birthDate"
-              defaultValue={this.props.user.birthDate}
-            />
-
-            <TextField
-              onChange={e => {
-                this.setState({
-                  bio: e.target.value
-                });
-              }}
-              autoFocus
-              margin="dense"
-              id="bio"
-              label="bio"
-              type="bio"
-              defaultValue={this.props.user.bio}
+              id="type"
+              label="type"
+              type="type"
+              defaultValue={this.props.user.type}
             />
             <TextField
               onChange={e => {
@@ -176,12 +130,15 @@ class FormDialog extends React.Component {
             <Typography paragraph>{this.state.Error}</Typography>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <button
+              // variant="outlined"
+              // color="primary"
+              class="Form-Dialo-Button"
+              onClick={this.handleClose}
+            >
               CANCEL
-            </Button>
-            <Button onClick={() => this.handleSubmit()} color="default">
-              UPDATE
-            </Button>
+            </button>
+            <button onClick={() => this.handleSubmit()}>UPDATE</button>
           </DialogActions>
         </Dialog>
       </div>
