@@ -14,7 +14,28 @@ import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Navbar from "../components/layout/Navbar"
 import { red } from "@material-ui/core/colors";
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
 
+const types=[{
+  value: 'member',
+  label: 'Member',
+},
+{
+  value: 'alumni',
+  label: 'Alumni',
+},
+{
+  value: 'disciple',
+  label: 'Disciple',
+},
+{
+  value: 'parent',
+  label: 'Parent',
+},];
+const status=["House Leader","BOA","Supervisor","Disciples House Leader"]
+const houses=["Pegasus","Orion","Neutral"];
+const supervisor=["Marketing","Fundraising","Logistics","Relations","Media Design"]
 const styles = theme => ({
   main: {
     width: "auto",
@@ -47,7 +68,9 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3
   }
 });
+
 class SignUp extends React.Component {
+  
   state = {
     type: "",
     firstName: "",
@@ -59,9 +82,15 @@ class SignUp extends React.Component {
     house: "",
     din: "",
     dor: "",
-    clubs: ""
+    tiqStatus:"",
+    supervisorType:""
   };
-
+  required = ( type,firstName, lastName, birthDate,bio,email, password,house,din,dor,tiqStatus,supervisorType) => {
+    if(firstName=="" || lastName=="" || birthDate=="" ||email=="" ||password==""){
+      
+    }
+}
+  
   componentDidMount() {
     console.log(this.props);
   }
@@ -72,7 +101,6 @@ class SignUp extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log("hhhhhhhhhhhhhhhh");
     return (
       
       <main className={classes.main}>
@@ -85,23 +113,39 @@ class SignUp extends React.Component {
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-          <form className={classes.form}>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="type"> Type</InputLabel>
-              <Input
-                id="type"
+          <form className={classes.form} >
+          
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="type"> </InputLabel>
+              
+              <TextField
+               required
+                id="outlined-select-currency"
+                select
+                className={classes.textField}
                 name="type"
-                autoComplete="type"
-                placeholder="TIQadmin,member,...."
-                style={{color:"black"}}
-                onChange={this.onChange}
+                label="Type"
                 value={this.state.type}
-                autoFocus
-              />
+                onChange={this.onChange}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please select your type"
+                margin="normal"
+                variant="outlined"
+              >
+                {types.map(option => (
+                  <MenuItem key={option} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+      </TextField>
             </FormControl>
-
+            
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="firstName">firstName </InputLabel>
+              <InputLabel htmlFor="firstName">First Name </InputLabel>
               <Input
                 id="firstName"
                 name="firstName"
@@ -124,20 +168,23 @@ class SignUp extends React.Component {
               />
             </FormControl>
 
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="birthDate">Birth Date</InputLabel>
-              <Input
-                id="birthDate"
-                name="birthDate"
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="birthDate"></InputLabel>
+              <TextField required
+                id="date"
+                label="Birth Date"
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 onChange={this.onChange}
-                value={this.state.birthDate}
-                placeholder="DD-MM-YYYY"
-                autoComplete="birthDate"
-                autoFocus
+                name="birthDate"
+                //value={this.state.birthDate}
               />
             </FormControl>
 
-            <FormControl margin="normal" required fullWidth>
+            <FormControl margin="normal"  fullWidth>
               <InputLabel htmlFor="bio"> Bio</InputLabel>
               <Input
                 id="bio"
@@ -173,58 +220,194 @@ class SignUp extends React.Component {
                 value={this.state.password}
               />
             </FormControl>
-
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="house"> House</InputLabel>
-              <Input
-                id="house"
+           {this.state.type=="alumni" && <div>              {/* alumni */}
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="house"> </InputLabel>
+              <Input required>
+              <TextField required
+                id="outlined-select-currency"
+                select
+                className={classes.textField}
                 name="house"
-                autoComplete="house"
-                onChange={this.onChange}
+                label="House"
                 value={this.state.house}
-                placeholder="Pegasus,Orion,Neutral"
-                autoFocus
-              />
+                onChange={this.onChange}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please select your house"
+                margin="normal"
+                variant="outlined"
+              >
+                {houses.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+            </TextField>
+            </Input>
             </FormControl>
-
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="din"> Date Of Joining</InputLabel>
-              <Input
-                id="din"
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="din"> </InputLabel>
+              <TextField required
+                id="date"
+                label="Date Of Joining"
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={this.onChange}
                 name="din"
-                autoComplete="din"
-                onChange={this.onChange}
-                value={this.state.din}
-                placeholder="DD-MM-YYYY"
-                autoFocus
               />
             </FormControl>
 
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="dor">Date Of Leaving </InputLabel>
-              <Input
-                id="dor"
-                name="dor"
-                autoComplete="dor"
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="dor"> </InputLabel>
+              <TextField required
+                id="date"
+                label="Date Of Leaving"
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 onChange={this.onChange}
-                value={this.state.dor}
-                placeholder="DD-MM-YYYY"
-                autoFocus
-              />
+                name="dor"            
+                  />
             </FormControl>
 
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="clubs"> Clubs</InputLabel>
-              <Input
-                id="clubs"
-                name="clubs"
-                autoComplete="clubs"
+            </div>}
+            {this.state.type=="disciple" && <div>
+              {/* disciples */}
+              <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="house"> </InputLabel>
+              <TextField required
+                id="outlined-select-currency"
+                select
+                className={classes.textField}
+                name="house"
+                label="House"
+                value={this.state.house}
                 onChange={this.onChange}
-                value={this.state.clubs}
-                autoFocus
-              />
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please select your house"
+                margin="normal"
+                variant="outlined"
+              >
+                {houses.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+      </TextField>
             </FormControl>
 
+            </div>}
+            {this.state.type=="member" &&<div>
+              {/* member */}
+              <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="house"> </InputLabel>
+              <TextField required
+                id="outlined-select-currency"
+                select
+                className={classes.textField}
+                name="house"
+                label="House"
+                value={this.state.house}
+                onChange={this.onChange}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please select your house"
+                margin="normal"
+                variant="outlined"
+              >
+                {houses.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+            </TextField>
+            </FormControl>
+
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="din"> </InputLabel>
+              <TextField required
+                id="date"
+                label="Date Of Joining"
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={this.onChange}
+                name="din"
+              />
+            </FormControl>
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="tiqStatus"> </InputLabel>
+                <TextField 
+                id="outlined-select-currency"
+                select
+                className={classes.textField}
+                name="tiqStatus"
+                label="TIQ Status"
+                value={this.state.tiqStatus}
+                onChange={this.onChange}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please select your TIQ Status"
+                margin="normal"
+                variant="outlined"
+              >
+                {status.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+            </TextField>
+            </FormControl>
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="supervisorType"></InputLabel>
+              <TextField required
+                id="outlined-select-currency"
+                select
+                className={classes.textField}
+                name="supervisorType"
+                label="Supervisor Type"
+                value={this.state.supervisorType}
+                onChange={this.onChange}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please select your Supervisor Type"
+                margin="normal"
+                variant="outlined"
+              >
+                {supervisor.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+            </TextField>
+            </FormControl>
+            </div>}
+            
+            
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -233,8 +416,21 @@ class SignUp extends React.Component {
               fullWidth
               variant="contained"
               color="primary"
-              href="/signin"
-              onClick={this.props.addUser.bind(
+              //href="/signin"
+              onClick={
+              //  this.error(this.state.type,
+              //   this.state.firstName,
+              //   this.state.lastName,
+              //   this.state.birthDate,
+              //   this.state.bio,
+              //   this.state.email,
+              //   this.state.password,
+              //   this.state.house,
+              //   this.state.din,
+              //   this.state.dor,
+              //   this.state.tiqStatus,
+              //   this.state.supervisorType)
+                this.props.addUser.bind(
                 this,
                 this.state.type,
                 this.state.firstName,
@@ -246,12 +442,15 @@ class SignUp extends React.Component {
                 this.state.house,
                 this.state.din,
                 this.state.dor,
-                this.state.clubs
-              )}
+                this.state.tiqStatus,
+                this.state.supervisorType
+              )
+            }
             >
               DEBATE NOW!
             </Button>
           </form>
+          
         </Paper>
       </main>
     );

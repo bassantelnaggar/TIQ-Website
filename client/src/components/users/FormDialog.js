@@ -20,14 +20,17 @@ class FormDialog extends React.Component {
       lastName: this.props.user.lastName,
       birthDate: this.props.user.birthDate,
       bio: this.props.user.bio,
-      clubs: this.props.user.clubs,
       din: this.props.user.din,
       dor: this.props.user.dor,
+      type:this.props.user.type,
+      house:this.props.user.house,
+      tiqStatus:this.props.user.tiqStatus,
+      supervisorType:this.props.user.supervisorType,
       Error: ""
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleClickOpen() {
@@ -40,21 +43,29 @@ class FormDialog extends React.Component {
   handleUpdateClick = () => {
     this.setState({ open: !this.state.open });
   };
-
-  handleSubmit = () => {
-    axios
-      .put("/api/Users/update/" + this.props.user._id, {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        bio: this.state.bio,
-        birthDate: this.state.birthDate,
-        clubs: this.state.clubs,
-        din: this.state.din,
-        dor: this.state.dor
-      })
-      .then(res => console.log(res))
-      .catch(err => console.log(err.message));
+  handleClick = event => {
+    const { currentTarget } = event;
+    this.setState(state => ({
+      anchorEl: currentTarget,
+      open: !state.open,
+    }));
   };
+  onChange = (e) => this.setState({[e.target.name]: e.target.value});
+
+  // handleSubmit = () => {
+  //   axios
+  //     .put("/api/Users/update/" + this.props.user._id, {
+  //       firstName: this.state.firstName,
+  //       lastName: this.state.lastName,
+  //       bio: this.state.bio,
+  //       birthDate: this.state.birthDate,
+  //       clubs: this.state.clubs,
+  //       din: this.state.din,
+  //       dor: this.state.dor
+  //     })
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err.message));
+  // };
 
   render() {
     return (
@@ -79,57 +90,46 @@ class FormDialog extends React.Component {
             <TextField
               onChange={e => {
                 this.setState({
-                  firstName: e.target.value
+                  type: e.target.value
                 });
               }}
+             // onChange={this.onChange}
               autoFocus
+
               margin="dense"
               id="FirstName"
-              label="FirstName"
-              type="FirstName"
-              defaultValue={this.props.user.firstName}
+              label="Type"
+              type="Type"
+              defaultValue={this.props.user.type}
             />
 
             <TextField
               onChange={e => {
                 this.setState({
-                  lastName: e.target.value
+                  house: e.target.value
                 });
               }}
               autoFocus
               margin="dense"
               id="LastName"
-              label="LastName"
-              type="LastName"
-              defaultValue={this.props.user.lastName}
+              label="House"
+              type="House"
+              defaultValue={this.props.user.house}
             />
 
+           
             <TextField
               onChange={e => {
                 this.setState({
-                  birthDate: e.target.value
-                });
-              }}
-              autoFocus
-              margin="dense"
-              id="birthDate"
-              label="birthDate"
-              type="birthDate"
-              defaultValue={this.props.user.birthDate}
-            />
-
-            <TextField
-              onChange={e => {
-                this.setState({
-                  bio: e.target.value
+                  dor: e.target.value
                 });
               }}
               autoFocus
               margin="dense"
               id="bio"
-              label="bio"
-              type="bio"
-              defaultValue={this.props.user.bio}
+              label="Date Out"
+              type="Date Out"
+              defaultValue={this.props.user.dor}
             />
             <TextField
               onChange={e => {
@@ -140,8 +140,8 @@ class FormDialog extends React.Component {
               autoFocus
               margin="dense"
               id="din"
-              label="din"
-              type="din"
+              label="Date In"
+              type="Date In"
               defaultValue={this.props.user.din}
             />
 
@@ -162,15 +162,28 @@ class FormDialog extends React.Component {
             <TextField
               onChange={e => {
                 this.setState({
-                  clubs: e.target.value
+                  tiqStatus: e.target.value
                 });
               }}
               autoFocus
               margin="dense"
               id="clubs"
-              label="Clubs"
-              type="clubs"
-              defaultValue={this.props.user.clubs}
+              label="TIQ Status"
+              type="TIQ Status"
+              defaultValue={this.props.user.tiqStatus}
+            />
+             <TextField
+              onChange={e => {
+                this.setState({
+                  supervisorType: e.target.value
+                });
+              }}
+              autoFocus
+              margin="dense"
+              id="clubs"
+              label="Supervisor Type"
+              type="Supervisor Type"
+              defaultValue={this.props.user.supervisorType}
             />
 
             <Typography paragraph>{this.state.Error}</Typography>
@@ -179,7 +192,7 @@ class FormDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               CANCEL
             </Button>
-            <Button onClick={() => this.handleSubmit()} color="default">
+            <Button  onClick={this.props.update.bind(this,this.props.user._id,this.state.type,this.state.house,this.state.din,this.state.dor,this.state.tiqStatus,this.state.supervisorType)} color="black">
               UPDATE
             </Button>
           </DialogActions>

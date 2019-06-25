@@ -10,7 +10,6 @@ export class SignedUpItem extends Component {
    const { _id,email,type,firstName,lastName,birthDate,bio,din,dor,house,tiqStatus,supervisorType} = this.props.signedUp;
     return (
       <div >
-        
       <p style={answerStyle}>
           First Name:  { firstName }
           
@@ -51,6 +50,7 @@ export class SignedUpItem extends Component {
             House:{ house }
           
         </p> 
+
         <p style={answerStyle}>
            TIQ Status { tiqStatus }
           

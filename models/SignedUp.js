@@ -5,9 +5,8 @@ const Schema = mongoose.Schema;
 const signedUpSchema = new Schema({
   type: {
     type: String,
-    required: true,  
-    enum: ["House Leader","BOA","Supervisor","Disciples House Leader"]
-
+    required: true,
+    enumm:["disciple","member","parent","TIQamin","alumni"]
   },
   firstName: {
     type: String,
@@ -33,7 +32,8 @@ const signedUpSchema = new Schema({
     required: true
   },
   house: {
-    type: String
+    type: String,
+    enum:["Pegasus","Orion","Neutral"]
   },
   score: {
     type: Number,
@@ -46,17 +46,13 @@ const signedUpSchema = new Schema({
     type: String
   },
 
-  
-  notification: {
-    type: [String]
-  },
   tiqStatus: {
     type: String,
-    enum: ["House Leader","BOA","Supervisor","Disciples House Leader"]
+    enum: ["House Leader","BOA","Supervisor","Disciples House Leader",""]
   },
   supervisorType:{
     type:String,
-    enum:["Marketing","Fundraising","Logistics", "Relations","Media Design"]
+    enum:["Marketing","Fundraising","Logistics","Relations","Media Design"]
   },
 });
 

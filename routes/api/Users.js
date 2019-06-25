@@ -6,58 +6,12 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config();
-
-//const tokenKey = require('../../config/keys').secretOrKey
-
 const user = require("../../models/User");
-
 const userValidator = require("../../validations/userValidations");
-//const adminValidator = require('../../validations/adminValidations')
 const alumniValidator = require("../../validations/alumniValidations");
 const TIQadminValidator = require("../../validations/tiqAdminValidations");
-const hubUserValidator = require("../../validations/hubUserValidations");
 const discipleValidator = require("../../validations/disciplevalidations");
 const parentValidator = require("../../validations/parentValidations");
-const hubAdminValidator = require("../../validations/hubAdminValidations");
-
-router.put("/updateapprove/:uid", async (req, res) => {
-  try {
-    const userId = req.params.uid;
-
-    const updatedUser = await user.findOneAndUpdate(
-      { _id: userId },
-      { approval: true }
-    );
-
-    res.json({ msg: "User updated sucessfully" });
-  } catch (error) {
-    console.log("error");
-  }
-});
-
-router.put("/updatedisapprove/:uid", async (req, res) => {
-  try {
-    const userId = req.params.uid;
-
-    const updatedUser = await user.findOneAndUpdate(
-      { _id: userId },
-      { approval: false }
-    );
-
-    res.json({ msg: "User updated sucessfully" });
-  } catch (error) {
-    console.log("error");
-  }
-});
-
-router.get("/searchbyapproval/:approval", async (req, res) => {
-  const userStatus = req.params.approval;
-  const users = await user.find({ approval: userStatus });
-  return res.json({ data: users });
-});
-
-
-//create new user (TIQ admin, Hub user, disciples, parent)
 
 router.post("/register/:id", async (req, res) => {
   const id = req.params.id;
@@ -65,34 +19,6 @@ router.post("/register/:id", async (req, res) => {
   const t = signedUp.type;
 
   switch (t) {
-   
-    case "regular":
-      try {
-      
-        const salt = bcrypt.genSaltSync(10);
-        const cryptedPasswrod = bcrypt.hashSync(password, salt);
-        const newUser = new User({
-          type:signedUp.type,
-          firstName:signedUp.firstName,
-          lastName:signedUp.lastName,
-          birthDate:signedUp.birthDate,
-          bio:signedUp.bio,
-          email:signedUp.email,
-          password: cryptedPasswrod,
-          house:signedUp.hou,
-          score,
-          din,
-          dor,
-          clubs
-        });
-        await User.create(newUser);
-
-        return res.json({ msg: "User created successfully", data: newUser });
-      } catch (error) {
-        // We will be handling the error later
-
-        console.log(error);
-      }
 
     case "disciple":
       try {
@@ -240,23 +166,132 @@ router.get("/:id", async (req, res) => {
 
 // updating the info/profile of a user
 router.put("/:id", async (req, res) => {
-  try {
+ 
     const userId = req.params.id;
     const getuser = await user.findOne({ _id: userId });
     if (!getuser) return res.status(404).send({ error: "User does not exist" });
-    const isValidated = userValidator.updateUserValidation(req.body);
-    if (isValidated.error)
-      return res
-        .status(400)
-        .send({ error: isValidated.error.details[0].message });
-    const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
+    t=getuser.type;
+    switch(t){
+        case "disciple":
+        try{
+          const isValidated =discipleValidator.updateValidationUser(req.body);
+          if (isValidated.error)
+          return res
+            .status(400)
+            .send({ error: isValidated.error.details[0].message });
+        const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
+          res.json({ msg: "User updated sucessfully" });
+        }
+        catch(error)
+        {
+            res.json({msg:"cannot find user"})
+          }
 
-    res.json({ msg: "User updated sucessfully" });
-  } catch (error) {
-    console.log(error);
-  }
+
+          case "alumni":
+          try{
+            const isAlumniValidated=alumniValidator.updateValidationUser(req.body);
+            if (isAlumniValidated.error)
+          return res
+            .status(400)
+            .send({ error: isAlumniValidated.error.details[0].message });
+        const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
+          res.json({ msg: "User updated sucessfully" });
+        }
+        catch(error)
+        {
+            res.json({msg:"cannot find user"})
+          }
+          
+          case"member":
+          try{
+            const isUserValidated=userValidator.updateUserValidation(req.body);
+
+            if (isUserValidated.error)
+            return res
+              .status(400)
+              .send({ error: isUserValidated.error.details[0].message });
+          const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
+            res.json({ msg: "User updated sucessfully" });
+          }
+          catch(error)
+          {
+              res.json({msg:"cannot find user"})
+            }
+
+            case"parent":
+            try{
+              const isParentValidated=parentValidator.updateParentValidationUser(req.body);
+  
+              if (isParentValidated.error)
+              return res
+                .status(400)
+                .send({ error: isParentValidated.error.details[0].message });
+            const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
+              res.json({ msg: "User updated sucessfully" });
+            }
+            catch(error)
+            {
+                res.json({msg:"cannot find user"})
+              }
+    }
 });
 
+router.put("/admin/:id",async (req,res)=>{
+  const userId = req.params.id;
+  const getuser = await user.findOne({ _id: userId });
+  if (!getuser) return res.status(404).send({ error: "User does not exist" });
+  t=getuser.type;
+  switch(t){
+    case"disciple":
+    try{
+      const isDiscipleValidated=discipleValidator.updateValidationAdmin(req.body);
+
+      if (isDiscipleValidated.error)
+      return res
+        .status(400)
+        .send({ error: isDiscipleValidated.error.details[0].message });
+    const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
+      res.json({ msg: "User updated sucessfully" });
+    }
+    catch(error)
+    {
+        res.json({msg:"cannot find user"})
+      }
+
+      case"alumni":
+      try{
+        const isAlumniValidatedAdmin=alumniValidator.updateValidationAdmin(req.body);
+  
+        if (isAlumniValidatedAdmin.error)
+        return res
+          .status(400)
+          .send({ error: isAlumniValidatedAdmin.error.details[0].message });
+      const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
+        res.json({ msg: "User updated sucessfully" });
+      }
+      catch(error)
+      {
+          res.json({msg:"cannot find user"})
+        }
+
+        case"member":
+      try{
+        const isMemberValidatedAdmin=userValidator.updateValidationAdmin(req.body);
+  
+        if (isMemberValidatedAdmin.error)
+        return res
+          .status(400)
+          .send({ error: isMemberValidatedAdmin.error.details[0].message });
+      const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
+        res.json({ msg: "User updated sucessfully" });
+      }
+      catch(error)
+      {
+          res.json({msg:"cannot find user"})
+        }
+  }
+})
 //delete a user
 router.delete("/:id", async (req, res) => {
   try {
@@ -364,7 +399,6 @@ router.get("/:id", async (req, res) => {
 // Update a user(alumni or member )
 router.put("/update/:id", async (req, res) => {
   // try {
-  console.log("heyyyyyyyyyyyyyyyy");
   const userId = req.params.id;
   const getuser = await user.findOne({ _id: userId });
   if (!getuser) return res.status(404).send({ error: "user does not exist" });
@@ -391,6 +425,63 @@ router.put("/update/:id", async (req, res) => {
     case "member":
       try {
         const isUserValidated = userValidator.updateValidation(req.body);
+
+        if (isUserValidated.error)
+          return res
+            .status(400)
+            .send({ error: isUserValidated.error.details[0].message });
+
+        const updatedMember = await getuser.updateOne(req.body);
+
+        if (!updatedMember)
+          return res
+            .status(404)
+            .send({ error: "member updation has an error" });
+        res.json({ msg: "User updated sucessfully" });
+      } catch (error) {
+        console.log(error);
+      }
+      case "parent":
+      try {
+        const isUserValidated = parentValidator.updateValidation(req.body);
+
+        if (isUserValidated.error)
+          return res
+            .status(400)
+            .send({ error: isUserValidated.error.details[0].message });
+
+        const updatedMember = await getuser.updateOne(req.body);
+
+        if (!updatedMember)
+          return res
+            .status(404)
+            .send({ error: "member updation has an error" });
+        res.json({ msg: "User updated sucessfully" });
+      } catch (error) {
+        console.log(error);
+      }
+      case "TIQadmin":
+      try {
+        const isUserValidated = TIQadminValidator.TIQadminValidation(req.body);
+
+        if (isUserValidated.error)
+          return res
+            .status(400)
+            .send({ error: isUserValidated.error.details[0].message });
+
+        const updatedMember = await getuser.updateOne(req.body);
+
+        if (!updatedMember)
+          return res
+            .status(404)
+            .send({ error: "member updation has an error" });
+        res.json({ msg: "User updated sucessfully" });
+      } catch (error) {
+        console.log(error);
+      }
+      case "disciple":
+      try {
+        const isUserValidated = discipleValidator.updateValidation(req.body);
 
         if (isUserValidated.error)
           return res

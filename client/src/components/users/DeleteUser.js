@@ -10,10 +10,10 @@ export class DeleteUser extends Component {
     return this.props.users.map(user => (
       <div>
         <OurPeople
-          key={user._id}
           id={user._id}
           user={user}
           deleteUser={this.props.deleteUser}
+          update={this.props.update}
         />
 
         {/* <DetailedExpansionPanel
