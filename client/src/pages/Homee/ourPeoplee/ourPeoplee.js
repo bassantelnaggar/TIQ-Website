@@ -21,6 +21,7 @@ class ourPeople extends Component {
       if (this.props.user.house == "Orion") {
         return (
           <div class="maincontainer">
+           {/* <div class="row"> */}
             <div class="thecard">
               <div class="thefront">
                 {/* <div style={{this.props.user.house == "Orion"? "class="+"background-orion-img":"class="+"background-pegasus-img"}}</div> */}
@@ -79,6 +80,7 @@ class ourPeople extends Component {
       } else {
         return (
           <div class="maincontainer">
+           {/* <div class = "row"> */}
             <div class="thecard">
               <div class="thefront">
                 {/* <div class="background-pegasus-img ">
@@ -128,12 +130,13 @@ class ourPeople extends Component {
                 </div>
               </div>
             </div>
-          </div>
+           </div>
         );
       }
     } else {
       return (
         <div class="maincontainer">
+         {/* <div class="row"> */}
           <div class="thecard">
             <div class="thefront">
               {/* <div class="background-img">
@@ -169,7 +172,7 @@ class ourPeople extends Component {
               {this.props.user.dor}
             </div>
           </div>
-        </div>
+         </div>
       );
     }
   }
