@@ -230,7 +230,9 @@
     left: 0;
     bottom: 0;
     right: 0;
-    margin-top: -8%;
+    margin-top: -4%;
+    max-zoom: 100%;
+    -ms-content-zoom-limit-max: 110%;
     /* overflow: auto; */
     /* position: absolute; top: 0;  */
     

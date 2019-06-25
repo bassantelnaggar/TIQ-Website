@@ -9,6 +9,7 @@ import OrionLogo from "../../Images/rsz_1rsz_orion-logo.jpg"
 import PegasusLogo3 from "../../Images/PEGASUS-LOGO.jpeg"
 import {Container} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import Background from "../../Images/about.jpg"
 const mapStateToProps = state => {
     return { token: state.token, usertype: state.usertype, id: state.id };
   };
@@ -70,8 +71,9 @@ class profile extends Component {
   {
     if (this.props.token == null) {
       return (
-        <div>
+        <div >
           <Toolbar />
+         
           <div class="thumbnails">
             <div class="box">
               <div class="inner">
@@ -89,33 +91,74 @@ class profile extends Component {
             </div>
           </div>
         </div>
+        
       );
     }
     else{
     return(
       <div>
-        <ToolbarOUT/>
-      <figure class="snip0057 red hover">
-  <figcaption>
-    <h2>{this.state.user.firstName} <span>{this.state.user.lastName}</span></h2>
-    <p> {this.state.user.bio}</p>
-    <p>{this.state.user.house}</p> 
-    <p>{this.state.user.birthDate}</p>  
-    <br></br>
-    <br></br>
-    <br></br>
-    {/* <div class="icons"><a href="#"><i class="ion-ios-home"></i></a><a href="#"><i class="ion-ios-email"></i></a><a href="#"><i class="ion-ios-telephone"></i></a></div> */}
-  </figcaption>
-    <div class="image-upload">
-      <label for="file-input">
-          <img src={this.state.user.profilePicture} height="350" width="350"/>
-      </label>
+      <img src={Background} style={{backgroundsize: 'cover', marginTop:"-5%"}} />
+     <div >
+     <ToolbarOUT/>
+      
+       
+          `<section class="card">
+              <figure class="panel meta">
+              <picture>
+              <div class="image-upload">
+              <label for="file-input">
+              <img class="avatar" src={this.state.user.profilePicture} width="128" height="128"/> 
+              </label> 
+              <input id="file-input" accept=".jpg,.png" type="file" onChange={this.onChange} display="none"/>
+              </div>
+              </picture>
+              <figcaption>
 
-      <input id="file-input" type="file" onChange={this.onChange} display="none"/>
-    </div>
-   {/* <div class="image"><img src = {this.state.user.profilePicture} alt="sample4"/></div>  */}
-  <div class="position">{this.state.user.type}</div>
-</figure>
+              <h1 class="name">{this.state.user.firstName} {this.state.user.lastName} </h1>
+              <h3 class="title">{this.state.user.bio}</h3>
+              </figcaption>
+              </figure>
+          
+              <div class="panel info">
+                <dl>
+                <dt>
+                  <h4 className="text">Birth Day </h4>
+                  <h5 className="text">{this.state.user.birthDate}</h5>
+                </dt>
+                {/* <dt></dt> */}
+                <dd>98</dd>
+                <dt>
+                  <h4 className="text">Type</h4>
+                  <h5 className="text">{this.state.user.type}</h5>
+                </dt>
+                {/* <dt></dt> */}
+                <dd>98</dd>
+                <dt>
+                  <h4 className="text">Score</h4>
+                  <h5 className="text">{this.state.user.score}</h5>
+                </dt>
+                {/* <dt></dt> */}
+                <dd>98</dd>
+                <dt>
+                  <h4 className="text">House</h4>
+                  <h5 className="text">{this.state.user.house}</h5>
+                </dt>
+                <dd>98</dd>
+                <dt>
+                  <h4 className="text">TIQ Status</h4>
+                  <h5 className="text">{this.state.user.tiqStatus}</h5>
+                </dt>
+                <dd>98</dd>
+                </dl>
+            
+            
+            
+          </div>
+      
+    </section>`
+
+
+</div>
 </div>
   )
   }}

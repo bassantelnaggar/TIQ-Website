@@ -45,6 +45,17 @@ router.put("/Profile/:id",async(req,res)=>{
   }
 })
 
+router.put("/Profile/:id",async(req,res)=>{
+  try{
+  const userId = req.params.id;
+  const addedPicture = req.body.profilePicture
+  const userToUpdate = await user.findOneAndUpdate({_id:userId},{profilePicture:addedPicture})
+  res.json({ data:userToUpdate, msg: "Profile added" });
+  } catch (error) {
+    console.log("error");
+  }
+})
+
 router.put("/updatedisapprove/:uid", async (req, res) => {
   try {
     const userId = req.params.uid;

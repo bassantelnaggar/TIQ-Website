@@ -2,11 +2,14 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  
 
 }  
 body{
   font-family: Georgia, serif;
   line-height: 1.7;
+  background-color: #ffffff;
+  background-image: url('../../Images/white-background.jpg')
 }
 
 a{

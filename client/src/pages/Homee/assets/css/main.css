@@ -3799,9 +3799,6 @@ button.alt:active,
   padding-top: 3.125em;
 } */
 
-body.landing {
-  padding-top: 0;
-}
 
 @media screen and (max-width: 980px) {
   body {
