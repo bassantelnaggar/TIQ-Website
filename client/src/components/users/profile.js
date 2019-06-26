@@ -4,6 +4,7 @@ import axios from "axios"
 import "./profile.css"
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
+import EditIcon from "@material-ui/icons/Edit";
 import PegasusLogo from "../../components/images/tiqLogo1.png"
 import OrionLogo from "../../Images/rsz_1rsz_orion-logo.jpg"
 import PegasusLogo3 from "../../Images/PEGASUS-LOGO.jpeg"
@@ -107,9 +108,10 @@ class profile extends Component {
               <picture>
               <div class="image-upload">
               <label for="file-input">
-              <img class="avatar" src={this.state.user.profilePicture} width="128" height="128"/> 
+              <img class="avatar" src={this.state.user.profilePicture} width="128" height="128"/> <EditIcon/>
               </label> 
               <input id="file-input" accept=".jpg,.png" type="file" onChange={this.onChange} display="none"/>
+              
               </div>
               </picture>
               <figcaption>
