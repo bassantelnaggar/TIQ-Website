@@ -15,7 +15,7 @@ class GetUsers extends Component {
     this.deleteUser = this.deleteUser.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -26,7 +26,8 @@ class GetUsers extends Component {
   deleteUser = id => {
     console.log(id);
 
-    axios.delete("/api/Users/" + id).then(
+    axios.delete("/api/Users/" + id)
+    .then(
       this.setState({
         users: [...this.state.users.filter(user => user._id !== id)]
       })
@@ -43,20 +44,27 @@ class GetUsers extends Component {
     this.setState({ open: !this.state.open });
   };
 
-  handleSubmit = async () => {
-    console.log("Hnnna Ahpoooo");
-    console.log(this.props.user._id);
-    const update = axios.put("/api/Users/update/" + this.props.user._id, {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      bio: this.state.bio,
-      birthDate: this.setState.birthDate,
-      clubs: this.state.clubs
-    });
+  update =  (id,type,house,din,dor,tiqStatus,supervisorType) => {
+  
+    axios.put("/api/Users/update/" + id, {
+      type:type,
+      house: house,
+      din:din,
+      dor: dor,
+      tiqStatus: tiqStatus,
+      supervisorType: supervisorType,
 
-    if (Object.keys(update.data)[0] === "err")
-      this.setState({ Error: "Invalid/Missing Information" });
-    else window.location.reload();
+    })
+    .then(res => {
+      axios.get('/api/Users')
+      .then(res => this.setState({ users: res.data.data }))
+       alert("Updated successfully!")
+    });
+  ;
+
+    // if (Object.keys(update.data)[0] === "err")
+    //   this.setState({ Error: "Invalid/Missing Information" });
+    // else window.location.reload();
     /*
      * axios ... put whatver using this.state.firstName, this.staet.lastName
      */
@@ -110,6 +118,7 @@ class GetUsers extends Component {
               <DeleteUser
                 users={this.state.users}
                 deleteUser={this.deleteUser}
+                update={this.update}
               />
             )}
           </ul>

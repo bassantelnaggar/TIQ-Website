@@ -32,6 +32,7 @@ class Question extends Component {
     
   
     ask = (ask) => {
+      console.log("pp")
       axios.post('/api/Questions/ask',
       { "question":ask,
         "user":this.props.id

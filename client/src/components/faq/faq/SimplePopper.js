@@ -38,7 +38,6 @@ class SimplePopper extends React.Component {
     }));
   };
   onChange = (e) => this.setState({[e.target.name]: e.target.value});
-
   render() {
     const { classes } = this.props;
     const { anchorEl, open } = this.state;
@@ -81,8 +80,8 @@ class SimplePopper extends React.Component {
             </form>
             
             <button  className="btn" style={btnStyle} onClick={this.props.updatefaq.bind(this,this.props.faq._id,this.state.question,this.state.answer)} >update</button>
-            <IconButton className={classes.button} aria-label="Delete">
-        <DeleteIcon  onClick={this.props.delfaq.bind(this, this.props.faq._id)}/> 
+            <IconButton  onClick={this.props.delfaq.bind(this,this.props.faq._id,this.props.faq.question,this.props.faq.answer)}className={classes.button} aria-label="Delete"> 
+        <DeleteIcon  /> 
       </IconButton>
 
             
