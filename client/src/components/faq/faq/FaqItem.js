@@ -18,7 +18,7 @@ export class FaqItem extends Component {
             { answer }
           
         </p> 
-        <SimplePopper p={this.SimplePopper}   delfaq={this.props.delfaq}  updatefaq={this.props.updatefaq} faq={this.props.faq} />
+        <SimplePopper p={this.SimplePopper} change={this.props.change}  delfaq={this.props.delfaq}  updatefaq={this.props.updatefaq} faq={this.props.faq} />
         
       </div>
     )

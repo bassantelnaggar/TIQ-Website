@@ -47,10 +47,11 @@ import getUsers from "./components/users/getUsers";
 
 import { saveState } from "./localStorage";
 import SearchDebateLive from "./components/Chatbar/searchChatbBar";
+import DisciplesProgram from "./components/DisciplesProgram/DisciplesProgram";
 
 import profile from "../src/components/users/profile"
 import About from "../src/components/about/About"
-import DisciplesProgram from "./components/DisciplesProgram/DisciplesProgram";
+//import DisciplesProgram from "./components/DisciplesProgram/DisciplesProgram";
 
 store.subscribe(() => {
   saveState(store.getState());

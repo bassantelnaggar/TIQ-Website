@@ -13,7 +13,8 @@ export class DisciplesProgramItem extends Component {
     price:this.props.disciplesProgram.price,
     location:this.props.disciplesProgram.location,
     image:this.props.disciplesProgram.image,
-    link:this.props.disciplesProgram.link
+    link:this.props.disciplesProgram.link,
+    
     
   };
 
@@ -105,7 +106,8 @@ export class DisciplesProgramItem extends Component {
       </label>
       <button  className="btn"  onClick={this.props.updateDisciplesProgram.bind(this,_id,this.state.title,
         this.state.description,this.state.duration,this.state.location,this.state.price,this.year,this.state.image,this.state.link)} >update</button>
-      <DeleteIcon  onClick={this.props.delDisciplesProgram.bind(this,_id)}/> 
+      <DeleteIcon  onClick={this.props.delDisciplesProgram.bind(this,_id,this.state.title,
+        this.state.description,this.state.duration,this.state.location,this.state.price,this.year,this.state.image,this.state.link)}/> 
   </form>
         
       

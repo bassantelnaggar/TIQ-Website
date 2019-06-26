@@ -14,9 +14,10 @@ export class AddFaq extends Component {
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
-
+  
   render() {
     return (
+      <div>
       <form onSubmit={this.onSubmit} style={{ display: "flex" }}>
         <input
           type="text"
@@ -42,7 +43,10 @@ export class AddFaq extends Component {
           style={{backgroundColor:"#70c7be"}}
           />
       </form>
+    </div>
     );
+   
+
   }
 }
 
