@@ -1,15 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import axios from "axios";
-import "./profile.css";
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import axios from "axios"
+import "./profile.css"
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
-import PegasusLogo from "../../components/images/tiqLogo1.png";
-import OrionLogo from "../../Images/rsz_1rsz_orion-logo.jpg";
-import PegasusLogo3 from "../../Images/PEGASUS-LOGO.jpeg";
-import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Background from "../../Images/about.jpg";
+import EditIcon from "@material-ui/icons/Edit";
+import PegasusLogo from "../../components/images/tiqLogo1.png"
+import OrionLogo from "../../Images/rsz_1rsz_orion-logo.jpg"
+import PegasusLogo3 from "../../Images/PEGASUS-LOGO.jpeg"
+import {Container} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import Background from "../../Images/about.jpg"
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -44,24 +45,24 @@ class profile extends Component {
       )
       .then(res => {
         console.log(res);
-        axios.put(`http://localhost:5000/api/Users/Profile/${this.props.id}`, {
-          profilePicture: res.data.secure_url
-        });
+        axios.put(`http://localhost:5000/api/Users/Profile/${this.props.id}`,{
+            'profilePicture': res.data.secure_url
+        }) 
         window.location.reload();
-      })
-      .catch(function(err) {
+    }).catch(function(err){
         console.log(err);
-      });
-  };
+    });
 
-  componentDidMount() {
-    const id = this.state.id;
-    console.log(id);
-    axios
-      .get(`/api/Users/${id}`)
-      .then(user => this.setState({ user: user.data.data }))
-      .catch(console.log("cannot fetch"));
-    console.log(this.state.user.profilePicture);
+}
+
+  componentDidMount()
+  {
+     const id = this.state.id
+     console.log(id)
+     axios.get(`/api/Users/${id}`)
+     .then(user=>this.setState({user : user.data.data}))
+     .catch(console.log('cannot fetch'))
+     console.log(this.state.user.profilePicture);
   }
 
   handleClick = () => {
@@ -91,42 +92,31 @@ class profile extends Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div>
-          <img
-            src={Background}
-            style={{ backgroundsize: "cover", marginTop: "-5%" }}
-          />
-          <div>
-            <ToolbarOUT />`
-            <section class="card">
+    }
+    else{
+    return(
+      <div>
+      <img src={Background} style={{backgroundsize: 'cover', marginTop:"-5%"}} />
+     <div >
+     <ToolbarOUT/>
+      
+       
+          `<section class="card">
               <figure class="panel meta">
-                <picture>
-                  <div class="image-upload">
-                    <label for="file-input">
-                      <img
-                        class="avatar"
-                        src={this.state.user.profilePicture}
-                        width="128"
-                        height="128"
-                      />
-                    </label>
-                    <input
-                      id="file-input"
-                      accept=".jpg,.png"
-                      type="file"
-                      onChange={this.onChange}
-                      display="none"
-                    />
-                  </div>
-                </picture>
-                <figcaption>
-                  <h1 class="name">
-                    {this.state.user.firstName} {this.state.user.lastName}{" "}
-                  </h1>
-                  <h3 class="title">{this.state.user.bio}</h3>
-                </figcaption>
+              <picture>
+              <div class="image-upload">
+              <label for="file-input">
+              <img class="avatar" src={this.state.user.profilePicture} width="128" height="128"/> <EditIcon/>
+              </label> 
+              <input id="file-input" accept=".jpg,.png" type="file" onChange={this.onChange} display="none"/>
+              
+              </div>
+              </picture>
+              <figcaption>
+
+              <h1 class="name">{this.state.user.firstName} {this.state.user.lastName} </h1>
+              <h3 class="title">{this.state.user.bio}</h3>
+              </figcaption>
               </figure>
 
               <div class="panel info">

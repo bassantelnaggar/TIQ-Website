@@ -195,8 +195,8 @@ export class ArticleBody extends Component {
             
               /> </form>
         {this.state.allComments.map(commenttt => (
-          <List className={classes.root} style={{background:'',width:"60%",  marginLeft:'9%'}}>
-          <ListItem alignItems="flex-start" style={{background:''}}>
+          <List className={classes.root} style={{background:'white',width:"60%",  marginLeft:'9%'}}>
+          <ListItem alignItems="flex-start" style={{background:'white'}}>
           {/* <ListItemAvatar>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </ListItemAvatar> */}

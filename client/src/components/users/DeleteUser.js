@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import OurPeople from "../../pages/Homee/ourPeople/OurPeople";
 import OurPeople from "../../pages/Homee/ourPeoplee/ourPeoplee";
 import "./DeleteUser.css";
+import ourPeopleBG from '../../pages/Homee/images/ourpeoplebg.png'
 
 //import DetailedExpansionPanel from "./DetailedExpansionPanel";
 
@@ -10,7 +11,7 @@ export class DeleteUser extends Component {
     console.log(this.props.users);
     const nada = this.props.users.map(user => {
       return (
-        <div>
+        <div >
           <OurPeople
           id={user._id}
           user={user}

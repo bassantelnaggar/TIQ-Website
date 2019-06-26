@@ -5,12 +5,18 @@
 
 .maincontainer {
   position: relative;
-  width: 10rem;
+  width: 6rem;
+  display: flex;
   /* height: 300px; */
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  margin-right: 15rem;
   align-items: center;
+  margin-left:-54%;
+  margin-top: -70%;
+  
+  
 
   /* background: green; */
 }
