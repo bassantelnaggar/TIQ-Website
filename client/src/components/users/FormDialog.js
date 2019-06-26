@@ -78,12 +78,43 @@ class FormDialog extends React.Component {
                   type: e.target.value
                 });
               }}
+             // onChange={this.onChange}
+              autoFocus
+
+              margin="dense"
+              id="FirstName"
+              label="Type"
+              type="Type"
+              defaultValue={this.props.user.type}
+            />
+
+            <TextField
+              onChange={e => {
+                this.setState({
+                  house: e.target.value
+                });
+              }}
               autoFocus
               margin="dense"
-              id="type"
-              label="type"
-              type="type"
-              defaultValue={this.props.user.type}
+              id="LastName"
+              label="House"
+              type="House"
+              defaultValue={this.props.user.house}
+            />
+
+           
+            <TextField
+              onChange={e => {
+                this.setState({
+                  dor: e.target.value
+                });
+              }}
+              autoFocus
+              margin="dense"
+              id="bio"
+              label="Date Out"
+              type="Date Out"
+              defaultValue={this.props.user.dor}
             />
             <TextField
               onChange={e => {
@@ -130,15 +161,17 @@ class FormDialog extends React.Component {
             <Typography paragraph>{this.state.Error}</Typography>
           </DialogContent>
           <DialogActions>
-            <button
+            <Button
               // variant="outlined"
               // color="primary"
               class="Form-Dialo-Button"
               onClick={this.handleClose}
             >
               CANCEL
-            </button>
-            <button onClick={() => this.handleSubmit()}>UPDATE</button>
+            </Button>
+            <Button  onClick={this.props.update.bind(this,this.props.user._id,this.state.type,this.state.house,this.state.din,this.state.dor,this.state.tiqStatus,this.state.supervisorType)} color="black">
+              UPDATE
+            </Button>
           </DialogActions>
         </Dialog>
       </div>

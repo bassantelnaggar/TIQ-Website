@@ -69,7 +69,7 @@ class ourPeople extends Component {
 
                   <FormDialog
                     user={this.props.user}
-                    handleSubmit={this.props.handleSubmit}
+                    update={this.props.update}
                   />
                   <br />
                 </div>
@@ -124,7 +124,7 @@ class ourPeople extends Component {
                   <FormDialog
                     variant="outlined"
                     user={this.props.user}
-                    handleSubmit={this.props.handleSubmit}
+                    update={this.props.update}
                   />
                   <br />
                 </div>

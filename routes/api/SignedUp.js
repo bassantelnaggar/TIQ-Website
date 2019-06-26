@@ -5,10 +5,10 @@ router.use(express.json())
 const mongoose = require('mongoose')
 const SignedUp = require('../../models/SignedUp')
 const alumniValidator = require("../../validations/alumniValidations");
-const hubUserValidator = require("../../validations/hubUserValidations");
 const discipleValidator = require("../../validations/disciplevalidations");
 const parentValidator = require("../../validations/parentValidations");
 const bcrypt = require("bcryptjs");
+const user = require("../../models/User");
 
 const userValidator = require("../../validations/userValidations");
 
@@ -16,14 +16,16 @@ const userValidator = require("../../validations/userValidations");
 router.post("/signUp", async (req, res) => {
   const Email = req.body.email;
 
-  const usernew = await SignedUp.findOne({ email: Email });
-  if (usernew)
+  const signnew = await SignedUp.findOne({ email: Email });
+  const usernew = await user.findOne({ email: Email });
+
+  if (usernew || signnew)
     return res
       .status(400)
       .json({ email: "Email already exists ,choose another mail..." });
 
   const t = req.body.type;
-
+console.log(t)
   switch (t) {
      
       case "disciple":
@@ -41,9 +43,8 @@ router.post("/signUp", async (req, res) => {
             password,
             type,
             house,
-            din,
-            dor,
             bio,
+            
             //profilePicture
           } = req.body;
           const salt = bcrypt.genSaltSync(10);
@@ -57,9 +58,8 @@ router.post("/signUp", async (req, res) => {
             email,
             password: cryptedPasswrod,
             //profilePicture,            
-            house,
-            din,
-            dor,
+            house
+           
   
           });
           await SignedUp.create(signedUp);
@@ -100,7 +100,7 @@ router.post("/signUp", async (req, res) => {
         }
         
   case "member":
-       try {
+      //  try {
          const isUserValidated = userValidator.registerValidation(req.body);
         if (isUserValidated.error)
           return res
@@ -146,13 +146,13 @@ router.post("/signUp", async (req, res) => {
           await SignedUp.create(signedUp);
           console.log("done");
           return res.json({data: signedUp });
-        } catch (error) {
-          return res.status(422).send({ error: "Can not create user" });
-        }
+        // } catch (error) {
+        //   return res.status(422).send({ error: "Can not create user" });
+        // }
     
       case "parent":
         try {
-          const isValidated = parentValidator.parentValidation(req.body);
+          const isValidated = parentValidator.registerParentValidation(req.body);
           if (isValidated.error)
             return res
               .status(400)
