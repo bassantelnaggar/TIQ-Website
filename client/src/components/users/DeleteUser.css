@@ -1,0 +1,22 @@
+@media screen and (min-width: 700px) {
+  .Gridd {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+  }
+}
+
+.row {
+  margin: 100px;
+  /* display: inline; */
+  position: relativey;
+}
+
+/* .heading-ofPage {
+  font-display: initial;
+  font-size: 5rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font: outline;
+} */
