@@ -12,17 +12,22 @@ export class DeleteUser extends Component {
       return (
         <div>
           <OurPeople
-            key={user._id}
-            id={user._id}
-            user={user}
-            deleteUser={this.props.deleteUser}
-          />
+          id={user._id}
+          user={user}
+          deleteUser={this.props.deleteUser}
+          update={this.props.update}
+        />
         </div>
       );
     });
-
-    return <div class="row">{nada}</div>;
+    return (
+      <div>
+        {/* <img src = {ourPeopleBG} style={{backgroundsize: 'cover', marginTop:"-5%"}}></img> */}
+     
+      <div class="row">{nada}</div> 
+      </div>
+      );
+    }
   }
-}
-
-export default DeleteUser;
+  
+  export default DeleteUser;

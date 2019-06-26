@@ -14,7 +14,8 @@ export class CreateUser extends Component {
     house: "",
     din: "",
     dor: "",
-    clubs: ""
+    tiqStatus:"",
+    supervisorType:""
   };
 
   addUser = (
@@ -28,10 +29,38 @@ export class CreateUser extends Component {
     house,
     din,
     dor,
-    clubs
+    tiqStatus,
+    supervisorType
+
   ) => {
-    axios
-      .post("/api/Users/register", {
+    console.log(firstName)
+     console.log(lastName)
+     console.log(type)
+     console.log(email)
+     console.log(birthDate)
+   if(type=="member"){
+     
+
+      axios.post("/api/SignedUp/signUp", {
+        "type": type,
+        "firstName": firstName,
+        "lastName": lastName,
+        "birthDate": birthDate,
+        "bio": bio,
+        "email": email,
+        "password": password,
+        house: house,
+        din: din,
+        tiqStatus:tiqStatus,
+        supervisorType:supervisorType
+      })
+      
+     
+     
+    }
+    if(type=="alumni"){
+      axios
+      .post("/api/SignedUp/signUp", {
         type: type,
         firstName: firstName,
         lastName: lastName,
@@ -41,20 +70,49 @@ export class CreateUser extends Component {
         password: password,
         house: house,
         din: din,
-        dor: dor,
-        clubs: clubs
+        dor:dor
+       
       })
       
-      .then(res =>
-        this.setState({ users: [...this.state.users, res.data.data] })
-      );
-    console.log("llllll");
-    
-        alert("User added successfully");
+      
+    }
+    if(type=="parent"){
+      axios
+      .post("/api/SignedUp/signUp", {
+        type: type,
+        firstName: firstName,
+        lastName: lastName,
+        birthDate: birthDate,
+        bio: bio,
+        email: email,
+        password: password,
+       
+       
+      })
+      
+      
+    }
+    if(type=="disciple"){
+      axios
+      .post("/api/SignedUp/signUp", {
+        type: type,
+        firstName: firstName,
+        lastName: lastName,
+        birthDate: birthDate,
+        bio: bio,
+        email: email,
+        password: password,
+        house: house,
+     
+      })
+      
+      
+    }
       
   };
 
   render() {
+
     //  console.log(this.addUser);
     console.log(111);
     return <SignUp p={this.SignUp} addUser={this.addUser} />;
