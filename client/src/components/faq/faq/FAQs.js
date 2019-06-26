@@ -8,6 +8,7 @@ class FAQs extends Component {
       <FaqItem
         key={faq._id}
         faq={faq}
+        change={this.props.change}
         delfaq={this.props.delfaq}
         updatefaq={this.props.updatefaq}
       />

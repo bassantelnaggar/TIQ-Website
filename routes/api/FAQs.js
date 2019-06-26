@@ -20,11 +20,13 @@ router.post('/add',async (req, res) => {
             answer: answer,
             
         })
-        res.json({msg:'FAQ was created successfully', data: newFaq})
+        res.status(201).json({msg:'FAQ was created successfully', data: newFaq});
+
+       
        }
        catch(error) {
            // We will be handling the error later
-           console.log(error)
+           res.status(400)
        }  
    
    

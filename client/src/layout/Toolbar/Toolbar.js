@@ -53,6 +53,10 @@ const toolbar = props => (
             <Link to="/getUsers">Debaters</Link>
           </li>
           <li>
+            <Link to="/DisciplesProgram">Disciples</Link>
+          </li>
+         
+          <li>
             <Link to="/Score">Scores</Link>
           </li>
          
@@ -71,8 +75,7 @@ const toolbar = props => (
           <li>
             <Link to="/createuser">Sign Up</Link>
           </li>
-         
-         
+        
              {/* <li>
              <Link to="/signout">LOG OUT</Link>
            </li> */}
