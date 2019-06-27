@@ -4,7 +4,8 @@ import FormDialog from "../../../components/users/FormDialog";
 import pic5 from "../images/pic5.jpeg";
 import orion from "../../Homee/images/orion-logo.jpg";
 import pegasus from "../../Homee/images/PEGASUS-LOGO.jpg";
-
+import SearchIcon from "@material-ui/icons/Search";
+import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 import "./ourPeoplee.css";
 
@@ -79,6 +80,7 @@ class ourPeople extends Component {
         );
       } else {
         return (
+          
           <div class="maincontainer">
            {/* <div class = "row"> */}
             <div class="thecard">
@@ -130,7 +132,10 @@ class ourPeople extends Component {
                 </div>
               </div>
             </div>
+            
+           
            </div>
+           
         );
       }
     } else {
@@ -170,6 +175,7 @@ class ourPeople extends Component {
            </div>
          </div>
        </div>
+      
       </div>
        
       );

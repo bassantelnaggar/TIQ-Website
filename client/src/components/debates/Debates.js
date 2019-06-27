@@ -342,7 +342,7 @@ class Debates extends Component {
               aria-label="Search by Category"
               className={classes.fab}
               onClick={this.handleCategorySearch}
-              style={{ left: "1080px", top: "-110px",  background:"#333" }}
+              style={{ left: "1080px", top: "-110px",  background:"#333"}}
             >
               Search by Category
               <SearchIcon />
