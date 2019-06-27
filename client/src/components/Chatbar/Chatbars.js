@@ -97,7 +97,7 @@ class Chatbars extends Component {
                     <h3>{chatbar.date}</h3>
                     <p>{chatbar.debateLiveTitle} </p>
                     <p>{"Number of Responses: "}{chatbar.numberOfResponses} </p>
-                    <Link to={"/tryme/" + chatbar._id} class="btn">
+                    <Link to={"/tryme/" + chatbar._id} class="button"  style={{background:"#202024 "}}>
                       Debate it Now!
                     </Link>
                   </div>
@@ -107,7 +107,8 @@ class Chatbars extends Component {
           </div>
 
           <button
-            className="btn"
+            className="button"
+             background = "#202024"
             style={{ position: "absolute", left: "20px", top: "63px" }}
             onClick={() => {
               this.handleClickME();
@@ -117,8 +118,9 @@ class Chatbars extends Component {
           </button>
           <div style={{ right: "0", top: "63px" }}>
             <button
-              className="btn"
-              style={{ position: "absolute", right: "0", top: "63px" }}
+             className="button"
+             background = "#202024"
+              style={{ position: "absolute", right: "10px", top: "63px" }}
               onClick={() => {
                 this.handleClickSearch();
               }}
@@ -138,7 +140,7 @@ class Chatbars extends Component {
                 padding: "5px",
                 position: "absolute",
                  width: "26%",
-                right: "170px",
+                right: "180px",
                 top: "60px",
                 color: "black"
               }}
@@ -168,7 +170,7 @@ class Chatbars extends Component {
                     <h3>{chatbar.date}</h3>
                     <p>{chatbar.debateLiveTitle} </p>
                     <p>{"Number of Responses: "}{chatbar.numberOfResponses} </p>
-                    <Link to={"/tryme/" + chatbar._id} class="btn">
+                    <Link to={"/tryme/" + chatbar._id} class="button"  style={{background:"#202024 "}}>
                       Debate it Now!
                     </Link>
                   </div>
@@ -179,7 +181,8 @@ class Chatbars extends Component {
 
           <div style={{ right: "0", top: "63px" }}>
             <button
-              className="btn"
+              class="button"
+              style={{background:"#202024 "}}
               style={{ position: "absolute", right: "0", top: "63px" }}
               onClick={() => {
                 this.handleClickSearch();

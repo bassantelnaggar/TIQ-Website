@@ -1,14 +1,16 @@
 body {
   margin: 0;
   padding: 0;
+  background: url(./pages/Homee/images/x.jpg)  center;
   /* object-fit: inherit; */
 }
 .Container {
   background-size: auto;
   position: relative;
+  opacity:1;
   /* background-color: #34495e; */
   /* top: -50px; */
-  /* background: url(./pages/Homee/images/bg-011.jpg) no-repeat center; */
+ 
 }
 .contactus-header {
   text-align: center;
@@ -31,7 +33,8 @@ body {
   margin: auto;
   padding: 30px 40px;
   overflow: hidden;
-  background: darkgray;
+  background:rgba(255,255,255,.2);
+ 
   top: 100px;
   left: 50%;
   box-sizing: border-box;

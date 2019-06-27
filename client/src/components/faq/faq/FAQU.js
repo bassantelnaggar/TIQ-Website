@@ -60,7 +60,7 @@ onSubmit = (e) => {
         <div>
         <Navbar/>
         <div className="FAQU">
-        <div className="container">
+        <div >
 
                 <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf"}} >FAQs </h1>
                 <FAQUs  FAQs={this.state.FAQs}  />
@@ -93,7 +93,7 @@ else{
         <div className="FAQU">
               <NavbarSignedIn />
 
-          <div className="container">
+          <div>
             <view>
             <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf"}} >FAQs  <Button variant="contained"  style={edit} onClick={this.handleClick}>
             My Questions     
