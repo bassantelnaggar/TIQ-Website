@@ -12,10 +12,11 @@ import pic18 from "./images/pic18.jpg";
 import pic19 from "./images/pic19.jpg";
 import pic20 from "./images/pic20.jpg";
 import TIQ from "./images/TIQ.png";
+import PegaOrion from './images/orion-pegasus.jpeg'
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import { Link } from "react-router-dom";
-import EventPic from "./images/Event.png";
+import EventPic from "./images/event.jpg";
 import axios from "axios";
 import { connect } from "react-redux";
 const mapStateToProps = state => {
@@ -39,10 +40,10 @@ export class Home extends Component {
         <div>
           <Toolbar />
         </div>
-        <section id="banner">
+        <section id="banner" style={{position:'relative',top:'-57px'}}>
           {/* <i className="icon" /> */}
-          <h2>Welcome to TIQ </h2>
-          <p>READY FOR THE CHALLANGE </p>
+          <h1 style={{fontWeight:'bold',fontSize:"400%"}}>Welcome to <br></br> TIQ </h1>
+          <p>READY FOR THE CHALLANGE ? </p>
 
           <ul className="actions">
             <li>
@@ -58,7 +59,7 @@ export class Home extends Component {
           <div className="inner">
             <article class="feature left">
               <span class="image">
-                <img src={TIQ} alt="" />
+                <img src={PegaOrion} alt="" />
               </span>
               <div class="content">
                 <h2>WHO IS LEADING NOW ....!!</h2>
@@ -74,7 +75,7 @@ export class Home extends Component {
             </article>
             <article class="feature right">
               <span class="image">
-                <img src={TIQ} alt="" />
+                <img src={EventPic} alt="" />
               </span>
               <div class="content">
                 <h2>OUR LATEST EVENTS</h2>
@@ -230,9 +231,9 @@ export class Home extends Component {
         <div>
           <ToolbarOUT />
         </div>
-        <section id="banner">
+        <section id="banner" style={{position:'relative',top:'-57px'}}>
           {/* <i className="icon" /> */}
-          <h2>Welcome to TIQ </h2>
+          <h1 style={{fontWeight:'bold',fontSize:"400%"}}>Welcome to <br></br> TIQ </h1>
           <p>READY FOR THE CHALLANGE </p>
 
           <ul className="actions">
@@ -249,7 +250,7 @@ export class Home extends Component {
           <div className="inner">
             <article class="feature left">
               <span class="image">
-                <img src={TIQ} alt="" />
+                <img src={PegaOrion} alt="" />
               </span>
               <div class="content">
                 <h2>WHO IS LEADING NOW ....!!</h2>
@@ -265,7 +266,7 @@ export class Home extends Component {
             </article>
             <article class="feature right">
               <span class="image">
-                <img src={TIQ} alt="" />
+                <img src={EventPic} alt="" />
               </span>
               <div class="content">
                 <h2>OUR LATEST EVENTS</h2>
