@@ -27,14 +27,24 @@ class SearchDate extends Component {
       category: null
     };
   }
-
+  handleClick =() => {
+    this.props.history.push("/debates");
+  };
+  
   render() {
     const { classes } = this.props;
     return (
       <>
         <ToolbarOUT />
-        <h1> 
-        </h1>
+        <button
+            className="button"
+            style={{ position: "absolute", left: "20px", top: "63px" }}
+            onClick={() => {
+              this.handleClick();
+            }}
+          >
+            BACK
+          </button>
         {/* <div className="center-div">
            */}
              <div class="inner">

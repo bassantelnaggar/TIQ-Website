@@ -83,6 +83,7 @@ a:hover {
   margin: 0;
   position: relative;
   text-align: center;
+  box-shadow: 0 0 20px #000000b3;
   -webkit-transform: translateX(0);
           transform: translateX(0);
   padding: 2rem 4rem;
@@ -124,6 +125,7 @@ a:hover {
     top: 0;
     left: 0;
     z-index: 0;
+    box-shadow: 0 0 20px #000000b3;
     position: absolute;
   }
 }

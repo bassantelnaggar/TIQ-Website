@@ -48,7 +48,7 @@ class SignedUp extends Component {
         <div>
         <Navbar/>
         <div>
-        <div className="container">
+        <div>
 
                 <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf",fontSize:"5000px"}} >FAQs </h1>
                 <br></br>
@@ -75,7 +75,7 @@ class SignedUp extends Component {
         <div >
         <NavbarSignedIn />
 
-          <div className="container">
+          <div>
             <h1 style={{color:"#3e3939bf"}}> Signed Up People </h1>      
             <br></br>
             <SignedUps  SignedUp={this.state.SignedUp} decline={this.decline} accept={this.accept} />
