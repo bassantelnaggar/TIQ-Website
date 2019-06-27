@@ -96,7 +96,7 @@ class profile extends Component {
     else{
     return(
       <div>
-      <img src={Background} style={{backgroundsize: 'cover', marginTop:"-5%"}} />
+      {/* <img src={Background} style={{backgroundsize: 'cover', marginTop:"-5%"}} /> */}
      <div >
      <ToolbarOUT/>
       
@@ -120,35 +120,38 @@ class profile extends Component {
               </figure>
 
               <div class="panel info">
+                <dr> <EditIcon style={{color:'#696969',position:'relative',right:'-650px'}}/></dr>
+             
                 <dl>
                   <dt>
-                    <h4 className="text">Birth Day </h4>
+                    <h4 className="text" style={{fontWeight:'bold'}}>Birth Date </h4>
                     <h5 className="text">{this.state.user.birthDate}</h5>
                   </dt>
                   {/* <dt></dt> */}
                   <dd>98</dd>
                   <dt>
-                    <h4 className="text">Type</h4>
+                    <h4 className="text"style={{fontWeight:'bold'}}>Type</h4>
                     <h5 className="text">{this.state.user.type}</h5>
                   </dt>
                   {/* <dt></dt> */}
                   <dd>98</dd>
                   <dt>
-                    <h4 className="text">Score</h4>
+                    <h4 className="text"style={{fontWeight:'bold'}}>Score</h4>
                     <h5 className="text">{this.state.user.score}</h5>
                   </dt>
                   {/* <dt></dt> */}
                   <dd>98</dd>
                   <dt>
-                    <h4 className="text">House</h4>
+                    <h4 className="text"style={{fontWeight:'bold'}}>House</h4>
                     <h5 className="text">{this.state.user.house}</h5>
                   </dt>
                   <dd>98</dd>
                   <dt>
-                    <h4 className="text">TIQ Status</h4>
-                    <h5 className="text">{this.state.user.tiqStatus}</h5>
-                  </dt>
+                    <h4 className="text"style={{fontWeight:'bold'}}>TIQ Status</h4> 
+                    <h5 className="text">{this.state.user.tiqStatus} </h5>
+                     </dt>
                   <dd>98</dd>
+                  
                 </dl>
               </div>
             </section>
