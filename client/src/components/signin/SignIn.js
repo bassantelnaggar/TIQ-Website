@@ -160,10 +160,10 @@ class InputAdornments extends React.Component {
             >
               Sign In
             </Button>
-            <Typography paragraph style={{color:"black"}}>{this.state.errormessgae}</Typography>
+            {/* <Typography paragraph style={{color:"black"}}>{this.state.errormessgae}</Typography> */}
             <Grid container>
               <Grid item>
-                <Link  href="/createuser" variant="body2">
+                <Link  href="/createuser" variant="body2" style={{color:"black"}}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

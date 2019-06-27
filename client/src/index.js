@@ -48,7 +48,7 @@ import getUsers from "./components/users/getUsers";
 import { saveState } from "./localStorage";
 import SearchDebateLive from "./components/Chatbar/searchChatbBar";
 import DisciplesProgram from "./components/DisciplesProgram/DisciplesProgram";
-
+import SearchUser from "./components/users/searchUser";
 import profile from "../src/components/users/profile"
 import About from "../src/components/about/About"
 //import DisciplesProgram from "./components/DisciplesProgram/DisciplesProgram";
@@ -97,6 +97,11 @@ ReactDOM.render(
             exact
             path="/chatbars/search/:title"
             component={SearchDebateLive}
+          />
+           <Route
+            exact
+            path="/getUsers/search/:firstName"
+            component={SearchUser}
           />
           <Route exact path="/Articles" component={Articles} />
           <Route exact path="/faq" component={FAQU} />
