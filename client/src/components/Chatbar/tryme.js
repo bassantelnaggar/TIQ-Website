@@ -11,6 +11,7 @@ import AppBar from '@material-ui/core/AppBar';
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import Toolbar from '@material-ui/core/Toolbar';
 import { connect } from "react-redux";
+//import "./Chatbars.css"
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -156,24 +157,22 @@ class tryme extends React.Component {
  
       color: '#191b1c',
       textAlign: 'center',
-      // padding: '40px',
-      position: "absolute", top: "65px",
+       //padding: '30px',
+      position: "absolute", top: "75px",
       left: '0',
       width:'100%',
       lineHeight: '1',
       fontWeight: 'bold',
-      fontSize:'40px',
-      fontFamily: [
-        '"Rock Salt"',
-        'cursive'
-      ].join(','),
+      textShadow: '2px 2px 4px #000000b3',
+      fontSize:'70px',
+      fontFamily: 'Carter One'
     }
     return (
     
       <div className={classes.root} >
           <ToolbarOUT />
           <p style={headerStyle} >  {this.state.chatbars.debateLiveTitle}</p>
-          <div style={{position:"relative",top:"10px"}}>
+          <div style={{position:"relative",top:"90px"}}>
         <Grid container spacing={3}>  
         <Grid item xs>
        
@@ -190,11 +189,11 @@ class tryme extends React.Component {
         <ExpansionPanel style={expanded?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary >
             <Typography className={classes.heading} style={expanded3?responseOpen:responseStyle} >
-            <b style={{fontWeight: 'bold'}}>{forResponse[0]} {": "}</b> {forResponse[1]} </Typography>
+            <b style={{fontWeight: 'bold',fontFamily:"Raleway"}}>{forResponse[0]} {": "}</b> <q style={{fontFamily:"Raleway"}}>{forResponse[1]}</q>  </Typography>
           </ExpansionPanelSummary>
           </ExpansionPanel>
         
-         
+          
         ))}
          <ExpansionPanel style={expanded?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary >
@@ -246,7 +245,7 @@ class tryme extends React.Component {
           <ExpansionPanel style={expanded2?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
             <ExpansionPanelSummary >
               <Typography className={classes.heading} style={expanded2?responseOpen:responseStyle} >
-              <b style={{fontWeight: 'bold'}}> {againstResponse[0]} {": "}</b> {againstResponse[1]} </Typography>
+              <b style={{fontWeight: 'bold',fontFamily:"Raleway"}}> {againstResponse[0]} {": "}</b> <q style={{fontFamily:"Raleway"}}>{againstResponse[1]} </q> </Typography>
             </ExpansionPanelSummary>
            </ExpansionPanel>
            ))}
