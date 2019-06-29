@@ -158,8 +158,7 @@ case "member":
 router.get("/", async (req, res) => {
   const users = await user.find();
   users.sort((a, b) => (a.score > b.score) ? 1 : -1)
-  // users.sort();
-   users.reverse();
+  users.reverse();
   res.json({ data: users });
 });
 
