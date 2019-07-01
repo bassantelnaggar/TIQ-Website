@@ -121,7 +121,7 @@ class SignUp extends React.Component {
               
               <TextField
                required
-                id="outlined-select-currency"
+                id="standard-select-currency"
                 select
                 className={classes.textField}
                 name="type"
@@ -226,7 +226,7 @@ class SignUp extends React.Component {
               <InputLabel htmlFor="house"> </InputLabel>
               <Input required>
               <TextField required
-                id="outlined-select-currency"
+                id="standard-select-currency"
                 select
                 className={classes.textField}
                 name="house"
@@ -286,7 +286,7 @@ class SignUp extends React.Component {
               <FormControl margin="normal"  fullWidth>
               <InputLabel htmlFor="house"> </InputLabel>
               <TextField required
-                id="outlined-select-currency"
+                id="standard-select-currency"
                 select
                 className={classes.textField}
                 name="house"
@@ -316,7 +316,7 @@ class SignUp extends React.Component {
               <FormControl margin="normal"  fullWidth>
               <InputLabel htmlFor="house"> </InputLabel>
               <TextField required
-                id="outlined-select-currency"
+                id="standard-select-currency"
                 select
                 className={classes.textField}
                 name="house"
@@ -357,7 +357,7 @@ class SignUp extends React.Component {
             <FormControl margin="normal"  fullWidth>
               <InputLabel htmlFor="tiqStatus"> </InputLabel>
                 <TextField 
-                id="outlined-select-currency"
+                id="standard-select-currency"
                 select
                 className={classes.textField}
                 name="tiqStatus"
@@ -383,7 +383,7 @@ class SignUp extends React.Component {
             <FormControl margin="normal"  fullWidth>
               <InputLabel htmlFor="supervisorType"></InputLabel>
               <TextField required
-                id="outlined-select-currency"
+                id="standard-select-currency"
                 select
                 className={classes.textField}
                 name="supervisorType"
@@ -420,18 +420,7 @@ class SignUp extends React.Component {
               // color="primary"
               //href="/signin"
               onClick={
-              //  this.error(this.state.type,
-              //   this.state.firstName,
-              //   this.state.lastName,
-              //   this.state.birthDate,
-              //   this.state.bio,
-              //   this.state.email,
-              //   this.state.password,
-              //   this.state.house,
-              //   this.state.din,
-              //   this.state.dor,
-              //   this.state.tiqStatus,
-              //   this.state.supervisorType)
+              
                 this.props.addUser.bind(
                 this,
                 this.state.type,

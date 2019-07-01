@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SignedUps from './SignedUps';
-
+import Toolbar from "../../layout/Toolbar/Toolbar"
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout"
 import NavbarSignedIn from "../layout/NavbarSignedIn";
 import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
@@ -38,31 +39,52 @@ class SignedUp extends Component {
   accept = (id) => {
     axios.post('/api/Users/register/'+id, {})
     .then(res => this.setState({ SignedUp: [...this.state.SignedUp.filter(signedUp => signedUp._id !== id)] }));
+    axios.delete('/api/SignedUp/'+id)
+    .then(res => this.setState({ SignedUp: [...this.state.SignedUp.filter(signedUp => signedUp._id !== id)] }));
     alert("Accepted successfully!")
   }
+  handleClick =() => {
+    this.props.history.push("/signin");
+ };
   render() {
     //const { classes } = this.props;
+    const headerStyle = {
+ 
+      color: '#191b1c',
+      textAlign: 'center',
+       //padding: '30px',
+      position: "absolute", top: "75px",
+      left: '0',
+      width:'100%',
+      lineHeight: '1',
+      fontWeight: 'bold',
+      // textShadow: '2px 2px 4px #000000b3',
+      fontSize:'70px',
+      
+    }
 
-    if (this.props.token == null) {
+    if (this.props.token === null) {
       return (
         <div>
-        <Navbar/>
-        <div>
-        <div>
-
-                <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf",fontSize:"5000px"}} >FAQs </h1>
-                <br></br>
+          <Toolbar/>
+          <div class="thumbnails">
+            <div class="box">
+              <div class="inner">
+                <h3>You have to sign in first!</h3>
+               
                 <button
                   variant="contained"
                   onClick={() => {
-                    this.handleClickWWW();
+                    this.handleClick();
                   }}
+                  //onClick={() => (document.location = "/signin")}
                   className="btn"
-                  style={{backgroundColor:"#70c7be"}}
                 >
                   Sign In
                 </button>
-                </div>
+                
+              </div>
+            </div>
           </div>
         </div>
       );
@@ -73,11 +95,11 @@ class SignedUp extends Component {
     return (
      
         <div >
-        <NavbarSignedIn />
+        <ToolbarOUT />
 
           <div>
-            <h1 style={{color:"#3e3939bf"}}> Signed Up People </h1>      
-            <br></br>
+            <h1 style={headerStyle}> NEW MEMBERS <br></br>CONFIRMATION LIST </h1>      
+            <br></br> <br></br><br></br><br></br>
             <SignedUps  SignedUp={this.state.SignedUp} decline={this.decline} accept={this.accept} />
              
           </div>  

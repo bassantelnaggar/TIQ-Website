@@ -41,8 +41,7 @@ module.exports = {
       din: Joi.string(),
       dor: Joi.string(),
       type:Joi.string(),
-      house:Joi.string().valid("Neutral","Pegasus","Orion"),    
-     score:Joi.Number()
+      house:Joi.string().valid("Neutral","Pegasus","Orion") 
     };
     return Joi.validate(request, updateAlumniSchemaAdmin);
   },

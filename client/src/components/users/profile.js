@@ -45,7 +45,7 @@ class profile extends Component {
       )
       .then(res => {
         console.log(res);
-        axios.put(`http://localhost:5000/api/Users/Profile/${this.props.id}`,{
+        axios.put(`/api/Users/Profile/${this.props.id}`,{
             'profilePicture': res.data.secure_url
         }) 
         window.location.reload();

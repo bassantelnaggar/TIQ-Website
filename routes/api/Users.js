@@ -13,17 +13,6 @@ const TIQadminValidator = require("../../validations/tiqAdminValidations");
 const discipleValidator = require("../../validations/disciplevalidations");
 const parentValidator = require("../../validations/parentValidations");
 
-
-router.get('/search/:keyWord',async(req,res)=>{
-  const keyWord=req.params.keyWord
-  const userr = await User.find({ "firstName" : { $regex: keyWord, $options: 'i' } } )
-  if(userr.length===0) return res.status(404).send({error: 'User with that keyword does not exist'})
-  return res.json({data:userr})
-       
-  })
-  
-
-
 router.put("/Profile/:id",async(req,res)=>{
   try{
   const userId = req.params.id;
@@ -34,7 +23,13 @@ router.put("/Profile/:id",async(req,res)=>{
     console.log("error");
   }
 })
-
+router.get('/search/:keyWord',async(req,res)=>{
+  const keyWord=req.params.keyWord
+  const userr = await User.find({ "firstName" : { $regex: keyWord, $options: 'i' } } )
+  if(userr.length===0) return res.status(404).send({error: 'User with that keyword does not exist'})
+  return res.json({data:userr})
+       
+  })
 router.post("/register/:id", async (req, res) => {
   const id = req.params.id;
   const signedUp = await SignedUp.findOne({ _id: id });
@@ -46,7 +41,7 @@ router.post("/register/:id", async (req, res) => {
       try {
            
         const salt = bcrypt.genSaltSync(10);
-        const cryptedPasswrod = bcrypt.hashSync(password, salt);
+        const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,
@@ -72,7 +67,7 @@ router.post("/register/:id", async (req, res) => {
       try {
        
         const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt);
+        const hashedPassword = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,
@@ -124,7 +119,7 @@ case "member":
       try {
        
         const salt = bcrypt.genSaltSync(10);
-        const cryptedPasswrod = bcrypt.hashSync(password, salt);
+        const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,
@@ -157,8 +152,11 @@ case "member":
 
 router.get("/", async (req, res) => {
   const users = await user.find();
+  users.sort((a, b) => (a.score > b.score) ? 1 : -1)
+  users.reverse();
   res.json({ data: users });
 });
+
 
 //uppdate scores dynamically
 router.put("/updateScores/:id/:score", async (req, res) => {
@@ -259,7 +257,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.put("update/admin/:id",async (req,res)=>{
+router.put("/update/admin/:id",async (req,res)=>{
   const userId = req.params.id;
   const getuser = await user.findOne({ _id: userId });
   if (!getuser) return res.status(404).send({ error: "User does not exist" });
@@ -298,7 +296,7 @@ router.put("update/admin/:id",async (req,res)=>{
         }
 
         case"member":
-      try{
+     try{
         const isMemberValidatedAdmin=userValidator.updateValidationAdmin(req.body);
   
         if (isMemberValidatedAdmin.error)
