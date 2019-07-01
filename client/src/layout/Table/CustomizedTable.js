@@ -153,26 +153,28 @@ class CustomizedTable extends React.Component {
       <Table className={classes.table}style={{position:"absolute",top:"-141px"}} >
           <TableHead>
             <TableRow>
-              <CustomTableCell>Member Of</CustomTableCell>
-              <CustomTableCell align="right">First Name</CustomTableCell>
-              <CustomTableCell align="right">Last Name</CustomTableCell>
-              <CustomTableCell align="right"> Score</CustomTableCell>
+            <CustomTableCell>Name</CustomTableCell>
+              <CustomTableCell align="center">House</CustomTableCell>
+              <CustomTableCell align="center">Status</CustomTableCell>
+              <CustomTableCell align="right">Score</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {this.props.scores.map(score => (
               <TableRow className={classes.score} key={score._id}>
-              
-                <CustomTableCell component="th" scope="row">
-                  {score.type}
+               <CustomTableCell component="th" scope="row">
+                  {score.firstName} {" "} {score.lastName}
+                </CustomTableCell>
+                <CustomTableCell align="center">
+                  {score.house} 
+                </CustomTableCell>
+                <CustomTableCell align="center">
+                   {score.type}
                 </CustomTableCell>
                 <CustomTableCell align="right">
-                  {score.firstName}
-                </CustomTableCell>
-                <CustomTableCell align="right">
-                  {score.lastName}
-                </CustomTableCell>
-                <CustomTableCell align="right"> {score.score} {"  "} 
+                
+                 {score.score} {"  "} 
+                
                
                     </CustomTableCell>
               </TableRow>
