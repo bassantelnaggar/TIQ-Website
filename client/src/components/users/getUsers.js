@@ -44,22 +44,59 @@ class GetUsers extends Component {
     this.setState({ open: !this.state.open });
   };
 
-  update =  (id,type,house,din,dor,tiqStatus,supervisorType) => {
-  
-    axios.put("/api/Users/update/" + id, {
-      type:type,
-      house: house,
-      din:din,
-      dor: dor,
-      tiqStatus: tiqStatus,
-      supervisorType: supervisorType,
+  update =  (id,
+    type,
+    house,
+    din,
+    dor,
+    tiqStatus,
+    supervisorType,
+    score
+    ) => {
+      console.log(type)
+      console.log(house)
+      console.log(din)
+      console.log(tiqStatus)
+      console.log(supervisorType)
+      console.log(score)
 
-    })
-    .then(res => {
-      axios.get('/api/Users')
-      .then(res => this.setState({ users: res.data.data }))
-       alert("Updated successfully!")
-    });
+    if(type=="member"){
+      axios.put("api/Users/update/admin/" + id, {
+        house,
+        din,
+        tiqStatus,
+        supervisorType,
+        score})
+      .then(res => {
+        axios.get('/api/Users')
+        .then(res => this.setState({ users: res.data.data }))
+         alert("Updated successfully!")
+      });
+    }
+    if(type=="disciple"){
+      axios.put("api/Users/update/admin/" + id, {
+        house ,
+        score
+               })
+      .then(res => {
+        axios.get('/api/Users')
+        .then(res => this.setState({ users: res.data.data }))
+         alert("Updated successfully!")
+      });
+    }
+    if(type=="alumni"){
+      axios.put("api/Users/update/admin/" + id, {
+      din,
+      dor,
+      type,
+      house
+      })
+      .then(res => {
+        axios.get('/api/Users')
+        .then(res => this.setState({ users: res.data.data }))
+         alert("Updated successfully!")
+      });
+    }
   ;
 
     // if (Object.keys(update.data)[0] === "err")

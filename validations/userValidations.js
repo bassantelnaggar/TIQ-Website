@@ -43,9 +43,10 @@ module.exports = {
     const updateValidationAdmin = {
       house: Joi.string(),
       din: Joi.string(),
+      
       tiqStatus:Joi.string().valid("House Leader","BOA","Supervisor","Disciples House Leader"), 
       supervisorType:Joi.string().valid("Marketing","Fundraising","Logistics","Relations","Media Design"),
-      score:Joi.Number() 
+      score:Joi.number().integer()
      
     };
     return Joi.validate(request, updateValidationAdmin);
