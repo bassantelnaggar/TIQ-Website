@@ -1,33 +1,32 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./Chatbars.css";
-import ToolBar from "../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
-import Header from './Header';
-import Logo from '../images/debate2.jpg';
 import Background from '../../Images/background.jpeg';
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom'
+import "./DeleteUser.css";
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
 
-class SearchDebateLive extends Component {
+class SearchUser extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          users: []
+        };
+      }
   componentDidMount() {
-    const { title } = this.props.match.params;
-    axios
-      .get(`/api/chatbars/Search/${title}`)
-      .then(res => this.setState({ chatbars: res.data.data }));
+    const { firstName } = this.props.match.params;
+     axios
+      .get(`/api/Users/search/${firstName}`)
+      .then( res => this.setState({ users: res.data.data }))
+      .catch(console.log('cannot fetch'))
   }
   handleClick =() => {
-    this.props.history.push("/chatbars");
+    this.props.history.push("/getUsers");
   };
-  constructor(props) {
-    super(props);
-    this.state = {
-      chatbars: []
-    };
-  }
+ 
   getStyle = () => {
     return {
       backgroundImage:Background,
@@ -35,15 +34,14 @@ class SearchDebateLive extends Component {
       textAlign: 'center'
     }
   }
-
   render() {
-    const { classes } = this.props;
+      console.log(this.state.users)
     return (
       <>
        <div style={this.getStyle()} >
       <div>
         <ToolbarOUT />
-        <Header />
+        
         <button
             className="button"
             background = "#202024"
@@ -55,19 +53,13 @@ class SearchDebateLive extends Component {
             BACK
           </button>
         </div>
-        <div class="inner">
-          <div class="thumbnails">
-            {this.state.chatbars.map(chatbar => (
+            <div class="inner">
+            <div class="thumbnails">
+            {this.state.users.map(user => (
               <div class="box">
-                <Link to={"/addResponse/" + chatbar._id} class="image fit">
-                  <img src={Logo} alt="" />
-                </Link>
                 <div class="inner">
-                  <h3>{chatbar.date}</h3>
-                  <p>{chatbar.debateLiveTitle} </p>
-                  <Link to={"/addResponse/" + chatbar._id} class="btn">
-                    Debate it Now!
-                  </Link>
+                  <h3>{user.firstName}</h3>
+                  <p>{user.lastName} </p>
                 </div>
               </div>
             ))}
@@ -82,7 +74,7 @@ class SearchDebateLive extends Component {
 const Form = connect(
   mapStateToProps,
   null
-)(SearchDebateLive);
+)(SearchUser);
 
 export default Form;
 

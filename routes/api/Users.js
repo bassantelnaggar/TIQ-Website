@@ -12,6 +12,7 @@ const alumniValidator = require("../../validations/alumniValidations");
 const TIQadminValidator = require("../../validations/tiqAdminValidations");
 const discipleValidator = require("../../validations/disciplevalidations");
 const parentValidator = require("../../validations/parentValidations");
+<<<<<<< HEAD
 
 router.put("/Profile/:id",async(req,res)=>{
   try{
@@ -24,6 +25,31 @@ router.put("/Profile/:id",async(req,res)=>{
   }
 })
 
+=======
+
+
+router.get('/search/:keyWord',async(req,res)=>{
+  const keyWord=req.params.keyWord
+  const userr = await User.find({ "firstName" : { $regex: keyWord, $options: 'i' } } )
+  if(userr.length===0) return res.status(404).send({error: 'User with that keyword does not exist'})
+  return res.json({data:userr})
+       
+  })
+  
+
+
+router.put("/Profile/:id",async(req,res)=>{
+  try{
+  const userId = req.params.id;
+  const addedPicture = req.body.profilePicture
+  const userToUpdate = await user.findOneAndUpdate({_id:userId},{profilePicture:addedPicture})
+  res.json({ data:userToUpdate, msg: "Profile added" });
+  } catch (error) {
+    console.log("error");
+  }
+})
+
+>>>>>>> 90b26a0b8851d99dbd51c8978b5da4eff477e8ea
 router.post("/register/:id", async (req, res) => {
   const id = req.params.id;
   const signedUp = await SignedUp.findOne({ _id: id });
@@ -248,7 +274,11 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 router.put("/update/admin/:id",async (req,res)=>{
+=======
+router.put("update/admin/:id",async (req,res)=>{
+>>>>>>> 90b26a0b8851d99dbd51c8978b5da4eff477e8ea
   const userId = req.params.id;
   const getuser = await user.findOne({ _id: userId });
   if (!getuser) return res.status(404).send({ error: "User does not exist" });
@@ -287,7 +317,11 @@ router.put("/update/admin/:id",async (req,res)=>{
         }
 
         case"member":
+<<<<<<< HEAD
      try{
+=======
+      try{
+>>>>>>> 90b26a0b8851d99dbd51c8978b5da4eff477e8ea
         const isMemberValidatedAdmin=userValidator.updateValidationAdmin(req.body);
   
         if (isMemberValidatedAdmin.error)

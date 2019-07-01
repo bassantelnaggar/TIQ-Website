@@ -32,7 +32,7 @@ class Article extends Component{
                 {/* <Link to ="/getUsers"> {" By "} {this.props.article.author} </Link> */}
                 <br></br>
                 <br></br>
-                <Link to={"/articlebody/" + this.props.article._id} class="btn">
+                <Link to={"/articlebody/" + this.props.article._id} className="button" background = "#202024">
                       Read More !
                     </Link>
                 {/* <p>  {"comments :"} {s}</p> */}

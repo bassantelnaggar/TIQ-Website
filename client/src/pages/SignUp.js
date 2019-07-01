@@ -104,12 +104,12 @@ class SignUp extends React.Component {
     const { classes } = this.props;
     return (
       
-      <main className={classes.main}>
+      <main className={classes.main}style={{width:'35%',  boxShadow: '0 0 20px #000000b3'}}>
        <Toolbar/>
         {/* <CssBaseline /> */}
-        <Paper className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+        <Paper className={classes.paper} >
+          <Avatar className={classes.avatar}style={{background:"black"}}>
+            <LockOutlinedIcon  />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign Up
@@ -415,8 +415,9 @@ class SignUp extends React.Component {
             />
             <Button
               fullWidth
+              style = {{background: '#410c12'}}
               variant="contained"
-              color="primary"
+              // color="primary"
               //href="/signin"
               onClick={
               

@@ -4,7 +4,8 @@ import FormDialog from "../../../components/users/FormDialog";
 import pic5 from "../images/pic5.jpeg";
 import orion from "../../Homee/images/orion-logo.jpg";
 import pegasus from "../../Homee/images/PEGASUS-LOGO.jpg";
-
+import SearchIcon from "@material-ui/icons/Search";
+import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 import "./ourPeoplee.css";
 
@@ -96,6 +97,7 @@ class ourPeople extends Component {
         );
       } else {
         return (
+          
           <div class="maincontainer">
            {/* <div class = "row"> */}
             <div class="thecard">
@@ -166,49 +168,52 @@ class ourPeople extends Component {
                 </div>
               </div>
             </div>
+            
+           
            </div>
+           
         );
       }
     } else {
-      return (
-        <div class="maincontainer">
-         {/* <div class="row"> */}
-          <div class="thecard">
-            <div class="thefront">
-              {/* <div class="background-img">
-                <img src={orion} />
-              </div> */}
-              <div class="profile-img">
-                <img src={pic5} />
-              </div>
+      return ( <div class="maincontainer">
+      {/* <div class = "row"> */}
+       <div class="thecard">
+         <div class="thefront">
+           {/* <div class="background-pegasus-img ">
+             <img src={pegasus} />
+           </div> */}
+           <div class="profile-img-front">
+             <img src={pic5} />
+           </div>
+           <h class="h1">{this.props.user.firstName}</h>
+           <h class="h1">{this.props.user.lastName}</h>
 
-              <title class="title1">{this.props.user.firstName}</title>
-              <p class="paragraph1">
-                {this.props.user.lastName}
-                <br />
-                {this.props.user.type}
-              </p>
-            </div>
-
-            <div class="theback">
-              {this.props.user.birthDate}
-              <br />
-
-              {this.props.user.email}
-              <br />
-
-              {this.props.user.clubs}
-              <br />
-              {this.props.user.house}
-              <br />
-              {this.props.user.bio}
-              <br />
-              {this.props.user.din}
-              <br />
-              {this.props.user.dor}
-            </div>
-          </div>
+           <p class="p1">{this.props.user.type}</p>
          </div>
+
+         <div class="theback">
+           <div class="content-back">
+             {this.props.user.birthDate}
+             <br />
+
+             {this.props.user.email}
+             <br />
+
+             {this.props.user.clubs}
+             <br />
+             {this.props.user.house}
+             <br />
+             {this.props.user.bio}
+             <br />
+             {this.props.user.din}
+             <br />
+             {this.props.user.dor}
+           </div>
+         </div>
+       </div>
+      
+      </div>
+       
       );
     }
   }
