@@ -57,7 +57,8 @@ const userSchema = new Schema({
   profilePicture:{
     type:String,
     default: "https://res.cloudinary.com/dpny1nhaq/image/upload/v1560854813/default_profile_fpwmcd.png"
-  }
+  },
+ 
 });
 
 module.exports = User = mongoose.model("users", userSchema);

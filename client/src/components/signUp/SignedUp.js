@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import SignedUps from './SignedUps';
-
 import NavbarSignedIn from "../layout/NavbarSignedIn";
 import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
 import Navbar from "../layout/Navbar";
-
 import axios from 'axios';
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -36,9 +35,12 @@ class SignedUp extends Component {
 }
 
   accept = (id) => {
+    
     axios.post('/api/Users/register/'+id, {})
     .then(res => this.setState({ SignedUp: [...this.state.SignedUp.filter(signedUp => signedUp._id !== id)] }));
+    
     alert("Accepted successfully!")
+
   }
   render() {
     //const { classes } = this.props;

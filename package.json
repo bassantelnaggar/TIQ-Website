@@ -33,6 +33,7 @@
     "jsonwebtoken": "^8.5.1",
     "material-ui-icons": "^1.0.0-beta.36",
     "mongoose": "^5.4.19",
+    "nodemailer": "^6.2.1",
     "nodemon": "^1.18.11",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",

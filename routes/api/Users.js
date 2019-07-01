@@ -12,7 +12,15 @@ const alumniValidator = require("../../validations/alumniValidations");
 const TIQadminValidator = require("../../validations/tiqAdminValidations");
 const discipleValidator = require("../../validations/disciplevalidations");
 const parentValidator = require("../../validations/parentValidations");
+const nodemailer = require("nodemailer")
 
+const transpoter = nodemailer.createTransport({
+  service:'Gmail',
+  auth:{
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS
+  }
+})
 
 router.get('/search/:keyWord',async(req,res)=>{
   const keyWord=req.params.keyWord
@@ -143,14 +151,21 @@ case "member":
 
         console.log(error);
       }
+  
       try {
         const deleted= await SignedUp.findByIdAndRemove({ _id: id });
         res.json({ msg: "User was deleted successfully", data: deleted });
+        await transpoter.sendmail({
+          to: deleted.email,
+          subject: 'TIQ Acceptance',
+          html: 'You have been accepted in the TIQ website you can browse throught the website NOW!'
+        })
       } catch (error) {
         console.log(error);
       }
 
   }
+
 });
 
 //get all users
@@ -522,6 +537,7 @@ router.put("/update/:id", async (req, res) => {
       }
   }
 });
+
 //Authentication
 router.post("/authenticate", async (req, res) => {
   let r = {

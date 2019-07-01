@@ -11,7 +11,15 @@ const bcrypt = require("bcryptjs");
 const user = require("../../models/User");
 
 const userValidator = require("../../validations/userValidations");
+const nodemailer = require("nodemailer")
 
+const transpoter = nodemailer.createTransport({
+  service:'Gmail',
+  auth:{
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS
+  }
+})
 
 router.post("/signUp", async (req, res) => {
   const Email = req.body.email;
@@ -211,6 +219,17 @@ router.get('/:id', async(request, response) => {
         const id = req.params.id
         const deletedSignUp = await SignedUp.findByIdAndRemove(id)
         res.json({ data: deletedSignUp})
+        try {
+          const deleted= await SignedUp.findByIdAndRemove({ _id: id });
+          res.json({ msg: "User was deleted successfully", data: deleted });
+          await transpoter.sendmail({
+            to: deleted.email,
+            subject: 'TIQ Acceptance',
+            html: 'Unfortunetly you have been declined from the TIQ Website'
+          })
+        } catch (error) {
+          console.log(error);
+        }
 
        }
        catch(error) {
