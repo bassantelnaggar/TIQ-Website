@@ -1,5 +1,4 @@
 import React from "react";
-
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -10,20 +9,83 @@ import axios from "axios";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
+import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from "prop-types";
+import withStyles from "@material-ui/core/styles/withStyles";
+import InputLabel from "@material-ui/core/InputLabel";
+import Input from "@material-ui/core/Input";
+
+import FormControl from "@material-ui/core/FormControl";
+
+const types=[{
+
+  value: 'member',
+  label: 'Member',
+},
+{
+  value: 'alumni',
+  label: 'Alumni',
+},
+{
+  value: 'disciple',
+  label: 'Disciple',
+},
+{
+  value: 'parent',
+  label: 'Parent',
+},];
+const status=["House Leader","BOA","Supervisor","Disciples House Leader"]
+const houses=["Pegasus","Orion","Neutral"];
+const supervisor=["Marketing","Fundraising","Logistics","Relations","Media Design"]
+const styles = theme => ({
+  main: {
+    width: "auto",
+    display: "block", // Fix IE 11 issue.
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+      width: 400,
+      marginLeft: "auto",
+      marginRight: "auto"
+    }
+  },
+  paper: {
+    marginTop: theme.spacing.unit * 8,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
+      .spacing.unit * 3}px`
+  },
+  avatar: {
+    margin: theme.spacing.unit,
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing.unit
+  },
+  submit: {
+    marginTop: theme.spacing.unit * 2
+  }
+});
 
 class FormDialog extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      firstName: this.props.user.firstName,
-      lastName: this.props.user.lastName,
-      birthDate: this.props.user.birthDate,
-      bio: this.props.user.bio,
-      clubs: this.props.user.clubs,
       din: this.props.user.din,
       dor: this.props.user.dor,
-      Error: ""
+      house: this.props.user.house,
+      Error: "",
+      tiqStatus:this.props.user.tiqStatus,
+      supervisorType:this.props.user.supervisorType,
+      score:this.props.user.score,
+      type:this.props.user.type
+
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -55,9 +117,14 @@ class FormDialog extends React.Component {
       .then(res => console.log(res))
       .catch(err => console.log(err.message));
   };
-
+  onChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
   render() {
+   const { classes } = this.props;
+
     return (
+
       <div>
         <div />
         <EditIcon variant="outlined" onClick={this.handleClickOpen}>
@@ -70,95 +137,209 @@ class FormDialog extends React.Component {
         >
           <DialogTitle class="form-dialog-title ">Update Profile</DialogTitle>
           <DialogContent>
-            <DialogContentText />
+          {this.props.user.type=="member" &&<div>
+              {/* member */}
+              <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="house"> </InputLabel>
+              <TextField 
+                id="standard-select-currency"
+                select
+                className={classes.textField}
+                name="house"
+                label="House"
+                value={this.state.house}
+                onChange={this.onChange}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please select your house"
+                margin="normal"
+                variant="outlined"
+              >
+                {houses.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+            </TextField>
+            </FormControl>
 
-            <TextField
-              onChange={e => {
-                this.setState({
-                  type: e.target.value
-                });
-              }}
-             // onChange={this.onChange}
-              autoFocus
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="din"> </InputLabel>
+              <TextField 
+                id="date"
+                label="Date Of Joining"
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={this.onChange}
+                name="din"
+                variant="outlined"
 
-              margin="dense"
-              id="FirstName"
-              label="Type"
-              type="Type"
-              defaultValue={this.props.user.type}
-            />
+              />
+            </FormControl>
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="tiqStatus"> </InputLabel>
+                <TextField 
+                id="standard-select-currency"
+                select
+                className={classes.textField}
+                name="tiqStatus"
+                label="TIQ Status"
+                value={this.state.tiqStatus}
+                onChange={this.onChange}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please select your TIQ Status"
+                margin="normal"
+                variant="outlined"
+              >
+                {status.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+            </TextField>
+            </FormControl>
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="supervisorType"></InputLabel>
+              <TextField 
+                id="standard-select-currency"
+                select
+                className={classes.textField}
+                name="supervisorType"
+                label="Supervisor Type"
+                value={this.state.supervisorType}
+                onChange={this.onChange}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please select your Supervisor Type"
+                margin="normal"
+                variant="outlined"
+              >
+                {supervisor.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+            </TextField>
+            </FormControl>
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="score">Score</InputLabel>
+              <Input
+                id="score"
+                name="score"
+                onChange={this.onChange}
+                value={this.state.score}
+                autoFocus
+              />
+            </FormControl>
+            
+            </div>}
+            {this.props.user.type=="alumni" && <div>              {/* alumni */}
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="house"> </InputLabel>
+              <TextField 
+                id="standard-select-currency"
+                select
+                className={classes.textField}
+                name="house"
+                label="House"
+                value={this.state.house}
+                onChange={this.onChange}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please select your house"
+                margin="normal"
+                variant="outlined"
+              >
+                {houses.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+            </TextField>
+            </FormControl>
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="din"> </InputLabel>
+              <TextField required
+                id="date"
+                label="Date Of Joining"
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={this.onChange}
+                name="din"
+                variant="outlined"
 
-            <TextField
-              onChange={e => {
-                this.setState({
-                  house: e.target.value
-                });
-              }}
-              autoFocus
-              margin="dense"
-              id="LastName"
-              label="House"
-              type="House"
-              defaultValue={this.props.user.house}
-            />
+              />
+            </FormControl>
 
-           
-            <TextField
-              onChange={e => {
-                this.setState({
-                  dor: e.target.value
-                });
-              }}
-              autoFocus
-              margin="dense"
-              id="bio"
-              label="Date Out"
-              type="Date Out"
-              defaultValue={this.props.user.dor}
-            />
-            <TextField
-              onChange={e => {
-                this.setState({
-                  din: e.target.value
-                });
-              }}
-              autoFocus
-              margin="dense"
-              id="din"
-              label="din"
-              type="din"
-              defaultValue={this.props.user.din}
-            />
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="dor"> </InputLabel>
+              <TextField required
+                id="date"
+                label="Date Of Leaving"
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={this.onChange}
+                name="dor"   
+                variant="outlined"
+         
+                  />
+            </FormControl>
 
-            <TextField
-              onChange={e => {
-                this.setState({
-                  dor: e.target.value
-                });
-              }}
-              autoFocus
-              margin="dense"
-              id="dor"
-              label="dor"
-              type="dor"
-              defaultValue={this.props.user.dor}
-            />
+            </div>}
+            {this.props.user.type=="disciple" && <div>
+              {/* disciples */}
+              <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="house"> </InputLabel>
+              <TextField required
+                id="standard-select-currency"
+                select
+                className={classes.textField}
+                name="house"
+                label="House"
+                value={this.state.house}
+                onChange={this.onChange}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please select your house"
+                margin="normal"
+                variant="outlined"
+              >
+                {houses.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+      </TextField>
+            </FormControl>
 
-            <TextField
-              onChange={e => {
-                this.setState({
-                  clubs: e.target.value
-                });
-              }}
-              autoFocus
-              margin="dense"
-              id="clubs"
-              label="Clubs"
-              type="clubs"
-              defaultValue={this.props.user.clubs}
-            />
-
-            <Typography paragraph>{this.state.Error}</Typography>
+            </div>}
+ 
+            <Typography paragraph>{this.state.Error}</Typography> */}
           </DialogContent>
           <DialogActions>
             <Button
@@ -169,14 +350,19 @@ class FormDialog extends React.Component {
             >
               CANCEL
             </Button>
-            <Button  onClick={this.props.update.bind(this,this.props.user._id,this.state.type,this.state.house,this.state.din,this.state.dor,this.state.tiqStatus,this.state.supervisorType)} color="black">
+            <Button  onClick={this.props.update.bind(this,this.props.user._id,this.state.type,this.state.house,this.state.din,this.state.dor,this.state.tiqStatus,this.state.supervisorType,this.state.score)} color="black">
               UPDATE
             </Button>
           </DialogActions>
         </Dialog>
       </div>
+      // </main>
+
     );
   }
 }
-
-export default FormDialog;
+  FormDialog.propTypes = {
+    classes: PropTypes.object.isRequired
+  };
+  
+  export default withStyles(styles)(FormDialog);
