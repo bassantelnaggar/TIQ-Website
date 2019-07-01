@@ -206,7 +206,7 @@ class tryme extends React.Component {
                   // flex: "10",
                   // padding: "5px",
                   //position: "fixed",
-                  width: "250%",
+                  width: "540px",
                   // bottom: "2px",
                   color: "black"
                 }}
@@ -219,7 +219,7 @@ class tryme extends React.Component {
                 type="Submit"
                 value="Submit"
                 className="btn"
-                style={{marginLeft:'183%'}}
+                style={{marginLeft:'390px'}}
                 onClick={this.addForResponse.bind(this, {
                   _id: this.props.match.params.key,
                   forResponses:[ this.state.user.firstName +" "+ this.state.user.lastName ,this.state.forResponses]
@@ -260,7 +260,7 @@ class tryme extends React.Component {
                   // flex: "10",
                   // padding: "5px",
                   //position: "fixed",
-                  width: "250%",
+                  width: "540px",
                   // bottom: "2px",
                   color: "black"
                  
@@ -276,7 +276,7 @@ class tryme extends React.Component {
                 type="Submit"
                 value="Submit"
                 className="btn"
-                style={{marginLeft:'183%'}}
+                style={{marginLeft:'390px'}}
                 onClick={this.addAgainstResponse.bind(this, {
                   _id: this.props.match.params.key,
                   againstResponses: [this.state.user.firstName +" "+ this.state.user.lastName , this.state.againstResponses]

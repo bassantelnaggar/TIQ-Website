@@ -54,8 +54,8 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
             debateLiveTitle:this.state.debateLiveTitle
             
         })
-          .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] }));
-          alert("The new motion has been added successfully, please refresh the page");
+          .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data.data] }));
+          alert("The new motion has been added successfully");
       }
       render() {
         const auth = this.props.usertype === "TIQadmin";
@@ -67,7 +67,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
         <Header />
         <button
             className="btn"
-            style={{ position: "absolute", left: "20px", top: "63px" }}
+            style={{ position: "absolute", left: "20px", top: "63px",background:"#333" }}
             onClick={() => {
               this.handleClick();
             }}
