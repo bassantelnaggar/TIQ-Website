@@ -53,6 +53,7 @@ class Debates extends Component {
       date: null,
       info: null,
       description: null,
+      debatePicture:null,
       error: "",
       selecteddate: null,
       selectedcategory: null,
@@ -109,6 +110,7 @@ class Debates extends Component {
   handleClick =() => {
     this.props.history.push("/signin");
  };
+ 
   render() {
     const { classes } = this.props;
     if (this.props.token === null) {
@@ -277,10 +279,8 @@ class Debates extends Component {
            
           </div>
     
-          {/* <div className="center-div"> */}
-          <div class="inner">
-            <div class="thumbnails">
-            {/* <h1>Our Debates</h1> */}
+          <div class="inner" >
+            <div class="thumbnails" >
             {this.state.debates.map(debate => (
               <DebateCard
                 key={debate._id}
@@ -290,6 +290,7 @@ class Debates extends Component {
                 category={debate.category}
                 description={debate.description}
                 info={debate.info}
+                debatePicture={debate.debatePicture}
                 auth={auth}
               />
             ))}
@@ -362,6 +363,7 @@ class Debates extends Component {
                 category={debate.category}
                 description={debate.description}
                 info={debate.info}
+                debatePicture={debate.debatePicture}
                 auth={auth}
               />
             ))}

@@ -46,7 +46,7 @@ router.post("/register/:id", async (req, res) => {
       try {
            
         const salt = bcrypt.genSaltSync(10);
-        const cryptedPasswrod = bcrypt.hashSync(password, salt);
+        const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,
@@ -72,7 +72,7 @@ router.post("/register/:id", async (req, res) => {
       try {
        
         const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt);
+        const hashedPassword = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,
@@ -124,7 +124,7 @@ case "member":
       try {
        
         const salt = bcrypt.genSaltSync(10);
-        const cryptedPasswrod = bcrypt.hashSync(password, salt);
+        const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,

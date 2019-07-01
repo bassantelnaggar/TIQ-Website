@@ -163,9 +163,9 @@ class tryme extends React.Component {
       width:'100%',
       lineHeight: '1',
       fontWeight: 'bold',
-      textShadow: '2px 2px 4px #000000b3',
+      // textShadow: '2px 2px 4px #000000b3',
       fontSize:'70px',
-      fontFamily: 'Carter One'
+      
     }
     return (
     

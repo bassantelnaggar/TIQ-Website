@@ -1,15 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import classnames from "classnames";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Axios from "axios";
@@ -19,8 +11,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Logo from "../images/debatecover.jpg";
 import { Link } from 'react-router-dom';
+
 
 const months = [
   "January",
@@ -87,6 +79,7 @@ class DebateCard extends React.Component {
       updateinfo: this.props.info,
       updatedescription: this.props.description,
       updatedate: this.props.date,
+      updatePicture: this.props.debatePicture,
       updateerror: ""
     };
   }
@@ -103,6 +96,7 @@ class DebateCard extends React.Component {
     window.location.reload();
   };
   UpdateDebate = async () => {
+    console.log(this.state.updatePicture)    
     const reply = await Axios.put(
       `/api/Debates/${this.props.id}`,
       {
@@ -110,6 +104,7 @@ class DebateCard extends React.Component {
         category: this.state.updatecategory,
         date: this.state.updatedate,
         description: this.state.updatedescription,
+        debatePicture:this.state.updatePicture,
         info: this.state.updateinfo
       }
     );
@@ -122,7 +117,26 @@ class DebateCard extends React.Component {
       [name]: event.target.value
     });
   };
-
+  onChange = e =>  {
+    var file = e.target.files[0];
+    console.log( e.target.files[0])
+    var formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "zcwrt7qz");
+  
+    Axios
+      .post(
+        "https://api.cloudinary.com/v1_1/dpny1nhaq/image/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        }
+      )
+      .then(res=>this.setState({updatePicture:res.data.secure_url}))     
+}
+        
   render() {
     const { classes } = this.props;
     if (this.props.auth) {
@@ -132,10 +146,26 @@ class DebateCard extends React.Component {
             open={this.state.updateOpen}
             onClose={this.handleUpdateClick}
             aria-labelledby="form-dialog-title"
+           
           >
             <DialogTitle id="form-dialog-title">Update Debate</DialogTitle>
             <DialogContent>
-              <TextField
+               <label class="image fit">
+               <img  src={this.state.updatePicture} style={{objectFit:"cover",height:"220px"}}/> 
+               </label>
+              <input 
+               id="file-input"
+               accept=".jpg,.png"
+               type="file" 
+               onChange={this.onChange.bind(this)} 
+               color="black"
+               style={{opacity:"0",marginLeft:'35%',marginBottom:"-10%"}}
+               
+               />
+               <EditIcon label="Edit Photo" style={{marginLeft:"90%",marginTop:"-20%"}}/>
+               <p style={{marginTop:"-10%"}}/>
+                {/* <button label="Edit Photo" style={{textDecorationColor:"black",fontColor:"black",opacity:"100",marginLeft:'55%',marginTop:"-20%"}}/> */}
+              <TextField styles={{marginTop:"-20%"}}
                 // autoFocus
                 margin="dense"
                 id="updatetitle"
@@ -151,12 +181,12 @@ class DebateCard extends React.Component {
                 defaultValue={this.props.category}
                 onChange={this.handleChange("updatecategory")}
               />
-              <TextField
+              <TextField 
                 autoFocus
                 margin="dense"
                 id="updatedescription"
                 multiline
-                label="Description"
+                label="Background"
                 defaultValue={this.props.description}
                 onChange={this.handleChange("updatedescription")}
               />
@@ -165,7 +195,7 @@ class DebateCard extends React.Component {
                 margin="dense"
                 id="updateinfo"
                 multiline
-                label="Info"
+                label="Description"
                 onChange={this.handleChange("updateinfo")}
                 defaultValue={this.props.info}
               />
@@ -182,6 +212,7 @@ class DebateCard extends React.Component {
                   shrink: true
                 }}
               />
+              
               <Typography paragraph>{this.state.updateerror}</Typography>
             </DialogContent>
             <DialogActions>
@@ -193,10 +224,16 @@ class DebateCard extends React.Component {
               </Button>
             </DialogActions>
           </Dialog>
-                <div class="box">
-                  <Link to={"/test/" + this.props.id} class="image fit">
-                    <img src={Logo} alt="" />
-                  </Link>
+                <div class="box" >
+              <picture>
+              <div class="image-upload">
+              <label for="file-input" class="image fit">
+              <img src={this.props.debatePicture} style={{objectFit:"cover",height:"220px"}}/> 
+              </label> 
+              <input id="file-input"  display="cover"/>
+              
+              </div>
+              </picture>
                   <div class="inner">
                     <h3>{this.props.title}</h3>
                     <p> {this.props.category} </p>
@@ -218,78 +255,16 @@ class DebateCard extends React.Component {
     } else {
       return (
         <>
-          <Dialog
-            open={this.state.updateOpen}
-            onClose={this.handleUpdateClick}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Update Debate</DialogTitle>
-            <DialogContent>
-              <TextField
-                // autoFocus
-                margin="dense"
-                id="updatetitle"
-                label="Title"
-                onChange={this.handleChange("updatetitle")}
-                defaultValue={this.props.title}
-              />
-              <TextField
-                // autoFocus
-                margin="dense"
-                id="updatecategory"
-                label="Category"
-                defaultValue={this.props.category}
-                onChange={this.handleChange("updatecategory")}
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="updatedescription"
-                multiline
-                label="Description"
-                defaultValue={this.props.description}
-                onChange={this.handleChange("updatedescription")}
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="updateinfo"
-                multiline
-                label="Info"
-                onChange={this.handleChange("updateinfo")}
-                defaultValue={this.props.info}
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="updateinfo"
-                type="date"
-                label="Date"
-                className={classes.textField}
-                defaultValue={this.props.date}
-                onChange={this.handleChange("updatedate")}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
-              <Typography paragraph>{this.state.updateerror}</Typography>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleUpdateClick} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={() => this.UpdateDebate()} color="primary">
-                Update
-              </Button>
-            </DialogActions>
-          </Dialog>
           <div class="box">
-                  <Link to={"/test/" + this.props.id} class="image fit">
-                    <img src={Logo} alt="" />
-                  </Link>
+                   <div class="image-upload">
+              <label for="file-input" class="image fit">
+                <img class="image fit" src={this.props.debatePicture} style={{objectFit:"cover",height:"220px"}}/> 
+              </label> 
+              <input id="file-input" display="cover"/>
+              
+              </div>
                   <div class="inner">
                     <h3>{this.props.title}</h3>
-                    {/* <p>{debate.info} </p> */}
                     <p> {this.props.category} </p>
                     {/* <p>{debate.date} </p> */}
                     <Link to={"/test/" + this.props.id} class="button">

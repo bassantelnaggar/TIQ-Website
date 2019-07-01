@@ -58,6 +58,7 @@ router.put('/:id', (req, res) => {
         category: joi.string(),
         date: joi.date(),
         description: joi.string(),
+        debatePicture:joi.string(),
         info: joi.string()
     }
     const result = joi.validate(req.body, schema)
@@ -98,8 +99,6 @@ router.get('/searchbydate/:date', async (req,res)=>{
     return res.json({data:dbs})
 
 })
-
-
 
 
 //TIQ users should be able to search for a debate by category
