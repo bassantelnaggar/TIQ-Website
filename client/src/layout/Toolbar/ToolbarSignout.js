@@ -24,7 +24,7 @@ const toolbar = props => (
     <nav className="toolbar__navigation">
       <div />
       <div className="toolbar__logo">
-        <Link to="/TIQHome">TIQ TIQ</Link>
+        <Link to="/TIQHome" style={{fontWeight:"bold", fontSize:"40px", marginLeft:"20%",marginBottom:"10px"}}>TIQ </Link>
       </div>
       <div className="spacer" />
       <div className="toolbar_navigation-items">
@@ -48,7 +48,9 @@ const toolbar = props => (
           <li>
             <Link to="/debates">Debates</Link>
           </li>
-          
+          <li>
+            <Link to="/DisciplesProgram">Disciples</Link>
+          </li>
           <li>
             <Link to="/getUsers">Debaters</Link>
           </li>
