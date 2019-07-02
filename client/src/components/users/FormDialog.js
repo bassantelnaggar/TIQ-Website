@@ -75,7 +75,7 @@ class FormDialog extends React.Component {
   
   constructor(props) {
     super(props);
-    this.state = {
+   this.state = {
       open: false,
       din: this.props.user.din,
       dor: this.props.user.dor,
@@ -137,12 +137,14 @@ class FormDialog extends React.Component {
         >
           <DialogTitle class="form-dialog-title ">Update Profile</DialogTitle>
           <DialogContent>
+          <form className={classes.form} >
+
           {this.props.user.type=="member" &&<div>
               {/* member */}
               <FormControl margin="normal"  fullWidth>
               <InputLabel htmlFor="house"> </InputLabel>
               <TextField 
-                id="standard-select-currency"
+                id="outlined-select-currency"
                 select
                 className={classes.textField}
                 name="house"
@@ -185,7 +187,7 @@ class FormDialog extends React.Component {
             <FormControl margin="normal"  fullWidth>
               <InputLabel htmlFor="tiqStatus"> </InputLabel>
                 <TextField 
-                id="standard-select-currency"
+                id="outlined-select-currency"
                 select
                 className={classes.textField}
                 name="tiqStatus"
@@ -208,10 +210,9 @@ class FormDialog extends React.Component {
                 ))}
             </TextField>
             </FormControl>
-            <FormControl margin="normal"  fullWidth>
-              <InputLabel htmlFor="supervisorType"></InputLabel>
-              <TextField 
-                id="standard-select-currency"
+            <FormControl margin="normal"  fullWidth>  
+              <TextField  
+                id="outlined-select-currency"
                 select
                 className={classes.textField}
                 name="supervisorType"
@@ -338,7 +339,8 @@ class FormDialog extends React.Component {
             </FormControl>
 
             </div>}
- 
+            </form>
+
             <Typography paragraph>{this.state.Error}</Typography> */}
           </DialogContent>
           <DialogActions>
@@ -353,6 +355,7 @@ class FormDialog extends React.Component {
             <Button  onClick={this.props.update.bind(this,this.props.user._id,this.state.type,this.state.house,this.state.din,this.state.dor,this.state.tiqStatus,this.state.supervisorType,this.state.score)} color="black">
               UPDATE
             </Button>
+            
           </DialogActions>
         </Dialog>
       </div>
