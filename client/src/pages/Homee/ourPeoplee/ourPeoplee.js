@@ -25,11 +25,7 @@ class ourPeople extends Component {
            {/* <div class="row"> */}
             <div class="thecard">
               <div class="thefront">
-                {/* <div style={{this.props.user.house == "Orion"? "class="+"background-orion-img":"class="+"background-pegasus-img"}}</div> */}
-
-                {/* <div class="background-orion-img">
-                  <img src={orion} />
-                </div> */}
+                
                 <div class="profile-img-front">
                   <img src={pic5} />
                 </div>
@@ -43,21 +39,42 @@ class ourPeople extends Component {
 
               <div class="theback">
                 <div class="content-back">
+
                   {this.props.user.birthDate}
                   <br />
 
                   {this.props.user.email}
                   <br />
-
-                  {this.props.user.clubs}
-                  <br />
-                  {this.props.user.house}
-                  <br />
                   {this.props.user.bio}
                   <br />
-                  {this.props.user.din}
-                  <br />
-                  {this.props.user.dor}
+                {this.props.user.type=="member" &&  <div>
+                {this.props.user.house}
+                <br />
+                {this.props.user.din}
+                <br />
+
+                {this.props.user.tiqStatus}
+                <br />
+
+                {this.props.user.supervisorType}
+      
+                  </div>}
+                 
+                  {this.props.user.type=="alumni" &&  <div>
+                {this.props.user.house}
+                <br />
+                {this.props.user.din}
+                <br />
+
+                {this.props.user.dor}
+                
+      
+                  </div>}
+                  {this.props.user.type=="disciple" &&  <div>
+                {this.props.user.house}
+               
+                  </div>}
+                  
                 </div>
 
                 <div className="btns">
@@ -99,21 +116,40 @@ class ourPeople extends Component {
 
               <div class="theback">
                 <div class="content-back">
-                  {this.props.user.birthDate}
+                  
+                {this.props.user.birthDate}
                   <br />
 
                   {this.props.user.email}
                   <br />
-
-                  {this.props.user.clubs}
+                  {this.props.user.bio !=="" && <div>
+                    {this.props.user.bio}
                   <br />
-                  {this.props.user.house}
+                  </div>}
+                  {this.props.user.house !=="" && <div>
+                    {this.props.user.house}
                   <br />
-                  {this.props.user.bio}
+                  </div>}
+                  {this.props.user.din !=="" && <div>
+                    {this.props.user.din}
                   <br />
-                  {this.props.user.din}
+                  </div>}
+                  {this.props.user.dor !=="" && <div>
+                    {this.props.user.dor}
                   <br />
-                  {this.props.user.dor}
+                  </div>}
+                  {this.props.user.tiqStatus !=="" && <div>
+                    {this.props.user.tiqStatus}
+                  <br />
+                  </div>}
+                  {this.props.user.supervisorType !=="" && <div>
+                    {this.props.user.supervisorType}
+                  <br />
+                  </div>}
+                 
+                  
+                
+                  
                 </div>
                 <div className="btns">
                   <DeleteIcon

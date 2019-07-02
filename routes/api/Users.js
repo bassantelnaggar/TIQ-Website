@@ -14,13 +14,38 @@ const discipleValidator = require("../../validations/disciplevalidations");
 const parentValidator = require("../../validations/parentValidations");
 const nodemailer = require("nodemailer")
 
-const transpoter = nodemailer.createTransport({
-  service:'Gmail',
-  auth:{
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS
-  }
-})
+
+function sendmessage(message,user) {
+  const transporter = nodemailer.createTransport({
+    service:'gmail',
+    secure:false,
+    port:25,
+    auth:{
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS
+    },
+    tls:{
+      rejectUnauthorized: false
+    }
+  })     
+  let HelperOptions = {  
+    from:process.env.GMAIL_USER,
+    to: user.email,
+    subject:'TIQ',
+    text:message
+  };
+  transporter.sendMail(HelperOptions,(error,info) => {
+    if (error){
+      console.log(error)
+    }
+    else {
+      console.log("The message has been sent ");      
+    }
+  });  
+}
+
+
+
 
 router.get('/search/:keyWord',async(req,res)=>{
   const keyWord=req.params.keyWord
@@ -42,19 +67,29 @@ router.put("/Profile/:id",async(req,res)=>{
     console.log("error");
   }
 })
-
+router.get('/search/:keyWord',async(req,res)=>{
+  const keyWord=req.params.keyWord
+  const userr = await User.find({ "firstName" : { $regex: keyWord, $options: 'i' } } )
+  if(userr.length===0) return res.status(404).send({error: 'User with that keyword does not exist'})
+  return res.json({data:userr})
+       
+  })
 router.post("/register/:id", async (req, res) => {
   const id = req.params.id;
   const signedUp = await SignedUp.findOne({ _id: id });
+  sendmessage("You have been accepted in the TIQ website you can browse throught the website NOW!",signedUp)
+  const deleted= await SignedUp.findByIdAndRemove({ _id: id });
   const t = signedUp.type;
+  console.log("2222 : "+process.env.GMAIL_USER);
 
+  console.log("1111 : "+signedUp.email);
   switch (t) {
 
     case "disciple":
       try {
            
         const salt = bcrypt.genSaltSync(10);
-        const cryptedPasswrod = bcrypt.hashSync(password, salt);
+        const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,
@@ -80,7 +115,7 @@ router.post("/register/:id", async (req, res) => {
       try {
        
         const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt);
+        const hashedPassword = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,
@@ -132,7 +167,7 @@ case "member":
       try {
        
         const salt = bcrypt.genSaltSync(10);
-        const cryptedPasswrod = bcrypt.hashSync(password, salt);
+        const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,
@@ -151,29 +186,22 @@ case "member":
 
         console.log(error);
       }
-  
-      try {
-        const deleted= await SignedUp.findByIdAndRemove({ _id: id });
-        res.json({ msg: "User was deleted successfully", data: deleted });
-        await transpoter.sendmail({
-          to: deleted.email,
-          subject: 'TIQ Acceptance',
-          html: 'You have been accepted in the TIQ website you can browse throught the website NOW!'
-        })
-      } catch (error) {
-        console.log(error);
-      }
-
+    }
+        
+     
   }
 
-});
+);
 
 //get all users
 
 router.get("/", async (req, res) => {
   const users = await user.find();
+  users.sort((a, b) => (a.score > b.score) ? 1 : -1)
+  users.reverse();
   res.json({ data: users });
 });
+
 
 //uppdate scores dynamically
 router.put("/updateScores/:id/:score", async (req, res) => {
@@ -274,7 +302,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.put("update/admin/:id",async (req,res)=>{
+router.put("/update/admin/:id",async (req,res)=>{
   const userId = req.params.id;
   const getuser = await user.findOne({ _id: userId });
   if (!getuser) return res.status(404).send({ error: "User does not exist" });
@@ -313,7 +341,7 @@ router.put("update/admin/:id",async (req,res)=>{
         }
 
         case"member":
-      try{
+     try{
         const isMemberValidatedAdmin=userValidator.updateValidationAdmin(req.body);
   
         if (isMemberValidatedAdmin.error)

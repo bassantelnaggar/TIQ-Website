@@ -4,11 +4,16 @@ import DisciplesPrograms from './DisciplesPrograms';
 // import uuid from 'uuid';
 import axios from 'axios';
 import Toolbar from "../../layout/Toolbar/Toolbar";
+import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import AddDisciplesProgram from './AddDisciplesProgram';
 import SimplePopper from './SimplePopper';
 import UpdateSimpleSnackbar from './UpdateSimpleSnackbar.';
 import CreateSimpleSnackbar from './CreateSimpleSnackbar';
 import DelSimpleSnackbar from './DelSimpleSnackbar';
+import { connect } from "react-redux";
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 class DisciplesProgram extends Component {
   
   state = {
@@ -103,6 +108,7 @@ updateDisciplesProgram = (id,title,description,duration,location,price,year,imag
 //     this.state.linkundo );
 // }
   render() {
+    if (this.props.token === null) {
     return (
       
         
@@ -123,8 +129,35 @@ updateDisciplesProgram = (id,title,description,duration,location,price,year,imag
         </div>
       
     );
+    }
+    else{
+      return (
+      
+        
+        <div className="App">
+        <ToolbarOUT/>
+          <div>
+       
+        <SimplePopper addDisciplesProgram={this.addDisciplesProgram} undo={this.undo}/>
+        <br></br>
+            <DisciplesPrograms disciplesPrograms={this.state.disciplesPrograms}
+             delDisciplesProgram={this.delDisciplesProgram} addDisciplesProgram={this.addDisciplesProgram}
+            updateDisciplesProgram={this.updateDisciplesProgram} />
+          </div>  
+          {this.state.deleted && <DelSimpleSnackbar change1={this.change1} undo={this.undo} /> }
+          {this.state.updated && <UpdateSimpleSnackbar change1={this.change1} undo={this.undo} /> }
+          {this.state.created && <CreateSimpleSnackbar change1={this.change1} undo={this.undo} /> }
+          
+        </div>
+      
+    );
+    }
 
   }
 }
+const Form = connect(
+  mapStateToProps,
+  null
+)(DisciplesProgram);
 
-export default DisciplesProgram;
+export default Form;

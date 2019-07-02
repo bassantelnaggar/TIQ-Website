@@ -13,13 +13,34 @@ const user = require("../../models/User");
 const userValidator = require("../../validations/userValidations");
 const nodemailer = require("nodemailer")
 
-const transpoter = nodemailer.createTransport({
-  service:'Gmail',
-  auth:{
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS
-  }
-})
+function sendmessage(message,user) {
+  const transporter = nodemailer.createTransport({
+    service:'gmail',
+    secure:false,
+    port:25,
+    auth:{
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS
+    },
+    tls:{
+      rejectUnauthorized: false
+    }
+  })     
+  let HelperOptions = {  
+    from:process.env.GMAIL_USER,
+    to: user.email,
+    subject:'TIQ',
+    text:message
+  };
+  transporter.sendMail(HelperOptions,(error,info) => {
+    if (error){
+      console.log(error)
+    }
+    else {
+      console.log("The message has been sent ");      
+    }
+  });  
+}
 
 router.post("/signUp", async (req, res) => {
   const Email = req.body.email;
@@ -215,21 +236,13 @@ router.get('/:id', async(request, response) => {
 
 
  router.delete('/:id', async(req, res) => {
-    try {
+   
+  try {
         const id = req.params.id
+        const signedUp = await SignedUp.findOne({ _id: id });
+        sendmessage("Unfortunely you have been rejected from TIQ...better luck next time!",signedUp)
         const deletedSignUp = await SignedUp.findByIdAndRemove(id)
         res.json({ data: deletedSignUp})
-        try {
-          const deleted= await SignedUp.findByIdAndRemove({ _id: id });
-          res.json({ msg: "User was deleted successfully", data: deleted });
-          await transpoter.sendmail({
-            to: deleted.email,
-            subject: 'TIQ Acceptance',
-            html: 'Unfortunetly you have been declined from the TIQ Website'
-          })
-        } catch (error) {
-          console.log(error);
-        }
 
        }
        catch(error) {
