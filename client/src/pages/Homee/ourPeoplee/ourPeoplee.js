@@ -27,7 +27,7 @@ class ourPeople extends Component {
               <div class="thefront">
                 
                 <div class="profile-img-front">
-                  <img src={pic5} />
+                  <img src={this.props.user.profilePicture} />
                 </div>
 
                 <h class="h1">{this.props.user.firstName}</h>
@@ -106,7 +106,7 @@ class ourPeople extends Component {
                   <img src={pegasus} />
                 </div> */}
                 <div class="profile-img-front">
-                  <img src={pic5} />
+                  <img src={this.props.user.profilePicture} />
                 </div>
                 <h class="h1">{this.props.user.firstName}</h>
                 <h class="h1">{this.props.user.lastName}</h>
@@ -183,7 +183,7 @@ class ourPeople extends Component {
              <img src={pegasus} />
            </div> */}
            <div class="profile-img-front">
-             <img src={pic5} />
+             <img src={this.props.user.profilePicture} />
            </div>
            <h class="h1">{this.props.user.firstName}</h>
            <h class="h1">{this.props.user.lastName}</h>

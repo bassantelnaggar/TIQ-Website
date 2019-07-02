@@ -82,7 +82,7 @@ class test extends Component {
             
                   <>
                     <div class="imgBx">
-                        <img src={news}/>
+                        <img src={this.state.debate.debatePicture}/>
                     </div>
                     <div class="storyBx">
                         <h2>{this.state.debate.title}</h2>
