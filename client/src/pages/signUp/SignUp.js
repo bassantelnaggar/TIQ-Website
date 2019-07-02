@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -12,11 +10,10 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Navbar from "../components/layout/Navbar"
-import Toolbar from "../layout/Toolbar/Toolbar";
-import { red } from "@material-ui/core/colors";
+import Toolbar from "../../layout/Toolbar/Toolbar";
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Link } from 'react-router-dom'
 
 const types=[{
   value: 'member',
@@ -37,6 +34,7 @@ const types=[{
 const status=["House Leader","BOA","Supervisor","Disciples House Leader"]
 const houses=["Pegasus","Orion","Neutral"];
 const supervisor=["Marketing","Fundraising","Logistics","Relations","Media Design"]
+
 const styles = theme => ({
   main: {
     width: "auto",
@@ -84,7 +82,8 @@ class SignUp extends React.Component {
     din: "",
     dor: "",
     tiqStatus:"",
-    supervisorType:""
+    supervisorType:"",
+    redirect:"false"
   };
   required = ( type,firstName, lastName, birthDate,bio,email, password,house,din,dor,tiqStatus,supervisorType) => {
     if(firstName=="" || lastName=="" || birthDate=="" ||email=="" ||password==""){
@@ -99,7 +98,15 @@ class SignUp extends React.Component {
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
+  redirect =() => {
+    return  <Link to="/TIQHome" /> 
+    };
+  // redirect2 =() => {
+  //   if(this.state.redirect=="true")
+  //    return  <Link to="/" /> 
+  //   //this.setState({redirect:"false"})
 
+  // };
   render() {
     const { classes } = this.props;
     return (
@@ -222,9 +229,8 @@ class SignUp extends React.Component {
               />
             </FormControl>
            {this.state.type=="alumni" && <div>              {/* alumni */}
-            <FormControl margin="normal"  fullWidth>
+           <FormControl margin="normal"  fullWidth>
               <InputLabel htmlFor="house"> </InputLabel>
-              <Input required>
               <TextField required
                 id="standard-select-currency"
                 select
@@ -247,8 +253,7 @@ class SignUp extends React.Component {
                     {option}
                   </MenuItem>
                 ))}
-            </TextField>
-            </Input>
+      </TextField>
             </FormControl>
             <FormControl margin="normal"  fullWidth>
               <InputLabel htmlFor="din"> </InputLabel>
@@ -413,33 +418,61 @@ class SignUp extends React.Component {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
+            <br></br>
+           <Link fullWidth variant="contained" class="button"  style = {{background: '#410c12'}} 
+           onClick={
+            this.props.addUser.bind(
+                    this,
+                    this.state.type,
+                    this.state.firstName,
+                    this.state.lastName,
+                    this.state.birthDate,
+                    this.state.bio,
+                    this.state.email,
+                    this.state.password,
+                    this.state.house,
+                    this.state.din,
+                    this.state.dor,
+                    this.state.tiqStatus,
+                    this.state.supervisorType
+                  )}
+                   >
+                 DEBATE NOW!
+              </Link>
+
+            {/* <Button
               fullWidth
               style = {{background: '#410c12'}}
               variant="contained"
               // color="primary"
               //href="/signin"
-              onClick={
+              onClick={() => 
+                
+                this.redirect()
+
+                //  function(event){
+                  // this.props.addUser.bind(
+                  //   this,
+                  //   this.state.type,
+                  //   this.state.firstName,
+                  //   this.state.lastName,
+                  //   this.state.birthDate,
+                  //   this.state.bio,
+                  //   this.state.email,
+                  //   this.state.password,
+                  //   this.state.house,
+                  //   this.state.din,
+                  //   this.state.dor,
+                  //   this.state.tiqStatus,
+                  //   this.state.supervisorType
+                  // );
+               }
+                
               
-                this.props.addUser.bind(
-                this,
-                this.state.type,
-                this.state.firstName,
-                this.state.lastName,
-                this.state.birthDate,
-                this.state.bio,
-                this.state.email,
-                this.state.password,
-                this.state.house,
-                this.state.din,
-                this.state.dor,
-                this.state.tiqStatus,
-                this.state.supervisorType
-              )
-            }
+            // }
             >
               DEBATE NOW!
-            </Button>
+            </Button> */}
           </form>
           
         </Paper>

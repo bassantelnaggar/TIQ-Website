@@ -20,7 +20,7 @@ module.exports = {
         .min(8)
         .required(),
       house: Joi.string().required().valid("Neutral","Pegasus","Orion"),
-      din: Joi.string().required(),
+      din: Joi.string().required().regex(/[1-2][0-9][0-9][0-9]\-[0-1][0-9]\-[0-3][0-9]/),
       tiqStatus:Joi.string().empty('').default('default value').valid("House Leader","BOA","Supervisor","Disciples House Leader",""),
       supervisorType:Joi.string().valid("Marketing","Fundraising","Logistics","Relations","Media Design").required() 
         };
@@ -42,7 +42,7 @@ module.exports = {
   updateValidationAdmin: request => {
     const updateValidationAdmin = {
       house: Joi.string(),
-      din: Joi.string(),
+      din: Joi.string().regex(/[1-2][0-9][0-9][0-9]\-[0-1][0-9]\-[0-3][0-9]/),
       
       tiqStatus:Joi.string().valid("House Leader","BOA","Supervisor","Disciples House Leader"), 
       supervisorType:Joi.string().valid("Marketing","Fundraising","Logistics","Relations","Media Design"),
