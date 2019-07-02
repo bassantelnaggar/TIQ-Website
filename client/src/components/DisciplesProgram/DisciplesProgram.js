@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import DisciplesPrograms from './DisciplesPrograms';
-// import uuid from 'uuid';
 import axios from 'axios';
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
@@ -10,10 +8,50 @@ import SimplePopper from './SimplePopper';
 import UpdateSimpleSnackbar from './UpdateSimpleSnackbar.';
 import CreateSimpleSnackbar from './CreateSimpleSnackbar';
 import DelSimpleSnackbar from './DelSimpleSnackbar';
+
+import { makeStyles } from '@material-ui/core/styles';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import IconButton from '@material-ui/core/IconButton';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import img from "../../pages/Homee/images/pic18.jpg"
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import { fontSize } from '@material-ui/system';
 import { connect } from "react-redux";
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
+const useStyles =theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+    
+  },
+  gridList: {
+    width: 50,
+    height: 450,
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
+  },
+  titleBar: {
+    background:
+      'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
+      'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+    opacity: '100%'
+     
+  },
+  icon: {
+    color: 'white',
+    
+  
+  }
+ 
+});
 class DisciplesProgram extends Component {
   
   state = {
@@ -29,12 +67,23 @@ class DisciplesProgram extends Component {
     priceundo:'',
     locationundo:'',
     imageundo:'',
-    linkundo:''
+    linkundo:'', 
+    loading:true,
+    disciplesPrograms2:[]
   }
 
-  componentDidMount() {
+   componentDidMount() {
     axios.get('api/DisciplesProgram')
-      .then(res => this.setState({ disciplesPrograms: res.data.data }))
+      .then(res =>{ 
+        console.log(res.data)
+        this.setState({ disciplesPrograms: res.data.data[0], loading:false })
+        res.data.data.shift()
+        this.setState({disciplesPrograms2:res.data.data})
+        console.log(this.state.disciplesPrograms2)
+      }
+    ).catch(err=>{
+      console.log(err)
+    })
   }
 
   // Delete DisciplesProgram
@@ -51,16 +100,8 @@ class DisciplesProgram extends Component {
     linkundo:link })
     this.setState({deleted:true});
 }
-  //create DisciplesProgram
-addDisciplesProgram=(title,description,duration,location,price,year,image,link) => {
-  console.log("added");
-  axios.post('/api/DisciplesProgram/', {
-    title,description,duration,location,price,year,image,link
-  })
-  .
-  then(res => this.setState({ disciplesPrograms: res.data.data }))  
-  this.setState({created:true});
-}
+
+
 undo = () => {
   this.addDisciplesProgram(
     this.state.titleundo,
@@ -96,68 +137,109 @@ updateDisciplesProgram = (id,title,description,duration,location,price,year,imag
     this.setState({updated:true});
 
 }
+handleClickME =() => {
+  this.props.history.push("/createdisciplePage");
+};
 
-//   undo=()=> {console.log("undo")
-//     addDisciplesProgram(this.state.titleundo,
-//     this.state.descriptionundo,
-//     this.state.yearundo,
-//     this.state.durationundo,
-//     this.state.priceundo,
-//     this.state.locationundo,
-//     this.state.imageundo,
-//     this.state.linkundo );
-// }
   render() {
+    const classes = useStyles;
     if (this.props.token === null) {
     return (
       
         
         <div className="App">
         <Toolbar/>
-          <div className="container">
-       
+          {/* <div>
+         
         <SimplePopper addDisciplesProgram={this.addDisciplesProgram} undo={this.undo}/>
         <br></br>
             <DisciplesPrograms disciplesPrograms={this.state.disciplesPrograms}
              delDisciplesProgram={this.delDisciplesProgram} addDisciplesProgram={this.addDisciplesProgram}
             updateDisciplesProgram={this.updateDisciplesProgram} />
+      
           </div>  
           {this.state.deleted && <DelSimpleSnackbar change1={this.change1} undo={this.undo} /> }
           {this.state.updated && <UpdateSimpleSnackbar change1={this.change1} undo={this.undo} /> }
-          {this.state.created && <CreateSimpleSnackbar change1={this.change1} undo={this.undo} /> }
+          {this.state.created && <CreateSimpleSnackbar change1={this.change1} undo={this.undo} /> } */}
           
         </div>
       
     );
     }
-    else{
+    else if(!this.state.loading){
       return (
       
         
-        <div className="App">
+        <div className="container" >
         <ToolbarOUT/>
-          <div>
-       
-        <SimplePopper addDisciplesProgram={this.addDisciplesProgram} undo={this.undo}/>
+        
+        <div>
+        <button
+            className="button"
+             background = "#202024"
+            style={{ position: "absolute", left: "20px", top: "61px" }}
+            onClick={() => {
+              this.handleClickME();
+            }}
+          >
+            CREATE NEW Disciple Program
+          </button>
+          
+      <GridList cellHeight={500} className={classes.gridList} cols={1} >
+      <GridListTile >
+            <img src={img} alt={"/"} />
+            <GridListTileBar title={this.state.disciplesPrograms.title} subtitle={this.state.disciplesPrograms.year}
+              style={{height:"15%",fontWeight:"bold",opacity:'100%'}}  >
+
+              </GridListTileBar>
+              
+
+          </GridListTile>
+          </GridList>
+          <GridList cellHeight={360} className={classes.gridList} cols={2} >
+        {this.state.disciplesPrograms2.map(disciplesProgram => (
+         
+          
+          <GridListTile  >
+            <img src={img} alt={"/"} />
+            <GridListTileBar 
+              title ={disciplesProgram.title}
+              subtitle={disciplesProgram.year}
+              actionPosition="left"
+              className={classes.titleBar}
+              style={{height:"15%",fontWeight:"bold",opacity:'100%'}} 
+            />
+          </GridListTile>
+        ))}
+      </GridList>
+    </div>
+        
+        {/* <SimplePopper addDisciplesProgram={this.addDisciplesProgram} undo={this.undo}/> */}
         <br></br>
-            <DisciplesPrograms disciplesPrograms={this.state.disciplesPrograms}
+            {/* <DisciplesPrograms disciplesPrograms={this.state.disciplesPrograms}
              delDisciplesProgram={this.delDisciplesProgram} addDisciplesProgram={this.addDisciplesProgram}
-            updateDisciplesProgram={this.updateDisciplesProgram} />
-          </div>  
-          {this.state.deleted && <DelSimpleSnackbar change1={this.change1} undo={this.undo} /> }
+            updateDisciplesProgram={this.updateDisciplesProgram} /> */}
+           
+          {/* {this.state.deleted && <DelSimpleSnackbar change1={this.change1} undo={this.undo} /> }
           {this.state.updated && <UpdateSimpleSnackbar change1={this.change1} undo={this.undo} /> }
-          {this.state.created && <CreateSimpleSnackbar change1={this.change1} undo={this.undo} /> }
+          {this.state.created && <CreateSimpleSnackbar change1={this.change1} undo={this.undo} /> } */}
           
         </div>
       
     );
     }
+    else return(
+      <div>
+        Eh ba2a
+      </div>
+    )
 
   }
-}
-const Form = connect(
-  mapStateToProps,
-  null
-)(DisciplesProgram);
 
-export default Form;
+}
+
+// const Form = connect(
+//   mapStateToProps,
+//   null
+// )(makeStyles(useStyles)(DisciplesProgram));
+export default DisciplesProgram;
