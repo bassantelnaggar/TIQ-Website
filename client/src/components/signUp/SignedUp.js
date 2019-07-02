@@ -6,8 +6,8 @@ import NavbarSignedIn from "../layout/NavbarSignedIn";
 import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
 import Navbar from "../layout/Navbar";
-
 import axios from 'axios';
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -37,11 +37,13 @@ class SignedUp extends Component {
 }
 
   accept = (id) => {
+    
     axios.post('/api/Users/register/'+id, {})
     .then(res => this.setState({ SignedUp: [...this.state.SignedUp.filter(signedUp => signedUp._id !== id)] }));
-    axios.delete('/api/SignedUp/'+id)
-    .then(res => this.setState({ SignedUp: [...this.state.SignedUp.filter(signedUp => signedUp._id !== id)] }));
+    // axios.delete('/api/SignedUp/'+id)
+    // .then(res => this.setState({ SignedUp: [...this.state.SignedUp.filter(signedUp => signedUp._id !== id)] }));
     alert("Accepted successfully!")
+
   }
   handleClick =() => {
     this.props.history.push("/signin");

@@ -20,8 +20,8 @@ module.exports = {
         .required(),
 
       house: Joi.string().required().valid("Neutral","Pegasus","Orion"),
-      din: Joi.string().required(),
-      dor: Joi.string().required(),
+      din: Joi.string().required().regex(/[1-2][0-9][0-9][0-9]\-[0-1][0-9]\-[0-3][0-9]/),
+      dor: Joi.string().required().regex(/[1-2][0-9][0-9][0-9]\-[0-1][0-9]\-[0-3][0-9]/),
     };
     return Joi.validate(request, registerAlumniSchema);
   },
@@ -38,8 +38,8 @@ module.exports = {
   updateValidationAdmin: request => {
     const updateAlumniSchemaAdmin = {
       
-      din: Joi.string(),
-      dor: Joi.string(),
+      din: Joi.string().regex(/[1-2][0-9][0-9][0-9]\-[0-1][0-9]\-[0-3][0-9]/),
+      dor: Joi.string().regex(/[1-2][0-9][0-9][0-9]\-[0-1][0-9]\-[0-3][0-9]/),
       type:Joi.string(),
       house:Joi.string().valid("Neutral","Pegasus","Orion") 
     };

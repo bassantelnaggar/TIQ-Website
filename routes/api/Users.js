@@ -12,6 +12,50 @@ const alumniValidator = require("../../validations/alumniValidations");
 const TIQadminValidator = require("../../validations/tiqAdminValidations");
 const discipleValidator = require("../../validations/disciplevalidations");
 const parentValidator = require("../../validations/parentValidations");
+const nodemailer = require("nodemailer")
+
+
+function sendmessage(message,user) {
+  const transporter = nodemailer.createTransport({
+    service:'gmail',
+    secure:false,
+    port:25,
+    auth:{
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS
+    },
+    tls:{
+      rejectUnauthorized: false
+    }
+  })     
+  let HelperOptions = {  
+    from:process.env.GMAIL_USER,
+    to: user.email,
+    subject:'TIQ',
+    text:message
+  };
+  transporter.sendMail(HelperOptions,(error,info) => {
+    if (error){
+      console.log(error)
+    }
+    else {
+      console.log("The message has been sent ");      
+    }
+  });  
+}
+
+
+
+
+router.get('/search/:keyWord',async(req,res)=>{
+  const keyWord=req.params.keyWord
+  const userr = await User.find({ "firstName" : { $regex: keyWord, $options: 'i' } } )
+  if(userr.length===0) return res.status(404).send({error: 'User with that keyword does not exist'})
+  return res.json({data:userr})
+       
+  })
+  
+
 
 router.put("/Profile/:id",async(req,res)=>{
   try{
@@ -33,8 +77,12 @@ router.get('/search/:keyWord',async(req,res)=>{
 router.post("/register/:id", async (req, res) => {
   const id = req.params.id;
   const signedUp = await SignedUp.findOne({ _id: id });
+  sendmessage("You have been accepted in the TIQ website you can browse throught the website NOW!",signedUp)
+  const deleted= await SignedUp.findByIdAndRemove({ _id: id });
   const t = signedUp.type;
+  console.log("2222 : "+process.env.GMAIL_USER);
 
+  console.log("1111 : "+signedUp.email);
   switch (t) {
 
     case "disciple":
@@ -138,15 +186,12 @@ case "member":
 
         console.log(error);
       }
-      try {
-        const deleted= await SignedUp.findByIdAndRemove({ _id: id });
-        res.json({ msg: "User was deleted successfully", data: deleted });
-      } catch (error) {
-        console.log(error);
-      }
-
+    }
+        
+     
   }
-});
+
+);
 
 //get all users
 
@@ -520,6 +565,7 @@ router.put("/update/:id", async (req, res) => {
       }
   }
 });
+
 //Authentication
 router.post("/authenticate", async (req, res) => {
   let r = {
