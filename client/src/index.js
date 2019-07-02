@@ -33,7 +33,7 @@ import "typeface-roboto";
 import { Provider } from "react-redux";
 import store from "./store";
 import SignedUp from "./components/signUp/SignedUp";
-
+import CreateDisciplePage from "./components/DisciplesProgram/createDisciple"
 import { CreateUser } from "./components/users/CreateUser";
 
 //Nada//---------------------------
@@ -79,7 +79,7 @@ ReactDOM.render(
           <Route exact path="/tryme/:key" component={tryme} />
           <Route exact path="/DisciplesProgram" component={DisciplesProgram} />
           <Route exact path="/SignedUp" component={SignedUp} />
-
+          <Route exact path="/createdisciplePage" component={CreateDisciplePage}/>
           <Route
             exact
             path="/debates/searchbydate/:date"
