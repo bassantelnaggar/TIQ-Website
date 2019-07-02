@@ -10,7 +10,11 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import ourPeopleBG from '../../pages/Homee/images/ourpeoplebg.png'
 import SearchUser from '../users/searchUser'
+import { connect } from "react-redux";
 
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 
 class GetUsers extends Component {
   constructor() {
@@ -54,6 +58,12 @@ class GetUsers extends Component {
     this.props.history.push(`getUsers/search/${
       this.state.searchkey
     }`)
+  };
+  handleClick =() => {
+    this.props.history.push("/signedUp");
+  };
+  handleClickME =() => {
+    this.props.history.push("/signin");
   };
 
   update =  (id,
@@ -120,12 +130,42 @@ class GetUsers extends Component {
   };
 
   render() {
+    const auth = this.props.usertype === "TIQadmin";
     if (this.props.token === null) {
       return (
-        <>
-        <Toolbar />
+       
+        <div>
+          <Toolbar/>
+          <div class="thumbnails">
+            <div class="box">
+              <div class="inner">
+                <h3>You have to sign in first!</h3>
+               
+                <button
+                  variant="contained"
+                  onClick={() => {
+                    this.handleClickME();
+                  }}
+                  //onClick={() => (document.location = "/signin")}
+                  className="btn"
+                >
+                  Sign In
+                </button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+    else{
+
+    if (auth) {
+    return (
+      <>
+        <ToolbarOUT />
+      
         <div className="center-div">
-          
           <h1
             style={{
               textAlign: "center",
@@ -136,42 +176,49 @@ class GetUsers extends Component {
           >
             OUR PEOPLE{" "}
           </h1>
+         
           <TextField
               id="selecteduser"
               label=  {"Search User"}
               type= "textField"
+              name="searchkey"
               value={this.state.searchkey}
               onChange={this.onChange}
-             style={{ left: "520px", top: "-150px"  }}
+             style={{ left: "520px", top: "-155px"  }}
             />
 
             <Button
               variant="extended"
-              variant="extended"
               aria-label="Search by FirstName"
               onClick={this.handleClickSearch}
-             style={{ left: "540px", top: "-140px",  background:"#333"}}
+             style={{ left: "540px", top: "-145px",  background:"#333"}}
             >
               Search User 
               <SearchIcon />
             </Button>
-            <SearchUser
-             deleteUser={this.deleteUser}
-             update={this.update}
-              />
+            
           <ul>
+          <Button
+            style={{background:"#333", left: "-660px", top: "-195px"}}
+            onClick={() => {
+              this.handleClick();
+            }}
+          >
+            Confirm New Memebers
+          </Button>
             {this.state.users && (
               <DeleteUser
                 users={this.state.users}
                 deleteUser={this.deleteUser}
+                update={this.update}
               />
             )}
           </ul>
         </div>
       </>
-      )
-    }
-    else{
+    );
+  }
+  else{
     return (
       <>
         <ToolbarOUT />
@@ -187,6 +234,7 @@ class GetUsers extends Component {
           >
             OUR PEOPLE{" "}
           </h1>
+    
           <TextField
               id="selecteduser"
               label=  {"Search User"}
@@ -221,4 +269,12 @@ class GetUsers extends Component {
   }
 }
 }
-export default GetUsers;
+}
+
+const Form = connect(
+  mapStateToProps,
+  null
+)(GetUsers);
+
+export default Form;
+// export default GetUsers;

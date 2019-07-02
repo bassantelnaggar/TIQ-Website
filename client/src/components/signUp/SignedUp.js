@@ -48,6 +48,9 @@ class SignedUp extends Component {
   handleClick =() => {
     this.props.history.push("/signin");
  };
+ handleClickME =() => {
+  this.props.history.push("/getUsers");
+};
   render() {
     //const { classes } = this.props;
     const headerStyle = {
@@ -55,7 +58,7 @@ class SignedUp extends Component {
       color: '#191b1c',
       textAlign: 'center',
        //padding: '30px',
-      position: "absolute", top: "75px",
+      position: "absolute", top: "145px",
       left: '0',
       width:'100%',
       lineHeight: '1',
@@ -79,8 +82,8 @@ class SignedUp extends Component {
                   onClick={() => {
                     this.handleClick();
                   }}
-                  //onClick={() => (document.location = "/signin")}
                   className="btn"
+                  style={{background:"#333"}}
                 >
                   Sign In
                 </button>
@@ -98,10 +101,19 @@ class SignedUp extends Component {
      
         <div >
         <ToolbarOUT />
-
+        <button
+            className="btn"
+            style={{ position: "absolute", left: "20px", top: "63px",background:"#333" }}
+            onClick={() => {
+              this.handleClickME();
+            }}
+          >
+            BACK
+          </button>
           <div>
+         
             <h1 style={headerStyle}> NEW MEMBERS <br></br>CONFIRMATION LIST </h1>      
-            <br></br> <br></br><br></br><br></br>
+            <br></br> <br></br><br></br><br></br><br></br> <br></br><br></br>
             <SignedUps  SignedUp={this.state.SignedUp} decline={this.decline} accept={this.accept} />
              
           </div>  

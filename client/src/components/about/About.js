@@ -5,6 +5,10 @@ import "./About.css"
 import Toolbar from "../../layout/Toolbar/Toolbar"
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 //import { yellowA100 } from 'material-ui/styles/colors';
+import { connect } from "react-redux";
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 class About extends Component { 
       state = {
          BOAs : [],
@@ -396,4 +400,10 @@ class About extends Component {
 
   }
 }
-    export default About  
+
+const Form = connect(
+    mapStateToProps,
+    null
+  )(About);
+  
+  export default Form;
