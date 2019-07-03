@@ -88,8 +88,6 @@ router.post("/register/:id", async (req, res) => {
     case "disciple":
       try {
            
-        const salt = bcrypt.genSaltSync(10);
-        const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,
@@ -97,7 +95,7 @@ router.post("/register/:id", async (req, res) => {
           birthDate:signedUp.birthDate,
           bio:signedUp.bio,
           email:signedUp.email,
-          password: cryptedPasswrod,
+          password: signedUp.password,
           house:signedUp.house,
           score:signedUp.score,
           din:signedUp.din,
@@ -114,8 +112,7 @@ router.post("/register/:id", async (req, res) => {
     case "alumni":
       try {
        
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(signedUp.password, salt);
+     
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,
@@ -123,7 +120,7 @@ router.post("/register/:id", async (req, res) => {
           birthDate:signedUp.birthDate,
           bio:signedUp.bio,
           email:signedUp.email,
-          password: hashedPassword,
+          password: signedUp.password,
           house:signedUp.house,
           score:signedUp.score,
           din:signedUp.din,
@@ -138,8 +135,7 @@ router.post("/register/:id", async (req, res) => {
 case "member":
       try {
        
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(signedUp.password, salt);
+        
         console.log(6);
         const newMember = new User({
           type:signedUp.type,
@@ -148,7 +144,7 @@ case "member":
           birthDate:signedUp.birthDate,
           bio:signedUp.bio,
           email:signedUp.email,
-          password: hashedPassword,
+          password: signedUp.password,
           house:signedUp.house,
           din:signedUp.din,
           dor:signedUp.dor,
@@ -166,8 +162,7 @@ case "member":
     case "parent":
       try {
        
-        const salt = bcrypt.genSaltSync(10);
-        const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
+        
         const newUser = new User({
           type:signedUp.type,
           firstName:signedUp.firstName,
@@ -175,7 +170,7 @@ case "member":
           birthDate:signedUp.birthDate,
           bio:signedUp.bio,
           email:signedUp.email,
-          password: cryptedPasswrod,
+          password: signedUp.password,
          
         });
         await User.create(newUser);
