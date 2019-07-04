@@ -59,13 +59,13 @@ class SearchDebateLive extends Component {
           <div class="thumbnails">
             {this.state.chatbars.map(chatbar => (
               <div class="box">
-                <Link to={"/addResponse/" + chatbar._id} class="image fit">
+                <Link to={"/tryme/" + chatbar._id} class="image fit">
                   <img src={Logo} alt="" />
                 </Link>
                 <div class="inner">
                   <h3>{chatbar.date}</h3>
                   <p>{chatbar.debateLiveTitle} </p>
-                  <Link to={"/addResponse/" + chatbar._id} class="btn">
+                  <Link to={"/tryme/" + chatbar._id} class="button" style={{background:"#202024 "}}>
                     Debate it Now!
                   </Link>
                 </div>
@@ -73,7 +73,32 @@ class SearchDebateLive extends Component {
             ))}
           </div>
         </div>
+        
         </div>
+        <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+       
       </>
     );
   }

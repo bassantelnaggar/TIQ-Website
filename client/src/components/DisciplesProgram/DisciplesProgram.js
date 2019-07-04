@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
 import DisciplesPrograms from './DisciplesPrograms';
 import axios from 'axios';
 import Toolbar from "../../layout/Toolbar/Toolbar";
@@ -8,18 +9,22 @@ import SimplePopper from './SimplePopper';
 import UpdateSimpleSnackbar from './UpdateSimpleSnackbar.';
 import CreateSimpleSnackbar from './CreateSimpleSnackbar';
 import DelSimpleSnackbar from './DelSimpleSnackbar';
-
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import img from "../../pages/Homee/images/pic18.jpg"
+import img from "../../pages/Homee/images/tb.png"
+import img2 from "../../pages/Homee/images/pic18.jpg"
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { fontSize } from '@material-ui/system';
 import { connect } from "react-redux";
+import "../users/profile.css"
+
+var ReactCSSTransitionGroup =  CSSTransitionGroup
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -53,33 +58,35 @@ const useStyles =theme => ({
  
 });
 class DisciplesProgram extends Component {
-  
-  state = {
-    
-    disciplesPrograms: [],
-    created:false,
-    updated:false,
-    deleted:false,
-    titleundo:'',
-    descriptionundo:'',
-    yearundo:'',
-    durationundo:'',
-    priceundo:'',
-    locationundo:'',
-    imageundo:'',
-    linkundo:'', 
-    loading:true,
-    disciplesPrograms2:[]
-  }
+ 
+    state = {
+      disciplesPrograms: [],
+      created:false,
+      updated:false,
+      deleted:false,
+      titleundo:'',
+      descriptionundo:'',
+      yearundo:'',
+      durationundo:'',
+      priceundo:'',
+      locationundo:'',
+      imageundo:'',
+      linkundo:'', 
+      loading:true,
+      disciplesPrograms2:[],
+      
+}
+
+
 
    componentDidMount() {
     axios.get('api/DisciplesProgram')
       .then(res =>{ 
         console.log(res.data)
-        this.setState({ disciplesPrograms: res.data.data[0], loading:false })
-        res.data.data.shift()
-        this.setState({disciplesPrograms2:res.data.data})
-        console.log(this.state.disciplesPrograms2)
+        this.setState({ disciplesPrograms: res.data.data, loading:false })
+        // res.data.data.shift()
+        // this.setState({disciplesPrograms2:res.data.data})
+        // console.log(this.state.disciplesPrograms2)
       }
     ).catch(err=>{
       console.log(err)
@@ -168,64 +175,60 @@ handleClickME =() => {
     }
     else if(!this.state.loading){
       return (
-      
-        
-        <div className="container" >
-        <ToolbarOUT/>
-        
         <div>
-        <button
-            className="button"
-             background = "#202024"
-            style={{ position: "absolute", left: "20px", top: "61px" }}
-            onClick={() => {
-              this.handleClickME();
-            }}
-          >
-            CREATE NEW Disciple Program
-          </button>
+        <div>
+            <ToolbarOUT />
+          </div>
+          {/* <div class="carousel" className="noselect">
+                <div className="arrow arrow-left" onClick={this.leftClick}><i className="fi-arrow-left"></i></div>
+                <ReactCSSTransitionGroup 
+                    transitionName={this.state.direction}>
+                        {this.state.disciplesPrograms.map(disciplesProgram => (
+                  
+                <div class="card" style={{ opacity: "", backgroundImage: `url(${img})`,display:"fit",  backgroundRepeat:"no-repeat"
+                ,backgroundSize:"100% 100%" }}>
+{                
+                      <h3>{disciplesProgram.title}</h3>
+                   <p>{disciplesProgram.year} </p> 
           
-      <GridList cellHeight={500} className={classes.gridList} cols={1} >
-      <GridListTile >
-            <img src={img} alt={"/"} />
-            <GridListTileBar title={this.state.disciplesPrograms.title} subtitle={this.state.disciplesPrograms.year}
-              style={{height:"15%",fontWeight:"bold",opacity:'100%'}}  >
+                </div>
+              ))}
+                   
+                </ReactCSSTransitionGroup>
+                <div className="arrow arrow-right" onClick={this.rightClick}><i className="fi-arrow-right"></i></div>
+            </div>
 
-              </GridListTileBar>
+ */}
+
+
+           <div class="inner"style={{height:"100%"}}>
+            <div class="thumbnails"style={{width:"100%",height:"70%"}} >
+              {this.state.disciplesPrograms.map(disciplesProgram => (
+                <div class="box" style={{ opacity: "", backgroundImage: `url(${img})`,display:"fit",  backgroundRepeat:"no-repeat"
+                ,backgroundSize:"100% 100%" }}>
+                
+                      <h3>{disciplesProgram.title}</h3>
+                    <p>{disciplesProgram.year} </p>
+                 
               
-
-          </GridListTile>
-          </GridList>
-          <GridList cellHeight={360} className={classes.gridList} cols={2} >
-        {this.state.disciplesPrograms2.map(disciplesProgram => (
-         
-          
-          <GridListTile  >
-            <img src={img} alt={"/"} />
-            <GridListTileBar 
-              title ={disciplesProgram.title}
-              subtitle={disciplesProgram.year}
-              actionPosition="left"
-              className={classes.titleBar}
-              style={{height:"15%",fontWeight:"bold",opacity:'100%'}} 
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
-        
-        {/* <SimplePopper addDisciplesProgram={this.addDisciplesProgram} undo={this.undo}/> */}
-        <br></br>
-            {/* <DisciplesPrograms disciplesPrograms={this.state.disciplesPrograms}
-             delDisciplesProgram={this.delDisciplesProgram} addDisciplesProgram={this.addDisciplesProgram}
-            updateDisciplesProgram={this.updateDisciplesProgram} /> */}
-           
-          {/* {this.state.deleted && <DelSimpleSnackbar change1={this.change1} undo={this.undo} /> }
-          {this.state.updated && <UpdateSimpleSnackbar change1={this.change1} undo={this.undo} /> }
-          {this.state.created && <CreateSimpleSnackbar change1={this.change1} undo={this.undo} /> } */}
-          
-        </div>
-      
+                
+                  <div class="inner">
+                    </div>
+                    <div class="inner">
+                    </div>
+                    <div class="inner">
+                    </div> 
+                     <div class="inner">
+                    </div>
+                   
+                   
+                 
+                </div>
+              ))}
+            </div>
+          </div> 
+          </div>
+  
     );
     }
     else return(

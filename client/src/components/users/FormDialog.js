@@ -341,20 +341,20 @@ class FormDialog extends React.Component {
             </div>}
             </form>
 
-            <Typography paragraph>{this.state.Error}</Typography> */}
+            <Typography paragraph>{this.state.Error}</Typography> 
           </DialogContent>
           <DialogActions>
-            <Button
-              // variant="outlined"
-              // color="primary"
-              class="Form-Dialo-Button"
+            <button 
+            class="btn" 
+            style={{background:"#333"}}
+              // class="Form-Dialo-Button"
               onClick={this.handleClose}
             >
               CANCEL
-            </Button>
-            <Button  onClick={this.props.update.bind(this,this.props.user._id,this.state.type,this.state.house,this.state.din,this.state.dor,this.state.tiqStatus,this.state.supervisorType,this.state.score)} color="black">
+            </button>
+            <button class="btn" style={{background:"#333"}}  onClick={this.props.update.bind(this,this.props.user._id,this.state.type,this.state.house,this.state.din,this.state.dor,this.state.tiqStatus,this.state.supervisorType,this.state.score)}>
               UPDATE
-            </Button>
+            </button>
             
           </DialogActions>
         </Dialog>

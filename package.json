@@ -36,6 +36,8 @@
     "nodemailer": "^6.2.1",
     "nodemon": "^1.18.11",
     "react": "^16.8.6",
+    "react-addons": "^0.9.1-deprecated",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.2",

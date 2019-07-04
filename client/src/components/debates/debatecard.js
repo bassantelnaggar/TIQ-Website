@@ -92,8 +92,8 @@ class DebateCard extends React.Component {
   };
 
   handleDeleteClick = async () => {
-    await Axios.delete(`/api/Debates/${this.props.id}`);
-    window.location.reload();
+    await Axios.delete(`/api/Debates/${this.props.id}`)
+     window.location.reload();
   };
   UpdateDebate = async () => {
     console.log(this.state.updatePicture)    

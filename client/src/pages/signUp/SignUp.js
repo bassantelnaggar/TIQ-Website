@@ -110,7 +110,7 @@ class SignUp extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      
+      <>
       <main className={classes.main}style={{width:'35%',  boxShadow: '0 0 20px #000000b3'}}>
        <Toolbar/>
         {/* <CssBaseline /> */}
@@ -419,7 +419,7 @@ class SignUp extends React.Component {
               label="Remember me"
             />
             <br></br>
-           <Link fullWidth variant="contained" class="button"  style = {{background: '#410c12'}} 
+           <Link fullWidth variant="contained" class="button"  style = {{background: '#410c12',width:'100%'}} 
            onClick={
             this.props.addUser.bind(
                     this,
@@ -437,7 +437,7 @@ class SignUp extends React.Component {
                     this.state.supervisorType
                   )}
                    >
-                 DEBATE NOW!
+                 DEBATE IT NOW!
               </Link>
 
             {/* <Button
@@ -476,7 +476,36 @@ class SignUp extends React.Component {
           </form>
           
         </Paper>
+        
       </main>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div >
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+      </>
     );
   }
 }
