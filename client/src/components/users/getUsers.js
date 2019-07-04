@@ -133,9 +133,10 @@ class GetUsers extends Component {
     const auth = this.props.usertype === "TIQadmin";
     if (this.props.token === null) {
       return (
-       
+       <>
         <div>
           <Toolbar/>
+          </div>
           <div class="thumbnails">
             <div class="box">
               <div class="inner">
@@ -155,7 +156,31 @@ class GetUsers extends Component {
               </div>
             </div>
           </div>
-        </div>
+         
+          <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+        </>
       )
     }
     else{
@@ -199,7 +224,7 @@ class GetUsers extends Component {
             
           <ul>
           <Button
-            style={{background:"#333", left: "-660px", top: "-195px"}}
+            style={{background:"#333", left: "-615px", top: "-195px"}}
             onClick={() => {
               this.handleClick();
             }}
@@ -215,6 +240,29 @@ class GetUsers extends Component {
             )}
           </ul>
         </div>
+        <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
       </>
     );
   }
@@ -264,6 +312,29 @@ class GetUsers extends Component {
             )}
           </ul>
         </div>
+        <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
       </>
     );
   }

@@ -81,6 +81,9 @@ class InputAdornments extends React.Component {
   handleClick33 = () => {
     this.props.history.push("/createuser");
   };
+  handleClickME =() => {
+    this.props.history.push("/ForgotPassword");
+ };
   handleClick = async event => {
     const Users = await axios.post("/api/Users/authenticate", {
       email: this.state.email,
@@ -172,7 +175,9 @@ class InputAdornments extends React.Component {
                     fullWidth
                     variant="contained"
                     color="primary"
-                    href="/ForgotPassword"
+                    onClick={() => {
+                      this.handleClickME();
+                    }}
                   >
                     Forgot Password
                   </Button>
@@ -181,7 +186,7 @@ class InputAdornments extends React.Component {
                   </Typography>
                   <Grid container>
                     <Grid item>
-                      <Link href="/createuser" variant="body2">
+                      <Link to="/createuser" variant="body2">
                         {"Don't have an account? Sign Up"}
                       </Link>
                     </Grid>
@@ -191,6 +196,29 @@ class InputAdornments extends React.Component {
             </Grid>
           </Grid>
         </div>
+        <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div >
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
       </div>
     );
   }

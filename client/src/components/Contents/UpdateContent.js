@@ -36,9 +36,17 @@ export class UpdateContent extends Component {
             onChange={this.onChange}
           />
           <br></br>
-        <button onClick={this.props.updateContent.bind(this, {_id: this.props.content._id, date:this.state.name, description: this.state.description,type:this.state.type})}>
+          <input 
+                 type="Submit" 
+                 value="Update"
+                 className="btn"
+                 onClick={this.props.updateContent.bind(this, {_id: this.props.content._id, date:this.state.name, description: this.state.description,type:this.state.type})}
+                 style={{flex: '10'}}
+                  />
+        {/* <button class="btn" 
+         onClick={this.props.updateContent.bind(this, {_id: this.props.content._id, date:this.state.name, description: this.state.description,type:this.state.type})}>
         UPDATE
-        </button>
+        </button> */}
         </div>
     )
   }
