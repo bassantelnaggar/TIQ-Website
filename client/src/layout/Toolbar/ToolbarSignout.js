@@ -48,9 +48,9 @@ const toolbar = props => (
           <li>
             <Link to="/debates">Debates</Link>
           </li>
-          {/* <li>
+          <li>
             <Link to="/DisciplesProgram">Disciples</Link>
-          </li> */}
+          </li>
           <li>
             <Link to="/getUsers">Debaters</Link>
           </li>

@@ -45,7 +45,7 @@ export class Score extends Component {
           <ToolbarOUT />
 
           <main className="Score__page" style={{ marginTop: "64px" }}>
-            <header>Debaters Scores!!</header>
+            <header> <br></br> </header>
           </main>
 
           <CustomizedTable UpdateScore={this.UpdateScore} scores={this.state.scores} />
