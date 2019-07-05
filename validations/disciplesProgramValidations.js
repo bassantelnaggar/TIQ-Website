@@ -21,7 +21,7 @@ module.exports = {
             description: Joi.string(),
             year: Joi.string(),
             duration: Joi.string(),
-            price: Joi.number(),
+            price: Joi.string(),
             location:Joi.string(),
             image:Joi.string(),
             link:Joi.string(),
