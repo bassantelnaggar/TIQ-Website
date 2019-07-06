@@ -21,7 +21,7 @@ export class AddFaq extends Component {
         <input
           type="text"
           name="question"
-          style={{ left:"25%",position:'relative',flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#black",color:"black",width:'50%' }}
+          style={{ left:"14%",position:'relative',flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#black",color:"black",width:'50%' }}
           placeholder="Add Question ..."
           value={this.state.question}
           onChange={this.onChange}
@@ -30,7 +30,7 @@ export class AddFaq extends Component {
         <input
           type="text"
           name="answer"
-          style={{ left:"25%",position:'relative',flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#black",color:"black",width:'50%' }}
+          style={{ left:"14%",position:'relative',flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#black",color:"black",width:'50%' }}
           placeholder="Add Answer ..."
           value={this.state.answer}
           onChange={this.onChange}
@@ -40,7 +40,7 @@ export class AddFaq extends Component {
           type="submit"
           value="Submit"
           className="btn"
-          style={{flex: '1',width:'25%',left:"38%",position:'absolute'}}
+          style={{flex: '1',width:'25%',left:"26%",position:'absolute'}}
           // style={{backgroundColor:"#70c7be"}}
           />
       </form>

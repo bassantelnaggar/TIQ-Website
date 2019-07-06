@@ -7,6 +7,8 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
+import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const styles = theme => ({
   root: {
@@ -52,24 +54,26 @@ handleClick = event => {
    const { expanded } = this.state;
     return (
   
-        <div className={classes.root} style={{marginLeft:"380px"}} >
-          <ExpansionPanel  style={expanded?panelStyle:panelStyle} expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
-            < >
-              <Typography className={classes.heading} style={expanded?questionOpen:questionOpen} > <br></br>{"Question: "}<q style={{color:"black"}}>{question}</q> 
-              <br></br><br></br><br></br>
-              <form>
+      <div className={classes.root} style={{marginLeft:"200px"}} >
+      <ExpansionPanel  style={expanded?panelStyle:panelStyle} expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography className={classes.heading} style={expanded?questionOpen:questionOpen} > <br></br>{"Question: "}<p style={{color:"black"}}>{question} </p></Typography>
+        </ExpansionPanelSummary >
+        
+        <form>
               <label>
                     <input 
                         type="text"
                         name='answer'
                         value={this.state.answer} 
                         placeholder="Add Answer ..."
-                        style={{backgroundColor:'#efefef'}}
+                        style={{backgroundColor:'#efefef',width:'70%',marginLeft:'30px'}}
                         onChange={this.onChange}/>
 
                 </label>
             </form>
-            </Typography>
+          <ExpansionPanelActions>
+        
             <button
             className="button"
              background = "#202024"
@@ -87,40 +91,12 @@ handleClick = event => {
           >
            Delete 
           </button> 
-              <br></br><br></br>
-            </>
-          
-           </ExpansionPanel>
-           
-           </div>
-     
+      </ExpansionPanelActions>
+       </ExpansionPanel>
+       </div>
+    
       )
-      // <div >
-      //   <p style={questionStyle}>
-      //       { question }
-      //       <br></br>
-      //   </p>
-      //       <form>
-                
-            //     <label>
-            //         <input 
-            //             type="text"
-            //             name='answer'
-            //             value={this.state.answer} 
-            //             placeholder="Add Answer ..."
-            //             style={{backgroundColor:'#efefef'}}
-            //             onChange={this.onChange}/>
-
-            //     </label>
-                
-            // </form>
-      //       <button    onClick={this.props.answerQuestion.bind(this,_id,this.state.answer)} >Answer</button>
-           
-          
-      //     <IconButton className={"classes"} aria-label="Delete"  onClick={this.props.delQuestion.bind(this,this.props.question._id)}>
-      //     <DeleteIcon/> 
-      //     </IconButton>
-      // </div>
+     
    
   }
 }
