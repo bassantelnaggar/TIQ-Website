@@ -257,7 +257,7 @@ router.put("/updatePasswordViaEmail", async (req, res) => {
   );
   const ID = user._id;
 
-  if (user == null) {
+  if (!user) {
     console.error("password reset link is invalid or has expired");
     res.status(403).send("password reset link is invalid or has expired");
   } else if (user != null) {
