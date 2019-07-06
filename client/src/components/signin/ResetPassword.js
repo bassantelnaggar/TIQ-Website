@@ -21,7 +21,7 @@ export default class ResetPassword extends Component {
     super();
 
     this.state = {
-      username: "",
+      email: "",
       password: "",
       updated: false,
       isLoading: true,
