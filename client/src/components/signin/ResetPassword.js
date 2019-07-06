@@ -82,7 +82,7 @@ export default class ResetPassword extends Component {
       });
 
       const response = await axios
-        .put("/updatePasswordViaEmail", {
+        .put("/api/ForgotPassword/updatePasswordViaEmail", {
           email: this.state.email,
           password: this.state.password,
           resetPasswordToken: this.props.match.params.token
@@ -136,7 +136,7 @@ export default class ResetPassword extends Component {
     return (
       <div>
         <div title={title} />
-        <form className="password-form" onSubmit={this.updatePassword}>
+        <form className="password-form">
           <TextField
             id="password"
             label="password"
@@ -144,7 +144,11 @@ export default class ResetPassword extends Component {
             value={password}
             type="password"
           />
-          <Button buttonText="Update Password" />
+          <Button
+            style={{ background: "black" }}
+            buttonText="Update Password"
+            onSubmit={this.updatePassword}
+          />
         </form>
 
         {updated && (
@@ -156,7 +160,7 @@ export default class ResetPassword extends Component {
             <Link className="button" buttonText="Login" link="/signin" />
           </div>
         )}
-        <Link className="button" to="/" />
+        {/* <Link className="button" to="/" /> */}
       </div>
     );
   }
