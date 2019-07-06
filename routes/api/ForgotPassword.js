@@ -276,7 +276,7 @@ router.put("/updatePasswordViaEmail", async (req, res) => {
     //var updatedUser = await User.findOneAndUpdate(mail, t);
     var updateUser = await User.findByIdAndUpdate(ID, body);
 
-    console.log("password updated :)");
+    console.log("password updated ");
     res.status(200).send({ message: "password updated :)" });
   } else {
     console.error("no user exists in db to update");
