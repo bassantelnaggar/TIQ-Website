@@ -52,6 +52,7 @@ class FaqUItem extends React.Component {
             </Typography>
           </ExpansionPanelDetails>
          </ExpansionPanel>
+         
          </div>
 
 
