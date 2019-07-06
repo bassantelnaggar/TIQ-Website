@@ -39,8 +39,15 @@ class FAQ extends Component {
   };
   
   componentDidMount()  {
-    axios.get('/api/FAQs')
-    .then(res => this.setState({ FAQs: res.data.data }))
+    fetch("/api/FAQs/")
+    .then(res => res.json())
+    .then(res =>
+      this.setState({ FAQs: res.data}, () =>
+        console.log("FAQs fetched...", FAQs)
+      )
+    );
+    // axios.get('/api/FAQs')
+    // .then(res => this.setState({ FAQs: res.data.data }))
   }
   handleClickWWW =() => {
     this.props.history.push("/signin");

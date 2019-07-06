@@ -49,7 +49,7 @@ class SimplePopper extends React.Component {
             className="button"
              background = "#202024"
             onClick={this.handleClick}
-            style={{marginLeft:"550px"}}
+            style={{marginLeft:"300px"}}
           >
            EDIT 
           </button>

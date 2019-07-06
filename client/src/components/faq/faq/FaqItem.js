@@ -5,6 +5,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -44,14 +45,15 @@ export class FaqItem extends Component {
    const { classes } = this.props;
     const { expanded } = this.state;
     return (
-      <div className={classes.root} style={{marginLeft:"380px"}} >
+      <div className={classes.root} style={{marginLeft:"200px"}} >
         <ExpansionPanel  style={expanded?panelStyle:panelStyle} expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
-          < >
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading} style={expanded?questionOpen:questionOpen} > <br></br>{"Question: "}<q style={{color:"black"}}>{question}  </q><br></br><br></br>{" Answer: "}<q style={{color:"black"}}>{answer} </q> </Typography>
-            <SimplePopper p={this.SimplePopper} change={this.props.change}  delfaq={this.props.delfaq}  updatefaq={this.props.updatefaq} faq={this.props.faq} />
+          </ExpansionPanelSummary >
             <br></br>
-          </>
-        
+            <ExpansionPanelActions>
+            <SimplePopper p={this.SimplePopper} change={this.props.change}  delfaq={this.props.delfaq}  updatefaq={this.props.updatefaq} faq={this.props.faq} />
+        </ExpansionPanelActions>
          </ExpansionPanel>
          </div>
    
