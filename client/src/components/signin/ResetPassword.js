@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
+import { Link } from 'react-router-dom';
+
 
 const loading = {
   margin: "1em",
@@ -32,7 +34,7 @@ export default class ResetPassword extends Component {
     console.log("doo doo doood : " + this.props.match.params.token);
 
     const response = await axios
-      .get("/reset" + this.props.match.params.token)
+      .get("/api/ForgotPassword/reset/" + this.props.match.params.token)
       .then(response => {
         console.log(response);
 
@@ -106,7 +108,7 @@ export default class ResetPassword extends Component {
   render() {
     const { password, error, isLoading, updated, showNullError } = this.state;
 
-    if (error) {
+    if (this.state.error) {
       return (
         <div>
           <div title={title} />
@@ -150,10 +152,10 @@ export default class ResetPassword extends Component {
               Your password has been successfully reset, please try logging in
               again.
             </p>
-            <Button buttonText="Login" link="/signin" />
+            <Link className="button" buttonText="Login" link="/signin" />
           </div>
         )}
-        <Button link="/" />
+        <Link className="button" to="/" />
       </div>
     );
   }

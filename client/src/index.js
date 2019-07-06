@@ -123,7 +123,7 @@ ReactDOM.render(
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signout" component={SignOut} />
           <Route exact path="/ForgotPassword" component={ForgotPassword} />
-          <Route exact path="/ResetPassword" component={ResetPassword} />
+          <Route exact path="/reset/:token" component={ResetPassword} />
 
           <Route component={Notfound} />
         </Switch>
