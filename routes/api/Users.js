@@ -93,20 +93,19 @@ router.post("/register/:id", async (req, res) => {
   switch (t) {
     case "disciple":
       try {
-        const salt = bcrypt.genSaltSync(10);
-        const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
+           
         const newUser = new User({
-          type: signedUp.type,
-          firstName: signedUp.firstName,
-          lastName: signedUp.lastName,
-          birthDate: signedUp.birthDate,
-          bio: signedUp.bio,
-          email: signedUp.email,
-          password: cryptedPasswrod,
-          house: signedUp.house,
-          score: signedUp.score,
-          din: signedUp.din,
-          dor: signedUp.dor
+          type:signedUp.type,
+          firstName:signedUp.firstName,
+          lastName:signedUp.lastName,
+          birthDate:signedUp.birthDate,
+          bio:signedUp.bio,
+          email:signedUp.email,
+          password: signedUp.password,
+          house:signedUp.house,
+          score:signedUp.score,
+          din:signedUp.din,
+          dor:signedUp.dor,
         });
         await User.create(newUser);
 
@@ -118,20 +117,20 @@ router.post("/register/:id", async (req, res) => {
       }
     case "alumni":
       try {
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(signedUp.password, salt);
+       
+     
         const newUser = new User({
-          type: signedUp.type,
-          firstName: signedUp.firstName,
-          lastName: signedUp.lastName,
-          birthDate: signedUp.birthDate,
-          bio: signedUp.bio,
-          email: signedUp.email,
-          password: hashedPassword,
-          house: signedUp.house,
-          score: signedUp.score,
-          din: signedUp.din,
-          dor: signedUp.dor
+          type:signedUp.type,
+          firstName:signedUp.firstName,
+          lastName:signedUp.lastName,
+          birthDate:signedUp.birthDate,
+          bio:signedUp.bio,
+          email:signedUp.email,
+          password: signedUp.password,
+          house:signedUp.house,
+          score:signedUp.score,
+          din:signedUp.din,
+          dor:signedUp.dor,
         });
         await User.create(newUser);
 
@@ -141,22 +140,22 @@ router.post("/register/:id", async (req, res) => {
       }
     case "member":
       try {
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(signedUp.password, salt);
+       
+        
         console.log(6);
         const newMember = new User({
-          type: signedUp.type,
-          firstName: signedUp.firstName,
-          lastName: signedUp.lastName,
-          birthDate: signedUp.birthDate,
-          bio: signedUp.bio,
-          email: signedUp.email,
-          password: hashedPassword,
-          house: signedUp.house,
-          din: signedUp.din,
-          dor: signedUp.dor,
-          tiqStatus: signedUp.tiqStatus,
-          supervisorType: signedUp.supervisorType
+          type:signedUp.type,
+          firstName:signedUp.firstName,
+          lastName:signedUp.lastName,
+          birthDate:signedUp.birthDate,
+          bio:signedUp.bio,
+          email:signedUp.email,
+          password: signedUp.password,
+          house:signedUp.house,
+          din:signedUp.din,
+          dor:signedUp.dor,
+          tiqStatus:signedUp.tiqStatus,
+          supervisorType:signedUp.supervisorType,
         });
 
         await User.create(newMember);
@@ -168,16 +167,17 @@ router.post("/register/:id", async (req, res) => {
 
     case "parent":
       try {
-        const salt = bcrypt.genSaltSync(10);
-        const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
+       
+        
         const newUser = new User({
-          type: signedUp.type,
-          firstName: signedUp.firstName,
-          lastName: signedUp.lastName,
-          birthDate: signedUp.birthDate,
-          bio: signedUp.bio,
-          email: signedUp.email,
-          password: cryptedPasswrod
+          type:signedUp.type,
+          firstName:signedUp.firstName,
+          lastName:signedUp.lastName,
+          birthDate:signedUp.birthDate,
+          bio:signedUp.bio,
+          email:signedUp.email,
+          password: signedUp.password,
+         
         });
         await User.create(newUser);
         // return res.json({ msg: "User created successfully", data: newUser });

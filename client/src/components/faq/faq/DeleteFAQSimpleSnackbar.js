@@ -12,18 +12,16 @@ export default function DeleteFAQSimpleSnackbar(props) {
   const [open, setOpen] = React.useState(true);
 
   function handleClick() {
-    props.change1();
+    // props.change1();
     props.undo();
 
 }
 
   function handleClose(event, reason) {
       setOpen(false);
-    props.change1();
+   // props.change1();
   }
-// function undo(){
-//   props.undo();
-// }
+
   return (
     <div>
       {/* <Button onClick={handleClick}>Open simple snackbar</Button> */}

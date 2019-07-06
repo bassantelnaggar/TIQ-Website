@@ -4,7 +4,7 @@ import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import { Button } from "@material-ui/core";
-
+import { Link } from 'react-router-dom';
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 
@@ -137,7 +137,7 @@ class ForgotPassword extends Component {
                 That email address isn&apos;t recognized. Please try again or
                 register for a new account.
               </p>
-              <link to="/createuser" />
+              <Link to="/createuser" />
             </div>
           )}
           {messageFromServer === "recovery email sent" && (
@@ -145,7 +145,7 @@ class ForgotPassword extends Component {
               <h3>Password Reset Email Successfully Sent!</h3>
             </div>
           )}
-          <link to="/" />
+          <Link to="/" />
         </div>
       </div>
     );

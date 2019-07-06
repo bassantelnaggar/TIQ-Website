@@ -5,12 +5,8 @@ import "./profile.css"
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import EditIcon from "@material-ui/icons/Edit";
-import PegasusLogo from "../../components/images/tiqLogo1.png"
-import OrionLogo from "../../Images/rsz_1rsz_orion-logo.jpg"
-import PegasusLogo3 from "../../Images/PEGASUS-LOGO.jpeg"
-import {Container} from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import Background from "../../Images/about.jpg"
+import CameraIcon from "@material-ui/icons/PhotoCamera";
+import "../../pages/Homee/assets/css/main.css"
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -71,51 +67,79 @@ class profile extends Component {
   render() {
     if (this.props.token == null) {
       return (
+        <>
         <div>
-          <Toolbar />
-
+          <Toolbar/>
+          </div>
           <div class="thumbnails">
             <div class="box">
               <div class="inner">
                 <h3>You have to sign in first!</h3>
+               
                 <button
                   variant="contained"
                   onClick={() => {
                     this.handleClick();
                   }}
+                  //onClick={() => (document.location = "/signin")}
                   className="btn"
                 >
                   Sign In
                 </button>
+                
               </div>
             </div>
           </div>
-        </div>
+         
+          <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+        </>
       );
     }
     else{
     return(
+      <>
       <div>
-      {/* <img src={Background} style={{backgroundsize: 'cover', marginTop:"-5%"}} /> */}
-     <div >
-     <ToolbarOUT/>
-      
-       
-          `<section class="card">
+        <ToolbarOUT />
+      </div>
+      `<section class="card">
               <figure class="panel meta">
               <picture>
               <div class="image-upload">
               <label for="file-input">
-              <img class="avatar" src={this.state.user.profilePicture} width="128" height="128"/> <EditIcon/>
+              <img class="avatar" src={this.state.user.profilePicture} width="128" height="128"/> 
+              
+              <CameraIcon />
               </label> 
-              <input id="file-input" accept=".jpg,.png" type="file" onChange={this.onChange} display="none"/>
+              <input id="file-input"   accept=".jpg,.png" type="file" onChange={this.onChange} display="none"/>
               
               </div>
               </picture>
               <figcaption>
 
-              <h1 class="name">{this.state.user.firstName} {this.state.user.lastName} </h1>
-              <h3 class="title">{this.state.user.bio}</h3>
+              <h1 class="name" style={{fontWeight:'bold'}}>{this.state.user.firstName} {this.state.user.lastName} </h1>
+              <h2 >{this.state.user.bio}</h2>
               </figcaption>
               </figure>
 
@@ -155,10 +179,35 @@ class profile extends Component {
                 </dl>
               </div>
             </section>
-            `
+           
+            <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div >
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
           </div>
-        </div>
+        </footer>
+          
+
+    </>
       );
+      
     }
   }
 }
