@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 
 class Questions extends Component {
   render() {
-    return this.props.Questions.map((question) => (
-      <QuestionItem key={question._id} question={question} />
-    ));
+    return (
+      <div  style={{position:'absolute',top:"260px"}}>
+      {this.props.Questions.map((question) => (
+      <QuestionItem key={question._id} question={question} /> )) }
+    </div>
+    );
   }
 }
 

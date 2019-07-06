@@ -5,14 +5,7 @@ import "./profile.css"
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import EditIcon from "@material-ui/icons/Edit";
-import PegasusLogo from "../../components/images/tiqLogo1.png"
-import camera from "../../Images/camera.png"
-import OrionLogo from "../../Images/rsz_1rsz_orion-logo.jpg"
-import PegasusLogo3 from "../../Images/PEGASUS-LOGO.jpeg"
-import {Container} from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import CameraIcon from "@material-ui/icons/PhotoCamera";
-import Background from "../../Images/about.jpg"
 import "../../pages/Homee/assets/css/main.css"
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };

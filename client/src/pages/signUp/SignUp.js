@@ -414,10 +414,11 @@ class SignUp extends React.Component {
             </div>}
             
             
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
+            <br></br>
             <br></br>
            <Link fullWidth variant="contained" class="button"  style = {{background: '#410c12',width:'100%'}} 
            onClick={
