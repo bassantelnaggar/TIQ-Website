@@ -12,96 +12,101 @@ const alumniValidator = require("../../validations/alumniValidations");
 const TIQadminValidator = require("../../validations/tiqAdminValidations");
 const discipleValidator = require("../../validations/disciplevalidations");
 const parentValidator = require("../../validations/parentValidations");
-const nodemailer = require("nodemailer")
+const nodemailer = require("nodemailer");
 
-
-function sendmessage(message,user) {
+function sendmessage(message, user) {
   const transporter = nodemailer.createTransport({
-    service:'gmail',
-    secure:false,
-    port:25,
-    auth:{
+    service: "gmail",
+    secure: false,
+    port: 25,
+    auth: {
       user: process.env.GMAIL_USER,
       pass: process.env.GMAIL_PASS
     },
-    tls:{
+    tls: {
       rejectUnauthorized: false
     }
-  })     
-  let HelperOptions = {  
-    from:process.env.GMAIL_USER,
+  });
+  let HelperOptions = {
+    from: process.env.GMAIL_USER,
     to: user.email,
-    subject:'TIQ',
-    text:message
+    subject: "TIQ",
+    text: message
   };
-  transporter.sendMail(HelperOptions,(error,info) => {
-    if (error){
-      console.log(error)
+  transporter.sendMail(HelperOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("The message has been sent ");
     }
-    else {
-      console.log("The message has been sent ");      
-    }
-  });  
+  });
 }
 
+router.get("/search/:keyWord", async (req, res) => {
+  const keyWord = req.params.keyWord;
+  const userr = await User.find({
+    firstName: { $regex: keyWord, $options: "i" }
+  });
+  if (userr.length === 0)
+    return res
+      .status(404)
+      .send({ error: "User with that keyword does not exist" });
+  return res.json({ data: userr });
+});
 
-
-
-router.get('/search/:keyWord',async(req,res)=>{
-  const keyWord=req.params.keyWord
-  const userr = await User.find({ "firstName" : { $regex: keyWord, $options: 'i' } } )
-  if(userr.length===0) return res.status(404).send({error: 'User with that keyword does not exist'})
-  return res.json({data:userr})
-       
-  })
-  
-
-
-router.put("/Profile/:id",async(req,res)=>{
-  try{
-  const userId = req.params.id;
-  const addedPicture = req.body.profilePicture
-  const userToUpdate = await user.findOneAndUpdate({_id:userId},{profilePicture:addedPicture})
-  res.json({ data:userToUpdate, msg: "Profile added" });
+router.put("/Profile/:id", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const addedPicture = req.body.profilePicture;
+    const userToUpdate = await user.findOneAndUpdate(
+      { _id: userId },
+      { profilePicture: addedPicture }
+    );
+    res.json({ data: userToUpdate, msg: "Profile added" });
   } catch (error) {
     console.log("error");
   }
-})
-router.get('/search/:keyWord',async(req,res)=>{
-  const keyWord=req.params.keyWord
-  const userr = await User.find({ "firstName" : { $regex: keyWord, $options: 'i' } } )
-  if(userr.length===0) return res.status(404).send({error: 'User with that keyword does not exist'})
-  return res.json({data:userr})
-       
-  })
+});
+router.get("/search/:keyWord", async (req, res) => {
+  const keyWord = req.params.keyWord;
+  const userr = await User.find({
+    firstName: { $regex: keyWord, $options: "i" }
+  });
+  if (userr.length === 0)
+    return res
+      .status(404)
+      .send({ error: "User with that keyword does not exist" });
+  return res.json({ data: userr });
+});
 router.post("/register/:id", async (req, res) => {
   const id = req.params.id;
   const signedUp = await SignedUp.findOne({ _id: id });
-  sendmessage("You have been accepted in the TIQ website you can browse throught the website NOW!",signedUp)
-  const deleted= await SignedUp.findByIdAndRemove({ _id: id });
+  sendmessage(
+    "You have been accepted in the TIQ website you can browse throught the website NOW!",
+    signedUp
+  );
+  const deleted = await SignedUp.findByIdAndRemove({ _id: id });
   const t = signedUp.type;
-  console.log("2222 : "+process.env.GMAIL_USER);
+  console.log("2222 : " + process.env.GMAIL_USER);
 
-  console.log("1111 : "+signedUp.email);
+  console.log("1111 : " + signedUp.email);
   switch (t) {
-
     case "disciple":
       try {
-           
         const salt = bcrypt.genSaltSync(10);
         const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
-          type:signedUp.type,
-          firstName:signedUp.firstName,
-          lastName:signedUp.lastName,
-          birthDate:signedUp.birthDate,
-          bio:signedUp.bio,
-          email:signedUp.email,
+          type: signedUp.type,
+          firstName: signedUp.firstName,
+          lastName: signedUp.lastName,
+          birthDate: signedUp.birthDate,
+          bio: signedUp.bio,
+          email: signedUp.email,
           password: cryptedPasswrod,
-          house:signedUp.house,
-          score:signedUp.score,
-          din:signedUp.din,
-          dor:signedUp.dor,
+          house: signedUp.house,
+          score: signedUp.score,
+          din: signedUp.din,
+          dor: signedUp.dor
         });
         await User.create(newUser);
 
@@ -113,21 +118,20 @@ router.post("/register/:id", async (req, res) => {
       }
     case "alumni":
       try {
-       
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
-          type:signedUp.type,
-          firstName:signedUp.firstName,
-          lastName:signedUp.lastName,
-          birthDate:signedUp.birthDate,
-          bio:signedUp.bio,
-          email:signedUp.email,
+          type: signedUp.type,
+          firstName: signedUp.firstName,
+          lastName: signedUp.lastName,
+          birthDate: signedUp.birthDate,
+          bio: signedUp.bio,
+          email: signedUp.email,
           password: hashedPassword,
-          house:signedUp.house,
-          score:signedUp.score,
-          din:signedUp.din,
-          dor:signedUp.dor,
+          house: signedUp.house,
+          score: signedUp.score,
+          din: signedUp.din,
+          dor: signedUp.dor
         });
         await User.create(newUser);
 
@@ -135,25 +139,24 @@ router.post("/register/:id", async (req, res) => {
       } catch (error) {
         return res.status(422).send({ error: "Can not create user" });
       }
-case "member":
+    case "member":
       try {
-       
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(signedUp.password, salt);
         console.log(6);
         const newMember = new User({
-          type:signedUp.type,
-          firstName:signedUp.firstName,
-          lastName:signedUp.lastName,
-          birthDate:signedUp.birthDate,
-          bio:signedUp.bio,
-          email:signedUp.email,
+          type: signedUp.type,
+          firstName: signedUp.firstName,
+          lastName: signedUp.lastName,
+          birthDate: signedUp.birthDate,
+          bio: signedUp.bio,
+          email: signedUp.email,
           password: hashedPassword,
-          house:signedUp.house,
-          din:signedUp.din,
-          dor:signedUp.dor,
-          tiqStatus:signedUp.tiqStatus,
-          supervisorType:signedUp.supervisorType,
+          house: signedUp.house,
+          din: signedUp.din,
+          dor: signedUp.dor,
+          tiqStatus: signedUp.tiqStatus,
+          supervisorType: signedUp.supervisorType
         });
 
         await User.create(newMember);
@@ -162,46 +165,38 @@ case "member":
       } catch (error) {
         return res.status(422).send({ error: "Can not create user" });
       }
-   
+
     case "parent":
       try {
-       
         const salt = bcrypt.genSaltSync(10);
         const cryptedPasswrod = bcrypt.hashSync(signedUp.password, salt);
         const newUser = new User({
-          type:signedUp.type,
-          firstName:signedUp.firstName,
-          lastName:signedUp.lastName,
-          birthDate:signedUp.birthDate,
-          bio:signedUp.bio,
-          email:signedUp.email,
-          password: cryptedPasswrod,
-         
+          type: signedUp.type,
+          firstName: signedUp.firstName,
+          lastName: signedUp.lastName,
+          birthDate: signedUp.birthDate,
+          bio: signedUp.bio,
+          email: signedUp.email,
+          password: cryptedPasswrod
         });
         await User.create(newUser);
         // return res.json({ msg: "User created successfully", data: newUser });
-
       } catch (error) {
         // We will be handling the error later
 
         console.log(error);
       }
-    }
-        
-     
   }
-
-);
+});
 
 //get all users
 
 router.get("/", async (req, res) => {
   const users = await user.find();
-  users.sort((a, b) => (a.score > b.score) ? 1 : -1)
+  users.sort((a, b) => (a.score > b.score ? 1 : -1));
   users.reverse();
   res.json({ data: users });
 });
-
 
 //uppdate scores dynamically
 router.put("/updateScores/:id/:score", async (req, res) => {
@@ -212,151 +207,163 @@ router.put("/updateScores/:id/:score", async (req, res) => {
     { $inc: { score: addedScore } }
   );
 
-  res.json({data:User});
+  res.json({ data: User });
 });
 
 //get user by id
 router.get("/:id", async (req, res) => {
-  try
-  {
+  try {
     const userId = req.params.id;
-    const specificUser = await user.findOne({_id:userId})
-    res.json({data:specificUser})
-  }
-  catch(error)
-  {
-    res.json({msg:"cannot find user"})
+    const specificUser = await user.findOne({ _id: userId });
+    res.json({ data: specificUser });
+  } catch (error) {
+    res.json({ msg: "cannot find user" });
   }
 });
 
 // updating the info/profile of a user
 router.put("/:id", async (req, res) => {
- 
-    const userId = req.params.id;
-    const getuser = await user.findOne({ _id: userId });
-    if (!getuser) return res.status(404).send({ error: "User does not exist" });
-    t=getuser.type;
-    switch(t){
-        case "disciple":
-        try{
-          const isValidated =discipleValidator.updateValidationUser(req.body);
-          if (isValidated.error)
-          return res
-            .status(400)
-            .send({ error: isValidated.error.details[0].message });
-        const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
-          res.json({ msg: "User updated sucessfully" });
-        }
-        catch(error)
-        {
-            res.json({msg:"cannot find user"})
-          }
-
-
-          case "alumni":
-          try{
-            const isAlumniValidated=alumniValidator.updateValidationUser(req.body);
-            if (isAlumniValidated.error)
-          return res
-            .status(400)
-            .send({ error: isAlumniValidated.error.details[0].message });
-        const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
-          res.json({ msg: "User updated sucessfully" });
-        }
-        catch(error)
-        {
-            res.json({msg:"cannot find user"})
-          }
-          
-          case"member":
-          try{
-            const isUserValidated=userValidator.updateUserValidation(req.body);
-
-            if (isUserValidated.error)
-            return res
-              .status(400)
-              .send({ error: isUserValidated.error.details[0].message });
-          const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
-            res.json({ msg: "User updated sucessfully" });
-          }
-          catch(error)
-          {
-              res.json({msg:"cannot find user"})
-            }
-
-            case"parent":
-            try{
-              const isParentValidated=parentValidator.updateParentValidationUser(req.body);
-  
-              if (isParentValidated.error)
-              return res
-                .status(400)
-                .send({ error: isParentValidated.error.details[0].message });
-            const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
-              res.json({ msg: "User updated sucessfully" });
-            }
-            catch(error)
-            {
-                res.json({msg:"cannot find user"})
-              }
-    }
-});
-
-router.put("/update/admin/:id",async (req,res)=>{
   const userId = req.params.id;
   const getuser = await user.findOne({ _id: userId });
   if (!getuser) return res.status(404).send({ error: "User does not exist" });
-  t=getuser.type;
-  switch(t){
-    case"disciple":
-    try{
-      const isDiscipleValidated=discipleValidator.updateValidationAdmin(req.body);
-
-      if (isDiscipleValidated.error)
-      return res
-        .status(400)
-        .send({ error: isDiscipleValidated.error.details[0].message });
-    const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
-      res.json({ msg: "User updated sucessfully" });
-    }
-    catch(error)
-    {
-        res.json({msg:"cannot find user"})
-      }
-
-      case"alumni":
-      try{
-        const isAlumniValidatedAdmin=alumniValidator.updateValidationAdmin(req.body);
-  
-        if (isAlumniValidatedAdmin.error)
-        return res
-          .status(400)
-          .send({ error: isAlumniValidatedAdmin.error.details[0].message });
-      const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
+  t = getuser.type;
+  switch (t) {
+    case "disciple":
+      try {
+        const isValidated = discipleValidator.updateValidationUser(req.body);
+        if (isValidated.error)
+          return res
+            .status(400)
+            .send({ error: isValidated.error.details[0].message });
+        const updatedUser = await user.findOneAndUpdate(
+          { _id: userId },
+          req.body
+        );
         res.json({ msg: "User updated sucessfully" });
+      } catch (error) {
+        res.json({ msg: "cannot find user" });
       }
-      catch(error)
-      {
-          res.json({msg:"cannot find user"})
-        }
 
-        case"member":
-     try{
-        const isMemberValidatedAdmin=userValidator.updateValidationAdmin(req.body);
-  
-        if (isMemberValidatedAdmin.error)
-        return res
-          .status(400)
-          .send({ error: isMemberValidatedAdmin.error.details[0].message });
-      const updatedUser = await user.findOneAndUpdate({ _id: userId }, req.body);
+    case "alumni":
+      try {
+        const isAlumniValidated = alumniValidator.updateValidationUser(
+          req.body
+        );
+        if (isAlumniValidated.error)
+          return res
+            .status(400)
+            .send({ error: isAlumniValidated.error.details[0].message });
+        const updatedUser = await user.findOneAndUpdate(
+          { _id: userId },
+          req.body
+        );
         res.json({ msg: "User updated sucessfully" });
+      } catch (error) {
+        res.json({ msg: "cannot find user" });
       }
-      catch(error)
-      {
-          res.json({msg:"cannot find user"})
-        }
+
+    case "member":
+      try {
+        const isUserValidated = userValidator.updateUserValidation(req.body);
+
+        if (isUserValidated.error)
+          return res
+            .status(400)
+            .send({ error: isUserValidated.error.details[0].message });
+        const updatedUser = await user.findOneAndUpdate(
+          { _id: userId },
+          req.body
+        );
+        res.json({ msg: "User updated sucessfully" });
+      } catch (error) {
+        res.json({ msg: "cannot find user" });
+      }
+
+    case "parent":
+      try {
+        const isParentValidated = parentValidator.updateParentValidationUser(
+          req.body
+        );
+
+        if (isParentValidated.error)
+          return res
+            .status(400)
+            .send({ error: isParentValidated.error.details[0].message });
+        const updatedUser = await user.findOneAndUpdate(
+          { _id: userId },
+          req.body
+        );
+        res.json({ msg: "User updated sucessfully" });
+      } catch (error) {
+        res.json({ msg: "cannot find user" });
+      }
   }
-})
+});
+
+router.put("/update/admin/:id", async (req, res) => {
+  const userId = req.params.id;
+  const getuser = await user.findOne({ _id: userId });
+  if (!getuser) return res.status(404).send({ error: "User does not exist" });
+  t = getuser.type;
+  switch (t) {
+    case "disciple":
+      try {
+        const isDiscipleValidated = discipleValidator.updateValidationAdmin(
+          req.body
+        );
+
+        if (isDiscipleValidated.error)
+          return res
+            .status(400)
+            .send({ error: isDiscipleValidated.error.details[0].message });
+        const updatedUser = await user.findOneAndUpdate(
+          { _id: userId },
+          req.body
+        );
+        res.json({ msg: "User updated sucessfully" });
+      } catch (error) {
+        res.json({ msg: "cannot find user" });
+      }
+
+    case "alumni":
+      try {
+        const isAlumniValidatedAdmin = alumniValidator.updateValidationAdmin(
+          req.body
+        );
+
+        if (isAlumniValidatedAdmin.error)
+          return res
+            .status(400)
+            .send({ error: isAlumniValidatedAdmin.error.details[0].message });
+        const updatedUser = await user.findOneAndUpdate(
+          { _id: userId },
+          req.body
+        );
+        res.json({ msg: "User updated sucessfully" });
+      } catch (error) {
+        res.json({ msg: "cannot find user" });
+      }
+
+    case "member":
+      try {
+        const isMemberValidatedAdmin = userValidator.updateValidationAdmin(
+          req.body
+        );
+
+        if (isMemberValidatedAdmin.error)
+          return res
+            .status(400)
+            .send({ error: isMemberValidatedAdmin.error.details[0].message });
+        const updatedUser = await user.findOneAndUpdate(
+          { _id: userId },
+          req.body
+        );
+        res.json({ msg: "User updated sucessfully" });
+      } catch (error) {
+        res.json({ msg: "cannot find user" });
+      }
+  }
+});
 //delete a user
 router.delete("/:id", async (req, res) => {
   try {
@@ -367,98 +374,100 @@ router.delete("/:id", async (req, res) => {
     console.log(error);
   }
 });
-router.get("/tiq/BOA", async(req,res)=>{
-  try{  
-  const BOAs = await user.find({tiqStatus :"BOA"})
-  res.json({data:BOAs})
+router.get("/tiq/BOA", async (req, res) => {
+  try {
+    const BOAs = await user.find({ tiqStatus: "BOA" });
+    res.json({ data: BOAs });
+  } catch (error) {
+    res.json("msh 3arfa");
   }
-  catch(error){
-    res.json("msh 3arfa")
+});
+router.get("/tiq/PHL", async (req, res) => {
+  try {
+    const PHL = await user.find({
+      $and: [{ house: "Pegasus" }, { tiqStatus: "House Leader" }]
+    });
+    res.json({ data: PHL });
+  } catch (error) {
+    res.json("cannot find them");
   }
-})
-router.get("/tiq/PHL",async(req,res)=>{
-  try{
-    const PHL = await user.find({$and:[{house:"Pegasus"},{tiqStatus:"House Leader"}]})
-    res.json({data:PHL})
+});
+router.get("/tiq/OHL", async (req, res) => {
+  try {
+    const OHL = await user.find({
+      $and: [{ house: "Orion" }, { tiqStatus: "House Leader" }]
+    });
+    res.json({ data: OHL });
+  } catch (error) {
+    res.json("cannot find them");
   }
-  catch(error){
-    res.json("cannot find them")
+});
+router.get("/tiq/FS", async (req, res) => {
+  try {
+    const FS = await user.find({
+      $and: [{ tiqStatus: "Supervisor" }, { supervisorType: "Fundraising" }]
+    });
+    res.json({ data: FS });
+  } catch (error) {
+    res.json("cannot find user");
   }
-})
-router.get("/tiq/OHL",async(req,res)=>{
-  try{
-    const OHL = await user.find({$and:[{house:"Orion"},{tiqStatus:"House Leader"}]})
-    res.json({data:OHL})
+});
+router.get("/tiq/MS", async (req, res) => {
+  try {
+    const MS = await user.find({
+      $and: [{ tiqStatus: "Supervisor" }, { supervisorType: "Marketing" }]
+    });
+    res.json({ data: MS });
+  } catch (error) {
+    res.json("cannot find user");
   }
-  catch(error){
-    res.json("cannot find them")
+});
+router.get("/tiq/LS", async (req, res) => {
+  try {
+    const LS = await user.find({
+      $and: [{ tiqStatus: "Supervisor" }, { supervisorType: "Logistics" }]
+    });
+    res.json({ data: LS });
+  } catch (error) {
+    res.json("cannot find user");
   }
-})
-router.get("/tiq/FS",async(req,res)=>{
-    try{
-      const FS = await user.find({$and:[{tiqStatus:"Supervisor"},{supervisorType:"Fundraising"}]})
-      res.json({data:FS})
-    }
-    catch(error){
-      res.json("cannot find user")
-    }
-})
-router.get("/tiq/MS",async(req,res)=>{
-  try{
-    const MS = await user.find({$and:[{tiqStatus:"Supervisor"},{supervisorType:"Marketing"}]})
-    res.json({data:MS})
+});
+router.get("/tiq/RS", async (req, res) => {
+  try {
+    const RS = await user.find({
+      $and: [{ tiqStatus: "Supervisor" }, { supervisorType: "Relations" }]
+    });
+    res.json({ data: RS });
+  } catch (error) {
+    res.json("cannot find user");
   }
-  catch(error){
-    res.json("cannot find user")
+});
+router.get("/tiq/MDS", async (req, res) => {
+  try {
+    const MDS = await user.find({
+      $and: [{ tiqStatus: "Supervisor" }, { supervisorType: "Media Design" }]
+    });
+    res.json({ data: MDS });
+  } catch (error) {
+    res.json("cannot find user");
   }
-})
-router.get("/tiq/LS",async(req,res)=>{
-  try{
-    const LS = await user.find({$and:[{tiqStatus:"Supervisor"},{supervisorType:"Logistics"}]})
-    res.json({data:LS})
+});
+router.get("/tiq/DHL", async (req, res) => {
+  try {
+    const DHL = await user.find({ tiqStatus: "Disciples House Leader" });
+    res.json({ data: DHL });
+  } catch (error) {
+    res.json({ msg: "cannot find users" });
   }
-  catch(error){
-    res.json("cannot find user")
-  }
-})
-router.get("/tiq/RS",async(req,res)=>{
-  try{
-    const RS = await user.find({$and:[{tiqStatus:"Supervisor"},{supervisorType:"Relations"}]})
-    res.json({data:RS})
-  }
-  catch(error){
-    res.json("cannot find user")
-  }
-})
-router.get("/tiq/MDS",async(req,res)=>{
-  try{
-    const MDS = await user.find({$and:[{tiqStatus:"Supervisor"},{supervisorType:"Media Design"}]})
-    res.json({data:MDS})
-  }
-  catch(error){
-    res.json("cannot find user")
-  }
-})
-router.get("/tiq/DHL",async(req,res)=>{
-  try{
-    const DHL = await user.find({tiqStatus:"Disciples House Leader"})
-     res.json({data:DHL})
-  }
-  catch(error){
-    res.json({msg:"cannot find users"})
-  }
-})
+});
 //get user by id
 router.get("/:id", async (req, res) => {
-  try
-  {
+  try {
     const userId = req.params.id;
-    const specificUser = await user.findOne({_id:userId})
-    res.json({data:specificUser})
-  }
-  catch(error)
-  {
-    res.json({msg:"cannot find user"})
+    const specificUser = await user.findOne({ _id: userId });
+    res.json({ data: specificUser });
+  } catch (error) {
+    res.json({ msg: "cannot find user" });
   }
 });
 // Update a user
@@ -506,7 +515,7 @@ router.put("/update/:id", async (req, res) => {
       } catch (error) {
         console.log(error);
       }
-      case "parent":
+    case "parent":
       try {
         const isUserValidated = parentValidator.updateValidation(req.body);
 
@@ -525,7 +534,7 @@ router.put("/update/:id", async (req, res) => {
       } catch (error) {
         console.log(error);
       }
-      case "TIQadmin":
+    case "TIQadmin":
       try {
         const isUserValidated = TIQadminValidator.TIQadminValidation(req.body);
 
@@ -544,7 +553,7 @@ router.put("/update/:id", async (req, res) => {
       } catch (error) {
         console.log(error);
       }
-      case "disciple":
+    case "disciple":
       try {
         const isUserValidated = discipleValidator.updateValidation(req.body);
 

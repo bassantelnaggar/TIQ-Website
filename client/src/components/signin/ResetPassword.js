@@ -1,43 +1,169 @@
-// import React, { Component } from "react";
-// import { connect } from "react-redux";
-// import Toolbar from "../../layout/Toolbar/Toolbar";
-// import Button from "@material-ui/core/Button";
+/* eslint-disable no-console */
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
+import TextField from "@material-ui/core/TextField";
+import { Button } from "@material-ui/core";
 
-// const mapStateToProps = state => {
-//   return { token: state.token, usertype: state.usertype, id: state.id };
-// };
-// class resetPassword extends Component {
-//   render() {
-//     console.log("forg");
-//     return (
-//       <div>
-//         <Toolbar />
-//         <div class="forgot-form">
-//           <Button
-//             style={{ background: "#410c12" }}
-//             variant="contained"
-//             color="primary"
-//             href="/SignIn"
-//           >
-//             Back
-//           </Button>
-//           <label> Reset New Passsword</label>
-//           <input type="text" placeholder="Confirm New Passsword" />
-//           <Button
-//             style={{ background: "#410c12", alignItems: "center" }}
-//             variant="contained"
-//             color="primary"
-//           >
-//             Submit
-//           </Button>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
+const loading = {
+  margin: "1em",
+  fontSize: "24px"
+};
 
-// const Form = connect(
-//   mapStateToProps,
-//   null
-// )(resetPassword);
-// export default Form;
+const title = {
+  pageTitle: "Password Reset Screen"
+};
+
+export default class ResetPassword extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      username: "",
+      password: "",
+      updated: false,
+      isLoading: true,
+      error: false,
+      showNullError: false
+    };
+  }
+
+  async componentDidMount() {
+    console.log("doo doo doood : " + this.props.match.params.token);
+
+    const response = await axios
+      .get("/reset" + this.props.match.params.token)
+      .then(response => {
+        console.log(response);
+
+        if (response.data.message === "password reset link a-ok") {
+          this.setState({
+            email: response.data.email,
+            updated: false,
+            isLoading: false,
+            error: false
+          });
+        }
+      })
+      .catch(error => {
+        alert(error.response.data.errmsg || error.response.data);
+        this.setState({
+          updated: false,
+          isLoading: false,
+          error: true
+        });
+      });
+  }
+
+  handleChange = name => event => {
+    console.log("hannnnnnnnnnnnnnnnnnnnnnnnnnnndle");
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+
+  updatePassword = async e => {
+    e.preventDefault();
+    // const { password, email } = this.state;
+    // const {
+    //   match: {
+    //     params: { tokenn }
+    //   }
+    // } = this.props;
+    if (this.state.password === "") {
+      this.setState({
+        showNullError: true
+      });
+    } else {
+      this.setState({
+        showNullError: false
+      });
+
+      const response = await axios
+        .put("/updatePasswordViaEmail", {
+          email: this.state.email,
+          password: this.state.password,
+          resetPasswordToken: this.props.match.params.token
+        })
+        .then(response => {
+          console.log(response.data);
+          if (response.data.message === "password updated :)") {
+            this.setState({
+              updated: true,
+              error: false
+            });
+          } else {
+            this.setState({
+              updated: false,
+              error: true
+            });
+          }
+        })
+        .catch(err => alert(err.response.data.errmsg || err.response.data));
+    }
+  };
+
+  render() {
+    const { password, error, isLoading, updated, showNullError } = this.state;
+
+    if (error) {
+      return (
+        <div>
+          <div title={title} />
+          <div style={loading}>
+            <h4>Problem resetting password. Please send another reset link.</h4>
+            <button TextField="Home" link="/" />
+            <button
+              style={{ color: "black" }}
+              TextField="Forgot Password?"
+              link="/ForgotPassword"
+            />
+          </div>
+        </div>
+      );
+    }
+    if (isLoading) {
+      return (
+        <div>
+          <div title={title} />
+          <div>Loading User Data...</div>
+        </div>
+      );
+    }
+    return (
+      <div>
+        <div title={title} />
+        <form className="password-form" onSubmit={this.updatePassword}>
+          <TextField
+            id="password"
+            label="password"
+            onChange={this.handleChange("password")}
+            value={password}
+            type="password"
+          />
+          <Button buttonText="Update Password" />
+        </form>
+
+        {updated && (
+          <div>
+            <p>
+              Your password has been successfully reset, please try logging in
+              again.
+            </p>
+            <Button buttonText="Login" link="/signin" />
+          </div>
+        )}
+        <Button link="/" />
+      </div>
+    );
+  }
+}
+
+ResetPassword.propTypes = {
+  // eslint-disable-next-line react/require-default-props
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      token: PropTypes.string.isRequired
+    })
+  })
+};
