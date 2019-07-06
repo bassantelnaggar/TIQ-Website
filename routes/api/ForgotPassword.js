@@ -241,6 +241,7 @@ router.get("/reset/:token", async (req, res) => {
   } else {
     res.status(200).send({
       firstName: user.firstName,
+      email: user.email,
       message: "password reset link a-ok"
     });
   }
