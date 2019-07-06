@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import QuestionsAdmin from './QuestionsAdmin';
-import NavbarSignedIn from "../../layout/NavbarSignedIn";
-import Navbar from "../../layout/Navbar";
+import Toolbar from "../../../layout/Toolbar/Toolbar";
+import ToolbarOUT from "../../../layout/Toolbar/ToolbarSignout";
 import { connect } from "react-redux";
-import ToolBar from "../../../layout/Toolbar/Toolbar";
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
@@ -45,10 +44,10 @@ answerQuestion = (id,answer) => {
  
   render() {
 console.log(this.props.usertype)
-    if (this.props.token == null) {
+    if (this.props.token === null) {
       return (
         <div>
-          <Navbar/>
+          <Toolbar/>
           <div class="thumbnails">
             <div class="box">
               <div class="inner">
@@ -70,15 +69,15 @@ console.log(this.props.usertype)
       );
     }    
 else{
-    const auth = this.props.usertype === "HUBadmin";
+    const auth = this.props.usertype === "TIQadmin";
     if (auth) {
     return (
     
         <div className="QuestionAdmin">
-         <NavbarSignedIn />
+         <ToolbarOUT />
 
-          <div className="container">
-            <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf"}}>QUESTIONS</h1>  
+          <div> <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'left', postion:'fixed', marginLeft: '200px',
+                      fontWeight: 'bold',fontSize:'80px'}} > Users'<br></br> Questions </h1>  
             <br></br>    
             <QuestionsAdmin  Questions={this.state.Questions} delQuestion={this.delQuestion} answerQuestion={this.answerQuestion} />
              

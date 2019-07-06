@@ -186,9 +186,9 @@ class InputAdornments extends React.Component {
                   </Typography>
                   <Grid container>
                     <Grid item>
-                      <Link to="/createuser" variant="body2">
+                      {/* <Link to="/createuser" variant="body2">
                         {"Don't have an account? Sign Up"}
-                      </Link>
+                      </Link> */}
                     </Grid>
                   </Grid>
                 </form>

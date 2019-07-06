@@ -62,7 +62,7 @@ ReactDOM.render(
       <div>
         <hr />
         <Switch>
-          <Route exact path="/" component={App} />
+          <Route exact path="/" component={Homee} />
 
           <Route exact path="/Homee" component={Homee} />
           <Route exact path="/ourPeople" component={ourPeople} />

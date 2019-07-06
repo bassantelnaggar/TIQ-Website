@@ -5,10 +5,9 @@ import clsx from 'clsx';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Divider from '@material-ui/core/Divider';
+
 
 const useStyles = theme => ({
   root: {
@@ -94,34 +93,6 @@ class DisciplesPrograms extends Component {
   }
 }
 
-const questionStyle={
-  textTransform: 'uppercase',
-  lineheight: '0.8',
-  fontWeight:'bold',
-  color:'#3e3939bf',
-  lineHeight:'1',
-  fontSize:'25px',
-
-}
-const answerStyle={
-  textTransform: 'capitalize',
-  color:'#6d7173',
-  lineHeight:'1',
-  fontSize:'20px',
-
-
-}
-const btnStyle = {
-  background: '#333',
-  color: '#fff',
-  border: 'none',
-  padding: '5px 10px',
-  textalign: 'center',
-  textdecoration: 'none',
-  display: 'inline-block',
-  fontsize: '16px',
-  borderradius: '12px'
-}
 // PropTypes
 DisciplesPrograms.propTypes = {
   disciplesPrograms: PropTypes.array.isRequired }

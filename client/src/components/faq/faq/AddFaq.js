@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 export class AddFaq extends Component {
   state = {
@@ -18,29 +17,31 @@ export class AddFaq extends Component {
   render() {
     return (
       <div>
-      <form onSubmit={this.onSubmit} style={{ display: "flex" }}>
+      <form onSubmit={this.onSubmit} >
         <input
           type="text"
           name="question"
-          style={{ flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#black",color:"black" }}
+          style={{ left:"25%",position:'relative',flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#black",color:"black",width:'50%' }}
           placeholder="Add Question ..."
           value={this.state.question}
           onChange={this.onChange}
         />
+        <br></br>
         <input
           type="text"
           name="answer"
-          style={{ flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#black",color:"black" }}
+          style={{ left:"25%",position:'relative',flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#black",color:"black",width:'50%' }}
           placeholder="Add Answer ..."
           value={this.state.answer}
           onChange={this.onChange}
         />
-
+<br></br>
         <input
           type="submit"
           value="Submit"
           className="btn"
-          style={{backgroundColor:"#70c7be"}}
+          style={{flex: '1',width:'25%',left:"38%",position:'absolute'}}
+          // style={{backgroundColor:"#70c7be"}}
           />
       </form>
     </div>

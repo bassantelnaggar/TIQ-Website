@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import FAQUs from './FAQUs';
 import FAQs from './FAQs';
 import AddFaq from './AddFaq';
-import NavbarSignedIn from "../../layout/NavbarSignedIn";
 import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";                                                                  
-import Navbar from "../../layout/Navbar";
+import Toolbar from "../../../layout/Toolbar/Toolbar";
+import ToolbarOUT from "../../../layout/Toolbar/ToolbarSignout";
 import CreateFAQSimpleSnackbar from './CreateFAQSimpleSnackbar';
 import UpdateFAQSimpleSnackbar from './UpdateFAQSimpleSnackbar';
 import DeleteFAQSimpleSnackbar from './DeleteFAQSimpleSnackbar';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 
 const mapStateToProps = state => {
@@ -87,12 +88,12 @@ undo=()=>{ this.addFAQ(this.state.questionundo,this.state.answerundo)  }
 
 
   render() {
-    const { classes } = this.props; 
+    
 
-    if (this.props.token == null) {
+    if (this.props.token === null) {
       return (
         <div>
-        <Navbar/>
+        <Toolbar/>
         <div className="FAQU">
         <div >
 
@@ -115,25 +116,35 @@ undo=()=>{ this.addFAQ(this.state.questionundo,this.state.answerundo)  }
       );
     }
     else{
-      const auth = this.props.usertype === "HUBadmin";
+      const auth = this.props.usertype === "TIQadmin";
     if (auth) {
     return (
      
-        <div className="FAQ">
-        <NavbarSignedIn />
+        <div>
+        <ToolbarOUT />
+        <button
+            className="button"
+             background = "#202024"
+            style={{ position: "absolute", left: "20px", top: "63px" }}
+            onClick={this.handleClick}
+          >
+           Users' Questions   
+          </button>
+          <br></br>
+          <div > 
+           
+          <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'left', postion:'fixed', marginLeft: '200px',
+                      fontWeight: 'bold',fontSize:'90px'}} >FAQs </h1> 
 
-          <div >
-            <h1 style={{color:"#3e3939bf"}}>FAQs <Button variant="contained"  style={edit} onClick={this.handleClick}>
-            Questions     
-            </Button></h1>      
+            </div>  
             <AddFaq addFAQ={this.addFAQ} />
-            <br></br>
+            <br></br> <br></br> <br></br>
             <FAQs  FAQs={this.state.FAQs} delfaq={this.delfaq} updatefaq={this.updatefaq} />
             {this.state.updated && <UpdateFAQSimpleSnackbar change={this.change} />}
             {this.state.created && <CreateFAQSimpleSnackbar change={this.change} />}
             {this.state.deleted && <DeleteFAQSimpleSnackbar undo={this.undo} change={this.change} />}
 
-          </div>  
+          {/* </div>   */}
         </div>
    
     );

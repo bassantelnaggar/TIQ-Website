@@ -68,6 +68,10 @@ const toolbar = props => (
           <Link to="/ContactUs">Contact Us</Link>
           </li>
           <li>
+            <Link to="/faq">FAQs</Link>
+          </li>
+
+          <li>
             <Link to="/signout">Log Out</Link>
           </li>
          
