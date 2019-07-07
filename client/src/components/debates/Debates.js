@@ -73,7 +73,11 @@ class Debates extends Component {
       .then(response => {
         if (Object.keys(response.data)[0] === "err")
           this.setState({ error: "Missing/Incomplete Data" });
-        else window.location.reload();
+        else {
+          this.setState({ debates: [...this.state.debates,,response.data.data] });
+       
+        }
+        
       })
       .catch(err => {
         this.setState({ error: "Missing/Incomplete Data" });
@@ -115,26 +119,54 @@ class Debates extends Component {
     const { classes } = this.props;
     if (this.props.token === null) {
       return (
+        <>
         <div>
-              <ToolBar />
+          <ToolBar/>
+          </div>
           <div class="thumbnails">
             <div class="box">
               <div class="inner">
                 <h3>You have to sign in first!</h3>
+               
                 <button
                   variant="contained"
                   onClick={() => {
                     this.handleClick();
                   }}
+                  //onClick={() => (document.location = "/signin")}
                   className="btn"
                 >
                   Sign In
                 </button>
+                
               </div>
             </div>
           </div>
-        </div>
-     
+         
+          <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+        </>
       );
     }
     console.log(this.props.usertype);
@@ -210,13 +242,21 @@ class Debates extends Component {
               <Typography paragraph>{this.state.error}</Typography>
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleCreateClick} style={{background:"#333"}}>
-                Cancel
-              </Button>
-              <Button onClick={() => this.createDebate()} style={{background:"#333"}}>
-                Create
-                <CloudUploadIcon className={classes.rightIcon} />
-              </Button>
+            <input 
+                  type="Submit" 
+                  value="Cancel"
+                  className="btn"
+                  onClick={this.handleCreateClick}
+                  />
+             <input 
+                  type="Submit" 
+                  value="Create"
+                  className="btn"
+                  onClick={() => this.createDebate()}
+                  />
+            
+              
+                
             </DialogActions>
           </Dialog>
 
@@ -276,14 +316,15 @@ class Debates extends Component {
               Search by Category
               <SearchIcon />
             </Button>
-           
+            <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'relative', 
+              marginTop:"-150px",fontWeight: 'bold',fontSize:'60px'}} > Our Debates  </h1>
           </div>
-    
+          
           <div class="inner" >
             <div class="thumbnails" >
             {this.state.debates.map(debate => (
               <DebateCard
-                key={debate._id}
+                key={debate._id}  
                 id={debate._id}
                 title={debate.title}
                 date={debate.date}
@@ -296,7 +337,30 @@ class Debates extends Component {
             ))}
           </div> 
           </div>
-          {/* </div> */}
+          <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+       
         </>
       );
     } else {
@@ -348,7 +412,8 @@ class Debates extends Component {
               Search by Category
               <SearchIcon />
             </Button>
-           
+            <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'relative', 
+              marginTop:"-70px",fontWeight: 'bold',fontSize:'60px'}} > Our Debates  </h1>
           </div>
 
 

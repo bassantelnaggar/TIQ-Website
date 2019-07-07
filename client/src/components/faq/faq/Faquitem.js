@@ -9,7 +9,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    
+    width: '110%',
+    postion:"center"
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -40,8 +42,8 @@ class FaqUItem extends React.Component {
     const { expanded } = this.state;
 
     return (
-      <div className={classes.root}>
-        <ExpansionPanel style={expanded?panelStyle:style} expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+      <div className={classes.root} style={{marginLeft:"160px"}} >
+        <ExpansionPanel style={{}} style={expanded?panelStyle:style} expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading} style={expanded?questionOpen:questionStyle} >{question}</Typography>
           </ExpansionPanelSummary>
@@ -51,6 +53,7 @@ class FaqUItem extends React.Component {
             </Typography>
           </ExpansionPanelDetails>
          </ExpansionPanel>
+         
          </div>
 
 
@@ -71,7 +74,7 @@ const questionOpen={
 const questionStyle={
     textTransform: 'uppercase',
     lineheight: '0.8',
-    color:'#9a9ea0',
+    color:'black',
     lineHeight:'1',
     fontSize:'17px',
     fontFamily:'Sanserif'
@@ -87,15 +90,18 @@ const questionStyle={
   
   }
   const panelStyle={
-    borderLeft:'20px solid #78c3bc',
+    borderLeft:'20px solid #B83126',
     background:'#e0e0e0'
   }
   const panel2Style={
-    borderLeft:'20px solid #b2ebf2',
+    borderLeft:'20px solid #FFDA00',
     background:'#eeeeee'
   }
   const style={
-    background:"#31383d"
+    // background:"#31383d"
+    background:"#F0F0F0",
+    boxShadow: '2px 2px 4px #000000b3' ,
+
   }
   FaqUItem.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -12,7 +12,6 @@ class DeleteArticle extends Component {
                 <div class="box">
                 <div class="inner">
                     <h3>{article.title}</h3>
-                    <DeleteIcon    onClick={this.props.deleteArticle.bind(this, article._id)}/>
                   {/* <input 
                    type="Submit" 
                    value="delete"
@@ -22,6 +21,7 @@ class DeleteArticle extends Component {
                     /> */}
                   </div>
                   <SimplePopper1 article={article} deleteArticle ={this.props.deleteArticle} allArticles={this.props.allArticles} updateComment = {this.props.updateComment} allArticles ={this.props.allArticles} updatearticle1 = {this.props.updatearticle1} />
+                  <DeleteIcon    onClick={this.props.deleteArticle.bind(this, article._id)}/>
 
                 </div>    
                                 ))}

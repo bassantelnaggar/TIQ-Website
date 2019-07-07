@@ -133,9 +133,10 @@ class GetUsers extends Component {
     const auth = this.props.usertype === "TIQadmin";
     if (this.props.token === null) {
       return (
-       
+       <>
         <div>
           <Toolbar/>
+          </div>
           <div class="thumbnails">
             <div class="box">
               <div class="inner">
@@ -155,7 +156,31 @@ class GetUsers extends Component {
               </div>
             </div>
           </div>
-        </div>
+         
+          <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+        </>
       )
     }
     else{
@@ -166,18 +191,20 @@ class GetUsers extends Component {
         <ToolbarOUT />
       
         <div className="center-div">
-          <h1
-            style={{
-              textAlign: "center",
-              position: "relative",
-
-              fontSize: "50px"
-            }}
-          >
-            OUR PEOPLE{" "}
-          </h1>
+        <input 
+                  type="Submit" 
+                  value="Confirm New Memebers"
+                  className="btn"
+                  onClick={() => {
+                    this.handleClick();
+                  }}
+                  style={{ position: "absolute", left: "20px", top: "63px"}}
+                  />
+                  <br></br>
+        <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed', 
+                      fontWeight: 'bold',fontSize:'75px'}} >Our People</h1>
          
-          <TextField
+          {/* <TextField
               id="selecteduser"
               label=  {"Search User"}
               type= "textField"
@@ -196,16 +223,10 @@ class GetUsers extends Component {
               Search User 
               <SearchIcon />
             </Button>
-            
+             */}
           <ul>
-          <Button
-            style={{background:"#333", left: "-660px", top: "-195px"}}
-            onClick={() => {
-              this.handleClick();
-            }}
-          >
-            Confirm New Memebers
-          </Button>
+         
+          
             {this.state.users && (
               <DeleteUser
                 users={this.state.users}
@@ -215,6 +236,29 @@ class GetUsers extends Component {
             )}
           </ul>
         </div>
+        <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
       </>
     );
   }
@@ -224,18 +268,11 @@ class GetUsers extends Component {
         <ToolbarOUT />
         
         <div className="center-div">
-          <h1
-            style={{
-              textAlign: "center",
-              position: "relative",
-
-              fontSize: "50px"
-            }}
-          >
-            OUR PEOPLE{" "}
-          </h1>
+        <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed', 
+                      fontWeight: 'bold',fontSize:'75px'}} >Our People</h1>
+         
     
-          <TextField
+          {/* <TextField
               id="selecteduser"
               label=  {"Search User"}
               type= "textField"
@@ -253,7 +290,7 @@ class GetUsers extends Component {
             >
               Search User 
               <SearchIcon />
-            </Button>
+            </Button> */}
           <ul>
             {this.state.users && (
               <DeleteUser
@@ -264,6 +301,29 @@ class GetUsers extends Component {
             )}
           </ul>
         </div>
+        <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
       </>
     );
   }

@@ -73,6 +73,7 @@ class test extends Component {
     }
     else{
       return (
+        <>
           <div>
           <ToolbarOUT/>
           <div class="body66">
@@ -98,7 +99,10 @@ class test extends Component {
             </div>
 
           </div>
+          
            </div>
+           
+           </>
       )
     }}
 }

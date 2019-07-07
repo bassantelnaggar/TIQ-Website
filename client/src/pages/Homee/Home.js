@@ -168,8 +168,8 @@ export class Home extends Component {
                   left: "250px"
                 }}
               >
-                It's better to debate.A Question Without setting it than to
-                settle a question without debating it.
+                It's better to debate a question without settling it than to
+                settle it without debating it.
               </h2>
               <p />
             </header>

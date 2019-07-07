@@ -45,11 +45,14 @@ class SimplePopper extends React.Component {
 
     return (
       <div>
-      <Button variant="contained"  style={edit} onClick={this.handleClick}>
-  
-        EDIT
-        
-      </Button>
+           <button
+            className="button"
+             background = "#202024"
+            onClick={this.handleClick}
+            style={{marginLeft:"300px"}}
+          >
+           EDIT 
+          </button>
       <br></br>
       <Popper id={id} open={open} anchorEl={anchorEl} style={{paddingLeft:'80px'}} transition>
         {({ TransitionProps }) => (
@@ -57,7 +60,7 @@ class SimplePopper extends React.Component {
             <Paper style={{backgroundColor:'#bdbdbd',padding:'10px 10px 10px 10px'}}>
             <form>
                 <label>
-                    <TextField
+                    <input
                        type="text"
                        placeholder="Edit Question ..."
                         name='question'
@@ -67,7 +70,7 @@ class SimplePopper extends React.Component {
                         />
                 </label>
                 <label>
-                    <TextField 
+                    <input 
                         type="text"
                         name='answer'
                         value={this.state.answer} 
@@ -78,11 +81,23 @@ class SimplePopper extends React.Component {
                 </label>
                
             </form>
+            <button
+            className="button"
+             background = "#202024"
+             onClick={this.props.updatefaq.bind(this,this.props.faq._id,this.state.question,this.state.answer)}
+          >
+           Update 
+          </button>
+          {"    "}
+          <button
+            className="button"
+             background = "#202024"
+             onClick={this.props.delfaq.bind(this,this.props.faq._id,this.props.faq.question,this.props.faq.answer)}
+      
+          >
+           Delete 
+          </button>
             
-            <button  className="btn" style={btnStyle} onClick={this.props.updatefaq.bind(this,this.props.faq._id,this.state.question,this.state.answer)} >update</button>
-            <IconButton  onClick={this.props.delfaq.bind(this,this.props.faq._id,this.props.faq.question,this.props.faq.answer)}className={classes.button} aria-label="Delete"> 
-        <DeleteIcon  /> 
-      </IconButton>
 
             
             </Paper>

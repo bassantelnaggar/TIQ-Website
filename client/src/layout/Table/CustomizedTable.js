@@ -84,6 +84,7 @@ class CustomizedTable extends React.Component {
     console.log(this.props.scores);
     const { classes } = this.props;
     return (
+      <>
       <div style={{position:"relative",top:"20px"}}>
       <Paper className={classes.root}>
       <Dialog
@@ -103,13 +104,13 @@ class CustomizedTable extends React.Component {
                <Button class="button" onClick={() => this.props.UpdateScore(this.state.idd,this.state.scoree)} onSubmit={this.onSubmit}> Update </Button>
             </DialogActions>
           </Dialog>
-        <Table className={classes.table}style={{position:"absolute",top:"-141px"}} >
+        <Table className={classes.table}style={{position:"absolute",top:"-141px"}}  >
           <TableHead>
             <TableRow>
-              <CustomTableCell>Name</CustomTableCell>
-              <CustomTableCell align="center">House</CustomTableCell>
-              <CustomTableCell align="center">Status</CustomTableCell>
-              <CustomTableCell align="right">Score</CustomTableCell>
+              <CustomTableCell style={{fontSize:"25px"}}>Name</CustomTableCell>
+              <CustomTableCell align="center" style={{fontSize:"25px"}}>House</CustomTableCell>
+              <CustomTableCell align="center" style={{fontSize:"25px"}}>Status</CustomTableCell>
+              <CustomTableCell align="right" style={{fontSize:"25px"}}>Score</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -118,16 +119,16 @@ class CustomizedTable extends React.Component {
               
               <TableRow className={classes.score} key={score._id}>
              
-                <CustomTableCell component="th" scope="row">
+                <CustomTableCell component="th" scope="row" style={{fontWeight:"bold",fontSize:"20px"}}>
                   {score.firstName} {" "} {score.lastName}
                 </CustomTableCell>
-                <CustomTableCell align="center">
+                <CustomTableCell align="center"style={{fontWeight:"bold"}}>
                   {score.house} 
                 </CustomTableCell>
-                <CustomTableCell align="center">
+                <CustomTableCell align="center" style={{fontWeight:"bold"}}>
                    {score.type}
                 </CustomTableCell>
-                <CustomTableCell align="right">
+                <CustomTableCell align="right" style={{fontWeight:"bold",fontSize:"15px"}}>
                 
                  {score.score} {"  "} 
                <a onClick={() => {
@@ -141,37 +142,64 @@ class CustomizedTable extends React.Component {
           </TableBody>
         </Table>
       </Paper>
+     
       </div>
+      <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+       
+      </>
     );
             
   }else{
     console.log(this.props.scores);
     const { classes } = this.props;
     return (
+      <>
       <div style={{position:"relative",top:"20px"}}>
       <Paper className={classes.root}>
       <Table className={classes.table}style={{position:"absolute",top:"-141px"}} >
           <TableHead>
             <TableRow>
             <CustomTableCell>Name</CustomTableCell>
-              <CustomTableCell align="center">House</CustomTableCell>
-              <CustomTableCell align="center">Status</CustomTableCell>
-              <CustomTableCell align="right">Score</CustomTableCell>
+              <CustomTableCell align="center" style={{fontSize:"25px"}}>House</CustomTableCell>
+              <CustomTableCell align="center" style={{fontSize:"25px"}}>Status</CustomTableCell>
+              <CustomTableCell align="right" style={{fontSize:"25px"}}>Score</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {this.props.scores.map(score => (
               <TableRow className={classes.score} key={score._id}>
-               <CustomTableCell component="th" scope="row">
+               <CustomTableCell component="th" scope="row"style={{fontWeight:"bold",fontSize:"20px"}}>
                   {score.firstName} {" "} {score.lastName}
                 </CustomTableCell>
-                <CustomTableCell align="center">
+                <CustomTableCell align="center"style={{fontWeight:"bold"}}>
                   {score.house} 
                 </CustomTableCell>
-                <CustomTableCell align="center">
+                <CustomTableCell align="center" style={{fontWeight:"bold"}}>
                    {score.type}
                 </CustomTableCell>
-                <CustomTableCell align="right">
+                <CustomTableCell align="right"style={{fontWeight:"bold",fontSize:"15px"}}>
                 
                  {score.score} {"  "} 
                 
@@ -183,6 +211,31 @@ class CustomizedTable extends React.Component {
         </Table>
       </Paper>
       </div>
+      <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+       
+      </>
     );
   }
 

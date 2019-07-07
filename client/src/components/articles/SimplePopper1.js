@@ -81,7 +81,7 @@ class SimplePopper1 extends React.Component {
           type="textarea"
           name="body"
           placeholder={this.props.article.body}
-          style={{height: "300px"}}
+          style={{height: "200px"}}
           onChange={this.onChange}
         />
         <br></br>

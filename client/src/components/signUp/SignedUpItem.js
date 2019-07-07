@@ -7,12 +7,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Chip from '@material-ui/core/Chip';
-import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
-import { connect } from "react-redux";
 
-import axios from 'axios';
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -120,8 +116,22 @@ class SignedUpItem extends Component {
         </ExpansionPanelDetails>
         <Divider />
         <ExpansionPanelActions>
-        <button  className="btn" style={btnStyle} onClick={this.props.accept.bind(this,_id)} >Accept</button>
-          <button  className="btn" style={btnStyle} onClick={this.props.decline.bind(this,_id)} >Decline</button>
+        <input 
+                  type="Submit" 
+                  value="Accept"
+                  className="btn"
+                  onClick={this.props.accept.bind(this,_id)}
+                 
+                  />
+                  {" "}
+        <input 
+                  type="Submit" 
+                  value="Decline"
+                  className="btn"
+                  onClick={this.props.decline.bind(this,_id)}
+            
+                  />
+       
         </ExpansionPanelActions>
       </ExpansionPanel>
     </div>

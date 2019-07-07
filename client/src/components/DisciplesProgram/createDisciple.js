@@ -3,14 +3,18 @@ import axios from 'axios';
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import { connect } from "react-redux";
 import Grid from '@material-ui/core/Grid';
+import SimplePopper from './SimplePopper';
+import UpdateSimpleSnackbar from './UpdateSimpleSnackbar.';
+import CreateSimpleSnackbar from './CreateSimpleSnackbar';
+import DelSimpleSnackbar from './DelSimpleSnackbar';
+import DisciplesPrograms from './DisciplesPrograms';
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
 
 export class createDisciple extends Component {
-        constructor() {
-          super();
-          this.state = {
+        
+          state = {
             disciplesPrograms:[],
             title:"",
             description:"",
@@ -19,10 +23,24 @@ export class createDisciple extends Component {
             price:null,
             year:"",
             image:"",
-            link:""
+            link:"",
+            // disciplesPrograms: [],
+            created:false,
+            updated:false,
+            deleted:false,
+            titleundo:'',
+            descriptionundo:'',
+            yearundo:'',
+            durationundo:'',
+            priceundo:'',
+            locationundo:'',
+            imageundo:'',
+            linkundo:'', 
+            loading:true,
+            disciplesPrograms2:[],
           };
           
-        }
+        
   componentDidMount() {
       fetch('/api/DisciplesProgram/')
       .then(res => res.json())
@@ -68,23 +86,112 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
           .then(res => this.setState({ disciplesPrograms: [...this.state.disciplesPrograms, res.data.data] }));
           alert("The new motion has been added successfully");
       }
+      // Delete DisciplesProgram
+ delDisciplesProgram= (id,title,description,duration,location,price,year,image,link) => {
+  axios.delete('api/DisciplesProgram/'+id)
+  .then(res => this.setState({ disciplesPrograms: [...this.state.disciplesPrograms.filter(disciplesProgram => disciplesProgram._id !== id)] }));
+   this.setState({ titleundo:title,
+  descriptionundo:description,
+  yearundo:year,
+  durationundo:duration,
+  priceundo:price,
+  locationundo:location,
+  imageundo:image,
+  linkundo:link })
+  this.setState({deleted:true});
+}
+
+
+undo = () => {
+this.addDisciplesProgram(
+  this.state.titleundo,
+  this.state.descriptionundo,
+  this.state.durationundo,
+  this.state.locationundo,
+  this.state.priceundo,
+  this.state.yearundo, 
+  this.state.imageundo,
+  this.state.linkundo );
+}
+change1=()=>{
+this.setState({ deleted: false,updated:false ,created:false })
+}
+//Update DisciplesProgram
+updateDisciplesProgram = (id,title,description,duration,location,price,year,image,link) => {
+  axios.put('/api/DisciplesProgram/edit/'+id,
+ {
+  "title":title,
+"description":description,
+"duration":duration,
+"location":location,
+"price":price,
+"year":year,
+"image":image,
+"link":link
+ })
+ .then(res => { 
+   axios.get('api/DisciplesProgram')
+   .then(res => this.setState({ disciplesPrograms: [...this.state.disciplesPrograms, res.data.data] }));
+  //  .then(res => this.setState({ disciplesPrograms: res.data.data }))
+  // this.setState({updated:true});
+  });
+  //this.setState({updated:true});
+  
+
+}
+onChange1 = e =>  {
+  var file = e.target.files[0];
+  console.log( e.target.files[0])
+  var formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "zcwrt7qz");
+
+  axios
+    .post(
+      "https://api.cloudinary.com/v1_1/dpny1nhaq/image/upload",
+      formData,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      }
+    )
+    .then(res=>this.setState({image:res.data.secure_url}))     
+}
       render() {
+       
+        const headerStyle = {
+ 
+          color: '#FFDA00',
+          textShadow: '2px 2px #B83126',
+          textAlign: 'center',
+         // padding: '55px',
+          postion:'fixed',
+          left: '0',
+          width:'100%',
+          lineHeight: '1',
+          fontWeight: 'bold',
+          fontSize:'60px'
+        }
         const auth = this.props.usertype === "TIQadmin";
         if (auth) {
         return (
+          <>
           <div style={this.getStyle()}  >
         <div>
         <ToolbarOUT/>
-       
-        <button
-            className="btn"
-            style={{ position: "absolute", left: "20px", top: "63px",background:"#333" }}
-            onClick={() => {
-              this.handleClick();
-            }}
-          >
-            BACK
-          </button>
+        <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed', 
+                      fontWeight: 'bold',fontSize:'57px'}} >Add new Disciples Program</h1>
+        <input 
+                  type="Submit" 
+                  value="Back"
+                  className="btn"
+                 onClick={() => {
+                  this.handleClick();
+                }}
+                style={{ position: "absolute", left: "20px", top: "63px" }}
+
+      />
       </div>
       <form onSubmit={this.onSubmit} >
              <Grid container spacing={3}>
@@ -92,7 +199,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
             <input
                  type="text"
                  name="title" 
-                style={{flex: '10' , padding: '5px',color:"black"}}
+                style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
                  placeholder="title"
                  value={this.state.title}
                  onChange={this.onChange}
@@ -103,7 +210,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
           <textarea
                  type="text"
                  name="description" 
-                style={{flex: '10' , padding: '5px',color:"black",height:"53px"}}
+                style={{flex: '10' , padding: '5px',color:"black",height:"53px",background:"#E0E0E0"}}
                  placeholder="description"
                  value={this.state.description}
                  onChange={this.onChange}
@@ -117,7 +224,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
              <input
                  type="text"
                  name="duration" 
-                style={{flex: '10' , padding: '5px',color:"black"}}
+                style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
                  placeholder="duration"
                  value={this.state.duration}
                  onChange={this.onChange}
@@ -127,7 +234,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
         <input
                  type="text"
                  name="location" 
-                 style={{flex: '10' , padding: '5px',color:"black"}}
+                 style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
                  placeholder="location"
                  value={this.state.location}
                  onChange={this.onChange}
@@ -140,7 +247,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
              <input
                  type="text"
                  name="price" 
-                 style={{flex: '10' , padding: '5px',color:"black"}}
+                 style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
                  placeholder="price"
                  value={this.state.price}
                  onChange={this.onChange}
@@ -150,7 +257,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
         <input
                  type="text"
                  name="year" 
-                 style={{flex: '10' , padding: '5px',color:"black"}}
+                 style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
                  placeholder="year"
                  value={this.state.year}
                  onChange={this.onChange}
@@ -159,25 +266,32 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
         </Grid>
                 
                   <Grid container spacing={3}>
-             <Grid item xs={6}>
-             <input
-                 type="text"
-                 name="image" 
-                 style={{flex: '10' , padding: '5px',color:"black"}}
-                 placeholder="image"
-                 value={this.state.image}
-                 onChange={this.onChange}
-                 />
-        </Grid>
-        <Grid item xs={6}>
+             
+        <Grid item xs={12}>
         <input
                  type="text"
                  name="link" 
-                 style={{flex: '10' , padding: '5px',color:"black"}}
-                 placeholder="link"
+                 style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
+                 placeholder="Form link"
                  value={this.state.link}
                  onChange={this.onChange}
                  />
+                 <br></br>
+                 <h style={{fontWeight:"bold",opacity:"1",left:"44%",position:'relative',color:"black"}}>
+                   Disciples Program Image
+                 </h>
+                 <br></br> 
+                  <input 
+               id="file-input"
+               accept=".jpg,.png"
+               type="file" 
+               onChange={this.onChange1.bind(this)} 
+               color="black"
+               style={{opacity:"1",left:"43%",position:'relative',color:"black"}}
+               
+               />
+
+<br></br>   <br></br> 
         </Grid>
         <Grid item xs={12}>
           <input 
@@ -193,20 +307,42 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
             </form>
             <br></br>
             <br></br>
-            <div class="thumbnails">
-            {this.state.disciplesPrograms.map(disciplesProgram =>
-							<div class="box">
-							 <div class="inner">
-									<h3>{disciplesProgram.title}</h3>
-									<p> {disciplesProgram.description} </p>
-                
-								</div>
-							</div>)}
+            <h1 style={headerStyle}> Manage old Disciples Programs</h1>
           
-          </div>
-       
         </div>
-        
+        <DisciplesPrograms disciplesPrograms={this.state.disciplesPrograms}
+             delDisciplesProgram={this.delDisciplesProgram} addDisciplesProgram={this.addDisciplesProgram}
+            updateDisciplesProgram={this.updateDisciplesProgram}
+           />
+            
+          {this.state.deleted && <DelSimpleSnackbar change1={this.change1} undo={this.undo} /> }
+          {this.state.updated && <UpdateSimpleSnackbar change1={this.change1} undo={this.undo} /> }
+          {this.state.created && <CreateSimpleSnackbar change1={this.change1} undo={this.undo} /> }
+          <br></br><br></br><br></br>
+          <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+        </>
         )
       }
     }

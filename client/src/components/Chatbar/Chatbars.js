@@ -74,6 +74,31 @@ class Chatbars extends Component {
               </div>
             </div>
           </div>
+          <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div >
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+          
+
         </div>
       );
     }
@@ -81,32 +106,10 @@ class Chatbars extends Component {
     const auth = this.props.usertype === "TIQadmin";
     if (auth) {
       return (
-        <div style={this.getStyle()}>
+        <div >
           <div>
             <ToolbarOUT />
-            <Header />
-          </div>
-          <div class="inner">
-            <div class="thumbnails">
-              {this.state.chatbars.map(chatbar => (
-                <div class="box">
-                  <Link to={"/tryme/" + chatbar._id} class="image fit">
-                    <img src={Logo} alt="" />
-                  </Link>
-                  <div class="inner">
-                    <h3>{chatbar.date}</h3>
-                    <p>{chatbar.debateLiveTitle} </p>
-                    <p>{"Number of Responses: "}{chatbar.numberOfResponses} </p>
-                    <Link to={"/tryme/" + chatbar._id} class="button"  style={{background:"#202024 "}}>
-                      Debate it Now!
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <button
+            <button
             className="button"
              background = "#202024"
             style={{ position: "absolute", left: "20px", top: "63px" }}
@@ -114,7 +117,7 @@ class Chatbars extends Component {
               this.handleClickME();
             }}
           >
-            CREATE AND DELETE
+         Manage Debate Live
           </button>
           <div style={{ right: "0", top: "63px" }}>
             <button
@@ -148,16 +151,10 @@ class Chatbars extends Component {
               value={this.state.searchkey}
               onChange={this.onChange}
             />
-
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div style={this.getStyle()}>
-          <div>
-            <ToolbarOUT />
-            <Header />
+            <br></br>
+            <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed',
+                      fontWeight: 'bold',fontSize:'60px'}} > Let's Debate Live!  </h1>
+        
           </div>
           <div class="inner">
             <div class="thumbnails">
@@ -179,7 +176,42 @@ class Chatbars extends Component {
             </div>
           </div>
 
-          <div style={{ right: "0", top: "63px" }}>
+          
+
+          </div>
+          <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+          
+
+        </div>
+      );
+    } else {
+      return (
+        <div >
+          <div>
+            <ToolbarOUT />
+            <div style={{ right: "0", top: "63px" }}>
             <button
               class="button"
               style={{background:"#202024 "}}
@@ -211,9 +243,60 @@ class Chatbars extends Component {
               value={this.state.searchkey}
               onChange={this.onChange}
             />
+            <br></br>
+            <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed',
+                      fontWeight: 'bold',fontSize:'60px'}} > Let's Debate Live!  </h1>
+          </div>
+          <div class="inner">
+            <div class="thumbnails">
+              {this.state.chatbars.map(chatbar => (
+                <div class="box">
+                  <Link to={"/tryme/" + chatbar._id} class="image fit">
+                    <img src={Logo} alt="" />
+                  </Link>
+                  <div class="inner">
+                    <h3>{chatbar.date}</h3>
+                    <p>{chatbar.debateLiveTitle} </p>
+                    <p>{"Number of Responses: "}{chatbar.numberOfResponses} </p>
+                    <Link to={"/tryme/" + chatbar._id} class="button"  style={{background:"#202024 "}}>
+                      Debate it Now!
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+       
 
           </div>
+          <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+          
+
         </div>
+        
       );
     }
   }

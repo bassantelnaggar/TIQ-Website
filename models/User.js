@@ -6,7 +6,7 @@ const userSchema = new Schema({
   type: {
     type: String,
     required: true,
-    enumm:["disciple","member","parent","TIQamin","alumni"]
+    enumm: ["disciple", "member", "parent", "TIQamin", "alumni"]
   },
   firstName: {
     type: String,
@@ -33,7 +33,7 @@ const userSchema = new Schema({
   },
   house: {
     type: String,
-    enum:["Pegasus","Orion","Neutral"]
+    enum: ["Pegasus", "Orion", "Neutral"]
   },
   score: {
     type: Number,
@@ -48,17 +48,20 @@ const userSchema = new Schema({
 
   tiqStatus: {
     type: String,
-   enum: ["House Leader","BOA","Supervisor","Disciples House Leader",""]
+    enum: ["House Leader", "BOA", "Supervisor", "Disciples House Leader", ""]
   },
-  supervisorType:{
-    type:String,
-    enum:["Marketing","Fundraising","Logistics","Relations","Media Design"]
+  supervisorType: {
+    type: String,
+    enum: ["Marketing", "Fundraising", "Logistics", "Relations", "Media Design"]
   },
-  profilePicture:{
-    type:String,
-    default: "https://res.cloudinary.com/dpny1nhaq/image/upload/v1560854813/default_profile_fpwmcd.png"
+  profilePicture: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/dpny1nhaq/image/upload/v1560854813/default_profile_fpwmcd.png"
   },
- 
+
+  resetPasswordToken: String, // used for after password reset is submitted
+  resetPasswordExpires: Date
 });
 
 module.exports = User = mongoose.model("users", userSchema);
