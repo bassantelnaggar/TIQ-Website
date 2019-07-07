@@ -242,13 +242,21 @@ class Debates extends Component {
               <Typography paragraph>{this.state.error}</Typography>
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleCreateClick} style={{background:"#333"}}>
-                Cancel
-              </Button>
-              <Button onClick={() => this.createDebate()} style={{background:"#333"}}>
-                Create
-                <CloudUploadIcon className={classes.rightIcon} />
-              </Button>
+            <input 
+                  type="Submit" 
+                  value="Cancel"
+                  className="btn"
+                  onClick={this.handleCreateClick}
+                  />
+             <input 
+                  type="Submit" 
+                  value="Create"
+                  className="btn"
+                  onClick={() => this.createDebate()}
+                  />
+            
+              
+                
             </DialogActions>
           </Dialog>
 
@@ -308,8 +316,10 @@ class Debates extends Component {
               Search by Category
               <SearchIcon />
             </Button>
-           
+            <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'relative', 
+              marginTop:"-150px",fontWeight: 'bold',fontSize:'60px'}} > Our Debates  </h1>
           </div>
+          
           <div class="inner" >
             <div class="thumbnails" >
             {this.state.debates.map(debate => (
@@ -402,7 +412,8 @@ class Debates extends Component {
               Search by Category
               <SearchIcon />
             </Button>
-           
+            <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'relative', 
+              marginTop:"-70px",fontWeight: 'bold',fontSize:'60px'}} > Our Debates  </h1>
           </div>
 
 

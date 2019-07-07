@@ -119,16 +119,16 @@ class CustomizedTable extends React.Component {
               
               <TableRow className={classes.score} key={score._id}>
              
-                <CustomTableCell component="th" scope="row">
+                <CustomTableCell component="th" scope="row" style={{fontWeight:"bold",fontSize:"20px"}}>
                   {score.firstName} {" "} {score.lastName}
                 </CustomTableCell>
-                <CustomTableCell align="center">
+                <CustomTableCell align="center"style={{fontWeight:"bold"}}>
                   {score.house} 
                 </CustomTableCell>
-                <CustomTableCell align="center">
+                <CustomTableCell align="center" style={{fontWeight:"bold"}}>
                    {score.type}
                 </CustomTableCell>
-                <CustomTableCell align="right">
+                <CustomTableCell align="right" style={{fontWeight:"bold",fontSize:"15px"}}>
                 
                  {score.score} {"  "} 
                <a onClick={() => {
@@ -190,16 +190,16 @@ class CustomizedTable extends React.Component {
           <TableBody>
             {this.props.scores.map(score => (
               <TableRow className={classes.score} key={score._id}>
-               <CustomTableCell component="th" scope="row">
+               <CustomTableCell component="th" scope="row"style={{fontWeight:"bold",fontSize:"20px"}}>
                   {score.firstName} {" "} {score.lastName}
                 </CustomTableCell>
-                <CustomTableCell align="center">
+                <CustomTableCell align="center"style={{fontWeight:"bold"}}>
                   {score.house} 
                 </CustomTableCell>
-                <CustomTableCell align="center">
+                <CustomTableCell align="center" style={{fontWeight:"bold"}}>
                    {score.type}
                 </CustomTableCell>
-                <CustomTableCell align="right">
+                <CustomTableCell align="right"style={{fontWeight:"bold",fontSize:"15px"}}>
                 
                  {score.score} {"  "} 
                 

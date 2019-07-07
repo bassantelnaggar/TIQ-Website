@@ -162,8 +162,8 @@ onChange1 = e =>  {
        
         const headerStyle = {
  
-          color: '#B6B6B6',
-          textShadow: '2px 2px #FFDA00',
+          color: '#FFDA00',
+          textShadow: '2px 2px #B83126',
           textAlign: 'center',
          // padding: '55px',
           postion:'fixed',
@@ -180,6 +180,8 @@ onChange1 = e =>  {
           <div style={this.getStyle()}  >
         <div>
         <ToolbarOUT/>
+        <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed', 
+                      fontWeight: 'bold',fontSize:'57px'}} >Add new Disciples Program</h1>
         <input 
                   type="Submit" 
                   value="Back"
@@ -197,7 +199,7 @@ onChange1 = e =>  {
             <input
                  type="text"
                  name="title" 
-                style={{flex: '10' , padding: '5px',color:"black"}}
+                style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
                  placeholder="title"
                  value={this.state.title}
                  onChange={this.onChange}
@@ -208,7 +210,7 @@ onChange1 = e =>  {
           <textarea
                  type="text"
                  name="description" 
-                style={{flex: '10' , padding: '5px',color:"black",height:"53px"}}
+                style={{flex: '10' , padding: '5px',color:"black",height:"53px",background:"#E0E0E0"}}
                  placeholder="description"
                  value={this.state.description}
                  onChange={this.onChange}
@@ -222,7 +224,7 @@ onChange1 = e =>  {
              <input
                  type="text"
                  name="duration" 
-                style={{flex: '10' , padding: '5px',color:"black"}}
+                style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
                  placeholder="duration"
                  value={this.state.duration}
                  onChange={this.onChange}
@@ -232,7 +234,7 @@ onChange1 = e =>  {
         <input
                  type="text"
                  name="location" 
-                 style={{flex: '10' , padding: '5px',color:"black"}}
+                 style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
                  placeholder="location"
                  value={this.state.location}
                  onChange={this.onChange}
@@ -245,7 +247,7 @@ onChange1 = e =>  {
              <input
                  type="text"
                  name="price" 
-                 style={{flex: '10' , padding: '5px',color:"black"}}
+                 style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
                  placeholder="price"
                  value={this.state.price}
                  onChange={this.onChange}
@@ -255,7 +257,7 @@ onChange1 = e =>  {
         <input
                  type="text"
                  name="year" 
-                 style={{flex: '10' , padding: '5px',color:"black"}}
+                 style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
                  placeholder="year"
                  value={this.state.year}
                  onChange={this.onChange}
@@ -269,12 +271,12 @@ onChange1 = e =>  {
         <input
                  type="text"
                  name="link" 
-                 style={{flex: '10' , padding: '5px',color:"black"}}
+                 style={{flex: '10' , padding: '5px',color:"black",background:"#E0E0E0"}}
                  placeholder="Form link"
                  value={this.state.link}
                  onChange={this.onChange}
                  />
-                 <br></br> <br></br>
+                 <br></br>
                  <h style={{fontWeight:"bold",opacity:"1",left:"44%",position:'relative',color:"black"}}>
                    Disciples Program Image
                  </h>
@@ -288,6 +290,8 @@ onChange1 = e =>  {
                style={{opacity:"1",left:"43%",position:'relative',color:"black"}}
                
                />
+
+<br></br>   <br></br> 
         </Grid>
         <Grid item xs={12}>
           <input 

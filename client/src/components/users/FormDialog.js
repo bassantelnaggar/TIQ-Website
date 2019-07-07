@@ -111,6 +111,7 @@ class FormDialog extends React.Component {
         bio: this.state.bio,
         birthDate: this.state.birthDate,
         clubs: this.state.clubs,
+        score: this.state.score,
         din: this.state.din,
         dor: this.state.dor
       })
@@ -135,7 +136,7 @@ class FormDialog extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle class="form-dialog-title ">Update Profile</DialogTitle>
+          <DialogTitle class="form-dialog-title "> <br></br> <q style={{marginLeft:"5%"}} >Update Profile</q></DialogTitle>
           <DialogContent>
           <form className={classes.form} >
 
@@ -336,30 +337,44 @@ class FormDialog extends React.Component {
                   </MenuItem>
                 ))}
       </TextField>
+     
+            </FormControl>
+
+            </div>}
+            
+            {this.props.user.type=="parent" && <div>
+              {/* parent */}
+              <FormControl margin="normal"  fullWidth>
+              <p>
+                Nothing to Update for parents
+              </p>
             </FormControl>
 
             </div>}
             </form>
 
+            {/* </form> */}
             <Typography paragraph>{this.state.Error}</Typography> 
           </DialogContent>
           <DialogActions>
-            <button 
-            class="btn" 
-            style={{background:"#333"}}
-              // class="Form-Dialo-Button"
-              onClick={this.handleClose}
-            >
-              CANCEL
-            </button>
-            <button class="btn" style={{background:"#333"}}  onClick={this.props.update.bind(this,this.props.user._id,this.state.type,this.state.house,this.state.din,this.state.dor,this.state.tiqStatus,this.state.supervisorType,this.state.score)}>
-              UPDATE
-            </button>
+          <input 
+                  type="Submit" 
+                  value="CANCEL"
+                  className="btn"
+                  onClick={this.handleClose}
+                  />
+                   <input 
+                  type="Submit" 
+                  value="UPDATE"
+                  className="btn"
+                  onClick={this.props.update.bind(this,this.props.user._id,this.state.type,this.state.house,this.state.din,this.state.dor,this.state.tiqStatus,this.state.supervisorType,this.state.score)}
+                  />
+          
             
           </DialogActions>
         </Dialog>
       </div>
-      // </main>
+     
 
     );
   }

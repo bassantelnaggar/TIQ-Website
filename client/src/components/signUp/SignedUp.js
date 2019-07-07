@@ -102,19 +102,21 @@ class SignedUp extends Component {
         <div >
         <ToolbarOUT />
         <div/>
-        <button
-            className="btn"
-            style={{ position: "absolute", left: "20px", top: "63px",background:"#333" }}
-            onClick={() => {
-              this.handleClickME();
-            }}
-          >
-            BACK
-          </button>
+        <input 
+                  type="Submit" 
+                  value="Back"
+                  className="btn"
+                  onClick={() => {
+                    this.handleClickME();
+                  }}
+                  style={{ position: "absolute", left: "20px", top: "63px"}}
+                  />
+       
           <div>
-         
-            <h1 style={headerStyle}> NEW MEMBERS <br></br>CONFIRMATION LIST </h1>      
-            <br></br> <br></br><br></br><br></br><br></br> <br></br><br></br>
+          <br></br>
+          <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed',
+                      fontWeight: 'bold',fontSize:'60px'}} >NEW MEMBERS <br></br>CONFIRMATION LIST  </h1>
+            
             <SignedUps  SignedUp={this.state.SignedUp} decline={this.decline} accept={this.accept} />
              
           </div>

@@ -87,11 +87,16 @@ class Articles extends Component {
           >
             BACK
           </button>
-      <h1>add new Article</h1>
+          <br></br>
+          <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'left', postion:'fixed', marginLeft: '200px',
+                      fontWeight: 'bold',fontSize:'60px'}} >add new Article </h1>
+      {/* <h1>add new Article</h1> */}
       <AddArticle addArticle = {this.addArticle} />
-      <h1>delete article</h1>
+      <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'left', postion:'fixed', marginLeft: '200px',
+                      fontWeight: 'bold',fontSize:'60px'}} >Manage Articles </h1>
+      {/* <h1>delete article</h1> */}
       <DeleteArticle deleteArticle ={this.deleteArticle} allArticles={this.state.allArticles} updateComment = {this.updateComment}/>
-      <h1>update articles</h1>
+      {/* <h1>update articles</h1> */}
       <UpdateArticlehelper allArticles ={this.state.allArticles} updateArticle = {this.updateArticle} />
       </div>
       <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>

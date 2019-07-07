@@ -56,7 +56,7 @@ export class DisciplesProgramItem extends Component {
       </label>
       <label>
       <h1>Description</h1>
-          <input 
+          <textarea 
               type="text"
               name='description'
               value={this.state.description}    
@@ -110,24 +110,6 @@ export class DisciplesProgramItem extends Component {
               />
       </label>
       <label>
-      {/* <h1>Image</h1>
-      <input 
-               id="file-input"
-               accept=".jpg,.png"
-               type="file" 
-               onChange={this.props.onChangepicture.bind(this)} 
-               color="black"
-               style={{opacity:"1",color:"black"}}
-               
-               /> */}
-          {/* <input 
-              type="text"
-              name='image'
-              value={this.state.image}    
-              style={{ color:"black",width:"160%"}}
-              placeholder="Edit image ..."
-              onChange={this.onChange}
-              /> */}
       </label>
       <label>
       <h1>Form Link</h1>
@@ -141,7 +123,7 @@ export class DisciplesProgramItem extends Component {
               />
       </label>
       <br></br>
-      <input 
+              <input 
                   type="Submit" 
                   value="Update"
                   className="button"
@@ -150,10 +132,20 @@ export class DisciplesProgramItem extends Component {
                 
 
       />
+      {"    "}
+       <input 
+                  type="Submit" 
+                  value="Delete"
+                  className="button"
+                  onClick={this.props.delDisciplesProgram.bind(this,_id,this.state.title,
+                    this.state.description,this.state.duration,this.state.location,this.state.price,this.year,this.state.image,this.state.link)}
+                
+
+      />
     
-     
+{/*      
       <DeleteIcon  onClick={this.props.delDisciplesProgram.bind(this,_id,this.state.title,
-        this.state.description,this.state.duration,this.state.location,this.state.price,this.year,this.state.image,this.state.link)}/> 
+        this.state.description,this.state.duration,this.state.location,this.state.price,this.year,this.state.image,this.state.link)}/>  */}
   </form>
         
   
