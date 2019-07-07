@@ -61,41 +61,46 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
         const auth = this.props.usertype === "TIQadmin";
         if (auth) {
         return (
-          <div style={this.getStyle()}  >
+          <div   >
         <div>
         <ToolbarOUT/>
-        <Header />
-        <button
-            className="btn"
-            style={{ position: "absolute", left: "20px", top: "63px",background:"#333" }}
-            onClick={() => {
-              this.handleClick();
-            }}
-          >
-            BACK
-          </button>
+        <input 
+                  type="Submit" 
+                  value="Back"
+                  className="btn"
+                  onClick={() => {
+                    this.handleClick();
+                  }}
+                  style={{ position: "absolute", left: "20px", top: "63px"}}
+                  />
+          <br></br>
+        <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'left', postion:'fixed', marginLeft: '200px',
+                      fontWeight: 'bold',fontSize:'60px'}} >Add new Debate Live  </h1>
+        
       </div>
-      <form onSubmit={this.onSubmit} style= {{display: 'flex'}}>
+      <form onSubmit={this.onSubmit}>
                 <input
                  type="text"
                  name="debateLiveTitle" 
-                 style={{flex: '10' , padding: '5px',color:"black"}}
+                //  style={{flex: '10' , padding: '5px',color:"black",width:'70%',marginLeft:"20%"}}
+                 style={{width:"70%",marginLeft:"13%",background:"#E0E0E0",color:"black"}}
                  placeholder="Add a new Debate live..."
                  value={this.state.debateLiveTitle}
                  onChange={this.onChange}
                  />
-                 
+                 <br></br>
                 <input 
                   type="Submit" 
                   value="Create"
                   className="btn"
                   onClick= {this.addDebateLive}
-                  style={{flex: '1'}}
+                  style={{flex: '1',marginLeft:"63%",width:"20%"}}
                   />
                   
             </form>
             <br></br>
-
+            <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'left', postion:'fixed', marginLeft: '200px',
+                      fontWeight: 'bold',fontSize:'60px'}} >Manage Debate Live  </h1>
             <div class="thumbnails">
       {this.state.chatbars.map(chatbar =>
 							<div class="box">
@@ -117,6 +122,29 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
 							</div>)}
           
           </div>
+          <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
        
         </div>
         

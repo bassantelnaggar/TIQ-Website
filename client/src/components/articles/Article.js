@@ -27,13 +27,14 @@ class Article extends Component{
             
             <div>
             <header style={headerStyle}>{this.props.article.title}</header>
+            
                 <p>{this.props.article.description} <br></br> {" on "} {this.props.article.date} </p>
                 <p1>{" By "} {this.props.article.author}</p1>
                 {/* <Link to ="/getUsers"> {" By "} {this.props.article.author} </Link> */}
                 <br></br>
                 <br></br>
                 <Link to={"/articlebody/" + this.props.article._id} className="button" background = "#202024">
-                      Read More !
+                      Read More!
                     </Link>
                 {/* <p>  {"comments :"} {s}</p> */}
                 <div>

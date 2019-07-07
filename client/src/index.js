@@ -32,7 +32,7 @@ import "typeface-roboto";
 import { Provider } from "react-redux";
 import store from "./store";
 import SignedUp from "./components/signUp/SignedUp";
-
+import CreateDisciplePage from "./components/DisciplesProgram/createDisciple";
 import { CreateUser } from "./components/users/CreateUser";
 
 import ourPeople from "./pages/Homee/ourPeople/OurPeople";
@@ -46,8 +46,11 @@ import { saveState } from "./localStorage";
 import SearchDebateLive from "./components/Chatbar/searchChatbBar";
 import DisciplesProgram from "./components/DisciplesProgram/DisciplesProgram";
 import SearchUser from "./components/users/searchUser";
-import profile from "../src/components/users/profile"
-import About from "../src/components/about/About"
+import profile from "../src/components/users/profile";
+import About from "../src/components/about/About";
+import ForgotPassword from "../src/components/signin/ForgotPassword";
+import ResetPassword from "../src/components/signin/ResetPassword";
+
 //import DisciplesProgram from "./components/DisciplesProgram/DisciplesProgram";
 
 store.subscribe(() => {
@@ -60,23 +63,27 @@ ReactDOM.render(
       <div>
         <hr />
         <Switch>
-          <Route exact path="/" component={App} />
+          <Route exact path="/" component={Homee} />
 
           <Route exact path="/Homee" component={Homee} />
           <Route exact path="/ourPeople" component={ourPeople} />
-          <Route exact path="/articlebody/:key" component={articlebody}/>
+          <Route exact path="/articlebody/:key" component={articlebody} />
           <Route exact path="/AllEvents" component={AllEvents} />
           <Route exact path="/TIQHome" component={Homee} />
           <Route exact path="/Score" component={Score} />
           <Route exact path="/createuser" component={CreateUser} />
           <Route exact path="/getUsers" component={getUsers} />
-          <Route exact path="/about" component={About}/>
-          <Route exact path= "/Profile" component={profile}/>
+          <Route exact path="/about" component={About} />
+          <Route exact path="/Profile" component={profile} />
           <Route exact path="/debates" component={Debates} />
           <Route exact path="/tryme/:key" component={tryme} />
           <Route exact path="/DisciplesProgram" component={DisciplesProgram} />
           <Route exact path="/SignedUp" component={SignedUp} />
-
+          <Route
+            exact
+            path="/createdisciplePage"
+            component={CreateDisciplePage}
+          />
           <Route
             exact
             path="/debates/searchbydate/:date"
@@ -95,7 +102,7 @@ ReactDOM.render(
             path="/chatbars/search/:title"
             component={SearchDebateLive}
           />
-           <Route
+          <Route
             exact
             path="/getUsers/search/:firstName"
             component={SearchUser}
@@ -115,6 +122,9 @@ ReactDOM.render(
           <Route exact path="/adminedits" component={AdminEdits} />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signout" component={SignOut} />
+          <Route exact path="/ForgotPassword" component={ForgotPassword} />
+          <Route exact path="/reset/:token" component={ResetPassword} />
+
           <Route component={Notfound} />
         </Switch>
       </div>

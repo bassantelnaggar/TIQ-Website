@@ -5,6 +5,10 @@ import "./About.css"
 import Toolbar from "../../layout/Toolbar/Toolbar"
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 //import { yellowA100 } from 'material-ui/styles/colors';
+import { connect } from "react-redux";
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 class About extends Component { 
       state = {
          BOAs : [],
@@ -297,6 +301,29 @@ class About extends Component {
       </div>
     {/* </div>    */}
     </div>
+    <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div >
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
     </div>
     )}
     else{
@@ -348,7 +375,7 @@ class About extends Component {
          </div>
          
          {/* <div class = "col s8" > */}
-         <div class="container" >
+         <div class="container2" >
                                    {/* <div class="container"> */}
                                        {LSRS}     
                                    {/* </div> */}
@@ -390,10 +417,39 @@ class About extends Component {
          </div>
        {/* </div>    */}
        </div>
+       <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div >
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
        </div>
        )
     }
 
   }
 }
-    export default About  
+
+const Form = connect(
+    mapStateToProps,
+    null
+  )(About);
+  
+  export default Form;

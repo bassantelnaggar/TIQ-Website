@@ -83,9 +83,9 @@ class Articles extends Component {
               this.handleClick();
             }}
           >
-            CREATE AND DELETE
+            Manage Articles
           </btn>
-    
+          <br></br><br></br>
       <AllArticles allArticles = {this.state.allArticles}  />
       {/* updateComment = {this.updateComment} */}
       {/* <h1>add new comment</h1>
@@ -111,6 +111,7 @@ class Articles extends Component {
         
     
       <AllArticles allArticles = {this.state.allArticles}  />
+      
       </div>
     );
   }

@@ -22,6 +22,7 @@ class ourPeople extends Component {
       if (this.props.user.house == "Orion") {
         return (
           <div class="maincontainer">
+        
            {/* <div class="row"> */}
             <div class="thecard">
               <div class="thefront">

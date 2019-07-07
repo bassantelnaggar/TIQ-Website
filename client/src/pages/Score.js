@@ -45,7 +45,7 @@ export class Score extends Component {
           <ToolbarOUT />
 
           <main className="Score__page" style={{ marginTop: "64px" }}>
-            <header>Debaters Scores!!</header>
+            <header> <br></br> </header>
           </main>
 
           <CustomizedTable UpdateScore={this.UpdateScore} scores={this.state.scores} />
@@ -53,25 +53,54 @@ export class Score extends Component {
       );
     } else {
       return (
+        <>
         <div>
-           <Toolbar />
+          <Toolbar/>
+          </div>
           <div class="thumbnails">
             <div class="box">
               <div class="inner">
                 <h3>You have to sign in first!</h3>
+               
                 <button
                   variant="contained"
                   onClick={() => {
                     this.handleClick();
                   }}
+                  //onClick={() => (document.location = "/signin")}
                   className="btn"
                 >
                   Sign In
                 </button>
+                
               </div>
             </div>
           </div>
-        </div>
+         
+          <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+        </>
       );
     }
   }

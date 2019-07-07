@@ -136,11 +136,11 @@ export class ArticleBody extends Component {
       }
       
       const classes = useStyles();
-
+      if (this.props.token === null) {
     return (
      <div >
           <div>
-          <ToolbarOUT />
+          <Toolbar/>
           <button
             className="button"
             style={{ position: "absolute", left: "20px", top: "63px" }}
@@ -153,47 +153,13 @@ export class ArticleBody extends Component {
 
         </div>
         <header style={headerStyle}> {this.state.articleee.title}</header>
-        <h style={authStyle}> {"BY: "}{this.state.articleee.author}</h>
+        <h style={authStyle}> {"By: "}{this.state.articleee.author}</h>
         {/* <img src={Blog} alt="" style={imageStyle}  /> */}
         {/* <header style={descStyle}>  {this.state.articleee.description}</header> */}
         <p style={bodyStyle}> {this.state.articleee.body}</p>
         <Divider variant="dense" component="li" />
         <br></br>
-        {/* <h1 style={commStyle}> {"COMMENTS"}</h1> */}
-        
-        <form onSubmit={this.onSubmit} >
-           <textarea
-                type="text"
-                name="commments"
-                style={{
-                    color: "black",
-                    height: "100px",
-                    width:"60%",
-                    marginLeft:'9%'
-                }}
-                placeholder="Write your comment here..."
-                value={ this.state.commments}
-                onChange={this.onChange}
-              />
-              <br></br>
-             <input
-                type="Submit"
-                value=" Comment"
-                className="button"
-                style={{ 
-                  color: '#E2A325',
-                  textAlign: 'center',
-                  padding: '35px',
-                 // postion:'fixed',
-                  marginLeft:'52%',
-                  width:'17%',
-                  lineHeight: '0',
-                  }}
-                onClick={this.addcomment.bind(this, {
-                  commments: [this.state.user.firstName +" "+ this.state.user.lastName ,this.state.commments]
-                })}
-            
-              /> </form>
+         <h1 style={commStyle}> {"COMMENTS"}</h1> 
         {this.state.allComments.map(commenttt => (
           <List className={classes.root} style={{background:'white',width:"60%",  marginLeft:'9%'}}>
           <ListItem alignItems="flex-start" style={{background:'white'}}>
@@ -211,7 +177,7 @@ export class ArticleBody extends Component {
                   className={classes.inline}
                   style={{color:"black",fontWeight:'bold'}}
                 >
-                  {"BY: "} {commenttt[0]}
+                  {"By: "} {commenttt[0]}
                   {/* {"BY: "}{ this.state.user.firstName +" "+ this.state.user.lastName} */}
                  
                 </Typography>
@@ -228,11 +194,154 @@ export class ArticleBody extends Component {
               <br></br>
               <br></br>
               <br></br>
-              
+              <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
       
       </div>
     );
   }
+  else{
+    return (
+      <div >
+           <div>
+           <ToolbarOUT />
+           <button
+             className="button"
+             style={{ position: "absolute", left: "20px", top: "63px" }}
+             onClick={() => {
+               this.handleClick();
+             }}
+           >
+             BACK
+           </button>
+ 
+         </div>
+         <header style={headerStyle}> {this.state.articleee.title}</header>
+         <h style={authStyle}> {"By: "}{this.state.articleee.author}</h>
+         {/* <img src={Blog} alt="" style={imageStyle}  /> */}
+         {/* <header style={descStyle}>  {this.state.articleee.description}</header> */}
+         <p style={bodyStyle}> {this.state.articleee.body}</p>
+         <Divider variant="dense" component="li" />
+         <br></br>
+         {/* <h1 style={commStyle}> {"COMMENTS"}</h1> */}
+         
+         <form onSubmit={this.onSubmit} >
+            <textarea
+                 type="text"
+                 name="commments"
+                 style={{
+                     color: "black",
+                     height: "100px",
+                     width:"60%",
+                     marginLeft:'9%'
+                 }}
+                 placeholder="Write your comment here..."
+                 value={ this.state.commments}
+                 onChange={this.onChange}
+               />
+               <br></br>
+              <input
+                 type="Submit"
+                 value=" Comment"
+                 className="button"
+                 style={{ 
+                   color: '#E2A325',
+                   textAlign: 'center',
+                   padding: '35px',
+                  // postion:'fixed',
+                   marginLeft:'52%',
+                   width:'17%',
+                   lineHeight: '0',
+                   }}
+                 onClick={this.addcomment.bind(this, {
+                   commments: [this.state.user.firstName +" "+ this.state.user.lastName ,this.state.commments]
+                 })}
+             
+               /> </form>
+         {this.state.allComments.map(commenttt => (
+           <List className={classes.root} style={{background:'white',width:"60%",  marginLeft:'9%'}}>
+           <ListItem alignItems="flex-start" style={{background:'white'}}>
+           {/* <ListItemAvatar>
+             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+           </ListItemAvatar> */}
+           <ListItemText
+            style={{color:"black"}}
+             primary= {commenttt[1]}
+             secondary={
+               <React.Fragment>
+                 <Typography
+                   component="span"
+                   variant="body2"
+                   className={classes.inline}
+                   style={{color:"black",fontWeight:'bold'}}
+                 >
+                   {"By: "} {commenttt[0]}
+                   {/* {"BY: "}{ this.state.user.firstName +" "+ this.state.user.lastName} */}
+                  
+                 </Typography>
+               </React.Fragment>
+             }
+           />
+         </ListItem>
+         <Divider variant="dense" component="li" />
+       
+          </List>
+         ))}  
+         
+       
+         <br></br>
+       
+               <br></br>
+               <br></br>
+               <br></br>
+               <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+       
+       </div>
+     );
+  }}
 }
 
 const Form = connect(
