@@ -98,15 +98,7 @@ class SignUp extends React.Component {
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
-  redirect =() => {
-    return  <Link to="/TIQHome" /> 
-    };
-  // redirect2 =() => {
-  //   if(this.state.redirect=="true")
-  //    return  <Link to="/" /> 
-  //   //this.setState({redirect:"false"})
-
-  // };
+ 
   render() {
     const { classes } = this.props;
     return (
@@ -440,39 +432,6 @@ class SignUp extends React.Component {
                  DEBATE NOW!
               </Link>
 
-            {/* <Button
-              fullWidth
-              style = {{background: '#410c12'}}
-              variant="contained"
-              // color="primary"
-              //href="/signin"
-              onClick={() => 
-                
-                this.redirect()
-
-                //  function(event){
-                  // this.props.addUser.bind(
-                  //   this,
-                  //   this.state.type,
-                  //   this.state.firstName,
-                  //   this.state.lastName,
-                  //   this.state.birthDate,
-                  //   this.state.bio,
-                  //   this.state.email,
-                  //   this.state.password,
-                  //   this.state.house,
-                  //   this.state.din,
-                  //   this.state.dor,
-                  //   this.state.tiqStatus,
-                  //   this.state.supervisorType
-                  // );
-               }
-                
-              
-            // }
-            >
-              DEBATE NOW!
-            </Button> */}
           </form>
           
         </Paper>
