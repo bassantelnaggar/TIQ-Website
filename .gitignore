@@ -2,9 +2,5 @@
 node_modules
 tmp.js
 client/node_modules
-<<<<<<< HEAD
-=======
-# client/public
->>>>>>> bd726677777501f7cccbea5257e8789812c0739c
 .env
 package-lock.json
