@@ -1,6 +1,4 @@
 const express = require("express");
-const Joi = require("joi");
-const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
@@ -536,7 +534,7 @@ router.put("/update/:id", async (req, res) => {
       }
     case "TIQadmin":
       try {
-        const isUserValidated = TIQadminValidator.TIQadminValidation(req.body);
+        const isUserValidated = TIQadminValidator.updateTIQadmin(req.body);
 
         if (isUserValidated.error)
           return res

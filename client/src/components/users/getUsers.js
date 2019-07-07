@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import axios from "axios";
 import DeleteUser from "./DeleteUser";
-import DetailedExpansionPanel from "./DetailedExpansionPanel";
-import FormDialog from "./FormDialog";
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
@@ -69,15 +67,7 @@ class GetUsers extends Component {
     this.props.history.push("/signin");
   };
 
-  update =  (id,
-    type,
-    house,
-    din,
-    dor,
-    tiqStatus,
-    supervisorType,
-    score
-    ) => {
+  update =  (id,type,house,din,dor,tiqStatus,supervisorType,score) => {
       console.log(type)
       console.log(house)
       console.log(din)
@@ -124,12 +114,6 @@ class GetUsers extends Component {
     }
   ;
 
-    // if (Object.keys(update.data)[0] === "err")
-    //   this.setState({ Error: "Invalid/Missing Information" });
-    // else window.location.reload();
-    /*
-     * axios ... put whatver using this.state.firstName, this.staet.lastName
-     */
   };
 
   render() {

@@ -62,9 +62,9 @@ const toolbar = props => (
           <li>
             <Link to="/contents">Announcements</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/about">About</Link>
-          </li>
+          </li> */}
           <li>
           <Link to="/ContactUs">Contact Us</Link>
           </li>
