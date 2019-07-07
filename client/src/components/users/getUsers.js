@@ -191,18 +191,20 @@ class GetUsers extends Component {
         <ToolbarOUT />
       
         <div className="center-div">
-          <h1
-            style={{
-              textAlign: "center",
-              position: "relative",
-
-              fontSize: "50px"
-            }}
-          >
-            OUR PEOPLE{" "}
-          </h1>
+        <input 
+                  type="Submit" 
+                  value="Confirm New Memebers"
+                  className="btn"
+                  onClick={() => {
+                    this.handleClick();
+                  }}
+                  style={{ position: "absolute", left: "20px", top: "63px"}}
+                  />
+                  <br></br>
+        <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed', 
+                      fontWeight: 'bold',fontSize:'75px'}} >Our People</h1>
          
-          <TextField
+          {/* <TextField
               id="selecteduser"
               label=  {"Search User"}
               type= "textField"
@@ -221,16 +223,10 @@ class GetUsers extends Component {
               Search User 
               <SearchIcon />
             </Button>
-            
+             */}
           <ul>
-          <Button
-            style={{background:"#333", left: "-615px", top: "-195px"}}
-            onClick={() => {
-              this.handleClick();
-            }}
-          >
-            Confirm New Memebers
-          </Button>
+         
+          
             {this.state.users && (
               <DeleteUser
                 users={this.state.users}
@@ -272,18 +268,11 @@ class GetUsers extends Component {
         <ToolbarOUT />
         
         <div className="center-div">
-          <h1
-            style={{
-              textAlign: "center",
-              position: "relative",
-
-              fontSize: "50px"
-            }}
-          >
-            OUR PEOPLE{" "}
-          </h1>
+        <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed', 
+                      fontWeight: 'bold',fontSize:'75px'}} >Our People</h1>
+         
     
-          <TextField
+          {/* <TextField
               id="selecteduser"
               label=  {"Search User"}
               type= "textField"
@@ -301,7 +290,7 @@ class GetUsers extends Component {
             >
               Search User 
               <SearchIcon />
-            </Button>
+            </Button> */}
           <ul>
             {this.state.users && (
               <DeleteUser

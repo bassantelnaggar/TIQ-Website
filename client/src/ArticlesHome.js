@@ -83,7 +83,7 @@ class Articles extends Component {
               this.handleClick();
             }}
           >
-            CREATE AND DELETE
+            Manage Articles
           </btn>
           <br></br><br></br>
       <AllArticles allArticles = {this.state.allArticles}  />

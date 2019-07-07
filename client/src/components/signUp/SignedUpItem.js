@@ -116,8 +116,22 @@ class SignedUpItem extends Component {
         </ExpansionPanelDetails>
         <Divider />
         <ExpansionPanelActions>
-        <button  className="btn" style={btnStyle} onClick={this.props.accept.bind(this,_id)} >Accept</button>
-          <button  className="btn" style={btnStyle} onClick={this.props.decline.bind(this,_id)} >Decline</button>
+        <input 
+                  type="Submit" 
+                  value="Accept"
+                  className="btn"
+                  onClick={this.props.accept.bind(this,_id)}
+                 
+                  />
+                  {" "}
+        <input 
+                  type="Submit" 
+                  value="Decline"
+                  className="btn"
+                  onClick={this.props.decline.bind(this,_id)}
+            
+                  />
+       
         </ExpansionPanelActions>
       </ExpansionPanel>
     </div>

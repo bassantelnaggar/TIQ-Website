@@ -375,7 +375,7 @@ class About extends Component {
          </div>
          
          {/* <div class = "col s8" > */}
-         <div class="container" >
+         <div class="container2" >
                                    {/* <div class="container"> */}
                                        {LSRS}     
                                    {/* </div> */}
