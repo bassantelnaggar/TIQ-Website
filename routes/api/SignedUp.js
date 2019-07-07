@@ -50,8 +50,8 @@ router.post("/signUp", async (req, res) => {
 
   if (usernew || signnew)
     return res
-      .status(400)
-      .json({ email: "Email already exists ,choose another mail..." });
+      //.status(400)
+      .json({ error: "Email already exists ,choose another mail..." });
 
   const t = req.body.type;
 console.log(t)
@@ -184,8 +184,8 @@ console.log(t)
           const isValidated = parentValidator.registerParentValidation(req.body);
           if (isValidated.error)
             return res
-              .status(400)
-              .send({ error: isValidated.error.details[0].message });
+             // .status(400)
+              .json({ error: isValidated.error.details[0].message });
           const {
             firstName,
             lastName,

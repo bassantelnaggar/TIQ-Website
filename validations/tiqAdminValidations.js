@@ -5,7 +5,7 @@ const Joi = require('joi');
 module.exports  ={
     updateTIQadmin :request =>{
             const updateTIQadminSchema = 
-            {      type: Joi.string().valid("TIQadmin").required(),
+            {      type: Joi.string().valid("TIQadmin"),
 
                 firstName : Joi.string().min(3),
                 lastName : Joi.string().min(3),
@@ -16,7 +16,8 @@ module.exports  ={
                 din : Joi.string(),
                 dor : Joi.string(),
                 tiqStatus:Joi.string(),
-                supervisorType:Joi.string()            
+                supervisorType:Joi.string() ,
+                score:Joi.number().integer()
             }
             return Joi.validate(request,updateTIQadminSchema)
     }
