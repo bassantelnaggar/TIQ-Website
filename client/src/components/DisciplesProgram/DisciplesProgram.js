@@ -135,8 +135,8 @@ updateDisciplesProgram = (id,title,description,duration,location,price,year,imag
      this.setState({updated:true});
     });
     this.setState({updated:true});
-
 }
+
 handleClickME =() => {
   this.props.history.push("/createdisciplePage");
 };

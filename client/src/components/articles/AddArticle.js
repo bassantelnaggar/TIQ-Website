@@ -15,7 +15,7 @@ import React , {Component} from "react";
       e.preventDefault();
       this.props.addArticle({title: this.state.title, description: this.state.description,body: this.state.body, author:this.state.author ,date:this.state.date });
       this.setState({ title: '', description: '' ,body:'',author:'',date:''});
-      
+      this.props.Close();
   }
 
   render() {

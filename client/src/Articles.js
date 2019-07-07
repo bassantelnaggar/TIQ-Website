@@ -9,6 +9,8 @@ import DeleteArticle from './components/articles/DeleteArticle'
 import UpdateArticlehelper from './components/articles/UpdateArticlehelper';
 import { Link } from 'react-router-dom'
 import {connect} from "react-redux";
+import SimplePopper from './components/articles/SimplePopper';
+import SimplePopper1 from './components/articles/SimplePopper1';
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id }
@@ -34,10 +36,28 @@ class Articles extends Component {
         console.log('erorr')
       });
   }
+  updatearticle1 = (id,title,description,body,author,date) => {
+    console.log("Ll")
+    axios.put('/api/Articles/'+id,
+    {
+    "title":title,
+	"description":description,
+	"body":body,
+	"author":author,
+	"date":date,
+	
+   })
+   .then(res => { 
+     axios.get('api/Articles/')
+     .then(res => this.setState({allArticles:res.data.data}))
+     this.setState({updated:true});
+    });
+    this.setState({updated:true});
+}
 
   updateComment = (comment)=>{
-    console.log(this.props.id)
-    console.log(this.usertype)
+    // console.log(this.props.id)
+    // console.log(this.usertype)
     axios.put(`/api/Articles/comment/${comment.article._id}/${this.props.id}`,{comments:comment.comment})
     axios.get('/api/Articles')
     .then(res=>this.setState({allArticles:res.data.data}))  
@@ -47,7 +67,7 @@ class Articles extends Component {
     axios.delete(`/api/Articles/${id}`)
     .then(res=>this.setState({allArticles:[...this.state.allArticles.filter(article=>article._id!== id)]}))
   }
-
+  getone=(id)=>{axios.get('/api/Articles'+id)}
   updateArticle = article => {
     const articles =this.state.allArticles
     for(var i = 0 ; i<articles.length;i++){
@@ -77,21 +97,12 @@ class Articles extends Component {
     return (
       <div className="App">
         <ToolbarOUT />
-        <button
-            className="button"
-            style={{ position: "absolute", left: "20px", top: "63px" }}
-            onClick={() => {
-              this.handleClick();
-            }}
-          >
-            BACK
-          </button>
-      <h1>add new Article</h1>
-      <AddArticle addArticle = {this.addArticle} />
-      <h1>delete article</h1>
-      <DeleteArticle deleteArticle ={this.deleteArticle} allArticles={this.state.allArticles} updateComment = {this.updateComment}/>
+        <button className="button"style={{ position: "absolute", left: "20px", top: "63px" }} onClick={() => {this.handleClick();}}>BACK</button>
+      {/* <h1>add new Article</h1> */}
+      <SimplePopper addArticle = {this.addArticle} />
+      {/* <h1>delete article</h1> */}
+      <DeleteArticle deleteArticle ={this.deleteArticle} allArticles={this.state.allArticles} updateComment = {this.updateComment} updatearticle1={this.updatearticle1} />
       <h1>update articles</h1>
-      <UpdateArticlehelper allArticles ={this.state.allArticles} updateArticle = {this.updateArticle} />
       </div>
     );
   }
