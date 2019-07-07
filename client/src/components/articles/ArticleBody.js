@@ -12,6 +12,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
@@ -35,7 +36,8 @@ export class ArticleBody extends Component {
               articleee: [],
               commments: "",
               allComments:[],
-              user:{}
+              user:{},
+              loaded:false
            }
         }
         handleClick =() => {
@@ -55,7 +57,7 @@ export class ArticleBody extends Component {
     .then(user=>this.setState({user : user.data.data},()=>console.log("fetched",user.data.data)))
     .catch(console.log('cannot fetch'))
     axios.get('/api/Articles/' + id)
-    .then(articleee=>this.setState({articleee : articleee.data.data},()=>console.log("fetched",articleee.data.data)))
+    .then(articleee=>this.setState({articleee : articleee.data.data,loaded:true}))
     .catch(console.log('cannot fetch'))
 
     fetch("/api/Articles/getAllComments/" + id)
@@ -136,6 +138,17 @@ export class ArticleBody extends Component {
       }
       
       const classes = useStyles();
+      if(!this.state.loaded){
+        return (
+          <>
+          <ToolbarOUT />
+          <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+        <CircularProgress/>
+        </div>
+        </>
+        )
+      }
+      else{
       if (this.props.token === null) {
     return (
      <div >
@@ -341,7 +354,7 @@ export class ArticleBody extends Component {
        
        </div>
      );
-  }}
+  }}}
 }
 
 const Form = connect(

@@ -6,6 +6,8 @@ import Toolbar from '../../layout/Toolbar/Toolbar';
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -15,14 +17,15 @@ export class DeleteChatBar extends Component {
           super();
           this.state = {
             chatbars: [],
-            debateLiveTitle: ''
+            debateLiveTitle: '',
+            loaded:false
           };
           
         }
   componentDidMount() {
       fetch('/api/Chatbars/')
       .then(res => res.json())
-      .then(chatbars => this.setState({chatbars: chatbars.data}, () => console.log('chatbars fetched...', chatbars)));
+      .then(chatbars => this.setState({chatbars: chatbars.data,  loaded:true}));
   }
   onSubmit= (e) => {
     e.preventDefault();
@@ -59,6 +62,17 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
       }
       render() {
         const auth = this.props.usertype === "TIQadmin";
+        if(!this.state.loaded){
+          return (
+            <>
+            <ToolbarOUT />
+            <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+          <CircularProgress/>
+          </div>
+          </>
+          )
+        }
+        else{
         if (auth) {
         return (
           <div   >
@@ -151,6 +165,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
         )
       }
     }
+  }
 }
 const Form = connect(
   mapStateToProps,

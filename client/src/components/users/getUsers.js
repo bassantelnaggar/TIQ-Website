@@ -3,6 +3,12 @@ import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import axios from "axios";
 import DeleteUser from "./DeleteUser";
 import Toolbar from "../../layout/Toolbar/Toolbar";
+import SearchIcon from "@material-ui/icons/Search";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import ourPeopleBG from '../../pages/Homee/images/ourpeoplebg.png'
+import SearchUser from '../users/searchUser'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { connect } from "react-redux";
 
@@ -15,7 +21,8 @@ class GetUsers extends Component {
     super();
     this.state = {
       users: [],
-      searchkey: null
+      loaded:false,
+      searchkey: null,
     };
     this.deleteUser = this.deleteUser.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -25,7 +32,7 @@ class GetUsers extends Component {
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   componentDidMount() {
     axios.get("/api/Users").then(res => {
-      this.setState({ users: res.data.data });
+      this.setState({ users: res.data.data,loaded:true });
     });
   }
   deleteUser = id => {
@@ -164,6 +171,17 @@ class GetUsers extends Component {
       )
     }
     else{
+      if(!this.state.loaded){
+        return (
+          <>
+          <ToolbarOUT />
+          <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+        <CircularProgress/>
+        </div>
+        </>
+        )
+      }
+      else{
 
     if (auth) {
     return (
@@ -307,6 +325,7 @@ class GetUsers extends Component {
       </>
     );
   }
+}
 }
 }
 }

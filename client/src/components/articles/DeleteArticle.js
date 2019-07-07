@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import Article from './Article' 
+import Article from './Article';
+import SimplePopper1 from './SimplePopper1';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class DeleteArticle extends Component {
 
@@ -10,6 +12,8 @@ class DeleteArticle extends Component {
                 <div class="box">
                 <div class="inner">
                     <h3>{article.title}</h3>
+                 
+                  </div>
                   <input 
                    type="Submit" 
                    value="delete"
@@ -17,8 +21,14 @@ class DeleteArticle extends Component {
                    onClick={this.props.deleteArticle.bind(this, article._id)}
                    style={{flex: '10'}}
                     />
-                  </div>
-                </div>))}
+                    <br></br>
+                    <br></br>
+                   
+                  <SimplePopper1 article={article} deleteArticle ={this.props.deleteArticle} allArticles={this.props.allArticles} updateComment = {this.props.updateComment} allArticles ={this.props.allArticles} updatearticle1 = {this.props.updatearticle1} />
+                  {/* <DeleteIcon    onClick={this.props.deleteArticle.bind(this, article._id)}/> */}
+                
+                </div>    
+                                ))}
             
             </div>
         )

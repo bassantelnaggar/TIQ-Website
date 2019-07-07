@@ -11,6 +11,8 @@ import UpdateFAQSimpleSnackbar from './UpdateFAQSimpleSnackbar';
 import DeleteFAQSimpleSnackbar from './DeleteFAQSimpleSnackbar';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 
 const mapStateToProps = state => {
@@ -29,7 +31,8 @@ class FAQ extends Component {
     questionundo:'',
     answerundo:'',
     errmsg:"null",
-      FAQs:[]
+      FAQs:[],
+      loaded:false
   }
   
   handleClick = event => {
@@ -42,8 +45,7 @@ class FAQ extends Component {
     fetch("/api/FAQs/")
     .then(res => res.json())
     .then(res =>
-      this.setState({ FAQs: res.data}, () =>
-        console.log("FAQs fetched...", FAQs)
+      this.setState({ FAQs: res.data,loaded:true}
       )
     );
     // axios.get('/api/FAQs')
@@ -122,6 +124,16 @@ undo=()=>{ this.addFAQ(this.state.questionundo,this.state.answerundo)  }
           
         </div>
       );
+    }
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
     }
     else{
       const auth = this.props.usertype === "TIQadmin";

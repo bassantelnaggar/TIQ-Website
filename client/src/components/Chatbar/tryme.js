@@ -11,6 +11,8 @@ import AppBar from '@material-ui/core/AppBar';
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import Toolbar from '@material-ui/core/Toolbar';
 import { connect } from "react-redux";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 //import "./Chatbars.css"
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
@@ -19,7 +21,8 @@ const styles = theme => ({
   root: {
     width:'80%',
     flexGrow: 1,
-    marginLeft:'10%'
+    marginLeft:'10%',
+    loaded:false
   }
 });
 
@@ -70,8 +73,7 @@ class tryme extends React.Component {
     fetch("/api/Chatbars/getAllAgainstResponses/" + id)
       .then(res => res.json())
       .then(againstResponses_ =>
-        this.setState({ againstResponses_: againstResponses_ }, () =>
-          console.log("chatbars fetched...", againstResponses_)
+        this.setState({ againstResponses_: againstResponses_ ,loaded:true}
         )
       );
   }
@@ -173,6 +175,17 @@ class tryme extends React.Component {
       </div>
       );
     }
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
+   
     else{
     const { classes } = this.props;
     const { expanded } = this.state;

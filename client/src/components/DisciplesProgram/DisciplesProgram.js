@@ -14,6 +14,7 @@ import Divider from '@material-ui/core/Divider';
 import "../users/profile.css"
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { connect } from "react-redux";
 
@@ -76,6 +77,8 @@ class DisciplesProgram extends Component {
       linkundo:'', 
       loading:true,
       disciplesPrograms2:[],
+      loaded:false
+
       
 }
 
@@ -85,7 +88,7 @@ class DisciplesProgram extends Component {
     axios.get('api/DisciplesProgram')
       .then(res =>{ 
         console.log(res.data)
-        this.setState({ disciplesPrograms: res.data.data, loading:false })
+        this.setState({ disciplesPrograms: res.data.data, loaded:true })
         // res.data.data.shift()
         // this.setState({disciplesPrograms2:res.data.data})
         // console.log(this.state.disciplesPrograms2)
@@ -144,8 +147,8 @@ updateDisciplesProgram = (id,title,description,duration,location,price,year,imag
      this.setState({updated:true});
     });
     this.setState({updated:true});
-
 }
+
 handleClickME =() => {
   this.props.history.push("/createdisciplePage");
 };
@@ -195,6 +198,29 @@ handleClickME =() => {
     }
   const classes = useStyles;
   const auth = this.props.usertype === "TIQadmin";
+  if(!this.state.loaded&&(this.props.token === null)){
+    return (
+      <>
+      <Toolbar />
+      <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+    <CircularProgress/>
+    </div>
+    </>
+    )
+  }
+  else{
+    if(!this.state.loaded&&!(this.props.token === null)){
+    return (
+      <>
+      <ToolbarOUT />
+     
+      <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+    <CircularProgress/>
+    </div>
+    </>
+    )
+    }
+  else{
   if (this.props.token === null) { 
     return (
       <div className={classes.root}>
@@ -486,7 +512,7 @@ handleClickME =() => {
   }
      
   }
-
+  }}
 }
 
 const questionStyle={

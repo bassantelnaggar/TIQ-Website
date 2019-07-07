@@ -15,7 +15,7 @@ export class ContactUs extends Component {
       <div>
         <Toolbar />
 
-        <div class="Container">
+        <div class="Container" style={{marginTop:"100px"}}>
           <form class="contactus-form">
             <h1 class="contactus-header">Contact Us</h1>
             <div class="border" />
@@ -54,6 +54,17 @@ export class ContactUs extends Component {
                 </a>
               </li>
             </div>
+            <div class="field">
+              <label style={{textAlign:"center"}} > First World style debate club in Egypt and North Africa. Established and located in the German University in Cairo.
+              
+              </label>
+              {/* <Link
+                class="link"
+                to="https://www.facebook.com/TheIntelligentQuestion/"
+              >
+                <u>https://www.facebook.com/TheIntelligentQuestion/ </u>{" "}
+              </Link> */}
+            </div> 
 
             {/* <div class="field">
               <label for="Facebook Page :">Facebook Page :</label>
@@ -65,7 +76,7 @@ export class ContactUs extends Component {
               </Link>
             </div> */}
 
-            <div class="field">
+            {/* <div class="field">
               <label for="Blog :">Blog :</label>
               <a
                 class="link-1"
@@ -73,21 +84,21 @@ export class ContactUs extends Component {
               >
                 <u> https://tiqguc.blogspot.com.eg/p/welcome.html</u>
               </a>
-            </div>
+            </div> */}
 
-            <div class="field">
+            {/* <div class="field">
               <label for="Messenger :">Messenger :</label>
               <a class="link-1" style={{ color: "blue" }}>
                 m.me/TheIntelligentQuestion
               </a>
-            </div>
+            </div> */}
 
-            <div class="field">
+            {/* <div class="field">
               <label for="Mail :">Mail :</label>
               <a class="link-1" style={{ color: "blue" }}>
                 the.intelligent.question@gmail.com
               </a>
-            </div>
+            </div> */}
           </form>
         </div>
         <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
@@ -121,7 +132,8 @@ export class ContactUs extends Component {
       <div>
         <ToolbarOUT />
 
-        <div class="Container">
+       
+        <div class="Container" style={{marginTop:"100px"}}>
           <form class="contactus-form">
             <h1 class="contactus-header">Contact Us</h1>
             <div class="border" />
@@ -160,6 +172,17 @@ export class ContactUs extends Component {
                 </a>
               </li>
             </div>
+            <div class="field">
+              <label style={{textAlign:"center"}} > First World style debate club in Egypt and North Africa. Established and located in the German University in Cairo.
+              
+              </label>
+              {/* <Link
+                class="link"
+                to="https://www.facebook.com/TheIntelligentQuestion/"
+              >
+                <u>https://www.facebook.com/TheIntelligentQuestion/ </u>{" "}
+              </Link> */}
+            </div> 
 
             {/* <div class="field">
               <label for="Facebook Page :">Facebook Page :</label>
@@ -171,7 +194,7 @@ export class ContactUs extends Component {
               </Link>
             </div> */}
 
-            <div class="field">
+            {/* <div class="field">
               <label for="Blog :">Blog :</label>
               <a
                 class="link-1"
@@ -179,21 +202,21 @@ export class ContactUs extends Component {
               >
                 <u> https://tiqguc.blogspot.com.eg/p/welcome.html</u>
               </a>
-            </div>
+            </div> */}
 
-            <div class="field">
+            {/* <div class="field">
               <label for="Messenger :">Messenger :</label>
               <a class="link-1" style={{ color: "blue" }}>
                 m.me/TheIntelligentQuestion
               </a>
-            </div>
+            </div> */}
 
-            <div class="field">
+            {/* <div class="field">
               <label for="Mail :">Mail :</label>
               <a class="link-1" style={{ color: "blue" }}>
                 the.intelligent.question@gmail.com
               </a>
-            </div>
+            </div> */}
           </form>
         </div>
         <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>

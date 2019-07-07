@@ -20,6 +20,8 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import ToolBar from "../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -57,7 +59,8 @@ class Debates extends Component {
       error: "",
       selecteddate: null,
       selectedcategory: null,
-      admin: this.props.usertype === "TIQadmin"
+      admin: this.props.usertype === "TIQadmin",
+      loaded:false
     };
   }
 
@@ -109,7 +112,7 @@ class Debates extends Component {
   componentDidMount() {
     axios
       .get("/api/debates")
-      .then(res => this.setState({ debates: res.data.data }));
+      .then(res => this.setState({ debates: res.data.data ,loaded:true}));
   }
   handleClick =() => {
     this.props.history.push("/signin");
@@ -171,6 +174,17 @@ class Debates extends Component {
     }
     console.log(this.props.usertype);
     const auth = this.props.usertype === "TIQadmin";
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
+    else{
     if (auth) {
       return (
         <>
@@ -438,7 +452,7 @@ class Debates extends Component {
       );
     }
   }
-}
+}}
 
 const Form = connect(
   mapStateToProps,
