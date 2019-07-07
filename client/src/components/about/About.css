@@ -109,7 +109,8 @@
 .middle{
     position: static;
     margin-left:1%;
-    margin-right:5%;
+    margin-right:7%;
+    margin-top:-170px;
 }
 .tree{
     position: initial;
@@ -124,12 +125,12 @@
 
 .FS{
     position: static;
-    margin-left:8%;
+    margin-left:0%;
 }
 .OH{
     position: static;
-    margin-left:10%;
-    margin-right:0%;
+    margin-left:0%;
+    /*   */
 }
 .boatitle555{
     position: static;

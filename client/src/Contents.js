@@ -8,19 +8,22 @@ import Toolbar from "./layout/Toolbar/Toolbar";
 import ToolbarOUT from "./layout/Toolbar/ToolbarSignout";
 import "./App.css";
 import {connect} from "react-redux";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id }
 }
 class Contents extends Component {
   state = {
-    allContent: []
+    allContent: [],
+    loaded:false
   };
 
   componentDidMount() {
     axios
       .get("/api/Contents")
-      .then(res => this.setState({ allContent: res.data.data }));
+      .then(res => this.setState({ allContent: res.data.data,loaded:true }));
   }
 
   addContent = content => {
@@ -60,6 +63,26 @@ class Contents extends Component {
   };
   render() {
     const auth = this.props.usertype === "TIQadmin";
+    if (this.props.token === null) {
+      return (
+        <div className="App">
+           <Toolbar />
+          <AllContent allContent={this.state.allContent} />
+        </div>
+      );
+    }
+    else{
+      if(!this.state.loaded){
+        return (
+          <>
+          <ToolbarOUT />
+          <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+        <CircularProgress/>
+        </div>
+        </>
+        )
+      }
+      else{
     if (auth) {
     return (
       <div className="App">
@@ -78,15 +101,8 @@ class Contents extends Component {
         />
       </div>
     );
-  }else{
-    if (this.props.token === null) {
-    return (
-      <div className="App">
-         <Toolbar />
-        <AllContent allContent={this.state.allContent} />
-      </div>
-    );
   }
+   
   else{
     return (
       <div className="App">
@@ -96,6 +112,7 @@ class Contents extends Component {
     );
 }
 }
+    }
 }
 }
 const Form = connect(

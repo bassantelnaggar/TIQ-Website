@@ -7,6 +7,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import Divider from '@material-ui/core/Divider';
 
 const mapStateToProps = state => {
@@ -52,6 +53,7 @@ const useStyles = theme => ({
 
 
 class SignedUpItem extends Component {
+
   
  render() {
   const classes = useStyles;

@@ -52,24 +52,34 @@ class SimplePopper1 extends React.Component {
 
     return (
       <div>
-      <Button variant="contained"   onClick={this.handleClick}>
+          <input 
+                   type="Submit" 
+                   value="Update ARTICLE"
+                   className="btn"
+                   onClick={this.handleClick}
+                   style={{flex: '10'}}
+                    />
+      {/* <Button variant="contained"   onClick={this.handleClick}>
   
         Update ARTICLE
         
-      </Button>
-      <br></br>
-      <Popper id={id} open={open} anchorEl={anchorEl} style={{paddingLeft:'80px'}} transition>
+      </Button> */}
+      
+      <Popper id={id} open={open} anchorEl={anchorEl} style={{paddingLeft:'80px',width:"50%"}} transition>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
-            <Paper style={{padding:'10px 10px 10px 10px'}}>
+            <Paper style={{padding:'10px 80px 5px 80px',width:"100%",height:"50%"}}>
             <form>
             <div>
+      <br></br>
+
         <input
           type="text"
           name="title"
           placeholder={this.props.article.title}
           onChange={this.onChange}
         />
+      <br></br>
          <input
           type="text"
           name="description"
@@ -99,17 +109,17 @@ class SimplePopper1 extends React.Component {
           onChange={this.onChange}
         />
         <br></br>
-        <button onClick={this.props.updatearticle1.bind(this, this.props.article._id,this.state.title, this.state.description,this.state.body,this.state.author,this.state.date)}>
-        UPDATE
-        </button>
+        <input 
+                   type="Submit" 
+                   value="UPDATE"
+                   className="btn"
+                   onClick={this.props.updatearticle1.bind(this, this.props.article._id,this.state.title, this.state.description,this.state.body,this.state.author,this.state.date)}
+                   style={{flex: '10'}}
+                    />
+    
         </div>
-            {/* <UpdateArticlehelper  allArticles={this.props.allArticles} updateArticle = {this.props.updateArticle}/>                */}
             </form>
-            
-            {/* <button  className="btn"  >update</button> */}
-            {/* <IconButton  className={classes.button} aria-label="Delete"> 
-        <DeleteIcon  /> 
-      </IconButton> */}
+         
 
             
             </Paper>

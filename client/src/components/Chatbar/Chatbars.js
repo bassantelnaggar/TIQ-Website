@@ -8,6 +8,8 @@ import Logo from "../images/debate2.jpg";
 // import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -16,7 +18,8 @@ class Chatbars extends Component {
     super();
     this.state = {
       chatbars: [],
-      searchkey: null
+      searchkey: null,
+      loaded:false
     };
   }
   handleClick =() => {
@@ -36,9 +39,7 @@ class Chatbars extends Component {
     fetch("/api/Chatbars/")
       .then(res => res.json())
       .then(chatbars =>
-        this.setState({ chatbars: chatbars.data }, () =>
-          console.log("chatbars fetched...", chatbars)
-        )
+        this.setState({ chatbars: chatbars.data ,loaded:true} )
       );
   }
   getStyle = () => {
@@ -102,8 +103,18 @@ class Chatbars extends Component {
         </div>
       );
     }
-
     const auth = this.props.usertype === "TIQadmin";
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
+    else{
     if (auth) {
       return (
         <div >
@@ -299,6 +310,7 @@ class Chatbars extends Component {
         
       );
     }
+  }
   }
 }
 const Form = connect(

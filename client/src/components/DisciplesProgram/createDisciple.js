@@ -8,6 +8,8 @@ import UpdateSimpleSnackbar from './UpdateSimpleSnackbar.';
 import CreateSimpleSnackbar from './CreateSimpleSnackbar';
 import DelSimpleSnackbar from './DelSimpleSnackbar';
 import DisciplesPrograms from './DisciplesPrograms';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -38,13 +40,15 @@ export class createDisciple extends Component {
             linkundo:'', 
             loading:true,
             disciplesPrograms2:[],
+            loaded:false
+
           };
           
         
   componentDidMount() {
       fetch('/api/DisciplesProgram/')
       .then(res => res.json())
-      .then(disciplesPrograms => this.setState({disciplesPrograms: disciplesPrograms.data}, () => console.log('Disciples Programs fetched...', disciplesPrograms)));
+      .then(disciplesPrograms => this.setState({disciplesPrograms: disciplesPrograms.data,  loaded:true }));
   }
   onSubmit= (e) => {
     e.preventDefault();
@@ -174,6 +178,17 @@ onChange1 = e =>  {
           fontSize:'60px'
         }
         const auth = this.props.usertype === "TIQadmin";
+        if(!this.state.loaded){
+          return (
+            <>
+            <ToolbarOUT />
+            <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+          <CircularProgress/>
+          </div>
+          </>
+          )
+        }
+        else{
         if (auth) {
         return (
           <>
@@ -345,7 +360,7 @@ onChange1 = e =>  {
         </>
         )
       }
-    }
+    }}
 }
 const Form = connect(
   mapStateToProps,

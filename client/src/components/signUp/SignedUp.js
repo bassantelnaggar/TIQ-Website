@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
 import Navbar from "../layout/Navbar";
 import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
@@ -14,7 +15,8 @@ const mapStateToProps = state => {
 
 class SignedUp extends Component {
   state={
-      SignedUp:[]
+      SignedUp:[],
+      loaded:false
   }
   
 //   handleClick = event => {
@@ -25,7 +27,7 @@ class SignedUp extends Component {
   
   componentDidMount()  {
     axios.get('/api/SignedUp')
-    .then(res => this.setState({ SignedUp: res.data.data }))
+    .then(res => this.setState({ SignedUp: res.data.data,loaded:true }))
   }
   handleClickWWW =() => {
     this.props.history.push("/signin");
@@ -93,6 +95,16 @@ class SignedUp extends Component {
           </div>
         </div>
       );
+    }
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
     }
     else{
       const auth = this.props.usertype === "TIQadmin";

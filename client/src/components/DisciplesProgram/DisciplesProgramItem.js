@@ -49,7 +49,7 @@ export class DisciplesProgramItem extends Component {
              type="text"
               name='title'
               value={this.state.title}
-              style={{ color:"black",width:"230%"}}
+              style={{ color:"black",width:"150%"}}
               placeholder="Edit Title ..."
               onChange={this.onChange}
               />
@@ -60,7 +60,7 @@ export class DisciplesProgramItem extends Component {
               type="text"
               name='description'
               value={this.state.description}    
-              style={{  color:"black",width:"230%"}}
+              style={{  color:"black",width:"150%"}}
               placeholder="Edit description ..."
               onChange={this.onChange}
               />
@@ -71,7 +71,7 @@ export class DisciplesProgramItem extends Component {
               type="text"
               name='year'
               value={this.state.year}    
-              style={{  color:"black",width:"230%"}}
+              style={{  color:"black",width:"150%"}}
               placeholder="Edit year ..."
               onChange={this.onChange}
               />
@@ -82,7 +82,7 @@ export class DisciplesProgramItem extends Component {
               type="text"
               name='duration'
               value={this.state.duration}
-              style={{  color:"black",width:"230%"}}
+              style={{  color:"black",width:"150%"}}
               placeholder="Edit duration ..."
               onChange={this.onChange}
               />
@@ -93,7 +93,7 @@ export class DisciplesProgramItem extends Component {
               type="text"
               name='price'
               value={this.state.price}    
-              style={{  color:"black",width:"230%"}}
+              style={{  color:"black",width:"150%"}}
               placeholder="Edit price ..."
               onChange={this.onChange}
               />
@@ -104,7 +104,7 @@ export class DisciplesProgramItem extends Component {
               type="text"
               name='location'
               value={this.state.location}    
-              style={{  color:"black",width:"230%"}}
+              style={{  color:"black",width:"150%"}}
               placeholder="Edit location ..."
               onChange={this.onChange}
               />
@@ -117,7 +117,7 @@ export class DisciplesProgramItem extends Component {
               type="text"
               name='link'
               value={this.state.link}    
-              style={{ color:"black",width:"230%"}}
+              style={{ color:"black",width:"150%"}}
               placeholder="Edit link ..."
               onChange={this.onChange}
               />

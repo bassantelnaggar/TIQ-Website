@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 import {connect} from "react-redux";
 import SimplePopper from './components/articles/SimplePopper';
 import SimplePopper1 from './components/articles/SimplePopper1';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id }
@@ -18,11 +19,12 @@ const mapStateToProps = state => {
 
 class Articles extends Component {
   state = {
-    allArticles : [] 
+    allArticles : [],
+    loaded:false
   }
   componentDidMount(){
     axios.get('/api/Articles')
-    .then(res=>this.setState({allArticles:res.data.data}))
+    .then(res=>this.setState({allArticles:res.data.data,loaded:true}))
   }
   handleClick =() => {
     this.props.history.push("/ArticlesHome");
@@ -93,6 +95,17 @@ class Articles extends Component {
 
   render() {
     const auth = this.props.usertype === "TIQadmin";
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
+    else{
     if (auth) {
     return (
       <>
@@ -150,6 +163,7 @@ class Articles extends Component {
       </>
     );
   }
+}
 }
 }
 

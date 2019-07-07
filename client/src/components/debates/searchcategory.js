@@ -4,6 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import "./Debates.css";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 
 const styles = theme => ({
@@ -18,13 +20,14 @@ class SearchDate extends Component {
     this.setState({ category: category });
     axios
     .get(`/api/debates/Search/${category}`)
-    .then(res => this.setState({ debates: res.data.data }));
+    .then(res => this.setState({ debates: res.data.data ,loaded:true}));
   }
   constructor(props) {
     super(props);
     this.state = {
       debates: [],
-      category: null
+      category: null,
+      loaded:false
     };
   }
   handleClick =() => {
@@ -33,6 +36,16 @@ class SearchDate extends Component {
   
   render() {
     const { classes } = this.props;
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }else{
     return (
       <>
         <ToolbarOUT />
@@ -92,6 +105,7 @@ class SearchDate extends Component {
        
       </>
     );
+          }
   }
 }
 
