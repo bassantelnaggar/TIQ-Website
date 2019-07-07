@@ -1,85 +1,94 @@
 import React, { Component } from 'react';
-import DisciplesPrograms from './DisciplesPrograms';
 import axios from 'axios';
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
-import AddDisciplesProgram from './AddDisciplesProgram';
-import SimplePopper from './SimplePopper';
-import UpdateSimpleSnackbar from './UpdateSimpleSnackbar.';
-import CreateSimpleSnackbar from './CreateSimpleSnackbar';
-import DelSimpleSnackbar from './DelSimpleSnackbar';
-
+import img2 from "../../pages/Homee/images/pic18.jpg"
+import clsx from 'clsx';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Divider from '@material-ui/core/Divider';
+import "../users/profile.css"
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import img from "../../pages/Homee/images/pic18.jpg"
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import { fontSize } from '@material-ui/system';
+import { Link } from 'react-router-dom'
+
 import { connect } from "react-redux";
+
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
-const useStyles =theme => ({
+
+const useStyles = theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
-    
+    width: '100%',
+     postion: "relative",
+     left:"20%",
+   
   },
-  gridList: {
-    width: 50,
-    height: 450,
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)',
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
   },
-  titleBar: {
-    background:
-      'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-      'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-    opacity: '100%'
-     
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
   },
   icon: {
-    color: 'white',
-    
-  
-  }
- 
+    verticalAlign: 'bottom',
+    height: 20,
+    width: 20,
+  },
+  details: {
+    alignItems: 'center',
+  },
+  column: {
+    flexBasis: '33.33%',
+  },
+  helper: {
+    borderLeft: `2px solid ${theme.palette.divider}`,
+    padding: theme.spacing(1, 2),
+  },
+  link: {
+    color: theme.palette.primary.main,
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
 });
 class DisciplesProgram extends Component {
-  
-  state = {
-    
-    disciplesPrograms: [],
-    created:false,
-    updated:false,
-    deleted:false,
-    titleundo:'',
-    descriptionundo:'',
-    yearundo:'',
-    durationundo:'',
-    priceundo:'',
-    locationundo:'',
-    imageundo:'',
-    linkundo:'', 
-    loading:true,
-    disciplesPrograms2:[]
-  }
+ 
+    state = {
+      disciplesPrograms: [],
+      created:false,
+      updated:false,
+      deleted:false,
+      titleundo:'',
+      descriptionundo:'',
+      yearundo:'',
+      durationundo:'',
+      priceundo:'',
+      locationundo:'',
+      imageundo:'',
+      linkundo:'', 
+      loading:true,
+      disciplesPrograms2:[],
+      
+}
+
+
 
    componentDidMount() {
     axios.get('api/DisciplesProgram')
       .then(res =>{ 
         console.log(res.data)
-        this.setState({ disciplesPrograms: res.data.data[0], loading:false })
-        res.data.data.shift()
-        this.setState({disciplesPrograms2:res.data.data})
-        console.log(this.state.disciplesPrograms2)
+        this.setState({ disciplesPrograms: res.data.data, loading:false })
+        // res.data.data.shift()
+        // this.setState({disciplesPrograms2:res.data.data})
+        // console.log(this.state.disciplesPrograms2)
       }
     ).catch(err=>{
       console.log(err)
@@ -135,111 +144,383 @@ updateDisciplesProgram = (id,title,description,duration,location,price,year,imag
      this.setState({updated:true});
     });
     this.setState({updated:true});
-
 }
+
 handleClickME =() => {
   this.props.history.push("/createdisciplePage");
 };
 
   render() {
-    const classes = useStyles;
-    if (this.props.token === null) {
+    
+    const headerStyle = {
+ 
+      color: '#FFDA00',
+      textShadow: '2px 2px #B83126',
+      textAlign: 'left',
+      padding: '55px',
+      postion:'fixed',
+      left: '0',
+      width:'100%',
+      lineHeight: '1',
+      fontWeight: 'bold',
+      fontSize:'60px'
+    }
+    const bodyStyle = {
+ 
+      color: 'black',
+      textAlign: 'left',
+      padding: '150px',
+      postion:'fixed',
+      marginTop:'-230px',
+      marginLeft:'-90px',
+      // left: '0',
+      //textmargin:'100px',
+      fontWeight: 'bold',
+      width:'100%',
+      fontSize:'20px'
+    }
+    const headerStyle2 = {
+ 
+      color: '#FFDA00',
+      textShadow: '2px 2px #B83126',
+      textAlign: 'left',
+      // padding: '55px',
+      postion:'fixed',
+      marginTop:'-150px',
+      marginLeft:'65px',
+     
+      lineHeight: '1',
+      fontWeight: 'bold',
+      fontSize:'60px'
+    }
+  const classes = useStyles;
+  const auth = this.props.usertype === "TIQadmin";
+  if (this.props.token === null) { 
     return (
-      
-        
-        <div className="App">
-        <Toolbar/>
-          {/* <div>
-         
-        <SimplePopper addDisciplesProgram={this.addDisciplesProgram} undo={this.undo}/>
-        <br></br>
-            <DisciplesPrograms disciplesPrograms={this.state.disciplesPrograms}
-             delDisciplesProgram={this.delDisciplesProgram} addDisciplesProgram={this.addDisciplesProgram}
-            updateDisciplesProgram={this.updateDisciplesProgram} />
-      
-          </div>  
-          {this.state.deleted && <DelSimpleSnackbar change1={this.change1} undo={this.undo} /> }
-          {this.state.updated && <UpdateSimpleSnackbar change1={this.change1} undo={this.undo} /> }
-          {this.state.created && <CreateSimpleSnackbar change1={this.change1} undo={this.undo} /> } */}
-          
-        </div>
-      
-    );
-    }
-    else if(!this.state.loading){
-      return (
-      
-        
-        <div className="container" >
-        <ToolbarOUT/>
-        
-        <div>
-        <button
-            className="button"
-             background = "#202024"
-            style={{ position: "absolute", left: "20px", top: "61px" }}
-            onClick={() => {
-              this.handleClickME();
-            }}
-          >
-            CREATE NEW Disciple Program
-          </button>
-          
-      <GridList cellHeight={500} className={classes.gridList} cols={1} >
-      <GridListTile >
-            <img src={img} alt={"/"} />
-            <GridListTileBar title={this.state.disciplesPrograms.title} subtitle={this.state.disciplesPrograms.year}
-              style={{height:"15%",fontWeight:"bold",opacity:'100%'}}  >
-
-              </GridListTileBar>
-              
-
-          </GridListTile>
-          </GridList>
-          <GridList cellHeight={360} className={classes.gridList} cols={2} >
-        {this.state.disciplesPrograms2.map(disciplesProgram => (
-         
-          
-          <GridListTile  >
-            <img src={img} alt={"/"} />
-            <GridListTileBar 
-              title ={disciplesProgram.title}
-              subtitle={disciplesProgram.year}
-              actionPosition="left"
-              className={classes.titleBar}
-              style={{height:"15%",fontWeight:"bold",opacity:'100%'}} 
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
-        
-        {/* <SimplePopper addDisciplesProgram={this.addDisciplesProgram} undo={this.undo}/> */}
-        <br></br>
-            {/* <DisciplesPrograms disciplesPrograms={this.state.disciplesPrograms}
-             delDisciplesProgram={this.delDisciplesProgram} addDisciplesProgram={this.addDisciplesProgram}
-            updateDisciplesProgram={this.updateDisciplesProgram} /> */}
-           
-          {/* {this.state.deleted && <DelSimpleSnackbar change1={this.change1} undo={this.undo} /> }
-          {this.state.updated && <UpdateSimpleSnackbar change1={this.change1} undo={this.undo} /> }
-          {this.state.created && <CreateSimpleSnackbar change1={this.change1} undo={this.undo} /> } */}
-          
-        </div>
-      
-    );
-    }
-    else return(
+      <div className={classes.root}>
       <div>
-        Eh ba2a
-      </div>
-    )
+          <Toolbar/>
+        </div>
+        <h1 style={headerStyle}> What's the Disciples Program ?</h1>
+        <p style={bodyStyle}>The Disciples Program (subsidiary of The Intelligent Question) 
+          is the 1st debating program in Egypt dedicated to high school students.
+           Founded in 2016, it offers school students in Egypt 
+           the chance to learn the semantics of a debate, the basics of argumentation,
+          and the World Style Debate format that is adopted in World Universities Debating
+           Championships (WUDC). The Disciples program’s main academic objective is to provide
+            the students with an understanding of how a good debate goes. This includes
+             understanding what an argument is, being able to evaluate an argument’s validity, 
+             deconstructing invalid arguments, as well as learning how to structure a speech and 
+             being able to present the arguments in an appealing manner. All roads lead to learning 
+             the World Style Debate format that is used in World Universities Debating Championships.</p>
+             <h1 style={headerStyle2}> OUR Disciples Programs</h1>
+             {this.state.disciplesPrograms.map(disciplesProgram => (
+    <ExpansionPanel style={{ backgroundColor:"#F0F0F0", width:"50%",postion: "relative", marginLeft:'130px',boxShadow: '2px 2px 4px #000000b3'}}>
+      <ExpansionPanelSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1c-content"
+        id="panel1c-header"
+      >
+        <div className={classes.column}>
+          <Typography className={classes.heading} style={{fontWeight:"bold",fontSize:"30px"}}>{disciplesProgram.title} </Typography>
+         <Typography className={classes.secondaryHeading}> {disciplesProgram.year}</Typography>
+        </div> 
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetails className={classes.details}>
+        <div className={classes.column} />
+        <div className={classes.column}>
+        <img src={disciplesProgram.image} class="image fit"/>
+          <p style={answerStyle}>
+          <q style={{fontWeight:"bold"}}> {"Description: "} </q> {disciplesProgram.description}
+        
+      </p> 
+      <p style={answerStyle}>
+     <q style={{fontWeight:"bold"}}> {"Duration: "} </q> {disciplesProgram.duration}
+        
+      </p> 
+      <p style={answerStyle}>
+      <q style={{fontWeight:"bold"}}> {"Location: "} </q>    {disciplesProgram.location}
+        
+      </p> 
+      <p style={answerStyle}>
+      <q style={{fontWeight:"bold"}}> {"Price: "} </q>{disciplesProgram.price}
+        
+      </p> 
+        </div>
+        <div className={clsx(classes.column, classes.helper)}>
+        </div>
+      </ExpansionPanelDetails>
+      <Divider />
+      <ExpansionPanelActions>
+      <a href={disciplesProgram.link}  className="button">Register Now!</a> 
+       
+      </ExpansionPanelActions>
+    </ExpansionPanel>
+            ))}
+    <br></br> <br></br> <br></br>
+    <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
 
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+        </div>
+
+  );
+  
+  }
+  else{
+    const auth = this.props.usertype === "TIQadmin";
+        if (auth) {
+    return (
+      <div className={classes.root}>
+      <div>
+          <ToolbarOUT />
+        </div>
+        <button
+          className="button"
+           background = "#202024"
+          style={{ position: "absolute", left: "20px", top: "61px" }}
+          onClick={() => {
+            this.handleClickME();
+          }}
+        >
+          Manage Disciples Programs
+        </button>
+
+        <h1 style={headerStyle}> What's the Disciples Program ?</h1>
+        <p style={bodyStyle}>The Disciples Program (subsidiary of The Intelligent Question) 
+          is the 1st debating program in Egypt dedicated to high school students.
+           Founded in 2016, it offers school students in Egypt 
+           the chance to learn the semantics of a debate, the basics of argumentation,
+          and the World Style Debate format that is adopted in World Universities Debating
+           Championships (WUDC). The Disciples program’s main academic objective is to provide
+            the students with an understanding of how a good debate goes. This includes
+             understanding what an argument is, being able to evaluate an argument’s validity, 
+             deconstructing invalid arguments, as well as learning how to structure a speech and 
+             being able to present the arguments in an appealing manner. All roads lead to learning 
+             the World Style Debate format that is used in World Universities Debating Championships.</p>
+             <h1 style={headerStyle2}> OUR Disciples Programs</h1>
+             {this.state.disciplesPrograms.map(disciplesProgram => (
+    <ExpansionPanel style={{ backgroundColor:"#F0F0F0", width:"50%",postion: "relative", marginLeft:'130px',boxShadow: '2px 2px 4px #000000b3'}}>
+      <ExpansionPanelSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1c-content"
+        id="panel1c-header"
+      >
+        <div className={classes.column}>
+          <Typography className={classes.heading} style={{fontWeight:"bold",fontSize:"30px"}}>{disciplesProgram.title} </Typography>
+         <Typography className={classes.secondaryHeading}> { "2019" }</Typography>
+        </div> 
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetails className={classes.details}>
+        <div className={classes.column} />
+        <div className={classes.column}>
+          <img src={disciplesProgram.image} class="image fit"/>
+          <p style={answerStyle}>
+          <q style={{fontWeight:"bold"}}> {"Description: "} </q> {disciplesProgram.description}
+        
+      </p> 
+      <p style={answerStyle}>
+     <q style={{fontWeight:"bold"}}> {"Duration: "} </q> {disciplesProgram.duration}
+        
+      </p> 
+      <p style={answerStyle}>
+      <q style={{fontWeight:"bold"}}> {"Location: "} </q>    {disciplesProgram.location}
+        
+      </p> 
+      <p style={answerStyle}>
+      <q style={{fontWeight:"bold"}}> {"Price: "} </q>{disciplesProgram.price}
+        
+      </p> 
+      
+     
+        </div>
+        <div className={clsx(classes.column, classes.helper)}>
+        </div>
+      </ExpansionPanelDetails>
+      <Divider />
+      <ExpansionPanelActions>
+      <a href={disciplesProgram.link}  className="button">Register Now!</a> 
+      </ExpansionPanelActions>
+    </ExpansionPanel>
+            ))}
+    <br></br> <br></br> <br></br>
+    <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+        </div>
+
+  );
+  
+             }
+             else{
+              return (
+                <div className={classes.root}>
+                <div>
+                    <ToolbarOUT />
+                  </div>
+          
+                  <h1 style={headerStyle}> What's the Disciples Program ?</h1>
+                  <p style={bodyStyle}>The Disciples Program (subsidiary of The Intelligent Question) 
+                    is the 1st debating program in Egypt dedicated to high school students.
+                     Founded in 2016, it offers school students in Egypt 
+                     the chance to learn the semantics of a debate, the basics of argumentation,
+                    and the World Style Debate format that is adopted in World Universities Debating
+                     Championships (WUDC). The Disciples program’s main academic objective is to provide
+                      the students with an understanding of how a good debate goes. This includes
+                       understanding what an argument is, being able to evaluate an argument’s validity, 
+                       deconstructing invalid arguments, as well as learning how to structure a speech and 
+                       being able to present the arguments in an appealing manner. All roads lead to learning 
+                       the World Style Debate format that is used in World Universities Debating Championships.</p>
+                       <h1 style={headerStyle2}> OUR Disciples Programs</h1>
+                       {this.state.disciplesPrograms.map(disciplesProgram => (
+              <ExpansionPanel style={{ backgroundColor:"#F0F0F0", width:"50%",postion: "relative", marginLeft:'130px',boxShadow: '2px 2px 4px #000000b3'}}>
+                <ExpansionPanelSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1c-content"
+                  id="panel1c-header"
+                >
+                  <div className={classes.column}>
+                    <Typography className={classes.heading} style={{fontWeight:"bold",fontSize:"30px"}}>{disciplesProgram.title} </Typography>
+                   <Typography className={classes.secondaryHeading}> {disciplesProgram.year}</Typography>
+                  </div> 
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails className={classes.details}>
+                  <div className={classes.column} />
+                  <div className={classes.column}>
+                  <img src={disciplesProgram.image} class="image fit"/>
+          <p style={answerStyle}>
+          <q style={{fontWeight:"bold"}}> {"Description: "} </q> {disciplesProgram.description}
+        
+      </p> 
+      <p style={answerStyle}>
+     <q style={{fontWeight:"bold"}}> {"Duration: "} </q> {disciplesProgram.duration}
+        
+      </p> 
+      <p style={answerStyle}>
+      <q style={{fontWeight:"bold"}}> {"Location: "} </q>    {disciplesProgram.location}
+        
+      </p> 
+      <p style={answerStyle}>
+      <q style={{fontWeight:"bold"}}> {"Price: "} </q>{disciplesProgram.price}
+        
+      </p> 
+                  </div>
+                  <div className={clsx(classes.column, classes.helper)}>
+                  </div>
+                </ExpansionPanelDetails>
+                <Divider />
+                <ExpansionPanelActions>
+                <a href={disciplesProgram.link}  className="button">Register Now!</a> 
+                 
+                </ExpansionPanelActions>
+              </ExpansionPanel>
+                      ))}
+              <br></br> <br></br> <br></br>
+              <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+                  </div>
+          
+            );
+             }
+
+  }
+     
   }
 
 }
 
-// const Form = connect(
-//   mapStateToProps,
-//   null
-// )(makeStyles(useStyles)(DisciplesProgram));
-export default DisciplesProgram;
+const questionStyle={
+  textTransform: 'uppercase',
+  lineheight: '0.8',
+  fontWeight:'bold',
+  color:'#3e3939bf',
+  lineHeight:'1',
+  fontSize:'25px',
+
+}
+const answerStyle={
+  textTransform: 'capitalize',
+  color:'#6d7173',
+  lineHeight:'1',
+  fontSize:'20px',
+
+
+}
+const btnStyle = {
+  background: '#333',
+  color: '#fff',
+  border: 'none',
+  padding: '5px 10px',
+  textalign: 'center',
+  textdecoration: 'none',
+  display: 'inline-block',
+  fontsize: '16px',
+  borderradius: '12px'
+}
+
+
+const Form = connect(
+  mapStateToProps,
+  null
+)(DisciplesProgram);
+export default Form;

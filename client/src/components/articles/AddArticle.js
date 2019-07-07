@@ -15,7 +15,7 @@ import React , {Component} from "react";
       e.preventDefault();
       this.props.addArticle({title: this.state.title, description: this.state.description,body: this.state.body, author:this.state.author ,date:this.state.date });
       this.setState({ title: '', description: '' ,body:'',author:'',date:''});
-      
+      // this.props.Close();
   }
 
   render() {
@@ -25,6 +25,7 @@ import React , {Component} from "react";
             type="text"
             name="title"
             placeholder="Add article title "
+            style={{width:"70%",marginLeft:"14%",background:"#E0E0E0",color:"black"}}
             value={this.state.title}
             onChange={this.onChange}
           />
@@ -33,6 +34,7 @@ import React , {Component} from "react";
             type="text"
             name="description"
             placeholder="Add article Description "
+            style={{width:"70%",marginLeft:"14%",background:"#E0E0E0",color:"black"}}
             value={this.state.description}
             onChange={this.onChange}
           />
@@ -41,7 +43,7 @@ import React , {Component} from "react";
             type="textarea"
             name="body"
             placeholder="Add article body "
-            style={{height: "300px"}}
+            style={{height: "300px",width:"70%",marginLeft:"14%",background:"#E0E0E0",color:"black"}}
             value={this.state.body}
             onChange={this.onChange}
           />
@@ -50,6 +52,7 @@ import React , {Component} from "react";
             type="text"
             name="author"
             placeholder="Add article author "
+            style={{width:"70%",marginLeft:"14%",background:"#E0E0E0",color:"black"}}
             value={this.state.author}
             onChange={this.onChange}
           />
@@ -59,6 +62,7 @@ import React , {Component} from "react";
             type="text"
             name="date"
             placeholder="Add article date "
+            style={{width:"70%",marginLeft:"14%",background:"#E0E0E0",color:"black"}}
             value={this.state.date}
             onChange={this.onChange}
           />
@@ -68,6 +72,7 @@ import React , {Component} from "react";
             type="submit"
             value="Submit"
             className="btn"
+            style={{marginLeft:"47%",width:"20%"}}
           />
       </form>
     )

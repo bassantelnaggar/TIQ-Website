@@ -49,6 +49,7 @@ import SearchUser from "./components/users/searchUser";
 import profile from "../src/components/users/profile";
 import About from "../src/components/about/About";
 import ForgotPassword from "../src/components/signin/ForgotPassword";
+import ResetPassword from "../src/components/signin/ResetPassword";
 
 //import DisciplesProgram from "./components/DisciplesProgram/DisciplesProgram";
 
@@ -62,7 +63,7 @@ ReactDOM.render(
       <div>
         <hr />
         <Switch>
-          <Route exact path="/" component={App} />
+          <Route exact path="/" component={Homee} />
 
           <Route exact path="/Homee" component={Homee} />
           <Route exact path="/ourPeople" component={ourPeople} />
@@ -122,6 +123,7 @@ ReactDOM.render(
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signout" component={SignOut} />
           <Route exact path="/ForgotPassword" component={ForgotPassword} />
+          <Route exact path="/reset/:token" component={ResetPassword} />
 
           <Route component={Notfound} />
         </Switch>

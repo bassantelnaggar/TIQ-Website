@@ -153,7 +153,7 @@ export class ArticleBody extends Component {
 
         </div>
         <header style={headerStyle}> {this.state.articleee.title}</header>
-        <h style={authStyle}> {"BY: "}{this.state.articleee.author}</h>
+        <h style={authStyle}> {"By: "}{this.state.articleee.author}</h>
         {/* <img src={Blog} alt="" style={imageStyle}  /> */}
         {/* <header style={descStyle}>  {this.state.articleee.description}</header> */}
         <p style={bodyStyle}> {this.state.articleee.body}</p>
@@ -177,7 +177,7 @@ export class ArticleBody extends Component {
                   className={classes.inline}
                   style={{color:"black",fontWeight:'bold'}}
                 >
-                  {"BY: "} {commenttt[0]}
+                  {"By: "} {commenttt[0]}
                   {/* {"BY: "}{ this.state.user.firstName +" "+ this.state.user.lastName} */}
                  
                 </Typography>
@@ -194,7 +194,29 @@ export class ArticleBody extends Component {
               <br></br>
               <br></br>
               <br></br>
-              
+              <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
       
       </div>
     );
@@ -216,7 +238,7 @@ export class ArticleBody extends Component {
  
          </div>
          <header style={headerStyle}> {this.state.articleee.title}</header>
-         <h style={authStyle}> {"BY: "}{this.state.articleee.author}</h>
+         <h style={authStyle}> {"By: "}{this.state.articleee.author}</h>
          {/* <img src={Blog} alt="" style={imageStyle}  /> */}
          {/* <header style={descStyle}>  {this.state.articleee.description}</header> */}
          <p style={bodyStyle}> {this.state.articleee.body}</p>
@@ -274,7 +296,7 @@ export class ArticleBody extends Component {
                    className={classes.inline}
                    style={{color:"black",fontWeight:'bold'}}
                  >
-                   {"BY: "} {commenttt[0]}
+                   {"By: "} {commenttt[0]}
                    {/* {"BY: "}{ this.state.user.firstName +" "+ this.state.user.lastName} */}
                   
                  </Typography>
@@ -286,12 +308,36 @@ export class ArticleBody extends Component {
        
           </List>
          ))}  
+         
+       
          <br></br>
        
                <br></br>
                <br></br>
                <br></br>
-               
+               <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div>
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
        
        </div>
      );

@@ -98,25 +98,54 @@ class SignedUp extends Component {
       const auth = this.props.usertype === "TIQadmin";
     if (auth) {
     return (
-     
+     <div>
         <div >
         <ToolbarOUT />
-        <button
-            className="btn"
-            style={{ position: "absolute", left: "20px", top: "63px",background:"#333" }}
-            onClick={() => {
-              this.handleClickME();
-            }}
-          >
-            BACK
-          </button>
+        <div/>
+        <input 
+                  type="Submit" 
+                  value="Back"
+                  className="btn"
+                  onClick={() => {
+                    this.handleClickME();
+                  }}
+                  style={{ position: "absolute", left: "20px", top: "63px"}}
+                  />
+       
           <div>
-         
-            <h1 style={headerStyle}> NEW MEMBERS <br></br>CONFIRMATION LIST </h1>      
-            <br></br> <br></br><br></br><br></br><br></br> <br></br><br></br>
+          <br></br>
+          <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed',
+                      fontWeight: 'bold',fontSize:'60px'}} >NEW MEMBERS <br></br>CONFIRMATION LIST  </h1>
+            
             <SignedUps  SignedUp={this.state.SignedUp} decline={this.decline} accept={this.accept} />
              
-          </div>  
+          </div>
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+       
+        <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div >
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
         </div>
    
     );

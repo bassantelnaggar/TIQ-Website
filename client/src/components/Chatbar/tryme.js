@@ -125,27 +125,52 @@ class tryme extends React.Component {
     if (this.props.token === null) {
       return (
         <div>
-          <Toolbarr/>
-          <div class="thumbnails">
-            <div class="box">
-              <div class="inner">
-                <h3>You have to sign in first!</h3>
-               
-                <button
-                  variant="contained"
-                  onClick={() => {
-                    this.handleClick();
-                  }}
-                  //onClick={() => (document.location = "/signin")}
-                  className="btn"
-                >
-                  Sign In
-                </button>
-                
-              </div>
+        <Toolbarr/>
+        <div class="thumbnails">
+          <div class="box">
+            <div class="inner">
+              <h3>You have to sign in first!</h3>
+             
+              <button
+                variant="contained"
+                onClick={() => {
+                  this.handleClick();
+                }}
+                //onClick={() => (document.location = "/signin")}
+                className="btn"
+              >
+                Sign In
+              </button>
+              
             </div>
           </div>
         </div>
+        <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+        <div >
+          <ul className="icons">
+            <li>
+              
+              <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+              {/* </Link> */}
+            </li>
+            <li>
+            <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+            </li>
+            <li>
+            <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+            </li>
+          </ul>
+          <ul className="copyright">
+            <li>&copy; ERROR 404.</li>
+          </ul>
+        </div>
+      </footer>
+        
+
+      </div>
       );
     }
     else{
@@ -168,7 +193,7 @@ class tryme extends React.Component {
       
     }
     return (
-    
+    <>
       <div className={classes.root} >
           <ToolbarOUT />
           <p style={headerStyle} >  {this.state.chatbars.debateLiveTitle}</p>
@@ -177,7 +202,7 @@ class tryme extends React.Component {
         <Grid item xs>
        
              
-        <AppBar position="static" style={{background:'#145A32'}}>
+        <AppBar position="static" style={{background:'#145A32',opacity:"50%"}}>
         <Toolbar variant="transparent" >
           <Typography variant="h6" color="inherit">
             FOR RESPONSES
@@ -189,7 +214,7 @@ class tryme extends React.Component {
         <ExpansionPanel style={expanded?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary >
             <Typography className={classes.heading} style={expanded3?responseOpen:responseStyle} >
-            <b style={{fontWeight: 'bold',fontFamily:"Raleway"}}>{forResponse[0]} {": "}</b> <q style={{fontFamily:"Raleway"}}>{forResponse[1]}</q>  </Typography>
+            <q style={{fontWeight: 'bold',fontFamily:"Raleway"}}>{forResponse[0]+":"} </q> <q style={{fontFamily:"Raleway"}}>{forResponse[1]}</q>  </Typography>
           </ExpansionPanelSummary>
           </ExpansionPanel>
         
@@ -232,9 +257,9 @@ class tryme extends React.Component {
        
         </Grid>
         <Grid item xs>
-        <AppBar position="static"style={{background:'#1F618D'}}>
-        <Toolbar variant="transparent"  >
-          <Typography variant="h6" color="inherit">
+        <AppBar position="static"style={{background:'#800000',opacity:"50%"}}>
+        <Toolbar variant="transparent" >
+          <Typography variant="h6" color="inherit" >
             AGAINST RESPONSES
           </Typography>
         </Toolbar>
@@ -245,7 +270,7 @@ class tryme extends React.Component {
           <ExpansionPanel style={expanded2?panelStyle:style} expanded3={expanded3 === 'panel1'} onChange={this.handleChange('panel1')}>
             <ExpansionPanelSummary >
               <Typography className={classes.heading} style={expanded2?responseOpen:responseStyle} >
-              <b style={{fontWeight: 'bold',fontFamily:"Raleway"}}> {againstResponse[0]} {": "}</b> <q style={{fontFamily:"Raleway"}}>{againstResponse[1]} </q> </Typography>
+              <q style={{fontWeight: 'bold',fontFamily:"Raleway"}}> {againstResponse[0]+":"}</q> <q style={{fontFamily:"Raleway"}}>{againstResponse[1]} </q> </Typography>
             </ExpansionPanelSummary>
            </ExpansionPanel>
            ))}
@@ -296,7 +321,36 @@ class tryme extends React.Component {
         
          
          </div>
+         
          </div>
+         <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <footer id="footer" style={{position:"relative",bottom:"0",width:"100%",marginBottom:"-500px"}}>
+          <div >
+            <ul className="icons">
+              <li>
+                
+                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+
+                {/* </Link> */}
+              </li>
+              <li>
+              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
+
+              </li>
+              <li>
+              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
+
+              </li>
+            </ul>
+            <ul className="copyright">
+              <li>&copy; ERROR 404.</li>
+            </ul>
+          </div>
+        </footer>
+         </>
 
 );
   }}

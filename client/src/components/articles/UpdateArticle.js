@@ -35,6 +35,18 @@ export class UpdateArticle extends Component {
           style={{height: "300px"}}
           onChange={this.onChange}
         />
+        <input
+          type="text"
+          name="title"
+          placeholder={this.props.article.title}
+          onChange={this.onChange}
+        />
+        <input
+          type="text"
+          name="title"
+          placeholder={this.props.article.title}
+          onChange={this.onChange}
+        />
         <br></br>
         <button onClick={this.props.updateArticle.bind(this, {_id: this.props.article._id, title:this.state.title, description: this.state.description,body: this.state.body})}>
         UPDATE
