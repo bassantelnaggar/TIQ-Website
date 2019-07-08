@@ -266,9 +266,12 @@ class profile extends Component {
     }
     else{
       return(
-        <div>
-          <CircularProgress/>
-        </div>
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
       )
     }
     }
