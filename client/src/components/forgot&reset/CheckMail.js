@@ -25,7 +25,8 @@ class CheckMail extends Component {
         <p style={{ color: "black", textAlign: "center" }}>
           We've sent you an email. Click on the link in the email to reset your
           Password.
-          <br /> If you didn't recevie email please click the link below.
+          <br /> If you didn't recevie email please click the link below to
+          reset your Password again.
         </p>
         <Link
           to="/ForgotPassword"

@@ -58,6 +58,11 @@ class ForgotPassword extends Component {
       });
       alert("Please add your mail");
     } else {
+      {
+        alert(
+          "Please wait in the current page until you get a confirmation message that your mail has been sent successfully."
+        );
+      }
       axios
         .post("/api/ForgotPassword/forgotPassword", {
           email: this.state.email
@@ -93,63 +98,56 @@ class ForgotPassword extends Component {
     } = this.state;
     const classes = useStyles();
     console.log("6666");
-    if (working) {
-      return (
-        <div>
-          <Toolbar />
-          <div
-            className={classes.root}
-            style={{
-              postion: "fixed",
-              marginLeft: "31%",
-              marginTop: "15%",
-              width: "100%",
-              lineHeight: "1"
-            }}
-          >
-            <Grid container component="main" className={classes.root}>
-              <Grid item xs={12} sm={8} md={5}>
-                <div className={classes.paper}>
-                  <form className={classes.form} noValidate>
-                    <InputLabel htmlFor="email">Enter Your Email </InputLabel>
-                    <Input
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="email"
-                      label="Email Address"
-                      name="email"
-                      autoComplete="email"
-                      value={this.state.email}
-                      onChange={this.onChange()}
-                      placeholder="Email Address"
-                    />
-                    <br />
-                    <br />
 
-                    <Button
-                      style={{ background: "#410c12" }}
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      onClick={() => {
-                        this.sendEmail();
-                      }}
-                    >
-                      Reset
-                    </Button>
-                  </form>
-                </div>
-              </Grid>
+    return (
+      <div>
+        <Toolbar />
+        <div
+          className={classes.root}
+          style={{
+            postion: "fixed",
+            marginLeft: "31%",
+            marginTop: "15%",
+            width: "100%",
+            lineHeight: "1"
+          }}
+        >
+          <Grid container component="main" className={classes.root}>
+            <Grid item xs={12} sm={8} md={5}>
+              <div className={classes.paper}>
+                <form className={classes.form} noValidate>
+                  <InputLabel htmlFor="email">Enter Your Email </InputLabel>
+                  <Input
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    value={this.state.email}
+                    onChange={this.onChange()}
+                    placeholder="Email Address"
+                  />
+                  <br />
+                  <br />
+
+                  <Button
+                    style={{ background: "#410c12" }}
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                      this.sendEmail();
+                    }}
+                  >
+                    Reset
+                  </Button>
+                </form>
+              </div>
             </Grid>
-          </div>
-        </div>
-      );
-    }
-    if (isLoading) {
-      return (
-        <div>
+          </Grid>
           {showError && (
             <div>
               <p>
@@ -167,16 +165,8 @@ class ForgotPassword extends Component {
             </div>
           )}
         </div>
-      );
-    } else {
-      if (!isLoading) {
-        return (
-          <div>
-            <CircularProgress />
-          </div>
-        );
-      }
-    }
+      </div>
+    );
   }
 }
 export default ForgotPassword;

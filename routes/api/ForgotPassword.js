@@ -57,7 +57,10 @@ router.post("/forgotPassword", async (req, res) => {
       from: "theintellegentquestionhr@gmail.com",
       to: userinfo.email,
       subject: "Link to reset your password",
-      text: "RESET YOUR PASSWORD \n" + "http://localhost:3000/reset/" + token
+      text:
+        "RESET YOUR PASSWORD \n" +
+        "https://tiqtiq.herokuapp.com//reset/" +
+        token
     };
     console.log("sending email");
     transporter.sendMail(mailOptions, function(err, data) {

@@ -81,9 +81,9 @@ class InputAdornments extends React.Component {
   handleClick33 = () => {
     this.props.history.push("/createuser");
   };
-  handleClickME =() => {
+  handleClickME = () => {
     this.props.history.push("/ForgotPassword");
- };
+  };
   handleClick = async event => {
     const Users = await axios.post("/api/Users/authenticate", {
       email: this.state.email,
@@ -196,22 +196,45 @@ class InputAdornments extends React.Component {
             </Grid>
           </Grid>
         </div>
-        <footer id="footer" style={{position:"absolute",bottom:"0",width:"100%",marginBottom:"-500px"}}>
-          <div >
+        <footer
+          id="footer"
+          style={{
+            position: "absolute",
+            bottom: "0",
+            width: "100%",
+            marginBottom: "-500px"
+          }}
+        >
+          <div>
             <ul className="icons">
               <li>
-                
-                <a className="icon fa-facebook" href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>" target="_blank"><i ></i></a>
+                <a
+                  className="icon fa-facebook"
+                  href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX?>"
+                  target="_blank"
+                >
+                  <i />
+                </a>
 
                 {/* </Link> */}
               </li>
               <li>
-              <a className="icon fa-youtube" href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg" target="_blank"><i ></i></a>
-
+                <a
+                  className="icon fa-youtube"
+                  href="https://www.youtube.com/channel/UCs-EFuX9iVRUdGfHcezy4Lg"
+                  target="_blank"
+                >
+                  <i />
+                </a>
               </li>
               <li>
-              <a className="icon fa-instagram" href="https://www.instagram.com/the.intelligent.question/" target="_blank"><i ></i></a>
-
+                <a
+                  className="icon fa-instagram"
+                  href="https://www.instagram.com/the.intelligent.question/"
+                  target="_blank"
+                >
+                  <i />
+                </a>
               </li>
             </ul>
             <ul className="copyright">
