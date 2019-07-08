@@ -20,6 +20,8 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import ToolBar from "../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -57,7 +59,8 @@ class Debates extends Component {
       error: "",
       selecteddate: null,
       selectedcategory: null,
-      admin: this.props.usertype === "TIQadmin"
+      admin: this.props.usertype === "TIQadmin",
+      loaded:false
     };
   }
 
@@ -109,7 +112,7 @@ class Debates extends Component {
   componentDidMount() {
     axios
       .get("/api/debates")
-      .then(res => this.setState({ debates: res.data.data }));
+      .then(res => this.setState({ debates: res.data.data ,loaded:true}));
   }
   handleClick =() => {
     this.props.history.push("/signin");
@@ -171,6 +174,17 @@ class Debates extends Component {
     }
     console.log(this.props.usertype);
     const auth = this.props.usertype === "TIQadmin";
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
+    else{
     if (auth) {
       return (
         <>
@@ -242,13 +256,21 @@ class Debates extends Component {
               <Typography paragraph>{this.state.error}</Typography>
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleCreateClick} style={{background:"#333"}}>
-                Cancel
-              </Button>
-              <Button onClick={() => this.createDebate()} style={{background:"#333"}}>
-                Create
-                <CloudUploadIcon className={classes.rightIcon} />
-              </Button>
+            <input 
+                  type="Submit" 
+                  value="Cancel"
+                  className="btn"
+                  onClick={this.handleCreateClick}
+                  />
+             <input 
+                  type="Submit" 
+                  value="Create"
+                  className="btn"
+                  onClick={() => this.createDebate()}
+                  />
+            
+              
+                
             </DialogActions>
           </Dialog>
 
@@ -308,8 +330,10 @@ class Debates extends Component {
               Search by Category
               <SearchIcon />
             </Button>
-           
+            <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'relative', 
+              marginTop:"-150px",fontWeight: 'bold',fontSize:'60px'}} > Our Debates  </h1>
           </div>
+          
           <div class="inner" >
             <div class="thumbnails" >
             {this.state.debates.map(debate => (
@@ -402,7 +426,8 @@ class Debates extends Component {
               Search by Category
               <SearchIcon />
             </Button>
-           
+            <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'relative', 
+              marginTop:"-70px",fontWeight: 'bold',fontSize:'60px'}} > Our Debates  </h1>
           </div>
 
 
@@ -427,7 +452,7 @@ class Debates extends Component {
       );
     }
   }
-}
+}}
 
 const Form = connect(
   mapStateToProps,

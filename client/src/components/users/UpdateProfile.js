@@ -18,7 +18,23 @@ import Input from "@material-ui/core/Input";
 
 import FormControl from "@material-ui/core/FormControl";
 
+const types=[{
 
+  value: 'member',
+  label: 'Member',
+},
+{
+  value: 'alumni',
+  label: 'Alumni',
+},
+{
+  value: 'disciple',
+  label: 'Disciple',
+},
+{
+  value: 'parent',
+  label: 'Parent',
+},];
 const status=["House Leader","BOA","Supervisor","Disciples House Leader"]
 const houses=["Pegasus","Orion","Neutral"];
 const supervisor=["Marketing","Fundraising","Logistics","Relations","Media Design"]
@@ -55,11 +71,12 @@ const styles = theme => ({
   }
 });
 
-class FormDialog extends React.Component {
-  
+class UpdateProfile extends React.Component {
   constructor(props) {
+
     super(props);
-   this.state = {
+ this.state = {
+       
       open: false,
       din: this.props.user.din,
       dor: this.props.user.dor,
@@ -68,12 +85,17 @@ class FormDialog extends React.Component {
       tiqStatus:this.props.user.tiqStatus,
       supervisorType:this.props.user.supervisorType,
       score:this.props.user.score,
-      type:this.props.user.type
+      type:this.props.user.type,
+      firstName:this.props.user.firstName,
+      lastName:this.props.user.lastName,
+      bio:this.props.user.bio,
+      birthDate:this.props.user.birthDate,
+    //   password:this.props.user.password
 
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    console.log("Hnnnnnnnnnnnnnna"+this.props.user.firstName)
   }
 
   handleClickOpen() {
@@ -87,34 +109,19 @@ class FormDialog extends React.Component {
     this.setState({ open: !this.state.open });
   };
 
-  handleSubmit = () => {
-    axios
-      .put("/api/Users/update/" + this.props.user._id, {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        bio: this.state.bio,
-        birthDate: this.state.birthDate,
-        clubs: this.state.clubs,
-        score: this.state.score,
-        din: this.state.din,
-        dor: this.state.dor
-      })
-      .then(res => console.log(res))
-      .catch(err => console.log(err.message));
-  };
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
   render() {
    const { classes } = this.props;
-console.log(this.state.type)
+   console.log(this.state.firstName)
+   console.log(this.props.user)
     return (
 
       <div>
         <div />
-        <EditIcon variant="outlined" onClick={this.handleClickOpen}>
-          UPDATE
-        </EditIcon>
+        <dr> <EditIcon onClick={this.handleClickOpen} style={{color:'#696969',position:'relative',right:'-650px'}}/></dr>
+        
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -123,9 +130,66 @@ console.log(this.state.type)
           <DialogTitle class="form-dialog-title "> <br></br> <q style={{marginLeft:"5%"}} >Update Profile</q></DialogTitle>
           <DialogContent>
           <form className={classes.form} >
+          <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="firstName">First Name</InputLabel>
+              <Input
+                id="firstName"
+                name="firstName"
+                onChange={this.onChange}
+                value={this.state.firstName}
+                autoFocus
+              />
+            </FormControl>
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="score">Last Name</InputLabel>
+              <Input
+                id="lastName"
+                name="lastName"
+                onChange={this.onChange}
+                value={this.state.lastName}
+                autoFocus
+              />
+            </FormControl>
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="score">Bio</InputLabel>
+              <Input
+                id="bio"
+                name="bio"
+                onChange={this.onChange}
+                value={this.state.bio}
+                autoFocus
+              />
+            </FormControl>
+            {/* <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="score">Password</InputLabel>
+              <Input
+                id="password"
+                name="password"
+                onChange={this.onChange}
+                value={this.props.user.password}
+                autoFocus
+              />
+            </FormControl> */}
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="birthDate"> </InputLabel>
+              <TextField 
+                id="date"
+                label="Birth Date"
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={this.onChange}
+                name="birthDate"
+                variant="outlined"
 
-          {this.props.user.type=="member" &&<div>
+              />
+            </FormControl>
+           
+          {this.props.user.type=="TIQadmin" &&<div>
               {/* member */}
+
               <FormControl margin="normal"  fullWidth>
               <InputLabel htmlFor="house"> </InputLabel>
               <TextField 
@@ -165,6 +229,22 @@ console.log(this.state.type)
                 }}
                 onChange={this.onChange}
                 name="din"
+                variant="outlined"
+
+              />
+            </FormControl>
+            <FormControl margin="normal"  fullWidth>
+              <InputLabel htmlFor="dor"> </InputLabel>
+              <TextField 
+                id="date"
+                label="Date Of Leaving"
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={this.onChange}
+                name="dor"
                 variant="outlined"
 
               />
@@ -226,114 +306,36 @@ console.log(this.state.type)
                 id="score"
                 name="score"
                 onChange={this.onChange}
-                value={this.state.score}
+                value={this.props.user.score}
                 autoFocus
               />
             </FormControl>
-            
-            </div>}
-            {this.props.user.type=="alumni" && <div>              {/* alumni */}
-            <FormControl margin="normal"  fullWidth>
-              <InputLabel htmlFor="house"> </InputLabel>
-              <TextField 
-                id="standard-select-currency"
+            <FormControl margin="normal"  fullWidth>  
+              <TextField  
+                id="outlined-select-currency"
                 select
                 className={classes.textField}
-                name="house"
-                label="House"
-                value={this.state.house}
+                name="type"
+                label="Type"
+                value={this.props.user.type}
                 onChange={this.onChange}
                 SelectProps={{
                   MenuProps: {
                     className: classes.menu,
                   },
                 }}
-                helperText="Please select your house"
+                helperText="Please select Type"
                 margin="normal"
                 variant="outlined"
               >
-                {houses.map(option => (
-                  <MenuItem key={option} value={option}>
-                    {option}
+                {types.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
                   </MenuItem>
                 ))}
             </TextField>
             </FormControl>
-            <FormControl margin="normal"  fullWidth>
-              <InputLabel htmlFor="din"> </InputLabel>
-              <TextField required
-                id="date"
-                label="Date Of Joining"
-                type="date"
-                className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onChange={this.onChange}
-                name="din"
-                variant="outlined"
-
-              />
-            </FormControl>
-
-            <FormControl margin="normal"  fullWidth>
-              <InputLabel htmlFor="dor"> </InputLabel>
-              <TextField required
-                id="date"
-                label="Date Of Leaving"
-                type="date"
-                className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onChange={this.onChange}
-                name="dor"   
-                variant="outlined"
-         
-                  />
-            </FormControl>
-
-            </div>}
-            {this.props.user.type=="disciple" && <div>
-              {/* disciples */}
-              <FormControl margin="normal"  fullWidth>
-              <InputLabel htmlFor="house"> </InputLabel>
-              <TextField required
-                id="standard-select-currency"
-                select
-                className={classes.textField}
-                name="house"
-                label="House"
-                value={this.state.house}
-                onChange={this.onChange}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menu,
-                  },
-                }}
-                helperText="Please select your house"
-                margin="normal"
-                variant="outlined"
-              >
-                {houses.map(option => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-      </TextField>
-     
-            </FormControl>
-
-            </div>}
             
-            {this.props.user.type=="parent" && <div>
-              {/* parent */}
-              <FormControl margin="normal"  fullWidth>
-              <p>
-                Nothing to Update for parents
-              </p>
-            </FormControl>
-
             </div>}
             </form>
 
@@ -351,10 +353,9 @@ console.log(this.state.type)
                   type="Submit" 
                   value="UPDATE"
                   className="btn"
-                  onClick={this.props.update.bind(this,this.props.user._id,this.state.type,this.state.house,this.state.din,this.state.dor,this.state.tiqStatus,this.state.supervisorType,this.state.score)}
+                  onClick={this.props.update.bind(this,this.props.user._id,this.state.type,this.state.firstName,this.state.lastName,this.state.birthDate,this.state.bio,this.state.house,this.state.din,this.state.dor,this.state.score,this.state.tiqStatus,this.state.supervisorType)}
                   />
           
-            
           </DialogActions>
         </Dialog>
       </div>
@@ -363,8 +364,8 @@ console.log(this.state.type)
     );
   }
 }
-  FormDialog.propTypes = {
+UpdateProfile.propTypes = {
     classes: PropTypes.object.isRequired
   };
   
-  export default withStyles(styles)(FormDialog);
+  export default withStyles(styles)(UpdateProfile);

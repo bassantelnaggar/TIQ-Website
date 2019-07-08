@@ -9,6 +9,7 @@ import DeleteArticle from './components/articles/DeleteArticle'
 import UpdateArticlehelper from './components/articles/UpdateArticlehelper';
 import { Link } from 'react-router-dom'
 import {connect} from "react-redux";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id }
@@ -16,11 +17,12 @@ const mapStateToProps = state => {
 
 class Articles extends Component {
   state = {
-    allArticles : [] 
+    allArticles : [],
+    loaded:false
   }
   componentDidMount(){
     axios.get('/api/Articles')
-    .then(res=>this.setState({allArticles:res.data.data}))
+    .then(res=>this.setState({allArticles:res.data.data,loaded:true}))
   }
   handleClick =() => {
     this.props.history.push("/Articles");
@@ -72,6 +74,29 @@ class Articles extends Component {
 
   render() {
     const auth = this.props.usertype === "TIQadmin";
+    if(!this.state.loaded&&(this.props.token === null)){
+      return (
+        <>
+        <Toolbar />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
+    else{
+      if(!this.state.loaded&&!(this.props.token === null)){
+      return (
+        <>
+        <ToolbarOUT />
+       
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+      }
+      else{
     if (auth) {
     return (
       <div className="App">
@@ -83,7 +108,7 @@ class Articles extends Component {
               this.handleClick();
             }}
           >
-            CREATE AND DELETE
+            Manage Articles
           </btn>
           <br></br><br></br>
       <AllArticles allArticles = {this.state.allArticles}  />
@@ -118,6 +143,7 @@ class Articles extends Component {
 }
 
 }
+  }}
 }
 
 const Form = connect(

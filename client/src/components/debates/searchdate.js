@@ -4,6 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import "./Debates.css";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const styles = theme => ({
   rightIcon: {
     marginLeft: theme.spacing.unit
@@ -16,18 +18,30 @@ class SearchDate extends Component {
     this.setState({ date: date });
     axios
       .get(`/api/debates/searchbydate/${date}`)
-      .then(res => this.setState({ debates: res.data.data }));
+      .then(res => this.setState({ debates: res.data.data ,loaded:true}));
   }
   constructor(props) {
     super(props);
     this.state = {
       debates: [],
-      date: null
+      date: null,
+      loaded:false
     };
   }
 
   render() {
     const { classes } = this.props;
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
+    else{
     try {
       return (
         <>
@@ -85,6 +99,7 @@ class SearchDate extends Component {
       );
     }
   }
+}
 }
 
 export default withStyles(styles)(SearchDate);

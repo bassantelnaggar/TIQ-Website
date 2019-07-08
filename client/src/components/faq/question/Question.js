@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import Toolbar from "../../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../../layout/Toolbar/ToolbarSignout";
 import { Link } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -15,6 +17,7 @@ class Question extends Component {
   state={
       Questions:[],
       ask:'',
+      loaded:false
       
       
   }
@@ -22,11 +25,12 @@ class Question extends Component {
   componentDidMount()  {
       
     this.get(this.state.id )
+    
    
   }
   get = () => {
     axios.get('/api/Questions/user/' +this.props.id )
-    .then(res => this.setState({ Questions: res.data.data }))
+    .then(res => this.setState({ Questions: res.data.data,loaded:true }))
     }
     
   
@@ -79,6 +83,16 @@ onSubmit = (e) => {
           </div>
         </div>
       );
+    }
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
     }
     else{
     return (

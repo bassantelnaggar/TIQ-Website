@@ -74,7 +74,7 @@ ReactDOM.render(
           <Route exact path="/Score" component={Score} />
           <Route exact path="/createuser" component={CreateUser} />
           <Route exact path="/getUsers" component={getUsers} />
-          <Route exact path="/about" component={About} />
+          {/* <Route exact path="/about" component={About} /> */}
           <Route exact path="/Profile" component={profile} />
           <Route exact path="/debates" component={Debates} />
           <Route exact path="/tryme/:key" component={tryme} />

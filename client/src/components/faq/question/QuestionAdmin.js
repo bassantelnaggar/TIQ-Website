@@ -7,20 +7,23 @@ import { connect } from "react-redux";
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
 
 class QuestionAdmin extends Component {
   state={
-      Questions:[]
+      Questions:[],
+      loaded:false
   }
   handleClickWWW =() => {
     this.props.history.push("/signin");
  };
   componentDidMount()  {
     axios.get('/api/Questions/admin')
-    .then(res => this.setState({ Questions: res.data.data }))
+    .then(res => this.setState({ Questions: res.data.data,loaded:true }))
   }
   delQuestion = (id) => {
     axios.delete('/api/Questions/'+id)
@@ -68,6 +71,16 @@ console.log(this.props.usertype)
         </div>
       );
     }    
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
 else{
     const auth = this.props.usertype === "TIQadmin";
     if (auth) {

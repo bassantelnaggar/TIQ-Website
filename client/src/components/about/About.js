@@ -227,7 +227,7 @@ class About extends Component {
                                 TIQ is a debate club, where we strive to produce dialogue in it's most exciting form, up on stage, going head to head with other people. There is nothing more remarkable than the free flowing of words carrying ideas, ideas that prevail with the passion, steadiness and charisma of those who deliver them. If riveting debate is something you long to learn and participate in then here is your home. </h3>
          </div>      
       <div className="tree">
-      {/* <div class="container1"> */}
+
       <div className="BOAtitle">
           <h3 className="Btitle">BOARD OF ADJUDICATORS</h3>
       </div>
@@ -356,7 +356,7 @@ class About extends Component {
          </div>
         <div className="PHFSOH">
         <div class="row">
-        <div className="PH">
+        <div style={{marginLeft:"8%"}}>
         <h4 className="Ptitle">PEGASUS HOUSE
              LEADERS</h4></div>
         <div className="FS">
@@ -375,7 +375,7 @@ class About extends Component {
          </div>
          
          {/* <div class = "col s8" > */}
-         <div class="container" >
+         <div >
                                    {/* <div class="container"> */}
                                        {LSRS}     
                                    {/* </div> */}

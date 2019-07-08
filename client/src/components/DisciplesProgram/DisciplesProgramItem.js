@@ -49,18 +49,18 @@ export class DisciplesProgramItem extends Component {
              type="text"
               name='title'
               value={this.state.title}
-              style={{ color:"black",width:"230%"}}
+              style={{ color:"black",width:"150%"}}
               placeholder="Edit Title ..."
               onChange={this.onChange}
               />
       </label>
       <label>
       <h1>Description</h1>
-          <input 
+          <textarea 
               type="text"
               name='description'
               value={this.state.description}    
-              style={{  color:"black",width:"230%"}}
+              style={{  color:"black",width:"150%"}}
               placeholder="Edit description ..."
               onChange={this.onChange}
               />
@@ -71,7 +71,7 @@ export class DisciplesProgramItem extends Component {
               type="text"
               name='year'
               value={this.state.year}    
-              style={{  color:"black",width:"230%"}}
+              style={{  color:"black",width:"150%"}}
               placeholder="Edit year ..."
               onChange={this.onChange}
               />
@@ -82,7 +82,7 @@ export class DisciplesProgramItem extends Component {
               type="text"
               name='duration'
               value={this.state.duration}
-              style={{  color:"black",width:"230%"}}
+              style={{  color:"black",width:"150%"}}
               placeholder="Edit duration ..."
               onChange={this.onChange}
               />
@@ -93,7 +93,7 @@ export class DisciplesProgramItem extends Component {
               type="text"
               name='price'
               value={this.state.price}    
-              style={{  color:"black",width:"230%"}}
+              style={{  color:"black",width:"150%"}}
               placeholder="Edit price ..."
               onChange={this.onChange}
               />
@@ -104,30 +104,12 @@ export class DisciplesProgramItem extends Component {
               type="text"
               name='location'
               value={this.state.location}    
-              style={{  color:"black",width:"230%"}}
+              style={{  color:"black",width:"150%"}}
               placeholder="Edit location ..."
               onChange={this.onChange}
               />
       </label>
       <label>
-      {/* <h1>Image</h1>
-      <input 
-               id="file-input"
-               accept=".jpg,.png"
-               type="file" 
-               onChange={this.props.onChangepicture.bind(this)} 
-               color="black"
-               style={{opacity:"1",color:"black"}}
-               
-               /> */}
-          {/* <input 
-              type="text"
-              name='image'
-              value={this.state.image}    
-              style={{ color:"black",width:"160%"}}
-              placeholder="Edit image ..."
-              onChange={this.onChange}
-              /> */}
       </label>
       <label>
       <h1>Form Link</h1>
@@ -135,13 +117,13 @@ export class DisciplesProgramItem extends Component {
               type="text"
               name='link'
               value={this.state.link}    
-              style={{ color:"black",width:"230%"}}
+              style={{ color:"black",width:"150%"}}
               placeholder="Edit link ..."
               onChange={this.onChange}
               />
       </label>
       <br></br>
-      <input 
+              <input 
                   type="Submit" 
                   value="Update"
                   className="button"
@@ -150,10 +132,20 @@ export class DisciplesProgramItem extends Component {
                 
 
       />
+      {"    "}
+       <input 
+                  type="Submit" 
+                  value="Delete"
+                  className="button"
+                  onClick={this.props.delDisciplesProgram.bind(this,_id,this.state.title,
+                    this.state.description,this.state.duration,this.state.location,this.state.price,this.year,this.state.image,this.state.link)}
+                
+
+      />
     
-     
+{/*      
       <DeleteIcon  onClick={this.props.delDisciplesProgram.bind(this,_id,this.state.title,
-        this.state.description,this.state.duration,this.state.location,this.state.price,this.year,this.state.image,this.state.link)}/> 
+        this.state.description,this.state.duration,this.state.location,this.state.price,this.year,this.state.image,this.state.link)}/>  */}
   </form>
         
   

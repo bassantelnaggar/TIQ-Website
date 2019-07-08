@@ -8,6 +8,8 @@ import Logo from '../images/debate2.jpg';
 import Background from '../../Images/background.jpeg';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -17,7 +19,7 @@ class SearchDebateLive extends Component {
     const { title } = this.props.match.params;
     axios
       .get(`/api/chatbars/Search/${title}`)
-      .then(res => this.setState({ chatbars: res.data.data }));
+      .then(res => this.setState({ chatbars: res.data.data,loaded:true }));
   }
   handleClick =() => {
     this.props.history.push("/chatbars");
@@ -25,7 +27,8 @@ class SearchDebateLive extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chatbars: []
+      chatbars: [],
+      loaded:false
     };
   }
   getStyle = () => {
@@ -38,6 +41,17 @@ class SearchDebateLive extends Component {
 
   render() {
     const { classes } = this.props;
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
+    else{
     return (
       <>
        <div style={this.getStyle()} >
@@ -101,7 +115,7 @@ class SearchDebateLive extends Component {
        
       </>
     );
-  }
+  }}
 }
 
 const Form = connect(

@@ -159,12 +159,10 @@ class DebateCard extends React.Component {
                type="file" 
                onChange={this.onChange.bind(this)} 
                color="black"
-               style={{opacity:"0",marginLeft:'35%',marginBottom:"-10%"}}
+               style={{opacity:"1",marginLeft:'55%'}}
                
                />
-               <EditIcon label="Edit Photo" style={{marginLeft:"90%",marginTop:"-20%"}}/>
-               <p style={{marginTop:"-10%"}}/>
-                {/* <button label="Edit Photo" style={{textDecorationColor:"black",fontColor:"black",opacity:"100",marginLeft:'55%',marginTop:"-20%"}}/> */}
+
               <TextField styles={{marginTop:"-20%"}}
                 // autoFocus
                 margin="dense"
@@ -216,12 +214,20 @@ class DebateCard extends React.Component {
               <Typography paragraph>{this.state.updateerror}</Typography>
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleUpdateClick} style={{background:"#333"}}>
-                Cancel
-              </Button>
-              <Button onClick={() => this.UpdateDebate()} style={{background:"#333"}}>
-                Update
-              </Button>
+            <input 
+                  type="Submit" 
+                  value="Cancel"
+                  className="btn"
+                  onClick={this.handleUpdateClick}
+                  />
+             <input 
+                  type="Submit" 
+                  value="Update"
+                  className="btn"
+                  onClick={() => this.UpdateDebate()} 
+                  />
+            
+             
             </DialogActions>
           </Dialog>
                 <div class="box" >

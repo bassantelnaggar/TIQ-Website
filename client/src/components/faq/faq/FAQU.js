@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom'
 import Toolbar from "../../../layout/Toolbar/Toolbar";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ToolbarOUT from "../../../layout/Toolbar/ToolbarSignout";
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
@@ -14,7 +15,8 @@ class FAQU extends Component {
   state={
       FAQs:[],
       ask:'',
-      id:this.props.id
+      id:this.props.id,
+      loaded:false
      
   }
   handleClickME =() => {
@@ -33,7 +35,7 @@ class FAQU extends Component {
   
   componentDidMount()  {
     axios.get('/api/FAQs')
-    .then(res => this.setState({ FAQs: res.data.data }))
+    .then(res => this.setState({ FAQs: res.data.data , loaded:true}))
   }
   ask = (ask,id) => {
     console.log("pp")
@@ -62,6 +64,29 @@ onSubmit = (e) => {
 }
 
   render() {
+    if(!this.state.loaded&&(this.props.token === null)){
+      return (
+        <>
+        <Toolbar />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
+    else{
+      if(!this.state.loaded&&!(this.props.token === null)){
+      return (
+        <>
+        <ToolbarOUT />
+       
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+      }
+    else{
     if (this.props.token === null) {
       return (
         <div className="FAQU">
@@ -119,6 +144,7 @@ onSubmit = (e) => {
    
       );
     }
+  
 else{
   if (this.props.usertype === "TIQadmin") {
     return(
@@ -197,7 +223,8 @@ else{
    
     );
    }}
-  }
+  }}
+}
 }
 const edit={
   backgroundColor:'#5ec0b6' ,

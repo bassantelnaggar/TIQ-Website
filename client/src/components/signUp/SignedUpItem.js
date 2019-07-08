@@ -7,6 +7,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import Divider from '@material-ui/core/Divider';
 
 const mapStateToProps = state => {
@@ -52,6 +53,7 @@ const useStyles = theme => ({
 
 
 class SignedUpItem extends Component {
+
   
  render() {
   const classes = useStyles;
@@ -116,8 +118,22 @@ class SignedUpItem extends Component {
         </ExpansionPanelDetails>
         <Divider />
         <ExpansionPanelActions>
-        <button  className="btn" style={btnStyle} onClick={this.props.accept.bind(this,_id)} >Accept</button>
-          <button  className="btn" style={btnStyle} onClick={this.props.decline.bind(this,_id)} >Decline</button>
+        <input 
+                  type="Submit" 
+                  value="Accept"
+                  className="btn"
+                  onClick={this.props.accept.bind(this,_id)}
+                 
+                  />
+                  {" "}
+        <input 
+                  type="Submit" 
+                  value="Decline"
+                  className="btn"
+                  onClick={this.props.decline.bind(this,_id)}
+            
+                  />
+       
         </ExpansionPanelActions>
       </ExpansionPanel>
     </div>

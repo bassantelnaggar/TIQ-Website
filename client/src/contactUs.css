@@ -4,7 +4,7 @@ body {
   background: url(./pages/Homee/images/back.jpg) center;
   /* object-fit: inherit; */
 }
-.Container-x {
+.Container {
   background-size: auto;
   position: relative;
   opacity: 1;

@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
 import axios from "axios";
 import DeleteUser from "./DeleteUser";
-import DetailedExpansionPanel from "./DetailedExpansionPanel";
-import FormDialog from "./FormDialog";
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import ourPeopleBG from '../../pages/Homee/images/ourpeoplebg.png'
 import SearchUser from '../users/searchUser'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
@@ -21,7 +21,8 @@ class GetUsers extends Component {
     super();
     this.state = {
       users: [],
-      searchkey: null
+      loaded:false,
+      searchkey: null,
     };
     this.deleteUser = this.deleteUser.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -31,7 +32,7 @@ class GetUsers extends Component {
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   componentDidMount() {
     axios.get("/api/Users").then(res => {
-      this.setState({ users: res.data.data });
+      this.setState({ users: res.data.data,loaded:true });
     });
   }
   deleteUser = id => {
@@ -66,15 +67,7 @@ class GetUsers extends Component {
     this.props.history.push("/signin");
   };
 
-  update =  (id,
-    type,
-    house,
-    din,
-    dor,
-    tiqStatus,
-    supervisorType,
-    score
-    ) => {
+  update =  (id,type,house,din,dor,tiqStatus,supervisorType,score) => {
       console.log(type)
       console.log(house)
       console.log(din)
@@ -121,12 +114,6 @@ class GetUsers extends Component {
     }
   ;
 
-    // if (Object.keys(update.data)[0] === "err")
-    //   this.setState({ Error: "Invalid/Missing Information" });
-    // else window.location.reload();
-    /*
-     * axios ... put whatver using this.state.firstName, this.staet.lastName
-     */
   };
 
   render() {
@@ -184,6 +171,17 @@ class GetUsers extends Component {
       )
     }
     else{
+      if(!this.state.loaded){
+        return (
+          <>
+          <ToolbarOUT />
+          <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+        <CircularProgress/>
+        </div>
+        </>
+        )
+      }
+      else{
 
     if (auth) {
     return (
@@ -191,18 +189,20 @@ class GetUsers extends Component {
         <ToolbarOUT />
       
         <div className="center-div">
-          <h1
-            style={{
-              textAlign: "center",
-              position: "relative",
-
-              fontSize: "50px"
-            }}
-          >
-            OUR PEOPLE{" "}
-          </h1>
+        <input 
+                  type="Submit" 
+                  value="Confirm New Memebers"
+                  className="btn"
+                  onClick={() => {
+                    this.handleClick();
+                  }}
+                  style={{ position: "absolute", left: "20px", top: "63px"}}
+                  />
+                  <br></br>
+        <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed', 
+                      fontWeight: 'bold',fontSize:'75px'}} >Our People</h1>
          
-          <TextField
+          {/* <TextField
               id="selecteduser"
               label=  {"Search User"}
               type= "textField"
@@ -221,16 +221,10 @@ class GetUsers extends Component {
               Search User 
               <SearchIcon />
             </Button>
-            
+             */}
           <ul>
-          <Button
-            style={{background:"#333", left: "-615px", top: "-195px"}}
-            onClick={() => {
-              this.handleClick();
-            }}
-          >
-            Confirm New Memebers
-          </Button>
+         
+          
             {this.state.users && (
               <DeleteUser
                 users={this.state.users}
@@ -272,18 +266,11 @@ class GetUsers extends Component {
         <ToolbarOUT />
         
         <div className="center-div">
-          <h1
-            style={{
-              textAlign: "center",
-              position: "relative",
-
-              fontSize: "50px"
-            }}
-          >
-            OUR PEOPLE{" "}
-          </h1>
+        <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed', 
+                      fontWeight: 'bold',fontSize:'75px'}} >Our People</h1>
+         
     
-          <TextField
+          {/* <TextField
               id="selecteduser"
               label=  {"Search User"}
               type= "textField"
@@ -301,7 +288,7 @@ class GetUsers extends Component {
             >
               Search User 
               <SearchIcon />
-            </Button>
+            </Button> */}
           <ul>
             {this.state.users && (
               <DeleteUser
@@ -338,6 +325,7 @@ class GetUsers extends Component {
       </>
     );
   }
+}
 }
 }
 }

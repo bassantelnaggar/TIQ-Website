@@ -4,9 +4,10 @@ import axios from "axios"
 import "./profile.css"
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import ToolbarOUT from "../../layout/Toolbar/ToolbarSignout";
-import EditIcon from "@material-ui/icons/Edit";
 import CameraIcon from "@material-ui/icons/PhotoCamera";
 import "../../pages/Homee/assets/css/main.css"
+import UpdateProfile from "./UpdateProfile"
+import CircularProgress from '@material-ui/core/CircularProgress';
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -14,8 +15,9 @@ class profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
-      id: this.props.id
+      user: [],
+      id: this.props.id,
+      loaded:false
       //auth : true
     };
   }
@@ -55,12 +57,65 @@ class profile extends Component {
   {
      const id = this.state.id
      console.log(id)
-     axios.get(`/api/Users/${id}`)
-     .then(user=>this.setState({user : user.data.data}))
+    axios.get(`/api/Users/${id}`)
+     .then(user=>this.setState({user : user.data.data,loaded:true}))
      .catch(console.log('cannot fetch'))
+     //this.setState({loaded:true});
      console.log(this.state.user.profilePicture);
   }
+  update =  (id,type,firstName,lastName,birthDate,bio,house,din,dor,score,tiqStatus,supervisorType) => {
+    console.log(firstName)
+    console.log(lastName)
 
+    console.log(birthDate)
+
+    console.log(bio)
+
+    console.log(house)
+
+    console.log(din)
+
+    console.log(dor)
+
+    console.log(score)
+    console.log(tiqStatus)
+    console.log(supervisorType)
+   
+
+    if(type==="TIQadmin"){
+      axios.put("api/Users/update/" + id, {
+      house,
+        din,
+        dor,
+        tiqStatus,
+        supervisorType,
+       type,
+        firstName,
+        lastName,
+        lastName,
+        bio,
+        score})
+      .then(res => {
+        axios.get('/api/Users/'+id)
+        .then(res => this.setState({ user: res.data.data }))
+        
+        alert("Updated successfully!")
+      });
+    }
+    else{
+      axios.put("api/Users/update/" + id, {
+        firstName,
+        lastName,
+        birthDate,
+        bio,
+        })
+      .then(res => {
+        axios.get('/api/Users/'+id)
+        .then(res => this.setState({ user: res.data.data }))
+        alert("Updated successfully!")
+      });
+    }
+  }
   handleClick = () => {
     this.props.history.push("/signin");
   };
@@ -118,6 +173,7 @@ class profile extends Component {
       );
     }
     else{
+      if(this.state.loaded){
     return(
       <>
       <div>
@@ -144,8 +200,8 @@ class profile extends Component {
               </figure>
 
               <div class="panel info">
-                <dr> <EditIcon style={{color:'#696969',position:'relative',right:'-650px'}}/></dr>
-             
+                {/* <dr> <EditIcon style={{color:'#696969',position:'relative',right:'-650px'}}/></dr> */}
+                <UpdateProfile user={this.state.user} update={this.update}/>
                 <dl>
                   <dt>
                     <h4 className="text" style={{fontWeight:'bold'}}>Birth Date </h4>
@@ -207,7 +263,17 @@ class profile extends Component {
 
     </>
       );
-      
+    }
+    else{
+      return(
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
     }
   }
 }

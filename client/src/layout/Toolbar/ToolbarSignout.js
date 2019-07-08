@@ -24,7 +24,8 @@ const toolbar = props => (
     <nav className="toolbar__navigation">
       <div />
       <div className="toolbar__logo">
-        <Link to="/TIQHome" style={{fontWeight:"bold", fontSize:"40px", marginLeft:"20%",marginBottom:"10px"}}>TIQ </Link>
+        
+        <Link to="/TIQHome" style={{fontWeight:"bold", fontSize:"40px", marginLeft:"20%",marginBottom:"10px",}}>TIQ </Link>
       </div>
       <div className="spacer" />
       <div className="toolbar_navigation-items">
@@ -61,9 +62,9 @@ const toolbar = props => (
           <li>
             <Link to="/contents">Announcements</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/about">About</Link>
-          </li>
+          </li> */}
           <li>
           <Link to="/ContactUs">Contact Us</Link>
           </li>

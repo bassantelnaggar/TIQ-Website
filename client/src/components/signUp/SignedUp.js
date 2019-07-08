@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
 import Navbar from "../layout/Navbar";
 import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
@@ -14,7 +15,8 @@ const mapStateToProps = state => {
 
 class SignedUp extends Component {
   state={
-      SignedUp:[]
+      SignedUp:[],
+      loaded:false
   }
   
 //   handleClick = event => {
@@ -25,7 +27,7 @@ class SignedUp extends Component {
   
   componentDidMount()  {
     axios.get('/api/SignedUp')
-    .then(res => this.setState({ SignedUp: res.data.data }))
+    .then(res => this.setState({ SignedUp: res.data.data,loaded:true }))
   }
   handleClickWWW =() => {
     this.props.history.push("/signin");
@@ -94,6 +96,16 @@ class SignedUp extends Component {
         </div>
       );
     }
+    if(!this.state.loaded){
+      return (
+        <>
+        <ToolbarOUT />
+        <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+      <CircularProgress/>
+      </div>
+      </>
+      )
+    }
     else{
       const auth = this.props.usertype === "TIQadmin";
     if (auth) {
@@ -102,19 +114,21 @@ class SignedUp extends Component {
         <div >
         <ToolbarOUT />
         <div/>
-        <button
-            className="btn"
-            style={{ position: "absolute", left: "20px", top: "63px",background:"#333" }}
-            onClick={() => {
-              this.handleClickME();
-            }}
-          >
-            BACK
-          </button>
+        <input 
+                  type="Submit" 
+                  value="Back"
+                  className="btn"
+                  onClick={() => {
+                    this.handleClickME();
+                  }}
+                  style={{ position: "absolute", left: "20px", top: "63px"}}
+                  />
+       
           <div>
-         
-            <h1 style={headerStyle}> NEW MEMBERS <br></br>CONFIRMATION LIST </h1>      
-            <br></br> <br></br><br></br><br></br><br></br> <br></br><br></br>
+          <br></br>
+          <h1 style={{ color: '#FFDA00', textShadow: '2px 2px #B83126',textAlign: 'center', postion:'fixed',
+                      fontWeight: 'bold',fontSize:'60px'}} >NEW MEMBERS <br></br>CONFIRMATION LIST  </h1>
+            
             <SignedUps  SignedUp={this.state.SignedUp} decline={this.decline} accept={this.accept} />
              
           </div>

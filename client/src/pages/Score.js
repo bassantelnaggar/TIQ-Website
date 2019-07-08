@@ -5,6 +5,8 @@ import axios from "axios";
 import CustomizedTable from "../layout/Table/CustomizedTable";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -12,7 +14,8 @@ export class Score extends Component {
   constructor() {
     super();
     this.state = {
-      scores: []
+      scores: [],
+      loaded:false
     };
   }
   UpdateScore = async (id,score) => {
@@ -30,7 +33,7 @@ export class Score extends Component {
     console.log("ana henaa");
     axios
       .get("/api/Users")
-      .then(res => this.setState({ scores: res.data.data }));
+      .then(res => this.setState({ scores: res.data.data,loaded:true }));
   }
   handleClick =() => {
     this.props.history.push("/signin");
@@ -39,19 +42,7 @@ export class Score extends Component {
   render() {
     console.log("kiki");
     console.log(this.state.scores);
-    if (this.props.token != null) {
-      return (
-        <div>
-          <ToolbarOUT />
-
-          <main className="Score__page" style={{ marginTop: "64px" }}>
-            <header> <br></br> </header>
-          </main>
-
-          <CustomizedTable UpdateScore={this.UpdateScore} scores={this.state.scores} />
-        </div>
-      );
-    } else {
+    if (this.props.token === null) {
       return (
         <>
         <div>
@@ -102,6 +93,33 @@ export class Score extends Component {
         </footer>
         </>
       );
+                }
+          else{
+            if(!this.state.loaded){
+              return (
+                <>
+                <ToolbarOUT />
+                <div style={{position: 'fixed',top: '50%',left: '50%'}}>
+              <CircularProgress/>
+              </div>
+              </>
+              )
+            }
+            else{                  
+
+      return (
+        <div>
+          <ToolbarOUT />
+
+          <main className="Score__page" style={{ marginTop: "64px" }}>
+            <header> <br></br> </header>
+          </main>
+
+          <CustomizedTable UpdateScore={this.UpdateScore} scores={this.state.scores} />
+        </div>
+      );
+      }
+  
     }
   }
 }
