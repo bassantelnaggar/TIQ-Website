@@ -5,6 +5,8 @@ import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import "./ResetPassword.css";
+import Toolbar from "../../layout/Toolbar/Toolbar";
 
 const loading = {
   margin: "1em",
@@ -72,6 +74,8 @@ export default class ResetPassword extends Component {
     //     params: { tokenn }
     //   }
     // } = this.props;
+
+    console.log("heyyyyy");
     if (this.state.password === "") {
       this.setState({
         showNullError: true
@@ -88,7 +92,7 @@ export default class ResetPassword extends Component {
           resetPasswordToken: this.props.match.params.token
         })
         .then(response => {
-          console.log(response.data);
+          console.log("responseee dattttaaa : " + response.data);
           if (response.data.message === "password updated :)") {
             this.setState({
               updated: true,
@@ -135,32 +139,64 @@ export default class ResetPassword extends Component {
     }
     return (
       <div>
+        {/* <Toolbar />
         <div title={title} />
-        <form className="password-form">
-          <TextField
-            id="password"
-            label="password"
+        <div className="password-form">
+          <h1> New Password</h1>
+          <input
+            className="passwordTextField"
+            placeholder="New Password"
             onChange={this.handleChange("password")}
             value={password}
+            type="text"
+            name="password"
+            label="Password"
             type="password"
+            id="password"
           />
-          <Button
-            style={{ background: "black" }}
-            buttonText="Update Password"
-            onSubmit={this.updatePassword}
+          <button
+            buttonText="updateButton"
+            onClick={this.updatePassword}
+            style={{ backgroundColor: "black" }}
           />
-        </form>
+        </div> */}
+
+        <Toolbar />
+        <div title={title} />
+        <div class="resetForm-container">
+          <form class="resetForm">
+            {/* <div class="border" /> */}
+            <div class="resetForm-field">
+              <h1 class="resetForm-header"> New Password</h1>
+              <input
+                className="passwordTextField"
+                placeholder="New Password"
+                onChange={this.handleChange("password")}
+                value={password}
+                type="text"
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+              />
+              <button
+                buttonText="updateButton"
+                onClick={this.updatePassword}
+                style={{ backgroundColor: "black" }}
+              />
+            </div>
+          </form>
+        </div>
 
         {updated && (
           <div>
-            <p>
+            <p style={{}}>
               Your password has been successfully reset, please try logging in
               again.
             </p>
-            <Link className="button" buttonText="Login" link="/signin" />
+            <Link className="button" buttonText="Login" to="/signin" />
           </div>
         )}
-        {/* <Link className="button" to="/" /> */}
       </div>
     );
   }

@@ -15,7 +15,7 @@ export class ContactUs extends Component {
       <div>
         <Toolbar />
 
-        <div class="Container">
+        <div class="Container-x">
           <form class="contactus-form">
             <h1 class="contactus-header">Contact Us</h1>
             <div class="border" />
