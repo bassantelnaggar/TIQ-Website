@@ -48,8 +48,9 @@ import DisciplesProgram from "./components/DisciplesProgram/DisciplesProgram";
 import SearchUser from "./components/users/searchUser";
 import profile from "../src/components/users/profile";
 import About from "../src/components/about/About";
-import ForgotPassword from "../src/components/signin/ForgotPassword";
-import ResetPassword from "../src/components/signin/ResetPassword";
+import ForgotPassword from "../src/components/forgot&reset/ForgotPassword";
+import ResetPassword from "../src/components/forgot&reset/ResetPassword";
+import CheckMail from "../src/components/forgot&reset/CheckMail";
 
 //import DisciplesProgram from "./components/DisciplesProgram/DisciplesProgram";
 
@@ -124,6 +125,7 @@ ReactDOM.render(
           <Route exact path="/signout" component={SignOut} />
           <Route exact path="/ForgotPassword" component={ForgotPassword} />
           <Route exact path="/reset/:token" component={ResetPassword} />
+          <Route exact path="/CheckMail" component={CheckMail} />
 
           <Route component={Notfound} />
         </Switch>

@@ -4,11 +4,14 @@ import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import { Button } from "@material-ui/core";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 
 import Grid from "@material-ui/core/Grid";
+
+import { makeStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const title = {
   pageTitle: "Forgot Password Screen"
@@ -37,7 +40,9 @@ class ForgotPassword extends Component {
     this.state = {
       email: "",
       showError: false,
-      messageFromServer: ""
+      messageFromServer: "",
+      isLoading: false,
+      working: true
     };
   }
 
@@ -53,6 +58,11 @@ class ForgotPassword extends Component {
       });
       alert("Please add your mail");
     } else {
+      {
+        alert(
+          "Please wait in the current page until you get a confirmation message that your mail has been sent successfully."
+        );
+      }
       axios
         .post("/api/ForgotPassword/forgotPassword", {
           email: this.state.email
@@ -67,9 +77,11 @@ class ForgotPassword extends Component {
           } else if (response.data === "recovery email sent") {
             this.setState({
               showError: false,
-              messageFromServer: "recovery email sent"
+              messageFromServer: "recovery email sent",
+              isLoading: true
             });
           }
+          window.location.href = "/CheckMail";
         })
         .catch(error => {
           console.log(error.data);
@@ -77,9 +89,15 @@ class ForgotPassword extends Component {
     }
   }
   render() {
-    const { email, messageFromServer, showError } = this.state;
-    console.log("6666");
+    const {
+      email,
+      messageFromServer,
+      showError,
+      isLoading,
+      working
+    } = this.state;
     const classes = useStyles();
+    console.log("6666");
 
     return (
       <div>
@@ -98,7 +116,7 @@ class ForgotPassword extends Component {
             <Grid item xs={12} sm={8} md={5}>
               <div className={classes.paper}>
                 <form className={classes.form} noValidate>
-                  <InputLabel htmlFor="email">Email </InputLabel>
+                  <InputLabel htmlFor="email">Enter Your Email </InputLabel>
                   <Input
                     variant="outlined"
                     margin="normal"
@@ -130,7 +148,6 @@ class ForgotPassword extends Component {
               </div>
             </Grid>
           </Grid>
-
           {showError && (
             <div>
               <p>
@@ -142,10 +159,11 @@ class ForgotPassword extends Component {
           )}
           {messageFromServer === "recovery email sent" && (
             <div>
-              <h3>Password Reset Email Successfully Sent!</h3>
+              <div>
+                <h3>Password Reset Email Successfully Sent!</h3>
+              </div>
             </div>
           )}
-          <Link to="/" />
         </div>
       </div>
     );

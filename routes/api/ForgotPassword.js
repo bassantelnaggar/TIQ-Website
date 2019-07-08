@@ -9,160 +9,6 @@ const crypto = require("crypto");
 const async = require("async");
 
 const salt_rounds = 12;
-// router.post("/forgotPassword", function(req, res, next) {
-//   async.waterfall(
-//     [
-//       function(done) {
-//         crypto.randomBytes(20, function(err, buf) {
-//           let token = buf.toString("hex");
-//           done(err, token);
-//         });
-//       },
-//       function(token, done) {
-//         User.findOne({ email: req.body.email }, function(err, user) {
-//           if (!user) {
-//             req.flash("error", "No user with that email address exists.");
-//             return res.redirect("/forgotPassword");
-//           }
-
-//           user.resetPasswordToken = token;
-//           user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-
-//           user.save(function(err) {
-//             done(err, token, user);
-//           });
-//         });
-//       },
-//       function(token, user, done) {
-//         let transporter = nodemailer.createTransport({
-//           service: "gmail",
-//           secure: false,
-//           port: 25,
-
-//           auth: {
-//             user: process.env.Email,
-//             pass: process.env.PASSWORD
-//           },
-//           tls: {
-//             rejectUnauthorized: false
-//           }
-//         });
-
-//         let mailOptions = {
-//           from: "theintellegentquestionhr@gmail.com",
-//           to: user.email,
-//           subject: "Password Reset Request",
-//           text:
-//             "Hello " +
-//             user.firstName +
-//             ",\n\n" +
-//             "RESET YOUR PASSWORD \n" +
-//             "http://localhost:3000/reset/" +
-//             token
-//         };
-//         transporter.sendMail(mailOptions, function(error, info) {
-//           if (error) {
-//             console.log(error);
-//           } else {
-//             console.log("Email sent: " + info.response);
-//           }
-//           res.send({ msg: "success" });
-//         });
-//       }
-//     ],
-//     function(err) {
-//       if (err) return next(err);
-//       res.redirect("/forgot");
-//     }
-//   );
-// });
-///////////////////////////////////////////////////////
-
-// router.get("/reset/:token", function(req, res) {
-//   console.log("zooooooombaaaaaaaaaaa");
-//   // const password = req.body.password;
-//   async.waterfall(
-//     [
-//       console.log("2"),
-//       console.log(req.params.token),
-
-//       function(done) {
-//         User.findOne(
-//           {
-//             resetPasswordToken: req.params.token
-//             // resetPasswordExpires: { $gt: Date.now() }
-//           },
-//           function(err, user) {
-//             console.log("2"), console.log(user);
-
-//             if (!user) {
-//               req.flash(
-//                 "error",
-//                 "Password reset token is invalid or has expired."
-//               );
-//               console.log("zooooooombaaaaaaaaaaa");
-//               console.log(user);
-//               console.log(user.email);
-//               console.log(user.resetPasswordToken);
-
-//               return res.redirect("/signin");
-//             }
-//             const salt = bcrypt.genSaltSync(10);
-//             const hashedPassword = bcrypt.hashSync(req.body.password, salt);
-
-//             user.password = hashedPassword;
-//             user.resetPasswordToken = undefined;
-//             user.resetPasswordExpires = undefined;
-
-//             user.save(function(err) {
-//               done(err, user);
-//             });
-//           }
-//         );
-//       },
-//       function(user, done) {
-//         let transporter = nodemailer.createTransport({
-//           service: "gmail",
-//           secure: false,
-//           port: 25,
-
-//           auth: {
-//             user: process.env.Email,
-//             pass: process.env.PASSWORD
-//           },
-//           tls: {
-//             rejectUnauthorized: false
-//           }
-//         });
-//         let mailOptions = {
-//           to: user.email,
-//           from: process.env.Email,
-//           subject: "Your password has been changed",
-//           text:
-//             "Hello " +
-//             user.firstName +
-//             ",\n\n" +
-//             "This is a confirmation that the password for your account " +
-//             user.email +
-//             " has just been changed.\n"
-//         };
-//         transporter.sendMail(mailOptions, function(err, info) {
-//           if (error) {
-//             console.log(error);
-//           } else {
-//             console.log("Email sent: " + info.response);
-//           }
-//           req.flash("success", "Success! Your password has been changed.");
-//           done(err);
-//         });
-//         res.send({ msg: "success" });
-//       }
-//     ],
-//     function(err) {
-//       res.redirect("/");
-//     }
-//   );
-// });
 
 ////////////////////////////////////////////////////
 
@@ -211,7 +57,10 @@ router.post("/forgotPassword", async (req, res) => {
       from: "theintellegentquestionhr@gmail.com",
       to: userinfo.email,
       subject: "Link to reset your password",
-      text: "RESET YOUR PASSWORD \n" + "http://localhost:3000/reset/" + token
+      text:
+        "RESET YOUR PASSWORD \n" +
+        "https://tiqtiq.herokuapp.com//reset/" +
+        token
     };
     console.log("sending email");
     transporter.sendMail(mailOptions, function(err, data) {
@@ -241,7 +90,7 @@ router.get("/reset/:token", async (req, res) => {
   } else {
     res.status(200).send({
       firstName: user.firstName,
-      email:user.email,
+      email: user.email,
       message: "password reset link a-ok"
     });
   }
@@ -257,7 +106,7 @@ router.put("/updatePasswordViaEmail", async (req, res) => {
   );
   const ID = user._id;
 
-  if (user == null) {
+  if (!user) {
     console.error("password reset link is invalid or has expired");
     res.status(403).send("password reset link is invalid or has expired");
   } else if (user != null) {
@@ -276,7 +125,7 @@ router.put("/updatePasswordViaEmail", async (req, res) => {
     //var updatedUser = await User.findOneAndUpdate(mail, t);
     var updateUser = await User.findByIdAndUpdate(ID, body);
 
-    console.log("password updated");
+    console.log("password updated ");
     res.status(200).send({ message: "password updated :)" });
   } else {
     console.error("no user exists in db to update");
